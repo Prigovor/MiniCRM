@@ -5,8 +5,8 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>Pro001</groupId>
-    <artifactId>Pro001</artifactId>
+    <groupId>MiniCRM</groupId>
+    <artifactId>MiniCRM</artifactId>
 
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
