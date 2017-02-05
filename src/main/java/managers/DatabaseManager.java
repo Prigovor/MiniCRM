@@ -12,6 +12,22 @@ import java.util.List;
  */
 public class DatabaseManager
 {
+    private static DatabaseManager instance;
+
+    public static DatabaseManager getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new DatabaseManager();
+        }
+        return instance;
+    }
+
+    private DatabaseManager()
+    {
+
+    }
+
     private SessionFactory sessionFactory;
 
     public DatabaseManager(String configFilePath, Class ...annotatedClasses)
@@ -83,11 +99,7 @@ public class DatabaseManager
         }
     }
 
-<<<<<<< HEAD
-    public void deleteEntry(Long id, Class entityClass)
-=======
     public void deleteEntry(int id, Class entityClass)
->>>>>>> DatabaseManager added
     {
         try (Session session = sessionFactory.getCurrentSession())
         {
@@ -104,11 +116,7 @@ public class DatabaseManager
         }
     }
 
-<<<<<<< HEAD
-    public <T> T getEntry(Long id, Class<T> entityClass)
-=======
     public <T> T getEntry(int id, Class<T> entityClass)
->>>>>>> DatabaseManager added
     {
         T entry = null;
 
