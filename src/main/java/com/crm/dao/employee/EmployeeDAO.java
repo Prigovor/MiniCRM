@@ -9,11 +9,11 @@ import java.util.List;
  */
 public interface EmployeeDAO {
 
-    Long createEmployee(Employee contact);
+    Long createEmployee(Employee employee);
 
     Employee readEmployee(Long id);
 
-    void updateEmployee(Employee contact);
+    void updateEmployee(Employee employee);
 
     void deleteEmployee(Long id );
 
