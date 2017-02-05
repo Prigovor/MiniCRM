@@ -12,9 +12,25 @@ import java.util.List;
  */
 public class DatabaseManager
 {
+    private static DatabaseManager instance;
+
+    public static DatabaseManager getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new DatabaseManager();
+        }
+        return instance;
+    }
+
+    private DatabaseManager()
+    {
+
+    }
+
     private SessionFactory sessionFactory;
 
-    public DatabaseManager(String configFilePath, Class ...annotatedClasses)
+    public void configure(String configFilePath, Class ...annotatedClasses)
     {
         Configuration configuration = new Configuration().configure(configFilePath);
 
