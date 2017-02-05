@@ -99,7 +99,7 @@ public class DatabaseManager
         }
     }
 
-    public void deleteEntry(int id, Class entityClass)
+    public void deleteEntry(Long id, Class entityClass)
     {
         try (Session session = sessionFactory.getCurrentSession())
         {
@@ -116,7 +116,7 @@ public class DatabaseManager
         }
     }
 
-    public <T> T getEntry(int id, Class<T> entityClass)
+    public <T> T getEntry(Long id, Class<T> entityClass)
     {
         T entry = null;
 
