@@ -10,14 +10,6 @@ import java.util.List;
 public interface EmployeeDAO {
 
     Long createEmployee(Employee employee);
-<<<<<<< HEAD
-    Long createEmployee(Employee employee);
-
-    Employee readEmployee(Long id);
-
-    void updateEmployee(Employee employee);
-=======
-    Long createEmployee(Employee contact);
 
     Employee readEmployee(Long id);
 
