@@ -22,7 +22,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public void updateEmployee(Employee employee) {
         DatabaseManager.getInstance().updateEntry(employee);
-
     }
 
     @Override

@@ -15,7 +15,7 @@ public interface EmployeeDAO {
 
     void updateEmployee(Employee employee);
 
-    void deleteEmployee(Long id );
+    void deleteEmployee(Long id);
 
     List<Employee> findAll();
 }
