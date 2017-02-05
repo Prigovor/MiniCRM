@@ -1,5 +1,7 @@
 package managers;
 
+import entity.Employee;
+import entity.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -25,21 +27,18 @@ public class DatabaseManager
 
     private DatabaseManager()
     {
+        Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
 
+        configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Employee.class);
+
+        sessionFactory = configuration.buildSessionFactory();
     }
 
     private SessionFactory sessionFactory;
 
     public void configure(String configFilePath, Class ...annotatedClasses)
     {
-        Configuration configuration = new Configuration().configure(configFilePath);
-
-        for (Class annotatedClass : annotatedClasses)
-        {
-            configuration.addAnnotatedClass(annotatedClass);
-        }
-
-        sessionFactory = configuration.buildSessionFactory();
     }
 
     public Long saveEntry(Object entry)
