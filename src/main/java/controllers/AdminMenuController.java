@@ -9,8 +9,7 @@ import javafx.stage.Stage;
 
 public class AdminMenuController {
 
-    @FXML
-    public ListView lvEmployee;
+    @FXML public ListView lvEmployee;
     @FXML public TableView tvTable;
     @FXML public TableColumn clnId;
     @FXML public TableColumn clnName;
@@ -23,6 +22,12 @@ public class AdminMenuController {
     @FXML public Button btnChange;
     @FXML public Button btnGenerate;
     @FXML public Button btnExit;
+
+    @FXML public Button btnShowAll;
+
+    @FXML
+    public void onActionButtonShowAll() {
+    }
 
     @FXML
     public void onActionButtonCreate() {
