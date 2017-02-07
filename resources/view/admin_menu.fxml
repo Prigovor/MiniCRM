@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="646.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ListView prefHeight="400.0" prefWidth="200.0" />
+      <VBox prefHeight="400.0" prefWidth="484.0">
+         <children>
+            <TableView prefHeight="315.0" prefWidth="465.0">
+              <columns>
+                <TableColumn prefWidth="60.0" text="id" />
+                <TableColumn prefWidth="86.0" text="name" />
+                  <TableColumn prefWidth="93.0" text="surname" />
+                  <TableColumn prefWidth="46.0" text="age" />
+                  <TableColumn prefWidth="65.0" text="gender" />
+                  <TableColumn minWidth="0.0" prefWidth="114.0" text="position" />
+              </columns>
+            </TableView>
+            <HBox prefHeight="136.0" prefWidth="465.0">
+               <children>
+                  <VBox alignment="CENTER_RIGHT" prefHeight="135.0" prefWidth="238.0" spacing="10.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="106.0" text="Create">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="105.0" text="Remove">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </VBox>
+                  <VBox alignment="CENTER_LEFT" prefHeight="135.0" prefWidth="227.0" spacing="10.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="119.0" text="Change">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="118.0" text="Generate">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</HBox>
