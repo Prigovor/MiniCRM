@@ -1,29 +1,49 @@
 package controllers;
 
-/**
- * Created by Жека on 2/5/2017.
- */
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.stage.Stage;
+
 public class AdminMenuController {
 
-    public void addNewEmployee(){
+    @FXML
+    public ListView lvEmployee;
+    @FXML public TableView tvTable;
+    @FXML public TableColumn clnId;
+    @FXML public TableColumn clnName;
+    @FXML public TableColumn clnSurname;
+    @FXML public TableColumn clnAge;
+    @FXML public TableColumn clnGender;
+    @FXML public TableColumn clnPosition;
+    @FXML public Button btnCreate;
+    @FXML public Button btnRemove;
+    @FXML public Button btnChange;
+    @FXML public Button btnGenerate;
+    @FXML public Button btnExit;
 
+    @FXML
+    public void onActionButtonCreate() {
     }
 
-    public void changeEmployee(){
-
+    @FXML
+    public void onActionButtonRemove() {
     }
 
-    public void addNewUser(){
-
+    @FXML
+    public void onActionButtonChange() {
     }
 
-    public void removeUser(){
-
+    @FXML
+    public void OnActionButtonGenerate() {
     }
 
-    public void backToPrevMenu(){
-
+    @FXML
+    public void onActionButtonExit() {
+        Stage stage = (Stage) btnExit.getScene().getWindow();
+        stage.close();
     }
-
 
 }

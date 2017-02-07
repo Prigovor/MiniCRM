@@ -1,18 +1,35 @@
 package controllers;
 
-import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
-/**
- * Created by Жека on 2/5/2017.
- */
+import java.io.IOException;
+
 public class AuthorizationMenuController {
 
-    public void entry (){
+    @FXML
+    public Button btnOk;
+    @FXML public Button btnExit;
+
+    @FXML
+    public void onActionButtonOk() throws IOException {
+        Stage stage = (Stage) btnOk.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/view/admin_menu.fxml"));
+
+        stage.setTitle("Admin");
+        stage.setResizable(false);
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
-    public void onActionButtonOk(ActionEvent actionEvent) {
+    @FXML
+    public void onActionButtonExit() {
+        Stage stage = (Stage) btnExit.getScene().getWindow();
+        stage.close();
     }
 
-    public void onActionButtonCancel(ActionEvent actionEvent) {
-    }
 }
