@@ -29,7 +29,6 @@ public class Initial extends Application{
         root.getChildren().addAll(mainContainer);
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.isIconified();
 //        primaryStage.setResizable(false);
         primaryStage.show();
     }

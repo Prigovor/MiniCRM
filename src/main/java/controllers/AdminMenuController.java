@@ -7,7 +7,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
-public class AdminMenuController {
+public class AdminMenuController implements ControlledScreen {
+
+    ScreensController screensController;
 
     @FXML public ListView lvEmployee;
     @FXML public TableView tvTable;
@@ -50,4 +52,8 @@ public class AdminMenuController {
         stage.close();
     }
 
+    @Override
+    public void setScreenParent(ScreensController screenParent) {
+        screensController = screenParent;
+    }
 }
