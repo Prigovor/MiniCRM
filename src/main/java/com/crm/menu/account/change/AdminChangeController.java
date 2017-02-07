@@ -1,4 +1,4 @@
-package controllers;
+package com.crm.menu.account.change;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class AdminCreateController {
+public class AdminChangeController {
 
     @FXML public Label lblId;
     @FXML public Label lblName;
@@ -20,13 +20,12 @@ public class AdminCreateController {
     @FXML public TextField tfAge;
     @FXML public TextField tfGender;
     @FXML public TextField tfPosition;
-    @FXML public Button btnAdd;
     @FXML public Button btnCancel;
+    @FXML public Button btnChange;
+
 
     @FXML
-    public void onActionButtonAdd() {
-
-
+    public void onActionButtonChange() {
     }
 
     @FXML
@@ -34,4 +33,6 @@ public class AdminCreateController {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
     }
+
+
 }

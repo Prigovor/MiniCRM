@@ -1,4 +1,4 @@
-package com.crm.menu.create.account;
+package com.crm.menu.account.create;
 
 import com.crm.dao.user.UserDAO;
 import com.crm.dao.user.UserDAOImpl;

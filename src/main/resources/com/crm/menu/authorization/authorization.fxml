@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="136.0" prefWidth="380.0" styleClass="background" stylesheets="@../css/authorization.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AuthorizationMenuController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="136.0" prefWidth="380.0" styleClass="background" stylesheets="@../../../../css/authorization.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.crm.menu.authorization.AuthorizationMenuController">
    <left>
       <VBox prefHeight="93.0" prefWidth="95.0" spacing="13.0" BorderPane.alignment="CENTER">
          <children>
@@ -30,7 +30,7 @@
    <bottom>
       <HBox prefHeight="41.0" prefWidth="380.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnOk" mnemonicParsing="false" onAction="#onActionButtonOk" prefHeight="35.0" prefWidth="115.0" stylesheets="@../css/authorization.css" text="OK">
+            <Button fx:id="btnOk" mnemonicParsing="false" onAction="#onActionButtonOk" prefHeight="35.0" prefWidth="115.0" stylesheets="@../../../../css/authorization.css" text="OK">
                <font>
                   <Font size="15.0" />
                </font>

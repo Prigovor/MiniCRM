@@ -1,10 +1,8 @@
 package com.crm.menu.authorization;
 
-import com.crm.main.Main;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -18,8 +16,12 @@ public class AuthorizationMenuController
 
     private AuthorizationMenuModel model = new AuthorizationMenuModel();
 
-    public void authorize()
-    {
+    @FXML
+    public Button btnOk;
+    @FXML public Button btnExit;
+
+    @FXML
+    public void onActionButtonOk() throws IOException {
         boolean isAuthorized = false;
         try
         {
@@ -36,20 +38,10 @@ public class AuthorizationMenuController
         }
     }
 
-    public void createAccount()
-    {
-        try
-        {
-            model.createAccount();
-        }
-        catch (IOException e)
-        {
-            new Alert(Alert.AlertType.INFORMATION, "Error while creating account", ButtonType.OK).showAndWait();
-        }
+    @FXML
+    public void onActionButtonExit() {
+        Stage stage = (Stage) btnExit.getScene().getWindow();
+        stage.close();
     }
 
-    public void exit() throws Exception
-    {
-        Main.getInstance().stop();
-    }
 }

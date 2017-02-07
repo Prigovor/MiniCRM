@@ -26,12 +26,12 @@ public class AuthorizationMenuModel
                 {
                     case ADMINISTRATOR:
                     {
-                        Main.getInstance().replaceSceneContent("/com/crm/menu/view/admin_menu.fxml");
+                        Main.getInstance().replaceSceneContent("/com/crm/menu/admin/admin_menu.fxml");
                         return true;
                     }
                     case EMPLOYEE:
                     {
-                        Main.getInstance().replaceSceneContent("/com/crm/menu/view/employee_menu.fxml");
+                        Main.getInstance().replaceSceneContent("/com/crm/menu/employee/employee.fxml");
                         return true;
                     }
                 }

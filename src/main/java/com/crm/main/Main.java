@@ -37,7 +37,8 @@ public class Main extends Application
 
         this.primaryStage = primaryStage;
 
-        replaceSceneContent("/com/crm/menu/view/authorization_menu.fxml");
+        replaceSceneContent("/com/crm/menu/authorization/authorization.fxml");
+        primaryStage.setFullScreen(true);
         primaryStage.setTitle("Title");
         primaryStage.show();
     }

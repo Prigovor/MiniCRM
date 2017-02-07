@@ -1,14 +1,24 @@
-package controllers;
+package com.crm.menu.account.create;
 
+import com.crm.entity.employee.Employee;
+import com.crm.entity.user.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class AdminChangeController {
+import java.io.IOException;
 
-    @FXML public Label lblId;
+/**
+ * Created by Bohdan on 07.02.2017.
+ */
+public class CreateAccountMenuController
+{
+    private CreateAccountMenuModel model = new CreateAccountMenuModel();
+
+    @FXML
+    public Label lblId;
     @FXML public Label lblName;
     @FXML public Label lblSurname;
     @FXML public Label lblAge;
@@ -20,12 +30,26 @@ public class AdminChangeController {
     @FXML public TextField tfAge;
     @FXML public TextField tfGender;
     @FXML public TextField tfPosition;
+    @FXML public Button btnAdd;
     @FXML public Button btnCancel;
-    @FXML public Button btnChange;
-
 
     @FXML
-    public void onActionButtonChange() {
+    public void onActionButtonAdd() {
+        User user = model.getUser();
+        Employee employee = model.getEmployee();
+
+        try
+        {
+            model.createAccount();
+        }
+        catch (CreateAccountException e)
+        {
+
+        }
+        catch (IOException e)
+        {
+
+        }
     }
 
     @FXML
@@ -33,6 +57,4 @@ public class AdminChangeController {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
     }
-
-
 }

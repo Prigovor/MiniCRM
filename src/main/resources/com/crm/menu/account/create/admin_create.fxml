@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="284.0" prefWidth="479.0" styleClass="background" stylesheets="@../css/authorization.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminChangeController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="284.0" prefWidth="479.0" styleClass="background" stylesheets="@../../../../../css/authorization.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.crm.menu.account.create.CreateAccountMenuController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.0" minWidth="10.0" prefWidth="175.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="425.0" minWidth="10.0" prefWidth="425.0" />
@@ -59,7 +59,7 @@
       </TextField>
       <HBox prefHeight="13.0" prefWidth="356.0" spacing="15.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
          <children>
-            <Button fx:id="btnChange" mnemonicParsing="false" onAction="#onActionButtonChange" prefHeight="33.0" prefWidth="99.0" text="Change" />
+            <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#onActionButtonAdd" prefHeight="33.0" prefWidth="99.0" text="Add" />
             <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#onActionButtonCancel" prefHeight="33.0" prefWidth="100.0" text="Cancel" />
          </children>
          <padding>
