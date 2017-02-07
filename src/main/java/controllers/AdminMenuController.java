@@ -22,7 +22,6 @@ public class AdminMenuController {
     @FXML public Button btnChange;
     @FXML public Button btnGenerate;
     @FXML public Button btnExit;
-
     @FXML public Button btnShowAll;
 
     @FXML
