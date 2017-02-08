@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="915.0" styleClass="background" stylesheets="@../../../../css/admin.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.crm.menu.admin.AdminMenuController">
+    <children>
+        <VBox prefHeight="500.0" prefWidth="337.0">
+            <children>
+                <ListView fx:id="lvEmployee" prefHeight="440.0" prefWidth="221.0" />
+                <Button fx:id="btnShowAll" mnemonicParsing="false" onAction="#onActionButtonShowAll" prefHeight="33.0" prefWidth="111.0" text="Show All">
+                    <VBox.margin>
+                        <Insets left="55.0" top="10.0" />
+                    </VBox.margin>
+                </Button>
+            </children>
+        </VBox>
+        <VBox prefHeight="500.0" prefWidth="811.0">
+            <children>
+                <TableView fx:id="tvTable" minWidth="-Infinity" maxWidth="Infinity" minHeight="-Infinity" maxHeight="Infinity" prefHeight="440.0" prefWidth="806.0">
+                    <columns>
+                        <TableColumn fx:id="clnId" prefWidth="60.0" text="id" />
+                        <TableColumn fx:id="clnName" prefWidth="115.33334350585938" text="name" />
+                        <TableColumn fx:id="clnSurname" prefWidth="153.33334350585938" text="surname" />
+                        <TableColumn fx:id="clnAge" minWidth="0.0" prefWidth="75.0" text="age" />
+                        <TableColumn fx:id="clnGender" minWidth="7.666656494140625" prefWidth="109.66668701171875" text="gender" />
+                        <TableColumn fx:id="clnPosition" minWidth="0.0" prefWidth="174.0" text="position" />
+                    </columns>
+                </TableView>
+                <HBox prefHeight="58.0" prefWidth="694.0" spacing="20.0">
+                    <children>
+                        <Button fx:id="btnCreate" mnemonicParsing="false" onAction="#onActionButtonCreate" prefHeight="33.0" prefWidth="109.0" text="Create" />
+                        <Button fx:id="btnRemove" mnemonicParsing="false" onAction="#onActionButtonRemove" prefHeight="33.0" prefWidth="109.0" text="Remove" />
+                        <Button fx:id="btnChange" mnemonicParsing="false" onAction="#onActionButtonChange" prefHeight="33.0" prefWidth="111.0" text="Change" />
+                        <Button fx:id="btnGenerate" mnemonicParsing="false" onAction="#onActionButtonGenerate" text="Generate" />
+                        <Button fx:id="btnExit" mnemonicParsing="false" onAction="#onActionButtonExit" prefHeight="33.0" prefWidth="110.0" text="Exit" />
+                    </children>
+                    <padding>
+                        <Insets left="35.0" top="10.0" />
+                    </padding>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</HBox>
