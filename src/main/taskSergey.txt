@@ -1,0 +1,14 @@
+08.02.17
+
+com.crm.menu.account.change
+
+    1. Написать класс AdminChangeModel, в нем реализовать методы changeAccount() и cancel();
+        В методе changeAccount() не забыть проверить не совпадают ли логин и пароль
+        с уже существующими в базе (см. CreateAccountMenuModel)
+    2. AdminChangeController
+        Написать реализацию методов onActionButtonChange(), onActionButtonCancel();
+
+com.crm.managers
+
+    1. DatabaseManager
+        Покрыть тестами все методы, окромя getInstance() и configure();
