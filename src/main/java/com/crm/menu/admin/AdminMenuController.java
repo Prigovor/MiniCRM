@@ -1,5 +1,6 @@
 package com.crm.menu.admin;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -45,7 +46,7 @@ public class AdminMenuController {
     }
 
     @FXML
-    public void onActionButtonGenerate() {
+    public void OnActionButtonGenerate() {
     }
 
     @FXML
