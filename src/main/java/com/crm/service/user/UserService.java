@@ -1,14 +1,14 @@
-package com.crm.dao.user;
+package com.crm.service.user;
 
 import com.crm.entity.user.User;
 
 import java.util.List;
 
 /**
- * Created by Prigovor on 05.02.2017.
+ * Created by Bohdan on 08.02.2017.
  */
-public interface UserDAO {
-
+public interface UserService
+{
     Long createUser(User user);
 
     User readUser(Long id);
