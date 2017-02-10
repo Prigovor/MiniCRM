@@ -3,6 +3,7 @@ package com.crm.service.user;
 import com.crm.dao.user.UserDAO;
 import com.crm.dao.user.UserDAOImpl;
 import com.crm.entity.user.User;
+import com.crm.service.UserValidationException;
 
 import java.util.List;
 
@@ -14,38 +15,42 @@ public class UserServiceImpl implements UserService
     private UserDAO userDAO = new UserDAOImpl();
 
     @Override
-    public Long createUser(User user)
+    public Long createUser(User user) throws UserValidationException
     {
-        Long id = userDAO.createUser(user);
+        validateUser();
 
-        return id;
+        return userDAO.createUser(user);
     }
 
     @Override
-    public User readUser(Long id)
+    public User readUser(Long id) throws UserValidationException
     {
-        User user = userDAO.readUser(id);
+        validateUser();
 
-        return user;
+        return userDAO.readUser(id);
     }
 
     @Override
-    public void updateUser(User user)
+    public void updateUser(User user) throws UserValidationException
     {
+        validateUser();
+
         userDAO.updateUser(user);
     }
 
     @Override
-    public void deleteUser(Long id)
+    public void deleteUser(Long id) throws UserValidationException
     {
+        validateUser();
+
         userDAO.deleteUser(id);
     }
 
     @Override
-    public List<User> findAll()
+    public List<User> findAll() throws UserValidationException
     {
-        List<User> listUsers = userDAO.findAll();
+        validateUser();
 
-        return listUsers;
+        return userDAO.findAll();
     }
 }

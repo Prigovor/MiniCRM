@@ -1,5 +1,6 @@
 package com.crm.service;
 
+import com.crm.main.MainModel;
 import javafx.scene.control.TextInputDialog;
 
 import java.util.Optional;
@@ -9,17 +10,25 @@ import java.util.Optional;
  */
 public interface SecureService
 {
-    default void checkPassword()
+    default void validateUser() throws UserValidationException
     {
-        TextInputDialog textInputDialog = new TextInputDialog();
-        textInputDialog.setTitle("Password check");
-        textInputDialog.setContentText("Enter your password");
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Security checking");
+        dialog.setContentText(MainModel.getInstance().getCurrentUser().getSecurityQuestion());
 
-        Optional<String> result = textInputDialog.showAndWait();
-
+        Optional<String> result = dialog.showAndWait();
         if (result.isPresent())
         {
-
+            if ((MainModel.getInstance().getCurrentUser().getAnswerToSecurityQuestion().equals(result.get())))
+            {
+                return;
+            }
+            else
+            {
+                throw new UserValidationException("Access denied");
+            }
         }
+
+        throw new UserValidationException("Access denied");
     }
 }

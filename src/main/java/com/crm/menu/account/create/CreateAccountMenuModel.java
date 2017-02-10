@@ -1,10 +1,11 @@
 package com.crm.menu.account.create;
 
-import com.crm.dao.user.UserDAO;
-import com.crm.dao.user.UserDAOImpl;
 import com.crm.entity.employee.Employee;
 import com.crm.entity.user.User;
+import com.crm.service.UserValidationException;
 import com.crm.main.Main;
+import com.crm.service.user.UserService;
+import com.crm.service.user.UserServiceImpl;
 
 import java.io.IOException;
 
@@ -26,13 +27,13 @@ public class CreateAccountMenuModel
         return employee;
     }
 
-    private UserDAO userDAO = new UserDAOImpl();
+    private UserService userService = new UserServiceImpl();
 
-    public void createAccount() throws CreateAccountException, IOException
+    public void createAccount() throws CreateAccountException, IOException, UserValidationException
     {
         if (user.getLogin() != null && user.getPassword() != null)
         {
-            for (User userEntry : userDAO.findAll())
+            for (User userEntry : userService.findAll())
             {
                 if (userEntry.getLogin().equals(user.getLogin()) || userEntry.getPassword().equals(user.getPassword()))
                 {
@@ -44,7 +45,7 @@ public class CreateAccountMenuModel
         if (employee.getName() != null && employee.getSurname() != null)
         {
             user.setEmployee(employee);
-            userDAO.createUser(user);
+            userService.createUser(user);
 
             Main.getInstance().replaceSceneContent("/com/crm/menu/view/employee_menu.fxml");
         }

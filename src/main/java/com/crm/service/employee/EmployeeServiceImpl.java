@@ -3,6 +3,7 @@ package com.crm.service.employee;
 import com.crm.dao.employee.EmployeeDAO;
 import com.crm.dao.employee.EmployeeDAOImpl;
 import com.crm.entity.employee.Employee;
+import com.crm.service.UserValidationException;
 
 import java.util.List;
 
@@ -14,38 +15,42 @@ public class EmployeeServiceImpl implements EmployeeService
     private EmployeeDAO employeeDAO = new EmployeeDAOImpl();
 
     @Override
-    public Long createEmployee(Employee employee)
+    public Long createEmployee(Employee employee) throws UserValidationException
     {
-        Long id = employeeDAO.createEmployee(employee);
+        validateUser();
 
-        return id;
+        return employeeDAO.createEmployee(employee);
     }
 
     @Override
-    public Employee readEmployee(Long id)
+    public Employee readEmployee(Long id) throws UserValidationException
     {
-        Employee employee = employeeDAO.readEmployee(id);
+        validateUser();
 
-        return employee;
+        return employeeDAO.readEmployee(id);
     }
 
     @Override
-    public void updateEmployee(Employee employee)
+    public void updateEmployee(Employee employee) throws UserValidationException
     {
+        validateUser();
+
         employeeDAO.updateEmployee(employee);
     }
 
     @Override
-    public void deleteEmployee(Long id)
+    public void deleteEmployee(Long id) throws UserValidationException
     {
+        validateUser();
+
         employeeDAO.deleteEmployee(id);
     }
 
     @Override
-    public List<Employee> findAll()
+    public List<Employee> findAll() throws UserValidationException
     {
-        List<Employee> listEmployees = employeeDAO.findAll();
+        validateUser();
 
-        return listEmployees;
+        return employeeDAO.findAll();
     }
 }

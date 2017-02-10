@@ -1,10 +1,8 @@
 package com.crm.main;
 
-import com.crm.entity.employee.Employee;
-import com.crm.entity.user.User;
-import com.crm.managers.DatabaseManager;
+import com.crm.menu.Controller;
+import com.crm.menu.authorization.AuthorizationMenuController;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -33,12 +31,9 @@ public class Main extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        DatabaseManager.getInstance().configure("hibernate.cfg.xml", User.class, Employee.class);
-
         this.primaryStage = primaryStage;
 
-        replaceSceneContent("/com/crm/menu/authorization/authorization.fxml");
-        primaryStage.setFullScreen(true);
+        replaceSceneContent(new AuthorizationMenuController());
         primaryStage.setTitle("Title");
         primaryStage.show();
     }
@@ -58,10 +53,29 @@ public class Main extends Application
         }
     }
 
-    @Override
-    public void stop() throws Exception
+    /**
+     * Replaces the application primary stage scene with view parent object taken from controller object
+     */
+    public void replaceSceneContent(Controller controller)
     {
-        Platform.exit();
+        Scene scene = primaryStage.getScene();
+
+        if (scene == null)
+        {
+            scene = new Scene(controller.getView().getParent());
+            primaryStage.setScene(scene);
+        }
+        else
+        {
+            primaryStage.getScene().setRoot(controller.getView().getParent());
+        }
+
+        controller.getView().getParent().requestFocus();
+    }
+
+    public void exit()
+    {
+        primaryStage.close();
         System.exit(0);
     }
 
