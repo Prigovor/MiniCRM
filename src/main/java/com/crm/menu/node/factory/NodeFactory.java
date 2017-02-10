@@ -3,10 +3,7 @@ package com.crm.menu.node.factory;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
@@ -96,5 +93,16 @@ public class NodeFactory
         GridPane.setHalignment(button, HPos.CENTER);
 
         return button;
+    }
+
+    public static <T extends Labeled> void transformLabeled(T labeled, String text)
+    {
+        labeled.setText(text);
+        labeled.setAlignment(Pos.CENTER);
+        labeled.setMinSize(SMALL_ELEMENT_WIDTH, SMALL_ELEMENT_HEIGHT);
+        labeled.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+
+        GridPane.setValignment(labeled, VPos.CENTER);
+        GridPane.setHalignment(labeled, HPos.CENTER);
     }
 }

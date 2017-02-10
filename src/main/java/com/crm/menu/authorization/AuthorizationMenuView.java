@@ -52,6 +52,7 @@ public class AuthorizationMenuView implements View
     {
         this.controller = controller;
         init();
+        playInitAnimation();
     }
 
     @Override

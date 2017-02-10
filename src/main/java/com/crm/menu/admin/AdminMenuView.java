@@ -52,6 +52,7 @@ public class AdminMenuView implements View
         this.controller = controller;
         this.model = controller.getModel();
         init();
+        playInitAnimation();
     }
 
     @Override
@@ -116,6 +117,11 @@ public class AdminMenuView implements View
         gridPane.add(userListView, 0, 0);
         gridPane.add(gridPaneRightSideControls, 1, 0);
 
+        userListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
+        {
+            model.setSelectedUser(newValue);
+        });
+
         buttonShowAllUsers.setOnAction(event ->
         {
             controller.showTableUsers();
@@ -124,6 +130,21 @@ public class AdminMenuView implements View
         buttonShowAllEmployers.setOnAction(event ->
         {
             controller.showTableEmployers();
+        });
+
+        buttonAdd.setOnAction(event ->
+        {
+            controller.addUser();
+        });
+
+        buttonChange.setOnAction(event ->
+        {
+            controller.changeUser();
+        });
+
+        buttonDelete.setOnAction(event ->
+        {
+            controller.deleteUser();
         });
     }
 }

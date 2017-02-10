@@ -2,7 +2,10 @@ package com.crm.menu.admin;
 
 import com.crm.entity.employee.Employee;
 import com.crm.entity.user.User;
+import com.crm.main.Main;
 import com.crm.menu.Controller;
+import com.crm.menu.account.change.ChangeAccountMenuController;
+import com.crm.menu.account.create.CreateAccountMenuController;
 import com.crm.service.UserValidationException;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
@@ -78,6 +81,59 @@ public class AdminMenuController implements Controller
         catch (UserValidationException e)
         {
             view.showInformationMessage(e.getMessage());
+        }
+    }
+
+    public void addUser()
+    {
+        try
+        {
+            model.validateUser();
+            Main.getInstance().replaceSceneContent(new CreateAccountMenuController());
+        }
+        catch (UserValidationException e)
+        {
+            view.showInformationMessage(e.getMessage());
+        }
+    }
+
+    public void changeUser()
+    {
+        if (model.getSelectedUser() != null)
+        {
+            try
+            {
+                model.validateUser();
+                Main.getInstance().replaceSceneContent(new ChangeAccountMenuController(model.getSelectedUser()));
+            }
+            catch (UserValidationException e)
+            {
+                view.showInformationMessage(e.getMessage());
+            }
+        }
+        else
+        {
+            view.showInformationMessage("Select user in left-side list");
+        }
+    }
+
+    public void deleteUser()
+    {
+        if (model.getSelectedUser() != null)
+        {
+            try
+            {
+                model.deleteUser(model.getSelectedUser());
+                showListUsers();
+            }
+            catch (UserValidationException e)
+            {
+                view.showInformationMessage(e.getMessage());
+            }
+        }
+        else
+        {
+            view.showInformationMessage("Select user in left-side list");
         }
     }
 }

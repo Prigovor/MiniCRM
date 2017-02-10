@@ -34,7 +34,14 @@ public class Main extends Application
         this.primaryStage = primaryStage;
 
         replaceSceneContent(new AuthorizationMenuController());
-        primaryStage.setTitle("Title");
+        primaryStage.setTitle("MiniCRM");
+        primaryStage.setMaximized(true);
+
+        primaryStage.setOnCloseRequest(event ->
+        {
+            exit();
+        });
+
         primaryStage.show();
     }
 

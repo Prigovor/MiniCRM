@@ -12,8 +12,13 @@ public interface View
     Parent getParent();
     void init();
 
+    default void playInitAnimation()
+    {
+
+    }
+
     default void showInformationMessage(String message)
     {
-        new Alert(Alert.AlertType.INFORMATION, message, ButtonType.OK).showAndWait();
+        new Alert(Alert.AlertType.INFORMATION, message, ButtonType.OK).show();
     }
 }
