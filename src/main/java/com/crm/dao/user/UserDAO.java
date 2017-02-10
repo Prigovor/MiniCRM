@@ -9,11 +9,11 @@ import java.util.List;
  */
 public interface UserDAO {
 
-    Long createUser(User contact);
+    Long createUser(User user);
 
     User readUser(Long id);
 
-    void updateUser(User contact);
+    void updateUser(User user);
 
     void deleteUser(Long id);
 

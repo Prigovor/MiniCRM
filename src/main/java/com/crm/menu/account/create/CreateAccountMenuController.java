@@ -1,60 +1,56 @@
 package com.crm.menu.account.create;
 
-import com.crm.entity.employee.Employee;
-import com.crm.entity.user.User;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import com.crm.entity.employee.Gender;
+import com.crm.entity.employee.PositionType;
+import com.crm.entity.user.UserType;
+import com.crm.main.Main;
+import com.crm.menu.Controller;
+import com.crm.menu.View;
+import com.crm.menu.admin.AdminMenuController;
+import com.crm.service.UserValidationException;
 
 import java.io.IOException;
 
 /**
  * Created by Bohdan on 07.02.2017.
  */
-public class CreateAccountMenuController
+public class CreateAccountMenuController implements Controller
 {
     private CreateAccountMenuModel model = new CreateAccountMenuModel();
+    private CreateAccountMenuView view = new CreateAccountMenuView(this);
 
-    @FXML
-    public Label lblId;
-    @FXML public Label lblName;
-    @FXML public Label lblSurname;
-    @FXML public Label lblAge;
-    @FXML public Label lblGender;
-    @FXML public Label lblPosition;
-    @FXML public TextField tfId;
-    @FXML public TextField tfName;
-    @FXML public TextField tfSurname;
-    @FXML public TextField tfAge;
-    @FXML public TextField tfGender;
-    @FXML public TextField tfPosition;
-    @FXML public Button btnAdd;
-    @FXML public Button btnCancel;
+    @Override
+    public View getView()
+    {
+        return view;
+    }
 
-    @FXML
-    public void onActionButtonAdd() {
-        User user = model.getUser();
-        Employee employee = model.getEmployee();
-
+    public void createAccount()
+    {
         try
         {
+            model.getUser().setLogin(view.getUserInfo().getPairLogin().getInputText());
+            model.getUser().setPassword(view.getUserInfo().getPairPassword().getInputText());
+            model.getUser().setUserType(UserType.valueOf(view.getUserInfo().getPairUserType().getInputText()));
+            model.getUser().setSecurityQuestion(view.getUserInfo().getPairQuestion().getInputText());
+            model.getUser().setAnswerToSecurityQuestion(view.getUserInfo().getPairAnswer().getInputText());
+
+            model.getEmployee().setName(view.getUserInfo().getPairName().getInputText());
+            model.getEmployee().setSurname(view.getUserInfo().getPairSurname().getInputText());
+            model.getEmployee().setAge(Integer.valueOf(view.getUserInfo().getPairAge().getInputText()));
+            model.getEmployee().setGender(Gender.valueOf(view.getUserInfo().getPairGender().getInputText()));
+            model.getEmployee().setPosition(PositionType.valueOf(view.getUserInfo().getPairPosition().getInputText()));
+
             model.createAccount();
         }
-        catch (CreateAccountException e)
+        catch (CreateAccountException | IOException | UserValidationException e)
         {
-
-        }
-        catch (IOException e)
-        {
-
+            view.showInformationMessage(e.getMessage());
         }
     }
 
-    @FXML
-    public void onActionButtonCancel() {
-        Stage stage = (Stage) btnCancel.getScene().getWindow();
-        stage.close();
+    public void cancel()
+    {
+        Main.getInstance().replaceSceneContent(new AdminMenuController());
     }
 }

@@ -1,10 +1,16 @@
 package com.crm.menu.account.create;
 
+import com.crm.dao.employee.EmployeeDAO;
+import com.crm.dao.employee.EmployeeDAOImpl;
 import com.crm.dao.user.UserDAO;
 import com.crm.dao.user.UserDAOImpl;
 import com.crm.entity.employee.Employee;
 import com.crm.entity.user.User;
+import com.crm.menu.admin.AdminMenuController;
+import com.crm.service.UserValidationException;
 import com.crm.main.Main;
+import com.crm.service.user.UserService;
+import com.crm.service.user.UserServiceImpl;
 
 import java.io.IOException;
 
@@ -27,8 +33,11 @@ public class CreateAccountMenuModel
     }
 
     private UserDAO userDAO = new UserDAOImpl();
+    private EmployeeDAO employeeDAO = new EmployeeDAOImpl();
 
-    public void createAccount() throws CreateAccountException, IOException
+    private UserService userService = new UserServiceImpl();
+
+    public void createAccount() throws CreateAccountException, IOException, UserValidationException
     {
         if (user.getLogin() != null && user.getPassword() != null)
         {
@@ -43,19 +52,15 @@ public class CreateAccountMenuModel
 
         if (employee.getName() != null && employee.getSurname() != null)
         {
+            employeeDAO.createEmployee(employee);
             user.setEmployee(employee);
-            userDAO.createUser(user);
+            userService.createUser(user);
 
-            Main.getInstance().replaceSceneContent("/com/crm/menu/view/employee_menu.fxml");
+            Main.getInstance().replaceSceneContent(new AdminMenuController());
         }
         else
         {
             throw new CreateAccountException("Enter your name and surname");
         }
-    }
-
-    public void cancel() throws IOException
-    {
-        Main.getInstance().replaceSceneContent("/com/crm/menu/view/authorization_menu.fxml");
     }
 }

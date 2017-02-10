@@ -88,4 +88,10 @@ public class Employee {
     public void setPosition(PositionType position) {
         this.position = position;
     }
+
+    @Override
+    public String toString()
+    {
+        return id.toString();
+    }
 }

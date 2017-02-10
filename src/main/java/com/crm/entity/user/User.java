@@ -23,13 +23,19 @@ public class User {
     @Column(name = "PASSWORD")
     private String password;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "ID")
     private Employee employee;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "USER_TYPE")
     private UserType userType;
+
+    @Column(name = "SECURITY_QUESTION")
+    private String securityQuestion;
+
+    @Column(name = "ANSWER_TO_QUESTION")
+    private String answerToSecurityQuestion;
 
     public User() {
     }
@@ -80,5 +86,31 @@ public class User {
 
     public void setUserType(UserType userType) {
         this.userType = userType;
+    }
+
+    public String getSecurityQuestion()
+    {
+        return securityQuestion;
+    }
+
+    public void setSecurityQuestion(String securityQuestion)
+    {
+        this.securityQuestion = securityQuestion;
+    }
+
+    public String getAnswerToSecurityQuestion()
+    {
+        return answerToSecurityQuestion;
+    }
+
+    public void setAnswerToSecurityQuestion(String answerToSecurityQuestion)
+    {
+        this.answerToSecurityQuestion = answerToSecurityQuestion;
+    }
+
+    @Override
+    public String toString()
+    {
+        return login;
     }
 }

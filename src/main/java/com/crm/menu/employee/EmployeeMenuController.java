@@ -1,5 +1,13 @@
 package com.crm.menu.employee;
 
-public class EmployeeMenuController {
+import com.crm.menu.Controller;
+import com.crm.menu.View;
 
+public class EmployeeMenuController implements Controller
+{
+    @Override
+    public View getView()
+    {
+        return null;
+    }
 }

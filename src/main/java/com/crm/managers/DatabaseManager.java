@@ -1,5 +1,7 @@
 package com.crm.managers;
 
+import com.crm.entity.employee.Employee;
+import com.crm.entity.user.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,6 +21,8 @@ public class DatabaseManager
         if (instance == null)
         {
             instance = new DatabaseManager();
+
+            DatabaseManager.getInstance().configure("hibernate.cfg.xml", User.class, Employee.class);
         }
         return instance;
     }
