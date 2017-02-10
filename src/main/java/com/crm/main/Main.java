@@ -34,6 +34,9 @@ public class Main extends Application
         this.primaryStage = primaryStage;
 
         replaceSceneContent(new AuthorizationMenuController());
+
+        primaryStage.getScene().getStylesheets().addAll("css/admin.css");
+
         primaryStage.setTitle("MiniCRM");
         primaryStage.setMaximized(true);
 
@@ -77,6 +80,7 @@ public class Main extends Application
             primaryStage.getScene().setRoot(controller.getView().getParent());
         }
 
+        primaryStage.getScene().getRoot().setStyle("-fx-background-color: #393c3e;");
         controller.getView().getParent().requestFocus();
     }
 

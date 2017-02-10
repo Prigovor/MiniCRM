@@ -57,5 +57,6 @@ public class AdminMenuModel
     public void deleteUser(User user) throws UserValidationException
     {
         userService.deleteUser(user.getId());
+        selectedUser = null;
     }
 }

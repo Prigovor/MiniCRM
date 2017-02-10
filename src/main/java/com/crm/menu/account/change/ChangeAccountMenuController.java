@@ -6,7 +6,7 @@ import com.crm.menu.Controller;
 public class ChangeAccountMenuController implements Controller
 {
     private ChangeAccountMenuModel model = new ChangeAccountMenuModel();
-    private ChangeAccountMenuView view = new ChangeAccountMenuView();
+    private ChangeAccountMenuView view = new ChangeAccountMenuView(this);
 
     public ChangeAccountMenuController(User user)
     {

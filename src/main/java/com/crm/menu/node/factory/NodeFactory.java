@@ -4,8 +4,9 @@ import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 
 import static com.crm.menu.node.SizeConstants.*;
 
@@ -42,13 +43,37 @@ public class NodeFactory
         return gridPane;
     }
 
+    public static void transformGridPane(GridPane gridPane, int rowAmount, int columnAmount)
+    {
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setVgap(INSETS);
+        gridPane.setHgap(INSETS);
+
+        GridPane.setValignment(gridPane, VPos.CENTER);
+        GridPane.setHalignment(gridPane, HPos.CENTER);
+
+        for (int i = 0; i < rowAmount; i++)
+        {
+            RowConstraints row = new RowConstraints();
+            row.setPercentHeight(100 / rowAmount);
+            gridPane.getRowConstraints().add(row);
+        }
+
+        for (int i = 0; i < columnAmount; i++)
+        {
+            ColumnConstraints column = new ColumnConstraints();
+            column.setPercentWidth(100 / columnAmount);
+            gridPane.getColumnConstraints().add(column);
+        }
+    }
+
     public static Label getLabel(String text, Double maxWidth, Double maxHeight)
     {
         Label label = new Label(text);
         label.setAlignment(Pos.CENTER);
         label.setMinSize(SMALL_ELEMENT_WIDTH, SMALL_ELEMENT_HEIGHT);
         label.setMaxSize(maxWidth, maxHeight);
-        label.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
+        label.setStyle("-fx-background-color: #1d1d1d;");
 
         GridPane.setValignment(label, VPos.CENTER);
         GridPane.setHalignment(label, HPos.CENTER);

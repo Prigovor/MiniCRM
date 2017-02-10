@@ -1,10 +1,12 @@
 package com.crm.menu.node.custom;
 
 import com.crm.entity.user.User;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
 
 import static com.crm.menu.node.SizeConstants.INSETS;
 
@@ -75,6 +77,33 @@ public class UserInfo extends GridPane
         return pairPosition;
     }
 
+    private User user;
+
+    public User getUser()
+    {
+        return user;
+    }
+
+    public void setUser(User user)
+    {
+        pairLogin.getTextFieldInput().setText(user.getLogin());
+        pairPassword.getTextFieldInput().setText(user.getPassword());
+        pairQuestion.getTextFieldInput().setText(user.getSecurityQuestion());
+        pairAnswer.getTextFieldInput().setText(user.getAnswerToSecurityQuestion());
+        pairUserType.getTextFieldInput().setText(user.getUserType().name());
+
+        if (user.getEmployee() != null)
+        {
+            pairName.getTextFieldInput().setText(user.getEmployee().getName());
+            pairSurname.getTextFieldInput().setText(user.getEmployee().getSurname());
+            pairAge.getTextFieldInput().setText(String.valueOf(user.getEmployee().getAge()));
+            pairGender.getTextFieldInput().setText(user.getEmployee().getGender().name());
+            pairPosition.getTextFieldInput().setText(user.getEmployee().getPosition().name());
+        }
+
+        this.user = user;
+    }
+
     public UserInfo(boolean isEditable)
     {
         init();
@@ -84,6 +113,7 @@ public class UserInfo extends GridPane
             {
                 InfoInputPair infoInputPair = (InfoInputPair) node;
                 infoInputPair.getTextFieldInput().setEditable(false);
+                infoInputPair.getTextFieldInput().setStyle("-fx-background-color: #616568; -fx-text-fill: #bcc6cd;");
             });
         }
     }
@@ -96,11 +126,20 @@ public class UserInfo extends GridPane
         pairQuestion = new InfoInputPair("Question", user.getSecurityQuestion());
         pairAnswer = new InfoInputPair("Answer", user.getAnswerToSecurityQuestion());
 
-        pairName = new InfoInputPair("Name", user.getEmployee().getName());
-        pairSurname = new InfoInputPair("Surname", user.getEmployee().getSurname());
-        pairAge = new InfoInputPair("Age", String.valueOf(user.getEmployee().getAge()));
-        pairGender = new InfoInputPair("Gender", user.getEmployee().getGender().name());
-        pairPosition = new InfoInputPair("Position", user.getEmployee().getPosition().name());
+        pairName = new InfoInputPair("Name");
+        pairSurname = new InfoInputPair("Surname");
+        pairAge = new InfoInputPair("Age");
+        pairGender = new InfoInputPair("Gender");
+        pairPosition = new InfoInputPair("Position");
+
+        if (user.getEmployee() != null)
+        {
+            pairName.getTextFieldInput().setText(user.getEmployee().getName());
+            pairSurname.getTextFieldInput().setText(user.getEmployee().getSurname());
+            pairAge.getTextFieldInput().setText(String.valueOf(user.getEmployee().getAge()));
+            pairGender.getTextFieldInput().setText(user.getEmployee().getGender().name());
+            pairPosition.getTextFieldInput().setText(user.getEmployee().getPosition().name());
+        }
 
         init();
         if (!isEditable)
@@ -109,6 +148,7 @@ public class UserInfo extends GridPane
             {
                 InfoInputPair infoInputPair = (InfoInputPair) node;
                 infoInputPair.getTextFieldInput().setEditable(false);
+                infoInputPair.getTextFieldInput().setStyle("-fx-background-color: #616568; -fx-text-fill: #bcc6cd;");
             });
         }
     }
@@ -116,23 +156,36 @@ public class UserInfo extends GridPane
     private void init()
     {
         setAlignment(Pos.CENTER);
-        setHgap(INSETS);
         setVgap(INSETS);
+        setHgap(INSETS);
 
-        ColumnConstraints columnConstraints = new ColumnConstraints();
-        columnConstraints.setHgrow(Priority.ALWAYS);
-        getColumnConstraints().add(columnConstraints);
+        for (int i = 0; i < 4; i++)
+        {
+            ColumnConstraints columnConstraints = new ColumnConstraints();
+            columnConstraints.setPercentWidth(25);
+            getColumnConstraints().add(columnConstraints);
+        }
+
+        for (int i = 0; i < 4; i++)
+        {
+            RowConstraints rowConstraints = new RowConstraints();
+            rowConstraints.setPercentHeight(25);
+            getRowConstraints().add(rowConstraints);
+        }
+
+        GridPane.setHalignment(this, HPos.CENTER);
+        GridPane.setValignment(this, VPos.CENTER);
 
         add(pairLogin, 0, 0);
-        add(pairPassword, 1 , 0);
-        add(pairUserType, 0 , 1, 2, 1);
-        add(pairQuestion, 0, 2);
-        add(pairAnswer, 1, 2);
+        add(pairPassword, 1, 0);
+        add(pairQuestion, 2, 0);
+        add(pairAnswer, 3, 0);
+        add(pairUserType, 0, 1, 4, 1);
 
-        add(pairName, 0, 3);
-        add(pairSurname, 1, 3);
-        add(pairAge, 0, 4);
-        add(pairGender, 1, 4);
-        add(pairPosition, 0, 5, 2, 1);
+        add(pairName, 0, 2);
+        add(pairSurname, 1, 2);
+        add(pairAge, 2, 2);
+        add(pairGender, 3, 2);
+        add(pairPosition, 0, 3, 4, 1);
     }
 }

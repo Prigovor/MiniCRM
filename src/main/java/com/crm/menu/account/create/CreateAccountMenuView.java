@@ -3,7 +3,6 @@ package com.crm.menu.account.create;
 import com.crm.menu.View;
 import com.crm.menu.node.custom.UserInfo;
 import com.crm.menu.node.factory.NodeFactory;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -19,8 +18,9 @@ public class CreateAccountMenuView implements View
     private GridPane gridPane = new GridPane();
 
     private UserInfo userInfo = new UserInfo(true);
-    private Button buttonCreate = NodeFactory.getButton("Create", userInfo.getMaxWidth(), userInfo.getMaxHeight());
-    private Button buttonCancel = NodeFactory.getButton("Cancel", userInfo.getMaxWidth(), userInfo.getMaxHeight());
+
+    private Button buttonCreate;
+    private Button buttonCancel;
 
     private CreateAccountMenuController controller;
 
@@ -44,12 +44,20 @@ public class CreateAccountMenuView implements View
     @Override
     public void init()
     {
+        buttonCreate = NodeFactory.getButton("Create", userInfo.getPairPosition().getMaxWidth() / 2, userInfo.getPairPosition().getMaxHeight());
+        buttonCancel = NodeFactory.getButton("Cancel", buttonCreate.getMaxWidth() / 2, buttonCreate.getMaxHeight());
+
+        GridPane gridPaneButtons = NodeFactory.getGridPane(1, 2);
+        gridPaneButtons.setMaxWidth(userInfo.getMaxWidth());
+        gridPaneButtons.add(buttonCreate, 0, 0);
+        gridPaneButtons.add(buttonCancel, 1, 0);
+
         gridPane.setAlignment(Pos.CENTER);
-        gridPane.setPadding(new Insets(INSETS));
+        gridPane.setHgap(INSETS);
+        gridPane.setVgap(INSETS);
 
         gridPane.add(userInfo, 0, 0);
-        gridPane.add(buttonCreate, 0, 1);
-        gridPane.add(buttonCancel, 1, 1);
+        gridPane.add(gridPaneButtons, 0, 1);
 
         buttonCreate.setOnAction(event ->
         {

@@ -36,7 +36,7 @@ public class InfoInputPair extends GridPane
         setAlignment(Pos.CENTER);
         setMaxWidth(Double.MAX_VALUE);
 
-        NodeFactory.transformLabeled(labelInfo, textInfo);
+        labelInfo = NodeFactory.getLabel(textInfo, Double.MAX_VALUE, Double.MAX_VALUE);
         textFieldInput = NodeFactory.getTextField(Double.MAX_VALUE, Double.MAX_VALUE);
 
         init();
@@ -45,11 +45,17 @@ public class InfoInputPair extends GridPane
     public InfoInputPair(String textInfo, String textInput)
     {
         this(textInfo);
-        textFieldInput.setText(textInput);
+
+        if (textInput != null)
+        {
+            textFieldInput.setText(textInput);
+        }
     }
 
     private void init()
     {
+        NodeFactory.transformGridPane(this, 2, 1);
+
         add(labelInfo, 0, 0);
         add(textFieldInput, 0, 1);
 

@@ -42,6 +42,19 @@ public class AdminMenuController implements Controller
         view.getUserListView().setItems(FXCollections.observableList(model.getListUsers()));
     }
 
+    public void showUserInfo()
+    {
+        try
+        {
+            model.validateUser();
+            view.getUserInfo().setUser(view.getUserListView().getSelectionModel().getSelectedItem());
+        }
+        catch (UserValidationException e)
+        {
+            view.showInformationMessage(e.getMessage());
+        }
+    }
+
     public void showTableUsers()
     {
         try
