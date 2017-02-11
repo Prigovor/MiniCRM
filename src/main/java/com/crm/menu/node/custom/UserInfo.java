@@ -24,6 +24,7 @@ public class UserInfo extends GridPane
     private InfoInputPair pairName = new InfoInputPair("Name");
     private InfoInputPair pairSurname = new InfoInputPair("Surname");
     private InfoInputPair pairAge = new InfoInputPair("Age");
+    private InfoInputPair pairEmail = new InfoInputPair("Email");
     private InfoInputPair pairGender = new InfoInputPair("Gender");
     private InfoInputPair pairPosition = new InfoInputPair("Position");
 
@@ -67,6 +68,11 @@ public class UserInfo extends GridPane
         return pairAge;
     }
 
+    public InfoInputPair getPairEmail()
+    {
+        return pairEmail;
+    }
+
     public InfoInputPair getPairGender()
     {
         return pairGender;
@@ -100,6 +106,7 @@ public class UserInfo extends GridPane
             pairName.getTextFieldInput().setText(user.getEmployee().getName());
             pairSurname.getTextFieldInput().setText(user.getEmployee().getSurname());
             pairAge.getTextFieldInput().setText(String.valueOf(user.getEmployee().getAge()));
+            pairEmail.getTextFieldInput().setText(user.getEmployee().getEmail());
             pairGender.getTextFieldInput().setText(user.getEmployee().getGender().name());
             pairPosition.getTextFieldInput().setText(user.getEmployee().getPosition().name());
         }
@@ -129,17 +136,12 @@ public class UserInfo extends GridPane
         pairQuestion = new InfoInputPair("Question", user.getQuestion());
         pairAnswer = new InfoInputPair("Answer", user.getAnswer());
 
-        pairName = new InfoInputPair("Name");
-        pairSurname = new InfoInputPair("Surname");
-        pairAge = new InfoInputPair("Age");
-        pairGender = new InfoInputPair("Gender");
-        pairPosition = new InfoInputPair("Position");
-
         if (user.getEmployee() != null)
         {
             pairName.getTextFieldInput().setText(user.getEmployee().getName());
             pairSurname.getTextFieldInput().setText(user.getEmployee().getSurname());
             pairAge.getTextFieldInput().setText(String.valueOf(user.getEmployee().getAge()));
+            pairEmail.getTextFieldInput().setText(user.getEmployee().getEmail());
             pairGender.getTextFieldInput().setText(user.getEmployee().getGender().name());
             pairPosition.getTextFieldInput().setText(user.getEmployee().getPosition().name());
         }
@@ -189,7 +191,8 @@ public class UserInfo extends GridPane
         add(pairSurname, 1, 2);
         add(pairAge, 2, 2);
         add(pairGender, 3, 2);
-        add(pairPosition, 0, 3, 4, 1);
+        add(pairEmail, 0, 3, 2, 1);
+        add(pairPosition, 2, 3, 2, 1);
     }
 
     public void cleanTextFields()

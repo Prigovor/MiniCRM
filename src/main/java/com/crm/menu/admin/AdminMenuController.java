@@ -13,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 
+import javax.mail.MessagingException;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -20,112 +21,153 @@ import java.lang.reflect.Field;
 /**
  * Created by Жека on 2/5/2017.
  */
-public class AdminMenuController implements Controller {
+public class AdminMenuController implements Controller
+{
     private AdminMenuModel model = new AdminMenuModel();
     private AdminMenuView view = new AdminMenuView(this);
 
     @Override
-    public AdminMenuView getView() {
+    public AdminMenuView getView()
+    {
         return view;
     }
 
-    public AdminMenuModel getModel() {
+    public AdminMenuModel getModel()
+    {
         return model;
     }
 
-    public AdminMenuController() {
+    public AdminMenuController()
+    {
         showListUsers();
     }
 
-    public void showListUsers() {
+    public void showListUsers()
+    {
         view.getUserListView().setItems(FXCollections.observableList(model.getListUsers()));
     }
 
-    public void showUserInfo() {
-        try {
+    public void showUserInfo()
+    {
+        try
+        {
             model.validateUser();
             view.getUserInfo().setUser(view.getUserListView().getSelectionModel().getSelectedItem());
-        } catch (UserValidationException e) {
+        }
+        catch (UserValidationException e)
+        {
             view.showInformationMessage(e.getMessage());
         }
     }
 
-    public void showTableUsers() {
-        try {
+    public void showTableUsers()
+    {
+        try
+        {
             view.getTableView().setItems(FXCollections.observableList(model.secureGetListUsers()));
 
             view.getTableView().getColumns().clear();
 
-            for (Field field : User.class.getDeclaredFields()) {
+            for (Field field : User.class.getDeclaredFields())
+            {
                 TableColumn tableColumn = new TableColumn(field.getName());
                 view.getTableView().getColumns().add(tableColumn);
                 tableColumn.setCellValueFactory(new PropertyValueFactory(field.getName()));
             }
-        } catch (UserValidationException e) {
+        }
+        catch (UserValidationException e)
+        {
             view.showInformationMessage(e.getMessage());
         }
     }
 
-    public void showTableEmployers() {
-        try {
+    public void showTableEmployers()
+    {
+        try
+        {
             view.getTableView().setItems(FXCollections.observableList(model.secureGetListEmployers()));
 
             view.getTableView().getColumns().clear();
 
-            for (Field field : Employee.class.getDeclaredFields()) {
+            for (Field field : Employee.class.getDeclaredFields())
+            {
                 TableColumn tableColumn = new TableColumn(field.getName());
                 view.getTableView().getColumns().add(tableColumn);
                 tableColumn.setCellValueFactory(new PropertyValueFactory(field.getName()));
             }
-        } catch (UserValidationException e) {
+        }
+        catch (UserValidationException e)
+        {
             view.showInformationMessage(e.getMessage());
         }
     }
 
-    public void addUser() {
-        try {
+    public void addUser()
+    {
+        try
+        {
             model.validateUser();
             Main.getInstance().replaceSceneContent(new CreateAccountMenuController());
-        } catch (UserValidationException e) {
+        }
+        catch (UserValidationException e)
+        {
             view.showInformationMessage(e.getMessage());
         }
     }
 
-    public void changeUser() {
-        if (model.getSelectedUser() != null) {
-            try {
+    public void changeUser()
+    {
+        if (model.getSelectedUser() != null)
+        {
+            try
+            {
                 model.validateUser();
                 Main.getInstance().replaceSceneContent(new ChangeAccountMenuController(model.getSelectedUser()));
-            } catch (UserValidationException e) {
+            }
+            catch (UserValidationException e)
+            {
                 view.showInformationMessage(e.getMessage());
             }
-        } else {
+        }
+        else
+        {
             view.showInformationMessage("Select user in left-side list");
         }
     }
 
-    public void deleteUser() {
-        if (model.getSelectedUser() != null) {
-            try {
+    public void deleteUser()
+    {
+        if (model.getSelectedUser() != null)
+        {
+            try
+            {
                 model.deleteUser(model.getSelectedUser());
                 showListUsers();
-            } catch (UserValidationException e) {
+            }
+            catch (UserValidationException e)
+            {
                 view.showInformationMessage(e.getMessage());
             }
-        } else {
+        }
+        else
+        {
             view.showInformationMessage("Select user in left-side list");
         }
     }
 
-    public void generateUser() {
+    public void generateUser()
+    {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
         File file = fileChooser.showOpenDialog(view.getParent().getScene().getWindow());
 
-        try {
+        try
+        {
             model.generateUser(JsonFileManager.deserializeFromJsonFile(Employee.class, file.getAbsolutePath()));
             showListUsers();
-        } catch (IOException | UserValidationException e) {
+        }
+        catch (IOException | UserValidationException | MessagingException e)
+        {
             view.showInformationMessage(e.getMessage());
         }
     }

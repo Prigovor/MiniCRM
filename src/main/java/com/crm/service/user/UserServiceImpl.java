@@ -1,10 +1,15 @@
 package com.crm.service.user;
 
+import com.crm.dao.employee.EmployeeDAO;
+import com.crm.dao.employee.EmployeeDAOImpl;
 import com.crm.dao.user.UserDAO;
 import com.crm.dao.user.UserDAOImpl;
+import com.crm.entity.employee.Employee;
 import com.crm.entity.user.User;
+import com.crm.managers.EmailManager;
 import com.crm.service.UserValidationException;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 /**
@@ -13,6 +18,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService
 {
     private UserDAO userDAO = new UserDAOImpl();
+    private EmployeeDAO employeeDAO = new EmployeeDAOImpl();
 
     @Override
     public Long createUser(User user) throws UserValidationException
@@ -52,5 +58,36 @@ public class UserServiceImpl implements UserService
         validateUser();
 
         return userDAO.findAll();
+    }
+
+    @Override
+    public void generateUserFromEmployee(Employee employee) throws UserValidationException, MessagingException
+    {
+        validateUser();
+
+        User user = new User();
+        user.setLogin(employee.getName().toLowerCase().concat(".").concat(employee.getSurname().toLowerCase()));
+        user.setPassword("1111");
+        user.setEmployee(employee);
+
+        int sameUserCount = 0;
+        for (User userEntry : userDAO.findAll())
+        {
+            if (user.getLogin().equals(userEntry.getLogin()))
+            {
+                sameUserCount++;
+            }
+        }
+
+        if (sameUserCount != 0)
+        {
+            user.setLogin(user.getLogin().concat("." + sameUserCount));
+        }
+
+        employeeDAO.createEmployee(employee);
+        userDAO.createUser(user);
+
+        EmailManager.getInstance().sendMessage(employee.getEmail(), "Login and password from MiniSRM account",
+                "Login: " + user.getLogin() + "Password: " + user.getPassword());
     }
 }

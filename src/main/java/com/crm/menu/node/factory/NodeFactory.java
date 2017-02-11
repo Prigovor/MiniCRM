@@ -6,6 +6,7 @@ import javafx.geometry.VPos;
 import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 
 import static com.crm.menu.node.SizeConstants.*;
@@ -15,6 +16,13 @@ import static com.crm.menu.node.SizeConstants.*;
  */
 public class NodeFactory
 {
+    private <T extends Region> T getRegion(Double minWidth, Double minHeight, Double maxWidth, Double maxHeight)
+    {
+
+
+        return null;
+    }
+
     public static GridPane getGridPane(int rowAmount, int columnAmount)
     {
         GridPane gridPane = new GridPane();
@@ -41,30 +49,6 @@ public class NodeFactory
         }
 
         return gridPane;
-    }
-
-    public static void transformGridPane(GridPane gridPane, int rowAmount, int columnAmount)
-    {
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setVgap(INSETS);
-        gridPane.setHgap(INSETS);
-
-        GridPane.setValignment(gridPane, VPos.CENTER);
-        GridPane.setHalignment(gridPane, HPos.CENTER);
-
-        for (int i = 0; i < rowAmount; i++)
-        {
-            RowConstraints row = new RowConstraints();
-            row.setPercentHeight(100 / rowAmount);
-            gridPane.getRowConstraints().add(row);
-        }
-
-        for (int i = 0; i < columnAmount; i++)
-        {
-            ColumnConstraints column = new ColumnConstraints();
-            column.setPercentWidth(100 / columnAmount);
-            gridPane.getColumnConstraints().add(column);
-        }
     }
 
     public static Label getLabel(String text, Double maxWidth, Double maxHeight)
@@ -120,6 +104,18 @@ public class NodeFactory
         return button;
     }
 
+    public static ChoiceBox getChoiceBox(Double maxWidth, Double maxHeight)
+    {
+        ChoiceBox choiceBox = new ChoiceBox();
+        choiceBox.setMinSize(SMALL_ELEMENT_WIDTH, SMALL_ELEMENT_HEIGHT);
+        choiceBox.setMaxSize(maxWidth, maxHeight);
+
+        GridPane.setValignment(choiceBox, VPos.CENTER);
+        GridPane.setHalignment(choiceBox, HPos.CENTER);
+
+        return choiceBox;
+    }
+
     public static <T extends Labeled> void transformLabeled(T labeled, String text)
     {
         labeled.setText(text);
@@ -129,5 +125,29 @@ public class NodeFactory
 
         GridPane.setValignment(labeled, VPos.CENTER);
         GridPane.setHalignment(labeled, HPos.CENTER);
+    }
+
+    public static void transformGridPane(GridPane gridPane, int rowAmount, int columnAmount)
+    {
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setVgap(INSETS);
+        gridPane.setHgap(INSETS);
+
+        GridPane.setValignment(gridPane, VPos.CENTER);
+        GridPane.setHalignment(gridPane, HPos.CENTER);
+
+        for (int i = 0; i < rowAmount; i++)
+        {
+            RowConstraints row = new RowConstraints();
+            row.setPercentHeight(100 / rowAmount);
+            gridPane.getRowConstraints().add(row);
+        }
+
+        for (int i = 0; i < columnAmount; i++)
+        {
+            ColumnConstraints column = new ColumnConstraints();
+            column.setPercentWidth(100 / columnAmount);
+            gridPane.getColumnConstraints().add(column);
+        }
     }
 }

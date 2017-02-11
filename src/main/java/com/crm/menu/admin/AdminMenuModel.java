@@ -1,7 +1,5 @@
 package com.crm.menu.admin;
 
-import com.crm.dao.employee.EmployeeDAO;
-import com.crm.dao.employee.EmployeeDAOImpl;
 import com.crm.dao.user.UserDAO;
 import com.crm.dao.user.UserDAOImpl;
 import com.crm.entity.employee.Employee;
@@ -12,6 +10,7 @@ import com.crm.service.employee.EmployeeServiceImpl;
 import com.crm.service.user.UserService;
 import com.crm.service.user.UserServiceImpl;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 /**
@@ -20,7 +19,6 @@ import java.util.List;
 public class AdminMenuModel
 {
     private UserDAO userDAO = new UserDAOImpl();
-    private EmployeeDAO employeeDAO = new EmployeeDAOImpl();
 
     private UserService userService = new UserServiceImpl();
     private EmployeeService employeeService = new EmployeeServiceImpl();
@@ -63,14 +61,8 @@ public class AdminMenuModel
         selectedUser = null;
     }
 
-    public void generateUser(Employee employee) throws UserValidationException
+    public void generateUser(Employee employee) throws UserValidationException, MessagingException
     {
-        User user = new User();
-        user.setLogin(employee.getName().toLowerCase().concat(".").concat(employee.getSurname().toLowerCase()));
-        user.setPassword("1111");
-        user.setEmployee(employee);
-
-        employeeService.createEmployee(employee);
-        userDAO.createUser(user);
+        userService.generateUserFromEmployee(employee);
     }
 }
