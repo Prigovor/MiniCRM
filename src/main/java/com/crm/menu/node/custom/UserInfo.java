@@ -86,6 +86,8 @@ public class UserInfo extends GridPane
 
     public void setUser(User user)
     {
+        cleanTextFields();
+
         pairLogin.getTextFieldInput().setText(user.getLogin());
         pairPassword.getTextFieldInput().setText(user.getPassword());
         pairQuestion.getTextFieldInput().setText(user.getQuestion());
@@ -188,5 +190,17 @@ public class UserInfo extends GridPane
         add(pairAge, 2, 2);
         add(pairGender, 3, 2);
         add(pairPosition, 0, 3, 4, 1);
+    }
+
+    public void cleanTextFields()
+    {
+        getChildren().forEach(node ->
+        {
+            if (node.getClass().equals(InfoInputPair.class))
+            {
+                InfoInputPair infoInputPair = (InfoInputPair) node;
+                infoInputPair.getTextFieldInput().setText("");
+            }
+        });
     }
 }

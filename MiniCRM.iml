@@ -27,5 +27,6 @@
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-entitymanager:5.2.7.Final" level="project" />
     <orderEntry type="library" name="Maven: net.bytebuddy:byte-buddy:1.6.0" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.40" level="project" />
+    <orderEntry type="library" name="gson-2.8.0" level="project" />
   </component>
 </module>
