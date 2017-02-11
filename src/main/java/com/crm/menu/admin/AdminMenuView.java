@@ -180,5 +180,10 @@ public class AdminMenuView implements View
             model.setSelectedUser(userListView.getSelectionModel().getSelectedItem());
             controller.deleteUser();
         });
+
+        buttonGenerate.setOnAction(event ->
+        {
+            controller.generateUser();
+        });
     }
 }

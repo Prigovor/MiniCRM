@@ -14,12 +14,12 @@ public interface SecureService
     {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Security checking");
-        dialog.setContentText(MainModel.getInstance().getCurrentUser().getSecurityQuestion());
+        dialog.setContentText(MainModel.getInstance().getCurrentUser().getQuestion());
 
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent())
         {
-            if ((MainModel.getInstance().getCurrentUser().getAnswerToSecurityQuestion().equals(result.get())))
+            if ((MainModel.getInstance().getCurrentUser().getAnswer().equals(result.get())))
             {
                 return;
             }

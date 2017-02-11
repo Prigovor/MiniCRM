@@ -32,12 +32,13 @@ public class User {
     private UserType userType;
 
     @Column(name = "SECURITY_QUESTION")
-    private String securityQuestion;
+    private String question;
 
     @Column(name = "ANSWER_TO_QUESTION")
-    private String answerToSecurityQuestion;
+    private String answer;
 
     public User() {
+        userType = UserType.EMPTY;
     }
 
     public User(String password, Employee employee, UserType userType) {
@@ -88,24 +89,24 @@ public class User {
         this.userType = userType;
     }
 
-    public String getSecurityQuestion()
+    public String getQuestion()
     {
-        return securityQuestion;
+        return question;
     }
 
-    public void setSecurityQuestion(String securityQuestion)
+    public void setQuestion(String question)
     {
-        this.securityQuestion = securityQuestion;
+        this.question = question;
     }
 
-    public String getAnswerToSecurityQuestion()
+    public String getAnswer()
     {
-        return answerToSecurityQuestion;
+        return answer;
     }
 
-    public void setAnswerToSecurityQuestion(String answerToSecurityQuestion)
+    public void setAnswer(String answer)
     {
-        this.answerToSecurityQuestion = answerToSecurityQuestion;
+        this.answer = answer;
     }
 
     @Override

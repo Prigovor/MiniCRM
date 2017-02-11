@@ -88,8 +88,9 @@ public class UserInfo extends GridPane
     {
         pairLogin.getTextFieldInput().setText(user.getLogin());
         pairPassword.getTextFieldInput().setText(user.getPassword());
-        pairQuestion.getTextFieldInput().setText(user.getSecurityQuestion());
-        pairAnswer.getTextFieldInput().setText(user.getAnswerToSecurityQuestion());
+        pairQuestion.getTextFieldInput().setText(user.getQuestion());
+        pairAnswer.getTextFieldInput().setText(user.getAnswer());
+
         pairUserType.getTextFieldInput().setText(user.getUserType().name());
 
         if (user.getEmployee() != null)
@@ -123,8 +124,8 @@ public class UserInfo extends GridPane
         pairLogin = new InfoInputPair("Login", user.getLogin());
         pairPassword = new InfoInputPair("Password", user.getPassword());
         pairUserType = new InfoInputPair("User type", user.getUserType().name());
-        pairQuestion = new InfoInputPair("Question", user.getSecurityQuestion());
-        pairAnswer = new InfoInputPair("Answer", user.getAnswerToSecurityQuestion());
+        pairQuestion = new InfoInputPair("Question", user.getQuestion());
+        pairAnswer = new InfoInputPair("Answer", user.getAnswer());
 
         pairName = new InfoInputPair("Name");
         pairSurname = new InfoInputPair("Surname");

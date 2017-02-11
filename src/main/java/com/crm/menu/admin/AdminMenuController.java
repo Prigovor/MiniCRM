@@ -3,6 +3,7 @@ package com.crm.menu.admin;
 import com.crm.entity.employee.Employee;
 import com.crm.entity.user.User;
 import com.crm.main.Main;
+import com.crm.managers.JsonFileManager;
 import com.crm.menu.Controller;
 import com.crm.menu.account.change.ChangeAccountMenuController;
 import com.crm.menu.account.create.CreateAccountMenuController;
@@ -10,7 +11,10 @@ import com.crm.service.UserValidationException;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
 
 /**
@@ -147,6 +151,23 @@ public class AdminMenuController implements Controller
         else
         {
             view.showInformationMessage("Select user in left-side list");
+        }
+    }
+
+    public void generateUser()
+    {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        File file = fileChooser.showOpenDialog(view.getParent().getScene().getWindow());
+
+        try
+        {
+            model.generateUser(JsonFileManager.deserializeFromJsonFile(Employee.class, file.getAbsolutePath()));
+            showListUsers();
+        }
+        catch (IOException | UserValidationException e)
+        {
+            view.showInformationMessage(e.getMessage());
         }
     }
 }

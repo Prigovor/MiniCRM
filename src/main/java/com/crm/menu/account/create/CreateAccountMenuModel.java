@@ -60,7 +60,7 @@ public class CreateAccountMenuModel
         }
         else
         {
-            throw new CreateAccountException("Enter your name and surname");
+            throw new CreateAccountException("Enter name and surname of employee");
         }
     }
 }
