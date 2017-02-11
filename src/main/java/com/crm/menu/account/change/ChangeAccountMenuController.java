@@ -40,15 +40,22 @@ public class ChangeAccountMenuController implements Controller
     {
         model.getUser().setLogin(view.getUserInfo().getPairLogin().getInputText());
         model.getUser().setPassword(view.getUserInfo().getPairPassword().getInputText());
-        model.getUser().setUserType(UserType.valueOf(view.getUserInfo().getPairUserType().getInputText()));
         model.getUser().setQuestion(view.getUserInfo().getPairQuestion().getInputText());
         model.getUser().setAnswer(view.getUserInfo().getPairAnswer().getInputText());
 
         model.getEmployee().setName(view.getUserInfo().getPairName().getInputText());
         model.getEmployee().setSurname(view.getUserInfo().getPairSurname().getInputText());
         model.getEmployee().setAge(Integer.valueOf(view.getUserInfo().getPairAge().getInputText()));
-        model.getEmployee().setGender(Gender.valueOf(view.getUserInfo().getPairGender().getInputText()));
-        model.getEmployee().setPosition(PositionType.valueOf(view.getUserInfo().getPairPosition().getInputText()));
+
+        try {
+            model.getUser().setUserType(UserType.valueOf(view.getUserInfo().getPairUserType().getInputText()));
+            model.getEmployee().setGender(Gender.valueOf(view.getUserInfo().getPairGender().getInputText()));
+            model.getEmployee().setPosition(PositionType.valueOf(view.getUserInfo().getPairPosition().getInputText()));
+            model.getEmployee().setAge(Integer.valueOf(view.getUserInfo().getPairAge().getInputText()));
+        }
+        catch (Exception e)
+        {
+        }
 
         try
         {

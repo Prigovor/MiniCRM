@@ -7,6 +7,7 @@ import com.crm.dao.user.UserDAOImpl;
 import com.crm.entity.employee.Employee;
 import com.crm.entity.user.User;
 import com.crm.main.Main;
+import com.crm.main.MainModel;
 import com.crm.menu.account.create.CreateAccountException;
 import com.crm.menu.admin.AdminMenuController;
 import com.crm.service.UserValidationException;
@@ -21,7 +22,7 @@ import java.io.IOException;
 public class ChangeAccountMenuModel
 {
     private User user;
-    private Employee employee;
+    private Employee employee = new Employee();
 
     private UserDAO userDAO = new UserDAOImpl();
     private EmployeeDAO employeeDAO = new EmployeeDAOImpl();
@@ -36,7 +37,9 @@ public class ChangeAccountMenuModel
     public void setUser(User user)
     {
         this.user = user;
-        employee = user.getEmployee();
+        if (user.getEmployee() != null) {
+            employee = user.getEmployee();
+        }
     }
 
     public Employee getEmployee()
@@ -46,12 +49,16 @@ public class ChangeAccountMenuModel
 
     public void changeAccount() throws CreateAccountException, IOException, UserValidationException
     {
-        if (employee.getName() != null && employee.getSurname() != null)
+        if (!employee.getName().isEmpty() && !employee.getSurname().isEmpty())
         {
             employeeDAO.updateEmployee(employee);
             user.setEmployee(employee);
             userService.updateUser(user);
 
+            if (MainModel.getInstance().getCurrentUser().getId().equals(user.getId()))
+            {
+                MainModel.getInstance().setCurrentUser(user);
+            }
             Main.getInstance().replaceSceneContent(new AdminMenuController());
         }
         else
@@ -62,7 +69,7 @@ public class ChangeAccountMenuModel
 
     public void checkAccountSameLoginPassword() throws CreateAccountException
     {
-        if (user.getLogin() != null && user.getPassword() != null)
+        if (!user.getLogin().isEmpty() && !user.getPassword().isEmpty())
         {
             for (User userEntry : userDAO.findAll())
             {

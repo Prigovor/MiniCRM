@@ -39,7 +39,7 @@ public class CreateAccountMenuModel
 
     public void createAccount() throws CreateAccountException, IOException, UserValidationException
     {
-        if (user.getLogin() != null && user.getPassword() != null)
+        if (!user.getLogin().isEmpty() && !user.getPassword().isEmpty())
         {
             for (User userEntry : userDAO.findAll())
             {
@@ -48,19 +48,23 @@ public class CreateAccountMenuModel
                     throw new CreateAccountException("User with such login or password already exists");
                 }
             }
-        }
 
-        if (employee.getName() != null && employee.getSurname() != null)
-        {
-            employeeDAO.createEmployee(employee);
-            user.setEmployee(employee);
-            userService.createUser(user);
+            if (!employee.getName().isEmpty() && !employee.getSurname().isEmpty())
+            {
+                employeeDAO.createEmployee(employee);
+                user.setEmployee(employee);
+                userService.createUser(user);
 
-            Main.getInstance().replaceSceneContent(new AdminMenuController());
+                Main.getInstance().replaceSceneContent(new AdminMenuController());
+            }
+            else
+            {
+                throw new CreateAccountException("Enter name and surname of employee");
+            }
         }
         else
         {
-            throw new CreateAccountException("Enter name and surname of employee");
+            throw new CreateAccountException("Enter login and password");
         }
     }
 }
