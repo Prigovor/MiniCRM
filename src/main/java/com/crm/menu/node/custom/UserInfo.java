@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 import static com.crm.menu.node.SizeConstants.INSETS;
+import static com.crm.menu.node.SizeConstants.SMALL_ELEMENT_WIDTH;
 
 /**
  * Created by Bohdan on 10.02.2017.
@@ -163,6 +164,8 @@ public class UserInfo extends GridPane
         setAlignment(Pos.CENTER);
         setVgap(INSETS);
         setHgap(INSETS);
+
+        setMaxWidth(SMALL_ELEMENT_WIDTH * 5.5);
 
         for (int i = 0; i < 4; i++)
         {

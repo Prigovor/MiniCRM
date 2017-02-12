@@ -54,6 +54,11 @@ public class CreateAccountMenuController implements Controller
         }
     }
 
+    public void generatePassword()
+    {
+        view.getUserInfo().getPairPassword().getTextFieldInput().setText(model.generatePassword(6));
+    }
+
     public void cancel()
     {
         Main.getInstance().replaceSceneContent(new AdminMenuController());

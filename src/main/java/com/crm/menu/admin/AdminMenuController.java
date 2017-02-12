@@ -158,17 +158,26 @@ public class AdminMenuController implements Controller
     public void generateUser()
     {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Resource File");
+        fileChooser.setTitle("Open resource File");
+
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Json files", "*.json");
+
+        fileChooser.getExtensionFilters().add(filter);
+        fileChooser.setSelectedExtensionFilter(filter);
+
         File file = fileChooser.showOpenDialog(view.getParent().getScene().getWindow());
 
-        try
+        if (file != null)
         {
-            model.generateUser(JsonFileManager.deserializeFromJsonFile(Employee.class, file.getAbsolutePath()));
-            showListUsers();
-        }
-        catch (IOException | UserValidationException | MessagingException e)
-        {
-            view.showInformationMessage(e.getMessage());
+            try
+            {
+                model.generateUser(JsonFileManager.deserializeFromJsonFile(Employee.class, file.getAbsolutePath()));
+                showListUsers();
+            }
+            catch (IOException | UserValidationException | MessagingException e)
+            {
+                view.showInformationMessage(e.getMessage());
+            }
         }
     }
 }

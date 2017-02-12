@@ -7,6 +7,7 @@ import com.crm.dao.user.UserDAOImpl;
 import com.crm.entity.employee.Employee;
 import com.crm.entity.user.User;
 import com.crm.managers.EmailManager;
+import com.crm.managers.PasswordManager;
 import com.crm.service.UserValidationException;
 
 import javax.mail.MessagingException;
@@ -67,7 +68,7 @@ public class UserServiceImpl implements UserService
 
         User user = new User();
         user.setLogin(employee.getName().toLowerCase().concat(".").concat(employee.getSurname().toLowerCase()));
-        user.setPassword("1111");
+        user.setPassword(PasswordManager.getInstance().generatePassword(4));
         user.setEmployee(employee);
 
         int sameUserCount = 0;
@@ -76,6 +77,11 @@ public class UserServiceImpl implements UserService
             if (user.getLogin().equals(userEntry.getLogin()))
             {
                 sameUserCount++;
+            }
+
+            if (user.getPassword().equals(userEntry.getPassword()))
+            {
+                user.setPassword(PasswordManager.getInstance().generatePassword(4));
             }
         }
 

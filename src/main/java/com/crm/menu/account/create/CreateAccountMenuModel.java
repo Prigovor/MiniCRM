@@ -6,6 +6,7 @@ import com.crm.dao.user.UserDAO;
 import com.crm.dao.user.UserDAOImpl;
 import com.crm.entity.employee.Employee;
 import com.crm.entity.user.User;
+import com.crm.managers.PasswordManager;
 import com.crm.menu.admin.AdminMenuController;
 import com.crm.service.UserValidationException;
 import com.crm.main.Main;
@@ -66,5 +67,21 @@ public class CreateAccountMenuModel
         {
             throw new CreateAccountException("Enter login and password");
         }
+    }
+
+
+    public String generatePassword(int length)
+    {
+        String password = PasswordManager.getInstance().generatePassword(length);
+
+        for (User userEntry : userDAO.findAll())
+        {
+            if (password.equals(userEntry.getPassword()))
+            {
+                password = PasswordManager.getInstance().generatePassword(length);
+            }
+        }
+
+        return password;
     }
 }

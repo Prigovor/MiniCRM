@@ -8,6 +8,7 @@ import com.crm.entity.employee.Employee;
 import com.crm.entity.user.User;
 import com.crm.main.Main;
 import com.crm.main.MainModel;
+import com.crm.managers.PasswordManager;
 import com.crm.menu.account.create.CreateAccountException;
 import com.crm.menu.admin.AdminMenuController;
 import com.crm.service.UserValidationException;
@@ -79,5 +80,20 @@ public class ChangeAccountMenuModel
                 }
             }
         }
+    }
+
+    public String generatePassword(int length)
+    {
+        String password = PasswordManager.getInstance().generatePassword(length);
+
+        for (User userEntry : userDAO.findAll())
+        {
+            if (password.equals(userEntry.getPassword()))
+            {
+                password = PasswordManager.getInstance().generatePassword(length);
+            }
+        }
+
+        return password;
     }
 }

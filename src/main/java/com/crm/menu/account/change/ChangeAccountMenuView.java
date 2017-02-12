@@ -18,6 +18,7 @@ public class ChangeAccountMenuView implements View
     private GridPane gridPane = new GridPane();
 
     private Button buttonChange = new Button();
+    private Button buttonGeneratePassword = new Button();
     private Button buttonCancel = new Button();
 
     private UserInfo userInfo;
@@ -51,11 +52,13 @@ public class ChangeAccountMenuView implements View
     {
         buttonChange = NodeFactory.getButton("Change", userInfo.getPairPosition().getMaxWidth() / 2, userInfo.getPairPosition().getMaxHeight());
         buttonCancel = NodeFactory.getButton("Cancel", buttonChange.getMaxWidth() / 2, buttonChange.getMaxHeight());
+        buttonGeneratePassword = NodeFactory.getButton("Generate password", userInfo.getPairPosition().getMaxWidth(), buttonCancel.getMaxHeight());
 
-        GridPane gridPaneButtons = NodeFactory.getGridPane(1, 2);
+        GridPane gridPaneButtons = NodeFactory.getGridPane(2, 2);
         gridPaneButtons.setMaxWidth(userInfo.getMaxWidth());
-        gridPaneButtons.add(buttonChange, 0, 0);
-        gridPaneButtons.add(buttonCancel, 1, 0);
+        gridPaneButtons.add(buttonGeneratePassword, 0, 0, 2, 1);
+        gridPaneButtons.add(buttonChange, 0, 1);
+        gridPaneButtons.add(buttonCancel, 1, 1);
 
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setHgap(INSETS);
@@ -63,6 +66,11 @@ public class ChangeAccountMenuView implements View
 
         gridPane.add(userInfo, 0, 0);
         gridPane.add(gridPaneButtons, 0, 1);
+
+        buttonGeneratePassword.setOnAction(event ->
+        {
+            controller.generatePassword();
+        });
 
         buttonChange.setOnAction(event ->
         {
@@ -73,5 +81,6 @@ public class ChangeAccountMenuView implements View
         {
             controller.cancel();
         });
+
     }
 }
