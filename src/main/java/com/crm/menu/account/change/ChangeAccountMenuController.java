@@ -46,6 +46,7 @@ public class ChangeAccountMenuController implements Controller
         model.getEmployee().setName(view.getUserInfo().getPairName().getInputText());
         model.getEmployee().setSurname(view.getUserInfo().getPairSurname().getInputText());
         model.getEmployee().setAge(Integer.valueOf(view.getUserInfo().getPairAge().getInputText()));
+        model.getEmployee().setEmail(view.getUserInfo().getPairEmail().getInputText());
 
         try {
             model.getUser().setUserType(UserType.valueOf(view.getUserInfo().getPairUserType().getInputText()));

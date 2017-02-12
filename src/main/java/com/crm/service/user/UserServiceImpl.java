@@ -94,6 +94,6 @@ public class UserServiceImpl implements UserService
         userDAO.createUser(user);
 
         EmailManager.getInstance().sendMessage(employee.getEmail(), "Login and password from MiniSRM account",
-                "Login: " + user.getLogin() + "Password: " + user.getPassword());
+                "Login: " + user.getLogin() + "\nPassword: " + user.getPassword());
     }
 }

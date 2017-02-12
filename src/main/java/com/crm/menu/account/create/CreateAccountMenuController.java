@@ -33,8 +33,10 @@ public class CreateAccountMenuController implements Controller
             model.getUser().setPassword(view.getUserInfo().getPairPassword().getInputText());
             model.getUser().setQuestion(view.getUserInfo().getPairQuestion().getInputText());
             model.getUser().setAnswer(view.getUserInfo().getPairAnswer().getInputText());
+
             model.getEmployee().setName(view.getUserInfo().getPairName().getInputText());
             model.getEmployee().setSurname(view.getUserInfo().getPairSurname().getInputText());
+            model.getEmployee().setEmail(view.getUserInfo().getPairEmail().getInputText());
 
             try {
                 model.getUser().setUserType(UserType.valueOf(view.getUserInfo().getPairUserType().getInputText()));
