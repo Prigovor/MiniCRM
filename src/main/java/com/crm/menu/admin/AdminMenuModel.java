@@ -10,6 +10,7 @@ import com.crm.service.employee.EmployeeServiceImpl;
 import com.crm.service.user.UserService;
 import com.crm.service.user.UserServiceImpl;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 /**
@@ -58,5 +59,10 @@ public class AdminMenuModel
     {
         userService.deleteUser(user.getId());
         selectedUser = null;
+    }
+
+    public void generateUser(Employee employee) throws UserValidationException, MessagingException
+    {
+        userService.generateUserFromEmployee(employee);
     }
 }

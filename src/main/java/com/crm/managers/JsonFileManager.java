@@ -24,6 +24,11 @@ public class JsonFileManager
 
     public static <T> T deserializeFromJsonFile(Class<T> tClass, String path) throws IOException
     {
+        if (!path.endsWith(".json"))
+        {
+            throw new IOException("Wrong file type. Need .json file type");
+        }
+
         try (FileReader fileReader = new FileReader(path))
         {
             CharBuffer charBuffer = CharBuffer.allocate(16000);

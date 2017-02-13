@@ -31,15 +31,22 @@ public class CreateAccountMenuController implements Controller
         {
             model.getUser().setLogin(view.getUserInfo().getPairLogin().getInputText());
             model.getUser().setPassword(view.getUserInfo().getPairPassword().getInputText());
-            model.getUser().setUserType(UserType.valueOf(view.getUserInfo().getPairUserType().getInputText()));
-            model.getUser().setSecurityQuestion(view.getUserInfo().getPairQuestion().getInputText());
-            model.getUser().setAnswerToSecurityQuestion(view.getUserInfo().getPairAnswer().getInputText());
+            model.getUser().setQuestion(view.getUserInfo().getPairQuestion().getInputText());
+            model.getUser().setAnswer(view.getUserInfo().getPairAnswer().getInputText());
 
             model.getEmployee().setName(view.getUserInfo().getPairName().getInputText());
             model.getEmployee().setSurname(view.getUserInfo().getPairSurname().getInputText());
-            model.getEmployee().setAge(Integer.valueOf(view.getUserInfo().getPairAge().getInputText()));
-            model.getEmployee().setGender(Gender.valueOf(view.getUserInfo().getPairGender().getInputText()));
-            model.getEmployee().setPosition(PositionType.valueOf(view.getUserInfo().getPairPosition().getInputText()));
+            model.getEmployee().setEmail(view.getUserInfo().getPairEmail().getInputText());
+
+            try {
+                model.getUser().setUserType(UserType.valueOf(view.getUserInfo().getPairUserType().getInputText()));
+                model.getEmployee().setGender(Gender.valueOf(view.getUserInfo().getPairGender().getInputText()));
+                model.getEmployee().setPosition(PositionType.valueOf(view.getUserInfo().getPairPosition().getInputText()));
+                model.getEmployee().setAge(Integer.valueOf(view.getUserInfo().getPairAge().getInputText()));
+            }
+            catch (Exception e)
+            {
+            }
 
             model.createAccount();
         }
@@ -47,6 +54,11 @@ public class CreateAccountMenuController implements Controller
         {
             view.showInformationMessage(e.getMessage());
         }
+    }
+
+    public void generatePassword()
+    {
+        view.getUserInfo().getPairPassword().getTextFieldInput().setText(model.generatePassword(6));
     }
 
     public void cancel()

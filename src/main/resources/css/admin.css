@@ -60,10 +60,6 @@
     -fx-background-color: -fx-focus-color;
 }
 
-
-
-
-
 .list-view {
     -fx-base: #3c3f41;
     -fx-control-inner-background: #616568;

@@ -1,9 +1,11 @@
 package com.crm.service.user;
 
+import com.crm.entity.employee.Employee;
 import com.crm.entity.user.User;
 import com.crm.service.UserValidationException;
 import com.crm.service.SecureService;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 /**
@@ -20,4 +22,6 @@ public interface UserService extends SecureService
     void deleteUser(Long id) throws UserValidationException;
 
     List<User> findAll() throws UserValidationException;
+
+    void generateUserFromEmployee(Employee employee) throws UserValidationException, MessagingException;
 }

@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 import static com.crm.menu.node.SizeConstants.INSETS;
+import static com.crm.menu.node.SizeConstants.SMALL_ELEMENT_WIDTH;
 
 /**
  * Created by Bohdan on 10.02.2017.
@@ -24,6 +25,7 @@ public class UserInfo extends GridPane
     private InfoInputPair pairName = new InfoInputPair("Name");
     private InfoInputPair pairSurname = new InfoInputPair("Surname");
     private InfoInputPair pairAge = new InfoInputPair("Age");
+    private InfoInputPair pairEmail = new InfoInputPair("Email");
     private InfoInputPair pairGender = new InfoInputPair("Gender");
     private InfoInputPair pairPosition = new InfoInputPair("Position");
 
@@ -67,6 +69,11 @@ public class UserInfo extends GridPane
         return pairAge;
     }
 
+    public InfoInputPair getPairEmail()
+    {
+        return pairEmail;
+    }
+
     public InfoInputPair getPairGender()
     {
         return pairGender;
@@ -86,10 +93,13 @@ public class UserInfo extends GridPane
 
     public void setUser(User user)
     {
+        cleanTextFields();
+
         pairLogin.getTextFieldInput().setText(user.getLogin());
         pairPassword.getTextFieldInput().setText(user.getPassword());
-        pairQuestion.getTextFieldInput().setText(user.getSecurityQuestion());
-        pairAnswer.getTextFieldInput().setText(user.getAnswerToSecurityQuestion());
+        pairQuestion.getTextFieldInput().setText(user.getQuestion());
+        pairAnswer.getTextFieldInput().setText(user.getAnswer());
+
         pairUserType.getTextFieldInput().setText(user.getUserType().name());
 
         if (user.getEmployee() != null)
@@ -97,6 +107,7 @@ public class UserInfo extends GridPane
             pairName.getTextFieldInput().setText(user.getEmployee().getName());
             pairSurname.getTextFieldInput().setText(user.getEmployee().getSurname());
             pairAge.getTextFieldInput().setText(String.valueOf(user.getEmployee().getAge()));
+            pairEmail.getTextFieldInput().setText(user.getEmployee().getEmail());
             pairGender.getTextFieldInput().setText(user.getEmployee().getGender().name());
             pairPosition.getTextFieldInput().setText(user.getEmployee().getPosition().name());
         }
@@ -123,20 +134,15 @@ public class UserInfo extends GridPane
         pairLogin = new InfoInputPair("Login", user.getLogin());
         pairPassword = new InfoInputPair("Password", user.getPassword());
         pairUserType = new InfoInputPair("User type", user.getUserType().name());
-        pairQuestion = new InfoInputPair("Question", user.getSecurityQuestion());
-        pairAnswer = new InfoInputPair("Answer", user.getAnswerToSecurityQuestion());
-
-        pairName = new InfoInputPair("Name");
-        pairSurname = new InfoInputPair("Surname");
-        pairAge = new InfoInputPair("Age");
-        pairGender = new InfoInputPair("Gender");
-        pairPosition = new InfoInputPair("Position");
+        pairQuestion = new InfoInputPair("Question", user.getQuestion());
+        pairAnswer = new InfoInputPair("Answer", user.getAnswer());
 
         if (user.getEmployee() != null)
         {
             pairName.getTextFieldInput().setText(user.getEmployee().getName());
             pairSurname.getTextFieldInput().setText(user.getEmployee().getSurname());
             pairAge.getTextFieldInput().setText(String.valueOf(user.getEmployee().getAge()));
+            pairEmail.getTextFieldInput().setText(user.getEmployee().getEmail());
             pairGender.getTextFieldInput().setText(user.getEmployee().getGender().name());
             pairPosition.getTextFieldInput().setText(user.getEmployee().getPosition().name());
         }
@@ -158,6 +164,8 @@ public class UserInfo extends GridPane
         setAlignment(Pos.CENTER);
         setVgap(INSETS);
         setHgap(INSETS);
+
+        setMaxWidth(SMALL_ELEMENT_WIDTH * 5.5);
 
         for (int i = 0; i < 4; i++)
         {
@@ -186,6 +194,19 @@ public class UserInfo extends GridPane
         add(pairSurname, 1, 2);
         add(pairAge, 2, 2);
         add(pairGender, 3, 2);
-        add(pairPosition, 0, 3, 4, 1);
+        add(pairEmail, 0, 3, 2, 1);
+        add(pairPosition, 2, 3, 2, 1);
+    }
+
+    public void cleanTextFields()
+    {
+        getChildren().forEach(node ->
+        {
+            if (node.getClass().equals(InfoInputPair.class))
+            {
+                InfoInputPair infoInputPair = (InfoInputPair) node;
+                infoInputPair.getTextFieldInput().setText("");
+            }
+        });
     }
 }

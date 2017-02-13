@@ -1,7 +1,9 @@
 package com.crm.menu.admin;
 
 import com.crm.entity.user.User;
+import com.crm.main.Main;
 import com.crm.menu.View;
+import com.crm.menu.authorization.AuthorizationMenuController;
 import com.crm.menu.node.custom.UserInfo;
 import com.crm.menu.node.factory.NodeFactory;
 import javafx.geometry.Insets;
@@ -18,8 +20,7 @@ import static com.crm.menu.node.SizeConstants.SMALL_ELEMENT_HEIGHT;
 /**
  * Created by Bohdan on 09.02.2017.
  */
-public class AdminMenuView implements View
-{
+public class AdminMenuView implements View {
     private GridPane gridPane = new GridPane();
 
     private ListView<User> userListView = new ListView<>();
@@ -37,26 +38,24 @@ public class AdminMenuView implements View
     private Button buttonChange = new Button();
     private Button buttonDelete = new Button();
 
+    private Button buttonUnlogin = new Button();
+
     private AdminMenuModel model;
     private AdminMenuController controller;
 
-    public ListView<User> getUserListView()
-    {
+    public ListView<User> getUserListView() {
         return userListView;
     }
 
-    public TableView getTableView()
-    {
+    public TableView getTableView() {
         return tableView;
     }
 
-    public UserInfo getUserInfo()
-    {
+    public UserInfo getUserInfo() {
         return userInfo;
     }
 
-    public AdminMenuView(AdminMenuController controller)
-    {
+    public AdminMenuView(AdminMenuController controller) {
         this.controller = controller;
         this.model = controller.getModel();
         init();
@@ -64,14 +63,12 @@ public class AdminMenuView implements View
     }
 
     @Override
-    public Parent getParent()
-    {
+    public Parent getParent() {
         return gridPane;
     }
 
     @Override
-    public void init()
-    {
+    public void init() {
         tableView.widthProperty().addListener((observable, oldValue, newValue) ->
         {
             buttonShowAllEmployers.setMinWidth(newValue.doubleValue() / 2 - INSETS / 2);
@@ -102,6 +99,7 @@ public class AdminMenuView implements View
         buttonChange = NodeFactory.getButton("Change user", tableView.getMaxWidth() / 4, SMALL_ELEMENT_HEIGHT * 1.5);
         buttonDelete = NodeFactory.getButton("Delete user", tableView.getMaxWidth() / 4, SMALL_ELEMENT_HEIGHT * 1.5);
         buttonGenerate = NodeFactory.getButton("Generate user", tableView.getMaxWidth() / 4, SMALL_ELEMENT_HEIGHT * 1.5);
+        buttonUnlogin = NodeFactory.getButton("Unlogin", tableView.getMaxWidth(), buttonAdd.getMaxHeight());
 
         GridPane gridPaneDBControlButtons = NodeFactory.getGridPane(1, 4);
         gridPaneDBControlButtons.add(buttonAdd, 0, 0);
@@ -113,17 +111,20 @@ public class AdminMenuView implements View
         tableView.setDisable(true);
         tableView.setOpacity(0.0);
 
-        GridPane gridPaneRightSideControls = NodeFactory.getGridPane(3, 2);
+        GridPane gridPaneRightSideControls = NodeFactory.getGridPane(4, 2);
         gridPaneRightSideControls.add(tableView, 1, 0);
         gridPaneRightSideControls.add(userInfo, 1, 0);
         gridPaneRightSideControls.add(gridPaneShowAllButtons, 1, 1);
         gridPaneRightSideControls.add(gridPaneDBControlButtons, 1, 2);
         gridPaneRightSideControls.add(userListView, 0, 0);
         gridPaneRightSideControls.add(buttonShowUserInfo, 0, 1, 1, 2);
+        gridPaneRightSideControls.add(buttonUnlogin, 0, 3, 2, 1);
 
-        gridPaneRightSideControls.getRowConstraints().get(0).setPercentHeight(80);
+        buttonUnlogin.setMaxWidth(Double.MAX_VALUE);
+        gridPaneRightSideControls.getRowConstraints().get(0).setPercentHeight(70);
         gridPaneRightSideControls.getRowConstraints().get(1).setPercentHeight(10);
         gridPaneRightSideControls.getRowConstraints().get(2).setPercentHeight(10);
+        gridPaneRightSideControls.getRowConstraints().get(3).setPercentHeight(10);
 
         gridPaneRightSideControls.getColumnConstraints().get(0).setPercentWidth(15);
 
@@ -179,6 +180,17 @@ public class AdminMenuView implements View
         {
             model.setSelectedUser(userListView.getSelectionModel().getSelectedItem());
             controller.deleteUser();
+        });
+
+        buttonGenerate.setOnAction(event ->
+        {
+            controller.generateUser();
+        });
+
+        buttonUnlogin.setOnAction(event ->
+        {
+            // TODO: 11.02.2017 COSTYIL!!!
+            Main.getInstance().replaceSceneContent(new AuthorizationMenuController());
         });
     }
 }

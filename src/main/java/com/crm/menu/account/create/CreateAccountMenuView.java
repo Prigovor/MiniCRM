@@ -20,6 +20,7 @@ public class CreateAccountMenuView implements View
     private UserInfo userInfo = new UserInfo(true);
 
     private Button buttonCreate;
+    private Button buttonGeneratePassword = new Button();
     private Button buttonCancel;
 
     private CreateAccountMenuController controller;
@@ -46,11 +47,13 @@ public class CreateAccountMenuView implements View
     {
         buttonCreate = NodeFactory.getButton("Create", userInfo.getPairPosition().getMaxWidth() / 2, userInfo.getPairPosition().getMaxHeight());
         buttonCancel = NodeFactory.getButton("Cancel", buttonCreate.getMaxWidth() / 2, buttonCreate.getMaxHeight());
+        buttonGeneratePassword = NodeFactory.getButton("Generate password", userInfo.getPairPosition().getMaxWidth(), buttonCancel.getMaxHeight());
 
-        GridPane gridPaneButtons = NodeFactory.getGridPane(1, 2);
+        GridPane gridPaneButtons = NodeFactory.getGridPane(2, 2);
         gridPaneButtons.setMaxWidth(userInfo.getMaxWidth());
-        gridPaneButtons.add(buttonCreate, 0, 0);
-        gridPaneButtons.add(buttonCancel, 1, 0);
+        gridPaneButtons.add(buttonGeneratePassword, 0, 0, 2, 1);
+        gridPaneButtons.add(buttonCreate, 0, 1);
+        gridPaneButtons.add(buttonCancel, 1, 1);
 
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setHgap(INSETS);
@@ -62,6 +65,11 @@ public class CreateAccountMenuView implements View
         buttonCreate.setOnAction(event ->
         {
             controller.createAccount();
+        });
+
+        buttonGeneratePassword.setOnAction(event ->
+        {
+            controller.generatePassword();
         });
 
         buttonCancel.setOnAction(event ->

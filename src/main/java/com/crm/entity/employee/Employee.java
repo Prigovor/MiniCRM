@@ -24,6 +24,9 @@ public class Employee {
     @Column(name = "AGE")
     private Integer age;
 
+    @Column(name = "EMAIL")
+    private String email;
+
     @Column(name = "GENDER")
     private Gender gender;
 
@@ -31,6 +34,8 @@ public class Employee {
     private PositionType position;
 
     public Employee() {
+        gender = Gender.EMPTY;
+        position = PositionType.EMPTY;
     }
 
     public Employee(String name, String surname, Integer age, Gender gender, PositionType position) {
@@ -71,6 +76,16 @@ public class Employee {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
     }
 
     public Gender getGender() {
