@@ -9,8 +9,7 @@ import java.util.List;
 /**
  * Created by Bohdan on 08.02.2017.
  */
-public interface EmployeeService extends SecureService
-{
+public interface EmployeeService extends SecureService {
     Long createEmployee(Employee employee) throws UserValidationException;
 
     Employee readEmployee(Long id) throws UserValidationException;
