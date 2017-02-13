@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Bohdan on 05.02.2017.
  */
-public class DatabaseManager
+public final class DatabaseManager
 {
     private static DatabaseManager instance;
 
@@ -44,6 +44,11 @@ public class DatabaseManager
         }
 
         sessionFactory = configuration.buildSessionFactory();
+    }
+
+    public SessionFactory getSessionFactory()
+    {
+        return sessionFactory;
     }
 
     public Long saveEntry(Object entry)
