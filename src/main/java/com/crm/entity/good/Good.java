@@ -1,12 +1,11 @@
 package com.crm.entity.good;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.crm.entity.order.Order;
+
+import javax.persistence.*;
 
 /**
- * Created by Bohdan on 13.02.2017.
+ * Created by Prigovor on 14.02.2017.
  */
 
 @Entity
@@ -26,14 +25,18 @@ public class Good {
     @Column(name = "PRICE")
     private Long price;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    private Order order;
+
     public Good() {
     }
 
-    public Good(Long id, String nomination, Long amount, Long price) {
+    public Good(Long id, String nomination, Long amount, Long price, Order order) {
         this.id = id;
         this.nomination = nomination;
         this.amount = amount;
         this.price = price;
+        this.order = order;
     }
 
     public Long getId() {

@@ -1,6 +1,9 @@
 package com.crm.entity.client;
 
+import com.crm.entity.order.Order;
+
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by Prigovor on 14.02.2017.
@@ -26,6 +29,9 @@ public class Client {
 
     @Column(name = "EMAIL")
     private String email;
+
+    @OneToMany(mappedBy = "client",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<Order> orders;
 
     public Client() {
     }
@@ -75,6 +81,14 @@ public class Client {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 
     @Override
