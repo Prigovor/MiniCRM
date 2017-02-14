@@ -4,6 +4,7 @@ import com.crm.entity.employee.Gender;
 import com.crm.entity.employee.PositionType;
 import com.crm.entity.user.User;
 import com.crm.entity.user.UserType;
+import com.crm.menu.node.factory.NodeFactory;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
@@ -12,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+
+import java.util.Arrays;
 
 import static com.crm.menu.node.SizeConstants.INSETS;
 import static com.crm.menu.node.SizeConstants.SMALL_ELEMENT_WIDTH;
@@ -23,7 +26,12 @@ public class UserInfo extends GridPane
 {
     private InfoInputPair pairLogin = new InfoInputPair("Login");
     private InfoInputPair pairPassword = new InfoInputPair("Password");
-    private PairNodePane<Label, ChoiceBox<UserType>> pairUserType = new PairNodePane<>();
+
+    private PairNodePane<Label, ChoiceBox<UserType>> pairUserType = new PairNodePane<>(
+            NodeFactory.getLabel("User type", Double.MAX_VALUE, Double.MAX_VALUE),
+            NodeFactory.getChoiceBox(Arrays.asList(UserType.values()), Double.MAX_VALUE, Double.MAX_VALUE)
+    );
+
     private InfoInputPair pairQuestion = new InfoInputPair("Question");
     private InfoInputPair pairAnswer = new InfoInputPair("Answer");
 
@@ -31,8 +39,16 @@ public class UserInfo extends GridPane
     private InfoInputPair pairSurname = new InfoInputPair("Surname");
     private InfoInputPair pairAge = new InfoInputPair("Age");
     private InfoInputPair pairEmail = new InfoInputPair("Email");
-    private PairNodePane<Label, ChoiceBox<Gender>> pairGender = new PairNodePane<>();
-    private PairNodePane<Label, ChoiceBox<PositionType>> pairPosition = new PairNodePane<>();
+
+    private PairNodePane<Label, ChoiceBox<Gender>> pairGender = new PairNodePane<>(
+            NodeFactory.getLabel("Gender", Double.MAX_VALUE, Double.MAX_VALUE),
+            NodeFactory.getChoiceBox(Arrays.asList(Gender.values()), Double.MAX_VALUE, Double.MAX_VALUE)
+    );
+    private PairNodePane<Label, ChoiceBox<PositionType>> pairPosition = new PairNodePane<>(
+            NodeFactory.getLabel("Position", Double.MAX_VALUE, Double.MAX_VALUE),
+            NodeFactory.getChoiceBox(Arrays.asList(PositionType.values()), Double.MAX_VALUE, Double.MAX_VALUE)
+    );
+    private boolean isEditable;
 
     public InfoInputPair getPairLogin()
     {
@@ -100,19 +116,19 @@ public class UserInfo extends GridPane
     {
         cleanTextFields();
 
-        pairLogin.getTextFieldInput().setText(user.getLogin());
-        pairPassword.getTextFieldInput().setText(user.getPassword());
-        pairQuestion.getTextFieldInput().setText(user.getQuestion());
-        pairAnswer.getTextFieldInput().setText(user.getAnswer());
+        pairLogin.getSecondNode().setText(user.getLogin());
+        pairPassword.getSecondNode().setText(user.getPassword());
+        pairQuestion.getSecondNode().setText(user.getQuestion());
+        pairAnswer.getSecondNode().setText(user.getAnswer());
 
         pairUserType.getSecondNode().setValue(UserType.EMPTY);
 
         if (user.getEmployee() != null)
         {
-            pairName.getTextFieldInput().setText(user.getEmployee().getName());
-            pairSurname.getTextFieldInput().setText(user.getEmployee().getSurname());
-            pairAge.getTextFieldInput().setText(String.valueOf(user.getEmployee().getAge()));
-            pairEmail.getTextFieldInput().setText(user.getEmployee().getEmail());
+            pairName.getSecondNode().setText(user.getEmployee().getName());
+            pairSurname.getSecondNode().setText(user.getEmployee().getSurname());
+            pairAge.getSecondNode().setText(String.valueOf(user.getEmployee().getAge()));
+            pairEmail.getSecondNode().setText(user.getEmployee().getEmail());
 
             pairGender.getSecondNode().setValue(Gender.EMPTY);
             pairPosition.getSecondNode().setValue(PositionType.EMPTY);
@@ -123,15 +139,11 @@ public class UserInfo extends GridPane
 
     public UserInfo(boolean isEditable)
     {
+        this.isEditable = isEditable;
         init();
         if (!isEditable)
         {
-            getChildren().forEach(node ->
-            {
-                InfoInputPair infoInputPair = (InfoInputPair) node;
-                infoInputPair.getTextFieldInput().setEditable(false);
-                infoInputPair.getTextFieldInput().setStyle("-fx-background-color: #616568; -fx-text-fill: #bcc6cd;");
-            });
+            setDisable(true);
         }
     }
 
@@ -147,10 +159,10 @@ public class UserInfo extends GridPane
 
         if (user.getEmployee() != null)
         {
-            pairName.getTextFieldInput().setText(user.getEmployee().getName());
-            pairSurname.getTextFieldInput().setText(user.getEmployee().getSurname());
-            pairAge.getTextFieldInput().setText(String.valueOf(user.getEmployee().getAge()));
-            pairEmail.getTextFieldInput().setText(user.getEmployee().getEmail());
+            pairName.getSecondNode().setText(user.getEmployee().getName());
+            pairSurname.getSecondNode().setText(user.getEmployee().getSurname());
+            pairAge.getSecondNode().setText(String.valueOf(user.getEmployee().getAge()));
+            pairEmail.getSecondNode().setText(user.getEmployee().getEmail());
 
             pairGender.getSecondNode().setValue(user.getEmployee().getGender());
             pairPosition.getSecondNode().setValue(user.getEmployee().getPosition());
@@ -159,12 +171,7 @@ public class UserInfo extends GridPane
         init();
         if (!isEditable)
         {
-            getChildren().forEach(node ->
-            {
-                InfoInputPair infoInputPair = (InfoInputPair) node;
-                infoInputPair.getTextFieldInput().setEditable(false);
-                infoInputPair.getTextFieldInput().setStyle("-fx-background-color: #616568; -fx-text-fill: #bcc6cd;");
-            });
+            setDisable(true);
         }
     }
 
@@ -214,8 +221,17 @@ public class UserInfo extends GridPane
             if (node.getClass().equals(InfoInputPair.class))
             {
                 InfoInputPair infoInputPair = (InfoInputPair) node;
-                infoInputPair.getTextFieldInput().setText("");
+                infoInputPair.getSecondNode().setText("");
             }
         });
+
+        pairPosition.getSecondNode().setValue(PositionType.EMPTY);
+        pairUserType.getSecondNode().setValue(UserType.EMPTY);
+        pairGender.getSecondNode().setValue(Gender.EMPTY);
+
+        if (!isEditable)
+        {
+            setDisable(true);
+        }
     }
 }

@@ -45,9 +45,9 @@ public class CreateAccountMenuView implements View
     @Override
     public void init()
     {
-        buttonCreate = NodeFactory.getButton("Create", userInfo.getPairPosition().getMaxWidth() / 2, userInfo.getPairPosition().getMaxHeight());
-        buttonCancel = NodeFactory.getButton("Cancel", buttonCreate.getMaxWidth() / 2, buttonCreate.getMaxHeight());
-        buttonGeneratePassword = NodeFactory.getButton("Generate password", userInfo.getPairPosition().getMaxWidth(), buttonCancel.getMaxHeight());
+        buttonCreate = NodeFactory.getButton("Create", Double.MAX_VALUE, userInfo.getPairPosition().getMaxHeight());
+        buttonCancel = NodeFactory.getButton("Cancel", Double.MAX_VALUE, buttonCreate.getMaxHeight());
+        buttonGeneratePassword = NodeFactory.getButton("Generate password", Double.MAX_VALUE, buttonCancel.getMaxHeight());
 
         GridPane gridPaneButtons = NodeFactory.getGridPane(2, 2);
         gridPaneButtons.setMaxWidth(userInfo.getMaxWidth());

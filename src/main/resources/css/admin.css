@@ -160,3 +160,17 @@
 .button:default:hover {
     -fx-background-color: derive(-fx-focus-color,30%);
 }
+
+.choice-box {
+    -fx-border-color: #939ea5;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: #2b2b2b;
+    -fx-text-fill: #bcc6cd;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.choice-box .label {
+    -fx-alignment: center;
+    -fx-font-size: 11;
+}

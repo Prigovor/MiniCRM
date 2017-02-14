@@ -40,6 +40,7 @@ public class PairNodePane<F extends Node, S extends Node> extends GridPane
     {
         this.firstNode = firstNode;
         this.secondNode = secondNode;
+        init();
     }
 
     private void init()

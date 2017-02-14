@@ -4,24 +4,23 @@ import com.crm.menu.node.factory.NodeFactory;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 
 import static com.crm.menu.node.SizeConstants.INSETS;
 
 /**
  * Created by Bohdan on 10.02.2017.
  */
-public class InfoInputPair extends GridPane
+public class InfoInputPair extends PairNodePane<Label, TextField>
 {
     private Label labelInfo = new Label();
     private TextField textFieldInput = new TextField();
 
-    public Label getLabelInfo()
+    public Label getFirstNode()
     {
         return labelInfo;
     }
 
-    public TextField getTextFieldInput()
+    public TextField getSecondNode()
     {
         return textFieldInput;
     }

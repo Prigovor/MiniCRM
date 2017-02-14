@@ -75,7 +75,7 @@ public class ChangeAccountMenuController implements Controller
 
     public void generatePassword()
     {
-        view.getUserInfo().getPairPassword().getTextFieldInput().setText(model.generatePassword(6));
+        view.getUserInfo().getPairPassword().getSecondNode().setText(model.generatePassword(6));
     }
 
     public void cancel()

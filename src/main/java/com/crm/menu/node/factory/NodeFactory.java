@@ -1,5 +1,6 @@
 package com.crm.menu.node.factory;
 
+import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
@@ -8,6 +9,8 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
+
+import java.util.List;
 
 import static com.crm.menu.node.SizeConstants.*;
 
@@ -104,9 +107,12 @@ public class NodeFactory
         return button;
     }
 
-    public static ChoiceBox getChoiceBox(Double maxWidth, Double maxHeight)
+    public static <T> ChoiceBox getChoiceBox(List<T> list, Double maxWidth, Double maxHeight)
     {
-        ChoiceBox choiceBox = new ChoiceBox();
+        ChoiceBox<T> choiceBox = new ChoiceBox<>();
+        choiceBox.setCenterShape(true);
+        choiceBox.setItems(FXCollections.observableList(list));
+
         choiceBox.setMinSize(SMALL_ELEMENT_WIDTH, SMALL_ELEMENT_HEIGHT);
         choiceBox.setMaxSize(maxWidth, maxHeight);
 
