@@ -6,6 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
@@ -145,5 +146,13 @@ public final class DatabaseManager
         }
 
         return list;
+    }
+
+    public <T> List<T> getEntriesByField(String fieldName, String fieldValue, Class<T> tClass)
+    {
+        try (Session session = sessionFactory.getCurrentSession())
+        {
+            return session.createCriteria(tClass).add(Restrictions.eq(fieldName, fieldValue)).list();
+        }
     }
 }

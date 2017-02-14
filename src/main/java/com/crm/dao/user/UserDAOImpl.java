@@ -33,4 +33,10 @@ public class UserDAOImpl implements UserDAO {
     public List<User> findAll() {
         return DatabaseManager.getInstance().getEntries(User.class);
     }
+
+    @Override
+    public List<User> getUsersByField(String filedName, String fieldValue)
+    {
+        return DatabaseManager.getInstance().getEntriesByField(filedName, fieldValue, User.class);
+    }
 }

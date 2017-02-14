@@ -41,24 +41,4 @@ public class EmployeeDAOImpl implements EmployeeDAO
     {
         return DatabaseManager.getInstance().getEntries(Employee.class);
     }
-
-    @Override
-    public List<Employee> getEmployeeByName(String name)
-    {
-        try (Session session = DatabaseManager.getInstance().getSessionFactory().getCurrentSession())
-        {
-            return session
-                    .createCriteria(Employee.class)
-                    .add(Restrictions.eq("name", "Lora"))
-                    .list();
-        }
-    }
-
-    public List<Employee> getEmployeeBetweenAge(Integer from, Integer to)
-    {
-        try (Session session = DatabaseManager.getInstance().getSessionFactory().getCurrentSession())
-        {
-            return session.createCriteria(Employee.class).add(Restrictions.between("age", from, to)).list();
-        }
-    }
 }

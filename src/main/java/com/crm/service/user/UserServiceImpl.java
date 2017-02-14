@@ -69,6 +69,7 @@ public class UserServiceImpl implements UserService
         User user = new User();
         user.setLogin(employee.getName().toLowerCase().concat(".").concat(employee.getSurname().toLowerCase()));
         user.setPassword(PasswordManager.getInstance().generatePassword(4));
+        user.setEmail(employee.getEmail());
         user.setEmployee(employee);
 
         int sameUserCount = 0;
@@ -93,7 +94,13 @@ public class UserServiceImpl implements UserService
         employeeDAO.createEmployee(employee);
         userDAO.createUser(user);
 
-        EmailManager.getInstance().sendMessage(employee.getEmail(), "Login and password from MiniSRM account",
+        EmailManager.getInstance().sendMessage(user.getEmail(), "Login and password from MiniSRM account",
                 "Login: " + user.getLogin() + "\nPassword: " + user.getPassword());
+    }
+
+    @Override
+    public void sendPasswordOnEmail(String email) throws UserValidationException, MessagingException
+    {
+
     }
 }

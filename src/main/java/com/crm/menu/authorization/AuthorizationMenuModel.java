@@ -6,8 +6,14 @@ import com.crm.entity.employee.Employee;
 import com.crm.entity.user.User;
 import com.crm.main.MainModel;
 import com.crm.managers.DatabaseManager;
+import com.crm.managers.EmailManager;
+import com.crm.service.UserValidationException;
+import javafx.scene.control.TextInputDialog;
 
+import javax.mail.MessagingException;
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Bohdan on 05.02.2017.
@@ -37,5 +43,29 @@ public class AuthorizationMenuModel
             }
         }
         return false;
+    }
+
+    public void remindPassword() throws MessagingException, UserValidationException
+    {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Password sending");
+        dialog.setContentText("Enter your email");
+
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent())
+        {
+            List<User> listUsers = userDAO.getUsersByField("email", result.get());
+
+            if (!listUsers.isEmpty())
+            {
+                EmailManager.getInstance().sendMessage(result.get(), "Password remind", "Your password:\n" + listUsers.get(0).getPassword());
+            }
+            else
+            {
+                throw new UserValidationException("User with such email is not registered");
+            }
+        }
+
+        throw new UserValidationException("User with such email is not registered");
     }
 }

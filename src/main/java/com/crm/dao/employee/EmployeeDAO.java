@@ -18,6 +18,4 @@ public interface EmployeeDAO {
     void deleteEmployee(Long id);
 
     List<Employee> findAll();
-
-    List<Employee> getEmployeeByName(String name);
 }

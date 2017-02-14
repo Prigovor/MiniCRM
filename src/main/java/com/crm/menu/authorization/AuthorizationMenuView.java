@@ -28,6 +28,7 @@ public class AuthorizationMenuView implements View
     private PasswordField passwordField = new PasswordField();
 
     private Button buttonLogIn = new Button();
+    private Button buttonRemindPassword = new Button();
     private Button buttonExit = new Button();
 
     public TextField getTextFieldLogin()
@@ -65,13 +66,15 @@ public class AuthorizationMenuView implements View
         passwordField = NodeFactory.getPasswordField(SMALL_ELEMENT_WIDTH * 3, SMALL_ELEMENT_HEIGHT * 1.25);
 
         buttonLogIn = NodeFactory.getButton("Log in", labelLogin.getMaxWidth() / 2, SMALL_ELEMENT_HEIGHT * 1.25);
-        buttonExit = NodeFactory.getButton("Exit", labelLogin.getMaxWidth() / 2, SMALL_ELEMENT_HEIGHT * 1.25);
+        buttonRemindPassword = NodeFactory.getButton("Remind password", buttonLogIn.getMaxWidth(), buttonLogIn.getMaxHeight());
+        buttonExit = NodeFactory.getButton("Exit", labelLogin.getMaxWidth(), SMALL_ELEMENT_HEIGHT * 1.25);
 
-        GridPane gridPaneButtons = NodeFactory.getGridPane(1, 2);
+        GridPane gridPaneButtons = NodeFactory.getGridPane(2, 2);
         gridPaneButtons.setMaxWidth(labelLogin.getMaxWidth());
 
         gridPaneButtons.add(buttonLogIn, 0, 0);
-        gridPaneButtons.add(buttonExit, 1, 0);
+        gridPaneButtons.add(buttonRemindPassword, 1, 0);
+        gridPaneButtons.add(buttonExit, 0, 1, 2, 1);
 
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setHgap(INSETS);
@@ -100,6 +103,11 @@ public class AuthorizationMenuView implements View
         buttonExit.setOnAction(event ->
         {
             controller.exit();
+        });
+
+        buttonRemindPassword.setOnAction(event ->
+        {
+            controller.remindPassword();
         });
     }
 }

@@ -24,4 +24,6 @@ public interface UserService extends SecureService
     List<User> findAll() throws UserValidationException;
 
     void generateUserFromEmployee(Employee employee) throws UserValidationException, MessagingException;
+
+    void sendPasswordOnEmail(String email) throws UserValidationException, MessagingException;
 }

@@ -24,14 +24,14 @@ public class Employee {
     @Column(name = "AGE")
     private Integer age;
 
-    @Column(name = "EMAIL")
-    private String email;
-
     @Column(name = "GENDER")
     private Gender gender;
 
     @Column(name = "POSITION")
     private PositionType position;
+
+    @Transient
+    private String email;
 
     public Employee() {
         gender = Gender.EMPTY;
@@ -78,16 +78,6 @@ public class Employee {
         this.age = age;
     }
 
-    public String getEmail()
-    {
-        return email;
-    }
-
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
-
     public Gender getGender() {
         return gender;
     }
@@ -108,5 +98,15 @@ public class Employee {
     public String toString()
     {
         return id.toString();
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
     }
 }

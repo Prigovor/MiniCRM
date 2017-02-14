@@ -120,6 +120,7 @@ public class UserInfo extends GridPane
         pairPassword.getSecondNode().setText(user.getPassword());
         pairQuestion.getSecondNode().setText(user.getQuestion());
         pairAnswer.getSecondNode().setText(user.getAnswer());
+        pairEmail.getSecondNode().setText(user.getEmail());
 
         pairUserType.getSecondNode().setValue(UserType.EMPTY);
 
@@ -128,7 +129,6 @@ public class UserInfo extends GridPane
             pairName.getSecondNode().setText(user.getEmployee().getName());
             pairSurname.getSecondNode().setText(user.getEmployee().getSurname());
             pairAge.getSecondNode().setText(String.valueOf(user.getEmployee().getAge()));
-            pairEmail.getSecondNode().setText(user.getEmployee().getEmail());
 
             pairGender.getSecondNode().setValue(Gender.EMPTY);
             pairPosition.getSecondNode().setValue(PositionType.EMPTY);
@@ -156,13 +156,13 @@ public class UserInfo extends GridPane
 
         pairQuestion = new InfoInputPair("Question", user.getQuestion());
         pairAnswer = new InfoInputPair("Answer", user.getAnswer());
+        pairEmail.getSecondNode().setText(user.getEmail());
 
         if (user.getEmployee() != null)
         {
             pairName.getSecondNode().setText(user.getEmployee().getName());
             pairSurname.getSecondNode().setText(user.getEmployee().getSurname());
             pairAge.getSecondNode().setText(String.valueOf(user.getEmployee().getAge()));
-            pairEmail.getSecondNode().setText(user.getEmployee().getEmail());
 
             pairGender.getSecondNode().setValue(user.getEmployee().getGender());
             pairPosition.getSecondNode().setValue(user.getEmployee().getPosition());
@@ -202,15 +202,15 @@ public class UserInfo extends GridPane
 
         add(pairLogin, 0, 0);
         add(pairPassword, 1, 0);
-        add(pairQuestion, 2, 0);
-        add(pairAnswer, 3, 0);
-        add(pairUserType, 0, 1, 4, 1);
+        add(pairEmail, 2, 0);
+        add(pairUserType, 3, 0);
+        add(pairQuestion, 0, 1, 2, 1);
+        add(pairAnswer, 2, 1, 2, 1);
 
         add(pairName, 0, 2);
         add(pairSurname, 1, 2);
         add(pairAge, 2, 2);
-        add(pairGender, 3, 2);
-        add(pairEmail, 0, 3, 2, 1);
+        add(pairGender, 0, 3, 2, 1);
         add(pairPosition, 2, 3, 2, 1);
     }
 

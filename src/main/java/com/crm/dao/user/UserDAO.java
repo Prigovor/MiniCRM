@@ -18,4 +18,6 @@ public interface UserDAO {
     void deleteUser(Long id);
 
     List<User> findAll();
+
+    List<User> getUsersByField(String filedName, String fieldValue);
 }
