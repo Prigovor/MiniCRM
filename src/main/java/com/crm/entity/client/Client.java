@@ -22,7 +22,7 @@ public class Client {
     private String surname;
 
     @Column(name = "PHONE")
-    private Integer phone;
+    private Long phone;
 
     @Column(name = "EMAIL")
     private String email;
@@ -30,7 +30,7 @@ public class Client {
     public Client() {
     }
 
-    public Client(String name, String surname, Integer phone, String email) {
+    public Client(String name, String surname, Long phone, String email) {
         this.name = name;
         this.surname = surname;
         this.phone = phone;
@@ -61,11 +61,11 @@ public class Client {
         this.surname = surname;
     }
 
-    public Integer getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 
