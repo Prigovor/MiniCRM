@@ -1,8 +1,5 @@
 package com.crm.menu.account.create;
 
-import com.crm.entity.employee.Gender;
-import com.crm.entity.employee.PositionType;
-import com.crm.entity.user.UserType;
 import com.crm.main.Main;
 import com.crm.menu.Controller;
 import com.crm.menu.View;
@@ -38,10 +35,12 @@ public class CreateAccountMenuController implements Controller
             model.getEmployee().setSurname(view.getUserInfo().getPairSurname().getInputText());
             model.getEmployee().setEmail(view.getUserInfo().getPairEmail().getInputText());
 
-            try {
-                model.getUser().setUserType(UserType.valueOf(view.getUserInfo().getPairUserType().getInputText()));
-                model.getEmployee().setGender(Gender.valueOf(view.getUserInfo().getPairGender().getInputText()));
-                model.getEmployee().setPosition(PositionType.valueOf(view.getUserInfo().getPairPosition().getInputText()));
+            try
+            {
+                model.getUser().setUserType(view.getUserInfo().getPairUserType().getSecondNode().getValue());
+                model.getEmployee().setGender(view.getUserInfo().getPairGender().getSecondNode().getValue());
+                model.getEmployee().setPosition(view.getUserInfo().getPairPosition().getSecondNode().getValue());
+
                 model.getEmployee().setAge(Integer.valueOf(view.getUserInfo().getPairAge().getInputText()));
             }
             catch (Exception e)

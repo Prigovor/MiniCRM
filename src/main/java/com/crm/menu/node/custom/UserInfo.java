@@ -1,9 +1,14 @@
 package com.crm.menu.node.custom;
 
+import com.crm.entity.employee.Gender;
+import com.crm.entity.employee.PositionType;
 import com.crm.entity.user.User;
+import com.crm.entity.user.UserType;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -18,7 +23,7 @@ public class UserInfo extends GridPane
 {
     private InfoInputPair pairLogin = new InfoInputPair("Login");
     private InfoInputPair pairPassword = new InfoInputPair("Password");
-    private InfoInputPair pairUserType = new InfoInputPair("User type");
+    private PairNodePane<Label, ChoiceBox<UserType>> pairUserType = new PairNodePane<>();
     private InfoInputPair pairQuestion = new InfoInputPair("Question");
     private InfoInputPair pairAnswer = new InfoInputPair("Answer");
 
@@ -26,8 +31,8 @@ public class UserInfo extends GridPane
     private InfoInputPair pairSurname = new InfoInputPair("Surname");
     private InfoInputPair pairAge = new InfoInputPair("Age");
     private InfoInputPair pairEmail = new InfoInputPair("Email");
-    private InfoInputPair pairGender = new InfoInputPair("Gender");
-    private InfoInputPair pairPosition = new InfoInputPair("Position");
+    private PairNodePane<Label, ChoiceBox<Gender>> pairGender = new PairNodePane<>();
+    private PairNodePane<Label, ChoiceBox<PositionType>> pairPosition = new PairNodePane<>();
 
     public InfoInputPair getPairLogin()
     {
@@ -39,7 +44,7 @@ public class UserInfo extends GridPane
         return pairPassword;
     }
 
-    public InfoInputPair getPairUserType()
+    public PairNodePane<Label, ChoiceBox<UserType>> getPairUserType()
     {
         return pairUserType;
     }
@@ -74,12 +79,12 @@ public class UserInfo extends GridPane
         return pairEmail;
     }
 
-    public InfoInputPair getPairGender()
+    public PairNodePane<Label, ChoiceBox<Gender>> getPairGender()
     {
         return pairGender;
     }
 
-    public InfoInputPair getPairPosition()
+    public PairNodePane<Label, ChoiceBox<PositionType>> getPairPosition()
     {
         return pairPosition;
     }
@@ -100,7 +105,7 @@ public class UserInfo extends GridPane
         pairQuestion.getTextFieldInput().setText(user.getQuestion());
         pairAnswer.getTextFieldInput().setText(user.getAnswer());
 
-        pairUserType.getTextFieldInput().setText(user.getUserType().name());
+        pairUserType.getSecondNode().setValue(UserType.EMPTY);
 
         if (user.getEmployee() != null)
         {
@@ -108,8 +113,9 @@ public class UserInfo extends GridPane
             pairSurname.getTextFieldInput().setText(user.getEmployee().getSurname());
             pairAge.getTextFieldInput().setText(String.valueOf(user.getEmployee().getAge()));
             pairEmail.getTextFieldInput().setText(user.getEmployee().getEmail());
-            pairGender.getTextFieldInput().setText(user.getEmployee().getGender().name());
-            pairPosition.getTextFieldInput().setText(user.getEmployee().getPosition().name());
+
+            pairGender.getSecondNode().setValue(Gender.EMPTY);
+            pairPosition.getSecondNode().setValue(PositionType.EMPTY);
         }
 
         this.user = user;
@@ -133,7 +139,9 @@ public class UserInfo extends GridPane
     {
         pairLogin = new InfoInputPair("Login", user.getLogin());
         pairPassword = new InfoInputPair("Password", user.getPassword());
-        pairUserType = new InfoInputPair("User type", user.getUserType().name());
+
+        pairUserType.getSecondNode().setValue(user.getUserType());
+
         pairQuestion = new InfoInputPair("Question", user.getQuestion());
         pairAnswer = new InfoInputPair("Answer", user.getAnswer());
 
@@ -143,8 +151,9 @@ public class UserInfo extends GridPane
             pairSurname.getTextFieldInput().setText(user.getEmployee().getSurname());
             pairAge.getTextFieldInput().setText(String.valueOf(user.getEmployee().getAge()));
             pairEmail.getTextFieldInput().setText(user.getEmployee().getEmail());
-            pairGender.getTextFieldInput().setText(user.getEmployee().getGender().name());
-            pairPosition.getTextFieldInput().setText(user.getEmployee().getPosition().name());
+
+            pairGender.getSecondNode().setValue(user.getEmployee().getGender());
+            pairPosition.getSecondNode().setValue(user.getEmployee().getPosition());
         }
 
         init();
