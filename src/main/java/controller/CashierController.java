@@ -11,7 +11,9 @@ public class CashierController {
     @FXML public TextArea taOrderNumber;
     @FXML public ComboBox comboBoxStatus;
     @FXML public TextArea taCustomer;
-    @FXML public TextArea taManager;
+    @FXML public Label lblAddress;
+    @FXML public TextArea taAddress;
+    @FXML public TextArea taManage;
 
     @FXML public TableView tvOrderDetails;
     @FXML public TableColumn clnNumber;
@@ -23,6 +25,9 @@ public class CashierController {
 
     @FXML public TextArea taToPay;
     @FXML public Button btnOk;
+    @FXML public Label lblManager;
+    @FXML public Label lblDate;
+    @FXML public Label lblToPay;
 
     @FXML
     public void onActionComboBoxStatus() {
@@ -33,3 +38,4 @@ public class CashierController {
     public void onActionButtonOk() {
     }
 }
+
