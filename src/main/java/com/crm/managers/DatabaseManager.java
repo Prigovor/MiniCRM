@@ -1,6 +1,9 @@
 package com.crm.managers;
 
+import com.crm.entity.client.Client;
 import com.crm.entity.employee.Employee;
+import com.crm.entity.good.Good;
+import com.crm.entity.order.Order;
 import com.crm.entity.user.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -23,7 +26,7 @@ public final class DatabaseManager
         {
             instance = new DatabaseManager();
 
-            DatabaseManager.getInstance().configure("hibernate.cfg.xml", User.class, Employee.class);
+            DatabaseManager.getInstance().configure("hibernate.cfg.xml", User.class, Employee.class, Client.class, Good.class, Order.class);
         }
         return instance;
     }
