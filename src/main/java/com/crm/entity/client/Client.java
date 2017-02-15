@@ -10,7 +10,7 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "CLIENT")
+@Table(name = "CLIENTS")
 public class Client {
 
     @Id
@@ -30,7 +30,7 @@ public class Client {
     @Column(name = "EMAIL")
     private String email;
 
-    @OneToMany(mappedBy = "client",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private Set<Order> orders;
 
     public Client() {
@@ -96,11 +96,4 @@ public class Client {
         return name;
     }
 
-    /**
-     * Сущность для БД
-     * Поля: Id, Имя, Фамилия, Номер телефона, Эл. почта
-     *
-     * Также создать DAO и Service (см. примеры реализации уже существующих,
-     * НЕ реализовывать интерфейс SecureService)
-     */
 }
