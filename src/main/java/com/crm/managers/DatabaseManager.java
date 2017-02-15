@@ -151,6 +151,15 @@ public final class DatabaseManager
         return list;
     }
 
+    /**
+     * Метод получает список обьектов, отобранных из таблицы по заданному значению поля
+     *
+     * @param fieldName - фактическое имя поля, по которому будем получать значения
+     * @param fieldValue - искомое значение поля
+     * @param tClass - класс, с которым взаимодействуем
+     * @param <T> - тип класса
+     * @return список отобранных значений
+     */
     public <T> List<T> getEntriesByField(String fieldName, String fieldValue, Class<T> tClass)
     {
         try (Session session = sessionFactory.getCurrentSession())
