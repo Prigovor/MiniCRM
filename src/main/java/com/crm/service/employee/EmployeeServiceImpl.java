@@ -11,6 +11,7 @@ import java.util.List;
  * Created by Bohdan on 08.02.2017.
  */
 public class EmployeeServiceImpl implements EmployeeService {
+
     private EmployeeDAO employeeDAO = new EmployeeDAOImpl();
 
     @Override
