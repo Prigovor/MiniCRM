@@ -60,10 +60,6 @@
     -fx-background-color: -fx-focus-color;
 }
 
-
-
-
-
 .list-view {
     -fx-base: #3c3f41;
     -fx-control-inner-background: #616568;
@@ -163,4 +159,19 @@
 
 .button:default:hover {
     -fx-background-color: derive(-fx-focus-color,30%);
+}
+
+.text-area {
+    -fx-base: #2b2b2b;
+    -fx-control-inner-background: #4b4e50;
+}
+
+.combo-box {
+    -fx-base: #4b4e50;
+    -fx-control-inner-background: #4b4e50;
+}
+
+.date-picker {
+    -fx-base: #2b2b2b;
+    -fx-control-inner-background: #4b4e50;
 }
