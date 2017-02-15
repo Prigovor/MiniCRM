@@ -32,9 +32,4 @@ public class GoodDAOImpl implements GoodDAO{
     @Override
     public List<Good> findAll() {
         return DatabaseManager.getInstance().getEntries(Good.class);    }
-
-    @Override
-    public List<Good> getGoodByName(String name) {
-        return null;
-    }
 }

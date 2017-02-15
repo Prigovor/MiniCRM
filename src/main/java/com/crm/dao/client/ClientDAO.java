@@ -18,6 +18,4 @@ public interface ClientDAO {
     void deleteClient(Long id);
 
     List<Client> findAll();
-
-    List<Client> getClientByName(String name);
 }

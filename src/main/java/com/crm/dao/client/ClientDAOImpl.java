@@ -34,9 +34,4 @@ public class ClientDAOImpl implements ClientDAO {
     public List<Client> findAll() {
         return DatabaseManager.getInstance().getEntries(Client.class);
     }
-
-    @Override
-    public List<Client> getClientByName(String name) {
-        return null;
-    }
 }

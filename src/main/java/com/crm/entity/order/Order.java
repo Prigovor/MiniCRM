@@ -28,8 +28,11 @@ public class Order {
     private Date registrationDate;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "DEADLINE")
-    private Date deadline;
+    @Column(name = "DELIVERY_TIME")
+    private Date deliveryTime;
+
+    @Column(name = "ADDRESS")
+    private String address;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
@@ -43,10 +46,10 @@ public class Order {
     public Order() {
     }
 
-    public Order(Client client, Date registrationDate, Date deadline, OrderStatus orderStatus, Long orderPrice) {
+    public Order(Client client, Date registrationDate, Date deliveryTime, OrderStatus orderStatus, Long orderPrice) {
         this.client = client;
         this.registrationDate = registrationDate;
-        this.deadline = deadline;
+        this.deliveryTime = deliveryTime;
         this.orderStatus = orderStatus;
         this.orderPrice = orderPrice;
     }
@@ -75,12 +78,22 @@ public class Order {
         this.registrationDate = registrationDate;
     }
 
-    public Date getDeadline() {
-        return deadline;
+    public Date getDeliveryTime() {
+        return deliveryTime;
     }
 
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
+    public void setDeliveryTime(Date deliveryTime) {
+        this.deliveryTime = deliveryTime;
+    }
+
+    public String getAddress()
+    {
+        return address;
+    }
+
+    public void setAddress(String address)
+    {
+        this.address = address;
     }
 
     public OrderStatus getOrderStatus() {

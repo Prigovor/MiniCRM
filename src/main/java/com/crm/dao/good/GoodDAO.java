@@ -18,6 +18,4 @@ public interface GoodDAO {
     void deleteGood(Long id);
 
     List<Good> findAll();
-
-    List<Good> getGoodByName(String name);
 }
