@@ -12,26 +12,25 @@ import javax.persistence.*;
 public class Good {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "good_seq")
-    @SequenceGenerator(name = "good_seq", sequenceName = "good_id", allocationSize = 1)
+    @GeneratedValue
     private Long id;
 
     @Column(name = "NOMINATION")
     private String nomination;
 
     @Column(name = "AMOUNT")
-    private Long amount;
+    private Integer amount;
 
     @Column(name = "PRICE")
-    private Long price;
+    private Double price;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Order order;
 
     public Good() {
     }
 
-    public Good(String nomination, Long amount, Long price, Order order) {
+    public Good(String nomination, Integer amount, Double price, Order order) {
         this.nomination = nomination;
         this.amount = amount;
         this.price = price;
@@ -54,19 +53,19 @@ public class Good {
         this.nomination = nomination;
     }
 
-    public Long getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
-    public Long getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

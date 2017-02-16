@@ -13,8 +13,7 @@ import java.util.Set;
 public class Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_seq")
-    @SequenceGenerator(name = "client_seq", sequenceName = "client_id", allocationSize = 1)
+    @GeneratedValue
     private Long id;
 
     @Column(name = "LOGIN")
