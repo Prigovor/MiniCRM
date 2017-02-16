@@ -12,7 +12,8 @@ import javax.persistence.*;
 public class Good {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private Long id;
 
     @Column(name = "NOMINATION")

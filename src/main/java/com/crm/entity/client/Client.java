@@ -13,7 +13,8 @@ import java.util.Set;
 public class Client {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private Long id;
 
     @Column(name = "LOGIN")

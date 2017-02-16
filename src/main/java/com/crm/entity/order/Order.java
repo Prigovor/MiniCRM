@@ -16,7 +16,8 @@ import java.util.Set;
 public class Order {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -34,9 +35,10 @@ public class Order {
     private String address;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "ORDER_STATUS")
     private OrderStatus orderStatus;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Good> goods;
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
