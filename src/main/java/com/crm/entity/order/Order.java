@@ -11,16 +11,14 @@ import java.util.Set;
  * Created by Prigovor on 14.02.2017.
  */
 
-@Entity
-@Table(name = "orders")
+@Entity(name = "Order")
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_seq")
-    @SequenceGenerator(name = "order_seq", sequenceName = "order_id", allocationSize = 1)
+    @GeneratedValue
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne
     private Client client;
 
     @Temporal(TemporalType.DATE)
@@ -35,18 +33,19 @@ public class Order {
     private String address;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "OrderStatus")
     private OrderStatus orderStatus;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Good> goods;
 
     @Column(name = "ORDER_PRICE")
-    private Long orderPrice;
+    private Double orderPrice;
 
     public Order() {
     }
 
-    public Order(Client client, Date registrationDate, Date deliveryTime, String address, OrderStatus orderStatus, Set<Good> goods, Long orderPrice) {
+    public Order(Client client, Date registrationDate, Date deliveryTime, String address, OrderStatus orderStatus, Set<Good> goods, Double orderPrice) {
         this.client = client;
         this.registrationDate = registrationDate;
         this.deliveryTime = deliveryTime;
@@ -112,11 +111,11 @@ public class Order {
         this.goods = goods;
     }
 
-    public Long getOrderPrice() {
+    public Double getOrderPrice() {
         return orderPrice;
     }
 
-    public void setOrderPrice(Long orderPrice) {
+    public void setOrderPrice(Double orderPrice) {
         this.orderPrice = orderPrice;
     }
 }

@@ -9,13 +9,11 @@ import java.util.Set;
  * Created by Prigovor on 14.02.2017.
  */
 
-@Entity
-@Table(name = "clients")
+@Entity(name = "Client")
 public class Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_seq")
-    @SequenceGenerator(name = "client_seq", sequenceName = "client_id", allocationSize = 1)
+    @GeneratedValue
     private Long id;
 
     @Column(name = "LOGIN")
@@ -36,7 +34,7 @@ public class Client {
     @Column(name = "EMAIL")
     private String email;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
     private Set<Order> orders;
 
     public Client() {

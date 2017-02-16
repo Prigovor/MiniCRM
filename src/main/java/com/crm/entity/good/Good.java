@@ -8,13 +8,11 @@ import javax.persistence.*;
  * Created by Prigovor on 14.02.2017.
  */
 
-@Entity
-@Table(name = "GOODS")
+@Entity(name = "Good")
 public class Good {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "good_seq")
-    @SequenceGenerator(name = "good_seq", sequenceName = "good_id", allocationSize = 1)
+    @GeneratedValue
     private Long id;
 
     @Column(name = "NOMINATION")
@@ -26,7 +24,7 @@ public class Good {
     @Column(name = "PRICE")
     private Double price;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne
     private Order order;
 
     public Good() {
