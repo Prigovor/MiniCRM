@@ -39,7 +39,7 @@ public class Order {
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private Set<Good> goods;
 
-    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Courier courier;
 
     @Column(name = "ORDER_PRICE")

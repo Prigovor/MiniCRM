@@ -2,6 +2,8 @@ package com.crm.dao;
 
 import com.crm.dao.client.ClientDAO;
 import com.crm.dao.client.ClientDAOImpl;
+import com.crm.dao.courier.CourierDAO;
+import com.crm.dao.courier.CourierDAOImpl;
 import com.crm.dao.employee.EmployeeDAO;
 import com.crm.dao.employee.EmployeeDAOImpl;
 import com.crm.dao.good.GoodDAO;
@@ -59,5 +61,14 @@ public final class FactoryDAO {
             orderDAO = new OrderDAOImpl();
         }
         return orderDAO;
+    }
+
+    private static CourierDAO courierDAO;
+
+    public static CourierDAO getCourierDAO() {
+        if (courierDAO == null) {
+            courierDAO = new CourierDAOImpl();
+        }
+        return courierDAO;
     }
 }
