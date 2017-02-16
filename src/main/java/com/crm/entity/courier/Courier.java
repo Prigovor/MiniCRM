@@ -7,8 +7,7 @@ import javax.persistence.*;
 /**
  * Created by Prigovor on 16.02.2017.
  */
-@Entity
-@Table(name = "Courier")
+@Entity(name = "Courier")
 public class Courier {
 
     @Id
@@ -25,7 +24,7 @@ public class Courier {
     @Column(name = "STATUS")
     private Status status;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
 

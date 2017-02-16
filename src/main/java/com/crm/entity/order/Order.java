@@ -1,6 +1,7 @@
 package com.crm.entity.order;
 
 import com.crm.entity.client.Client;
+import com.crm.entity.courier.Courier;
 import com.crm.entity.good.Good;
 
 import javax.persistence.*;
@@ -37,6 +38,9 @@ public class Order {
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private Set<Good> goods;
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Courier courier;
 
     @Column(name = "ORDER_PRICE")
     private Long orderPrice;
