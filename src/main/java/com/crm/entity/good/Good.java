@@ -20,10 +20,10 @@ public class Good {
     private String nomination ;
 
     @Column(name = "AMOUNT")
-    private Long amount;
+    private Integer amount;
 
     @Column(name = "PRICE")
-    private Long price;
+    private Double price;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     private Order order;
@@ -31,7 +31,7 @@ public class Good {
     public Good() {
     }
 
-    public Good(Long id, String nomination, Long amount, Long price, Order order) {
+    public Good(Long id, String nomination, Integer amount, Double price, Order order) {
         this.id = id;
         this.nomination = nomination;
         this.amount = amount;
@@ -55,25 +55,58 @@ public class Good {
         this.nomination = nomination;
     }
 
-    public Long getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
-    public Long getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Order getOrder()
+    {
+        return order;
+    }
+
+    public void setOrder(Order order)
+    {
+        this.order = order;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+        {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass())
+        {
+            return false;
+        }
+
+        Good good = (Good) o;
+
+        return id != null ? id.equals(good.id) : good.id == null;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
     public String toString() {
-        return nomination;
+        return nomination + " " + amount;
     }
 
     /**

@@ -1,7 +1,7 @@
 package com.crm.service.good;
 
+import com.crm.dao.FactoryDAO;
 import com.crm.dao.good.GoodDAO;
-import com.crm.dao.good.GoodDAOImpl;
 import com.crm.entity.good.Good;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class GoodServiceImpl implements GoodService {
 
-    private GoodDAO goodDAO = new GoodDAOImpl();
+    private GoodDAO goodDAO = FactoryDAO.getGoodDAO();
 
     @Override
     public Long createGood(Good good) {

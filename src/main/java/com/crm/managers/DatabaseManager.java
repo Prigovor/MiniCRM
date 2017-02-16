@@ -152,7 +152,7 @@ public final class DatabaseManager
     }
 
     /**
-     * Метод получает список обьектов, отобранных из таблицы по заданному значению поля
+     * Метод возвращает список обьектов, отобранных из таблицы по заданному значению поля
      *
      * @param fieldName - фактическое имя поля, по которому будем получать значения
      * @param fieldValue - искомое значение поля
@@ -160,11 +160,28 @@ public final class DatabaseManager
      * @param <T> - тип класса
      * @return список отобранных значений
      */
-    public <T> List<T> getEntriesByField(String fieldName, String fieldValue, Class<T> tClass)
+    public <T> List<T> getEntriesByField(String fieldName, Object fieldValue, Class<T> tClass)
     {
         try (Session session = sessionFactory.getCurrentSession())
         {
             return session.createCriteria(tClass).add(Restrictions.eq(fieldName, fieldValue)).list();
+        }
+    }
+
+    /**
+     * Метод возвращает один обьект, выбранный из таблицы по заданному значению поля
+     *
+     * @param fieldName - фактическое имя поля, по которому будем получать значения
+     * @param fieldValue - искомое значение поля
+     * @param tClass - класс, с которым взаимодействуем
+     * @param <T> - тип класса
+     * @return найденный обьект
+     */
+    public <T> T getEntryByField(String fieldName, Object fieldValue, Class<T> tClass)
+    {
+        try (Session session = sessionFactory.getCurrentSession())
+        {
+            return (T) session.createCriteria(tClass).add(Restrictions.eq(fieldName, fieldValue)).uniqueResult();
         }
     }
 }

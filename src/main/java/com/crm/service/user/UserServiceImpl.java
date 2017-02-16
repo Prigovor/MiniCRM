@@ -1,9 +1,8 @@
 package com.crm.service.user;
 
+import com.crm.dao.FactoryDAO;
 import com.crm.dao.employee.EmployeeDAO;
-import com.crm.dao.employee.EmployeeDAOImpl;
 import com.crm.dao.user.UserDAO;
-import com.crm.dao.user.UserDAOImpl;
 import com.crm.entity.employee.Employee;
 import com.crm.entity.user.User;
 import com.crm.managers.EmailManager;
@@ -18,8 +17,8 @@ import java.util.List;
  */
 public class UserServiceImpl implements UserService
 {
-    private UserDAO userDAO = new UserDAOImpl();
-    private EmployeeDAO employeeDAO = new EmployeeDAOImpl();
+    private UserDAO userDAO = FactoryDAO.getUserDAO();
+    private EmployeeDAO employeeDAO = FactoryDAO.getEmployeeDAO();
 
     @Override
     public Long createUser(User user) throws UserValidationException

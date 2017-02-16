@@ -1,7 +1,7 @@
 package com.crm.service.employee;
 
+import com.crm.dao.FactoryDAO;
 import com.crm.dao.employee.EmployeeDAO;
-import com.crm.dao.employee.EmployeeDAOImpl;
 import com.crm.entity.employee.Employee;
 import com.crm.service.UserValidationException;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Bohdan on 08.02.2017.
  */
 public class EmployeeServiceImpl implements EmployeeService {
-    private EmployeeDAO employeeDAO = new EmployeeDAOImpl();
+    private EmployeeDAO employeeDAO = FactoryDAO.getEmployeeDAO();
 
     @Override
     public Long createEmployee(Employee employee) throws UserValidationException {

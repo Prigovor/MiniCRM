@@ -34,4 +34,10 @@ public class ClientDAOImpl implements ClientDAO {
     public List<Client> findAll() {
         return DatabaseManager.getInstance().getEntries(Client.class);
     }
+
+    @Override
+    public Client getEntryByField(String fieldName, Object fieldValue)
+    {
+        return DatabaseManager.getInstance().getEntryByField(fieldName, fieldValue, Client.class);
+    }
 }

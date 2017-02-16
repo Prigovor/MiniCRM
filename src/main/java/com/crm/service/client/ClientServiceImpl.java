@@ -1,40 +1,97 @@
 package com.crm.service.client;
 
+import com.crm.dao.FactoryDAO;
 import com.crm.dao.client.ClientDAO;
-import com.crm.dao.client.ClientDAOImpl;
 import com.crm.entity.client.Client;
+import com.crm.managers.EmailManager;
+import com.crm.managers.PasswordManager;
+import com.crm.service.UserExistsException;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 /**
  * Created by Prigovor on 14.02.2017.
  */
-public class ClientServiceImpl implements ClientService {
-
-    private ClientDAO clientDAO = new ClientDAOImpl();
+public class ClientServiceImpl implements ClientService
+{
+    private ClientDAO clientDAO = FactoryDAO.getClientDAO();
 
     @Override
-    public Long createClient(Client client) {
+    public Long createClient(Client client) throws UserExistsException
+    {
+        if (getEntryByField("email", client.getEmail()) != null)
+        {
+            throw new UserExistsException("Client with such email is registered");
+        }
+
         return clientDAO.createClient(client);
     }
 
     @Override
-    public Client readClient(Long id) {
+    public Client readClient(Long id)
+    {
         return clientDAO.readClient(id);
     }
 
     @Override
-    public void updateClient(Client client) {
+    public void updateClient(Client client)
+    {
         clientDAO.updateClient(client);
     }
 
     @Override
-    public void deleteClient(Long id) {
+    public void deleteClient(Long id)
+    {
         clientDAO.deleteClient(id);
     }
 
     @Override
-    public List<Client> findAll() {
+    public List<Client> findAll()
+    {
         return clientDAO.findAll();
+    }
+
+    @Override
+    public Client getEntryByField(String fieldName, Object fieldValue)
+    {
+        return clientDAO.getEntryByField(fieldName, fieldValue);
+    }
+
+    public void generateClient(Client client) throws MessagingException, UserExistsException
+    {
+        Client clientEntry = new Client();
+
+        clientEntry.setLogin(client.getName().concat(".").concat(client.getSurname()));
+        clientEntry.setPassword(PasswordManager.getInstance().generatePassword(4));
+
+        clientEntry.setName(client.getName());
+        clientEntry.setSurname(client.getSurname());
+        clientEntry.setEmail(client.getEmail());
+        clientEntry.setPhone(client.getPhone());
+
+        int sameClientCount = 0;
+        for (Client entry : clientDAO.findAll())
+        {
+            if (clientEntry.getLogin().equals(entry.getLogin()))
+            {
+                sameClientCount++;
+            }
+
+            if (clientEntry.getPassword().equals(entry.getPassword()))
+            {
+                clientEntry.setPassword(PasswordManager.getInstance().generatePassword(4));
+            }
+        }
+
+        if (sameClientCount != 0)
+        {
+            clientEntry.setLogin(clientEntry.getLogin().concat("." + sameClientCount));
+        }
+
+        createClient(clientEntry);
+
+        EmailManager.getInstance().sendMessage(clientEntry.getEmail(), "Login and password from client MiniSRM account",
+                "Login: " + clientEntry.getLogin() + "\nPassword: " + clientEntry.getPassword());
     }
 }
