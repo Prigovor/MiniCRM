@@ -7,7 +7,8 @@ import javax.persistence.*;
 /**
  * Created by Prigovor on 16.02.2017.
  */
-@Entity(name = "Courier")
+@Entity
+@Table(name = "Courier")
 public class Courier {
 
     @Id

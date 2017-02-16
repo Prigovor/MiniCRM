@@ -8,29 +8,30 @@ import javax.persistence.*;
  * Created by Prigovor on 14.02.2017.
  */
 
-@Entity(name = "Good")
+@Entity(name = "GOODS")
 public class Good {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "good_seq")
+    @SequenceGenerator(name = "good_seq", sequenceName = "good_id", allocationSize = 1)
     private Long id;
 
     @Column(name = "NOMINATION")
     private String nomination;
 
     @Column(name = "AMOUNT")
-    private Integer amount;
+    private Long amount;
 
     @Column(name = "PRICE")
-    private Double price;
+    private Long price;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     private Order order;
 
     public Good() {
     }
 
-    public Good(String nomination, Integer amount, Double price, Order order) {
+    public Good(String nomination, Long amount, Long price, Order order) {
         this.nomination = nomination;
         this.amount = amount;
         this.price = price;
@@ -53,19 +54,19 @@ public class Good {
         this.nomination = nomination;
     }
 
-    public Integer getAmount() {
+    public Long getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(Long amount) {
         this.amount = amount;
     }
 
-    public Double getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 
