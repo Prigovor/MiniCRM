@@ -12,13 +12,12 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "ORDERS")
+@Table(name = "orders")
 public class Order {
 
     @Id
-    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_seq")
-    @SequenceGenerator(name = "order_seq", sequenceName = "order_id", allocationSize = 5)
+    @SequenceGenerator(name = "order_seq", sequenceName = "order_id", allocationSize = 1)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
@@ -47,11 +46,13 @@ public class Order {
     public Order() {
     }
 
-    public Order(Client client, Date registrationDate, Date deliveryTime, OrderStatus orderStatus, Long orderPrice) {
+    public Order(Client client, Date registrationDate, Date deliveryTime, String address, OrderStatus orderStatus, Set<Good> goods, Long orderPrice) {
         this.client = client;
         this.registrationDate = registrationDate;
         this.deliveryTime = deliveryTime;
+        this.address = address;
         this.orderStatus = orderStatus;
+        this.goods = goods;
         this.orderPrice = orderPrice;
     }
 
@@ -87,13 +88,11 @@ public class Order {
         this.deliveryTime = deliveryTime;
     }
 
-    public String getAddress()
-    {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address)
-    {
+    public void setAddress(String address) {
         this.address = address;
     }
 
@@ -120,15 +119,4 @@ public class Order {
     public void setOrderPrice(Long orderPrice) {
         this.orderPrice = orderPrice;
     }
-
-    /**
-     * Сущность для БД
-     * Id: создать отличную от Автогенерации стратегию генерации id
-     * (пока что любую, на ваше усмотрение)
-     *
-     * Поля: client, Дата регистрации, Срок выполнения (в днях), Статус заказа, Список товаров, Сумма заказа
-     *
-     * Также создать DAO и Service (см. примеры реализации уже существующих,
-     * НЕ реализовывать интерфейс SecureService)
-     */
 }

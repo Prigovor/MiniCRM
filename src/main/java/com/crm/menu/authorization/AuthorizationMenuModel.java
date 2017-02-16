@@ -2,10 +2,7 @@ package com.crm.menu.authorization;
 
 import com.crm.dao.user.UserDAO;
 import com.crm.dao.user.UserDAOImpl;
-import com.crm.entity.client.Client;
 import com.crm.entity.employee.Employee;
-import com.crm.entity.good.Good;
-import com.crm.entity.order.Order;
 import com.crm.entity.user.User;
 import com.crm.main.MainModel;
 import com.crm.managers.DatabaseManager;
@@ -29,7 +26,7 @@ public class AuthorizationMenuModel
     {
         Thread thread = new Thread(() ->
         {
-            DatabaseManager.getInstance().configure("hibernate.cfg.xml", User.class, Employee.class, Client.class, Good.class, Order.class);
+            DatabaseManager.getInstance().configure("hibernate.cfg.xml", User.class, Employee.class);
         });
         thread.setDaemon(true);
         thread.start();

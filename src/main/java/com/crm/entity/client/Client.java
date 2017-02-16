@@ -10,13 +10,19 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "CLIENTS")
+@Table(name = "clients")
 public class Client {
 
     @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_seq")
+    @SequenceGenerator(name = "client_seq", sequenceName = "client_id", allocationSize = 1)
     private Long id;
+
+    @Column(name = "LOGIN")
+    private String login;
+
+    @Column(name = "PASSWORD")
+    private String password;
 
     @Column(name = "NAME")
     private String name;
@@ -30,17 +36,20 @@ public class Client {
     @Column(name = "EMAIL")
     private String email;
 
-    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "client")
     private Set<Order> orders;
 
     public Client() {
     }
 
-    public Client(String name, String surname, Long phone, String email) {
+    public Client(String login, String password, String name, String surname, Long phone, String email, Set<Order> orders) {
+        this.login = login;
+        this.password = password;
         this.name = name;
         this.surname = surname;
         this.phone = phone;
         this.email = email;
+        this.orders = orders;
     }
 
     public Long getId() {
@@ -49,6 +58,22 @@ public class Client {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
