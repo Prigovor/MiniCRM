@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -29,9 +31,13 @@ public class CashierController {
     @FXML public Label lblDate;
     @FXML public Label lblToPay;
 
-    @FXML
-    public void onActionComboBoxStatus() {
+    private ObservableList<String> status = FXCollections
+            .observableArrayList("Executed", "Formed", "Paid", "Closed");
 
+    @FXML
+    private void initialize(){
+        comboBoxStatus.setValue("Executed");
+        comboBoxStatus.setItems(status);
     }
 
     @FXML
