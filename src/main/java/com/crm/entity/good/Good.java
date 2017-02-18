@@ -1,18 +1,16 @@
 package com.crm.entity.good;
 
-import com.crm.entity.order.Order;
-
 import javax.persistence.*;
 
 /**
  * Created by Prigovor on 14.02.2017.
  */
 
-@Entity
-@Table(name = "GOOD")
+@Entity(name = "GOODS")
 public class Good {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Long id;
 
@@ -28,18 +26,13 @@ public class Good {
     @Column(name = "PRICE")
     private Double price;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    private Order order;
-
     public Good() {
     }
 
-    public Good(Long id, String nomination, Integer amount, Double price, Order order) {
-        this.id = id;
+    public Good(String nomination, Integer amount, Double price) {
         this.nomination = nomination;
         this.amount = amount;
         this.price = price;
-        this.order = order;
     }
 
     public Long getId() {
@@ -58,16 +51,6 @@ public class Good {
         this.nomination = nomination;
     }
 
-    public String getDescription()
-    {
-        return description;
-    }
-
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
-
     public Integer getAmount() {
         return amount;
     }
@@ -84,49 +67,13 @@ public class Good {
         this.price = price;
     }
 
-    public Order getOrder()
+    public String getDescription()
     {
-        return order;
+        return description;
     }
 
-    public void setOrder(Order order)
+    public void setDescription(String description)
     {
-        this.order = order;
+        this.description = description;
     }
-
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o)
-        {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass())
-        {
-            return false;
-        }
-
-        Good good = (Good) o;
-
-        return id != null ? id.equals(good.id) : good.id == null;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return id != null ? id.hashCode() : 0;
-    }
-
-    @Override
-    public String toString() {
-        return nomination + " " + amount;
-    }
-
-    /**
-     * Сущность для БД
-     * Поля: Id, Наименование, Количество, Цена
-     *
-     * Также создать DAO и Service (см. примеры реализации уже существующих,
-     * НЕ реализовывать интерфейс SecureService)
-     */
 }

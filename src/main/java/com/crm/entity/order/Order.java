@@ -38,19 +38,19 @@ public class Order {
     @Column(name = "ORDER_STATUS")
     private OrderStatus orderStatus;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Transient
     private Set<Good> goods;
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Courier courier;
 
     @Column(name = "ORDER_PRICE")
-    private Long orderPrice;
+    private Double orderPrice;
 
     public Order() {
     }
 
-    public Order(Client client, Date registrationDate, Date deliveryTime, String address, OrderStatus orderStatus, Set<Good> goods, Long orderPrice) {
+    public Order(Client client, Date registrationDate, Date deliveryTime, String address, OrderStatus orderStatus, Set<Good> goods, Double orderPrice) {
         this.client = client;
         this.registrationDate = registrationDate;
         this.deliveryTime = deliveryTime;
@@ -116,19 +116,21 @@ public class Order {
         this.goods = goods;
     }
 
-    public Long getOrderPrice() {
+    public Double getOrderPrice() {
         return orderPrice;
     }
 
-    public void setOrderPrice(Long orderPrice) {
+    public void setOrderPrice(Double orderPrice) {
         this.orderPrice = orderPrice;
     }
 
-    public Courier getCourier() {
+    public Courier getCourier()
+    {
         return courier;
     }
 
-    public void setCourier(Courier courier) {
+    public void setCourier(Courier courier)
+    {
         this.courier = courier;
     }
 }

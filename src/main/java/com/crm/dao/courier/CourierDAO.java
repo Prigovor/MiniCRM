@@ -18,4 +18,6 @@ public interface CourierDAO {
     void deleteCourier(Long id);
 
     List<Courier> findAll();
+
+    Courier getEntryByField(String fieldName, Object fieldValue);
 }

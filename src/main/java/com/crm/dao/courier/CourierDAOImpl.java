@@ -33,4 +33,10 @@ public class CourierDAOImpl implements CourierDAO {
     public List<Courier> findAll() {
         return DatabaseManager.getInstance().getEntries(Courier.class);
     }
+
+    @Override
+    public Courier getEntryByField(String fieldName, Object fieldValue)
+    {
+        return DatabaseManager.getInstance().getEntryByField(fieldName, fieldValue, Courier.class);
+    }
 }

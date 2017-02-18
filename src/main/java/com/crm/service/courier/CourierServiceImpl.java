@@ -37,4 +37,10 @@ public class CourierServiceImpl implements CourierService {
     public List<Courier> findAll() {
         return courierDAO.findAll();
     }
+
+    @Override
+    public Courier getEntryByField(String fieldName, Object fieldValue)
+    {
+        return courierDAO.getEntryByField(fieldName, fieldValue);
+    }
 }
