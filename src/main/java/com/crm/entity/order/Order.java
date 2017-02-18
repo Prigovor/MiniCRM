@@ -1,6 +1,7 @@
 package com.crm.entity.order;
 
 import com.crm.entity.client.Client;
+import com.crm.entity.courier.Courier;
 import com.crm.entity.good.Good;
 
 import javax.persistence.*;
@@ -11,16 +12,15 @@ import java.util.Set;
  * Created by Prigovor on 14.02.2017.
  */
 
-@Entity
-@Table(name = "ORDER")
+@Entity(name = "ORDERS")
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_seq")
-    @SequenceGenerator(name = "order_seq", sequenceName = "order_id", allocationSize = 5)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Client client;
 
     @Temporal(TemporalType.DATE)
@@ -35,10 +35,14 @@ public class Order {
     private String address;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "ORDER_STATUS")
     private OrderStatus orderStatus;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Good> goods;
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Courier courier;
 
     @Column(name = "ORDER_PRICE")
     private Long orderPrice;
@@ -46,11 +50,13 @@ public class Order {
     public Order() {
     }
 
-    public Order(Client client, Date registrationDate, Date deliveryTime, OrderStatus orderStatus, Long orderPrice) {
+    public Order(Client client, Date registrationDate, Date deliveryTime, String address, OrderStatus orderStatus, Set<Good> goods, Long orderPrice) {
         this.client = client;
         this.registrationDate = registrationDate;
         this.deliveryTime = deliveryTime;
+        this.address = address;
         this.orderStatus = orderStatus;
+        this.goods = goods;
         this.orderPrice = orderPrice;
     }
 
@@ -86,13 +92,11 @@ public class Order {
         this.deliveryTime = deliveryTime;
     }
 
-    public String getAddress()
-    {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address)
-    {
+    public void setAddress(String address) {
         this.address = address;
     }
 
@@ -120,14 +124,11 @@ public class Order {
         this.orderPrice = orderPrice;
     }
 
-    /**
-     * Сущность для БД
-     * Id: создать отличную от Автогенерации стратегию генерации id
-     * (пока что любую, на ваше усмотрение)
-     *
-     * Поля: client, Дата регистрации, Срок выполнения (в днях), Статус заказа, Список товаров, Сумма заказа
-     *
-     * Также создать DAO и Service (см. примеры реализации уже существующих,
-     * НЕ реализовывать интерфейс SecureService)
-     */
+    public Courier getCourier() {
+        return courier;
+    }
+
+    public void setCourier(Courier courier) {
+        this.courier = courier;
+    }
 }

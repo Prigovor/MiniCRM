@@ -8,21 +8,17 @@ import java.util.Properties;
 /**
  * Created by Prigovor on 11.02.2017.
  */
-public class EmailManager
-{
+public class EmailManager {
     private static EmailManager ourInstance = new EmailManager();
 
-    public static EmailManager getInstance()
-    {
+    public static EmailManager getInstance() {
         return ourInstance;
     }
 
-    private EmailManager()
-    {
+    private EmailManager() {
     }
 
-    public void sendMessage(String emailTo, String subject, String message) throws MessagingException
-    {
+    public void sendMessage(String emailTo, String subject, String message) throws MessagingException {
         final String username = "company.mini.crm";
         final String password = "HobbitsAreBastards";
 
@@ -34,11 +30,9 @@ public class EmailManager
         properties.put("mail.smtp.host", host);
         properties.put("mail.smtp.port", "587");
 
-        Session session = Session.getInstance(properties, new Authenticator()
-        {
+        Session session = Session.getInstance(properties, new Authenticator() {
             @Override
-            protected PasswordAuthentication getPasswordAuthentication()
-            {
+            protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
             }
         });
