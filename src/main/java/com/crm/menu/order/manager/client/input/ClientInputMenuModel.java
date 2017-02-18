@@ -41,11 +41,6 @@ public class ClientInputMenuModel
         }
     }
 
-    public void cancel()
-    {
-
-    }
-
     public void back()
     {
 

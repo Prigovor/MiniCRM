@@ -38,7 +38,7 @@ public final class DatabaseManager
 
     private SessionFactory sessionFactory;
 
-    public void configure(String configFilePath, Class ...annotatedClasses)
+    public void configure(String configFilePath, Class... annotatedClasses)
     {
         Configuration configuration = new Configuration().configure(configFilePath);
 
@@ -154,34 +154,56 @@ public final class DatabaseManager
     /**
      * Метод возвращает список обьектов, отобранных из таблицы по заданному значению поля
      *
-     * @param fieldName - фактическое имя поля, по которому будем получать значения
+     * @param fieldName  - фактическое имя поля, по которому будем получать значения
      * @param fieldValue - искомое значение поля
-     * @param tClass - класс, с которым взаимодействуем
-     * @param <T> - тип класса
+     * @param tClass     - класс, с которым взаимодействуем
+     * @param <T>        - тип класса
      * @return список отобранных значений
      */
     public <T> List<T> getEntriesByField(String fieldName, Object fieldValue, Class<T> tClass)
     {
+        List<T> tObjs = null;
         try (Session session = sessionFactory.getCurrentSession())
         {
-            return session.createCriteria(tClass).add(Restrictions.eq(fieldName, fieldValue)).list();
+            try
+            {
+                session.beginTransaction();
+                tObjs = session.createCriteria(tClass).add(Restrictions.eq(fieldName, fieldValue)).list();
+                session.getTransaction().commit();
+            }
+            catch (HibernateException e)
+            {
+                session.getTransaction().rollback();
+            }
         }
+        return tObjs;
     }
 
     /**
      * Метод возвращает один обьект, выбранный из таблицы по заданному значению поля
      *
-     * @param fieldName - фактическое имя поля, по которому будем получать значения
+     * @param fieldName  - фактическое имя поля, по которому будем получать значения
      * @param fieldValue - искомое значение поля
-     * @param tClass - класс, с которым взаимодействуем
-     * @param <T> - тип класса
+     * @param tClass     - класс, с которым взаимодействуем
+     * @param <T>        - тип класса
      * @return найденный обьект
      */
     public <T> T getEntryByField(String fieldName, Object fieldValue, Class<T> tClass)
     {
+        T tObj = null;
         try (Session session = sessionFactory.getCurrentSession())
         {
-            return (T) session.createCriteria(tClass).add(Restrictions.eq(fieldName, fieldValue)).uniqueResult();
+            try
+            {
+                session.beginTransaction();
+                tObj = (T) session.createCriteria(tClass).add(Restrictions.eq(fieldName, fieldValue)).uniqueResult();
+                session.getTransaction().commit();
+            }
+            catch (HibernateException e)
+            {
+                session.getTransaction().rollback();
+            }
         }
+        return tObj;
     }
 }

@@ -1,9 +1,14 @@
 package com.crm.menu.order.manager.good.choose;
 
 import com.crm.entity.good.Good;
+import com.crm.entity.order.Order;
+import com.crm.main.Main;
+import com.crm.menu.order.manager.OrderManagerMenuModel;
+import com.crm.menu.order.manager.good.info.GoodInfoMenuModel;
 import com.crm.service.good.GoodService;
 import com.crm.service.good.GoodServiceImpl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +18,8 @@ import java.util.List;
 public class ChooseGoodsMenuModel
 {
     private GoodService goodService = new GoodServiceImpl();
+
+    private Order order = OrderManagerMenuModel.getInstance().getOrder();
 
     private List<Good> listStoreGoods = new ArrayList<>();
 
@@ -28,11 +35,39 @@ public class ChooseGoodsMenuModel
         return listChosenGoods;
     }
 
-    public ChooseGoodsMenuModel()
+
+    private static ChooseGoodsMenuModel instance;
+
+    public static ChooseGoodsMenuModel getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new ChooseGoodsMenuModel();
+        }
+
+        return instance;
+    }
+
+    private ChooseGoodsMenuModel()
     {
         for (int i = 0; i < 10; i++)
         {
-            listStoreGoods.add(new Good((long) i, "Good" + i, 10, 890D, null));
+            Good good = new Good((long) i, "Good" + i, 10, 890D, null);
+            good.setDescription("DESC of " + good.getNomination());
+            listStoreGoods.add(good);
+        }
+    }
+
+    public void showGoodInfo(Good good)
+    {
+        try
+        {
+            GoodInfoMenuModel.getInstance().setGood(good);
+            Main.getInstance().replaceSceneContent("/fxml-files/good-info-menu.fxml");
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -55,7 +90,10 @@ public class ChooseGoodsMenuModel
             }
             else
             {
-                listChosenGoods.add(new Good(good.getId(), good.getNomination(), 1, good.getPrice(), good.getOrder()));
+                Good goodToAdd = new Good(good.getId(), good.getNomination(), 1, good.getPrice(), good.getOrder());
+                goodToAdd.setDescription(good.getDescription());
+
+                listChosenGoods.add(goodToAdd);
             }
         }
     }
@@ -77,7 +115,7 @@ public class ChooseGoodsMenuModel
             goodInStore.setAmount(amountOfGoodInStore + 1);
         }
 
-        if (amountOfGoodInChosen == 0)
+        if (goodInChosen.getAmount() == 0)
         {
             listChosenGoods.remove(goodInChosen);
         }
@@ -87,7 +125,7 @@ public class ChooseGoodsMenuModel
     {
         listChosenGoods.forEach(good ->
         {
-
+            order.getGoods().add(good);
         });
     }
 

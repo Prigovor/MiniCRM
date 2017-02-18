@@ -17,7 +17,10 @@ public class Good {
     private Long id;
 
     @Column(name = "NOMINATION")
-    private String nomination ;
+    private String nomination;
+
+    @Column(name = "DESCRIPTION")
+    private String description;
 
     @Column(name = "AMOUNT")
     private Integer amount;
@@ -53,6 +56,16 @@ public class Good {
 
     public void setNomination(String nomination) {
         this.nomination = nomination;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
     }
 
     public Integer getAmount() {

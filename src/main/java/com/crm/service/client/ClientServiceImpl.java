@@ -62,7 +62,7 @@ public class ClientServiceImpl implements ClientService
     {
         Client clientEntry = new Client();
 
-        clientEntry.setLogin(client.getName().concat(".").concat(client.getSurname()));
+        clientEntry.setLogin(client.getName().toLowerCase().concat(".").concat(client.getSurname().toLowerCase()));
         clientEntry.setPassword(PasswordManager.getInstance().generatePassword(4));
 
         clientEntry.setName(client.getName());
@@ -91,7 +91,7 @@ public class ClientServiceImpl implements ClientService
 
         createClient(clientEntry);
 
-        EmailManager.getInstance().sendMessage(clientEntry.getEmail(), "Login and password from client MiniSRM account",
+        EmailManager.getInstance().sendMessage(clientEntry.getEmail(), "Login and password from MiniSRM client account",
                 "Login: " + clientEntry.getLogin() + "\nPassword: " + clientEntry.getPassword());
     }
 }

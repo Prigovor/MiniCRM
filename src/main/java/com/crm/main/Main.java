@@ -29,9 +29,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
 
-        replaceSceneContent(new ChooseGoodsMenuController());
-
-        //primaryStage.getScene().getStylesheets().addAll("css/admin.css");
+        replaceSceneContent("/fxml-files/good-choose-menu.fxml");
 
         primaryStage.setTitle("MiniCRM");
         primaryStage.setMaximized(true);
