@@ -5,6 +5,10 @@ import com.crm.entity.courier.Courier;
 import com.crm.entity.courier.Status;
 import com.crm.entity.order.Order;
 import com.crm.entity.order.OrderStatus;
+import com.crm.service.courier.CourierService;
+import com.crm.service.courier.CourierServiceImpl;
+import com.crm.service.order.OrderService;
+import com.crm.service.order.OrderServiceImpl;
 
 import javax.mail.MessagingException;
 
@@ -13,12 +17,18 @@ import javax.mail.MessagingException;
  */
 public class CourierManager {
 
-    public void orderDelivery(Courier courier, Order order, Client client) {
+    private OrderService orderService = new OrderServiceImpl();
+    private CourierService courierService = new CourierServiceImpl();
+
+    public void orderDelivery(Courier courier, Order order) {
         if (courier != null && order != null) {
-            courier.setStatus(Status.BUSY);
+            order.setCourier(courier);
+            order.getCourier().setStatus(Status.BUSY);
             order.setOrderStatus(OrderStatus.DELIVERY_PROCESS);
+            orderService.updateOrder(order);
+
             try {
-                EmailManager.getInstance().sendMessage(client.getEmail(), "123", "Your order number: ");
+                EmailManager.getInstance().sendMessage(order.getClient().getEmail(), "123", "Your order number: " + order.getId());
             } catch (MessagingException e) {
                 e.printStackTrace();
             }

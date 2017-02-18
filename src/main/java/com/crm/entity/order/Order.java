@@ -123,4 +123,12 @@ public class Order {
     public void setOrderPrice(Long orderPrice) {
         this.orderPrice = orderPrice;
     }
+
+    public Courier getCourier() {
+        return courier;
+    }
+
+    public void setCourier(Courier courier) {
+        this.courier = courier;
+    }
 }
