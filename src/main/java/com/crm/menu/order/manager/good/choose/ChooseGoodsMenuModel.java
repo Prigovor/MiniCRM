@@ -127,6 +127,15 @@ public class ChooseGoodsMenuModel
         {
             order.getGoods().add(good);
         });
+
+        try
+        {
+            Main.getInstance().replaceSceneContent("/fxml-files/order-input-menu.fxml");
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void cancel()

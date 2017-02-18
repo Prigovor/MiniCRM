@@ -38,9 +38,8 @@ public class ClientInputMenuController
             try
             {
                 model.confirm(textFieldName.getText(), textFieldSurname.getText(), textFieldEmail.getText(), textFieldPhone.getText());
-                Main.getInstance().replaceSceneContent("");
             }
-            catch (UserExistsException | MessagingException | IOException e)
+            catch (UserExistsException | MessagingException e)
             {
                 new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
             }

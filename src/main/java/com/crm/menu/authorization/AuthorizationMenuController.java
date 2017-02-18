@@ -39,7 +39,19 @@ public class AuthorizationMenuController implements Controller
                     }
                     case EMPLOYEE:
                     {
-                        Main.getInstance().replaceSceneContent(new EmployeeMenuController());
+                        switch (MainModel.getInstance().getCurrentUser().getEmployee().getPosition())
+                        {
+                            case MANAGER:
+                            {
+                                Main.getInstance().replaceSceneContent("/fxml-files/client-input-menu.fxml");
+                                break;
+                            }
+                            default:
+                            {
+                                Main.getInstance().replaceSceneContent(new EmployeeMenuController());
+                                break;
+                            }
+                        }
                         break;
                     }
                 }

@@ -5,4 +5,5 @@ package com.crm.menu.order.manager.order.input;
  */
 public class OrderInputMenuModel
 {
+
 }
