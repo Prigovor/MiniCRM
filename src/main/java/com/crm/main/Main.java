@@ -1,7 +1,7 @@
 package com.crm.main;
 
 import com.crm.menu.Controller;
-import com.crm.menu.order.manager.good.choose.ChooseGoodsMenuController;
+import com.crm.menu.authorization.AuthorizationMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -29,7 +29,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
 
-        replaceSceneContent("/fxml-files/good-choose-menu.fxml");
+        replaceSceneContent(new AuthorizationMenuController());
+
+        primaryStage.getScene().getStylesheets().addAll("/css-styles/mini-crm.css");
 
         primaryStage.setTitle("MiniCRM");
         primaryStage.setMaximized(true);
