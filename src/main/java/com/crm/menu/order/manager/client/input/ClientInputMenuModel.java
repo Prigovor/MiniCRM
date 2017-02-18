@@ -36,7 +36,17 @@ public class ClientInputMenuModel
 
         if (clientEntry == null)
         {
-            clientService.generateClient(client);
+            new Thread(() ->
+            {
+                try
+                {
+                    clientService.generateClient(client);
+                }
+                catch (MessagingException | UserExistsException e)
+                {
+
+                }
+            });
         }
         else
         {

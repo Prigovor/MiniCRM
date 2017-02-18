@@ -3,6 +3,7 @@ package com.crm.menu.order.manager.good.choose;
 import com.crm.entity.good.Good;
 import com.crm.entity.order.Order;
 import com.crm.main.Main;
+import com.crm.menu.authorization.AuthorizationMenuController;
 import com.crm.menu.order.manager.OrderManagerMenuModel;
 import com.crm.menu.order.manager.good.info.GoodInfoMenuModel;
 import com.crm.service.good.GoodService;
@@ -52,7 +53,7 @@ public class ChooseGoodsMenuModel
     {
         for (int i = 0; i < 10; i++)
         {
-            Good good = new Good((long) i, "Good" + i, 10, 890D, null);
+            Good good = new Good("Good" + i, 10, 890D);
             good.setDescription("DESC of " + good.getNomination());
             listStoreGoods.add(good);
         }
@@ -90,7 +91,7 @@ public class ChooseGoodsMenuModel
             }
             else
             {
-                Good goodToAdd = new Good(good.getId(), good.getNomination(), 1, good.getPrice(), good.getOrder());
+                Good goodToAdd = new Good(good.getNomination(), 1, good.getPrice());
                 goodToAdd.setDescription(good.getDescription());
 
                 listChosenGoods.add(goodToAdd);
@@ -140,11 +141,18 @@ public class ChooseGoodsMenuModel
 
     public void cancel()
     {
-
+        Main.getInstance().replaceSceneContent(new AuthorizationMenuController());
     }
 
     public void back()
     {
-
+        try
+        {
+            Main.getInstance().replaceSceneContent("/fxml-files/client-input-menu.fxml");
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

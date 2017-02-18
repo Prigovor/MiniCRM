@@ -1,16 +1,10 @@
 package com.crm.menu.order.manager.good.choose;
 
 import com.crm.entity.good.Good;
-import com.crm.main.Main;
-import com.crm.menu.Controller;
-import com.crm.menu.View;
-import com.crm.menu.order.manager.good.info.GoodInfoMenuModel;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-
-import java.io.IOException;
 
 /**
  * Created by Bohdan on 16.02.2017.
@@ -77,6 +71,21 @@ public class ChooseGoodsMenuController
                     break;
                 }
             }
+        });
+
+        buttonConfirm.setOnAction(event ->
+        {
+            model.confirm();
+        });
+
+        buttonBack.setOnAction(event ->
+        {
+            model.back();
+        });
+
+        buttonCancel.setOnAction(event ->
+        {
+            model.cancel();
         });
     }
 

@@ -76,4 +76,37 @@ public class Good {
     {
         this.description = description;
     }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+        {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass())
+        {
+            return false;
+        }
+
+        Good good = (Good) o;
+
+        return nomination != null ? nomination.equals(good.nomination) : good.nomination == null;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return nomination != null ? nomination.hashCode() : 0;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Good{" +
+                "nomination='" + nomination + '\'' +
+                ", amount=" + amount +
+                ", price=" + price +
+                '}';
+    }
 }

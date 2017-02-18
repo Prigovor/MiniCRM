@@ -1,15 +1,13 @@
 package com.crm.menu.order.manager.client.input;
 
-import com.crm.main.Main;
-import com.crm.menu.View;
 import com.crm.service.UserExistsException;
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 
 import javax.mail.MessagingException;
-import java.io.IOException;
 
 /**
  * Created by Bohdan on 17.02.2017.
@@ -25,6 +23,15 @@ public class ClientInputMenuController
     public Button buttonConfirm;
 
     private ClientInputMenuModel model = new ClientInputMenuModel();
+
+    @FXML
+    public void initialize()
+    {
+        textFieldName.setText(model.getClient().getName());
+        textFieldSurname.setText(model.getClient().getSurname());
+        textFieldEmail.setText(model.getClient().getEmail());
+        textFieldPhone.setText(model.getClient().getPhone());
+    }
 
     public void confirm()
     {
