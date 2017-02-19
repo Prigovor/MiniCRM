@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="300.0" maxWidth="500.0" minHeight="300.0" minWidth="500.0" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.crm.menu.client.ClientRegistrationContr">
+    <children>
+        <ImageView fitHeight="300.0" fitWidth="500.0" layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <image>
+                <Image url="@../images/setka800x600.jpg" />
+            </image>
+        </ImageView>
+        <GridPane fx:id="gpMainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <TextField fx:id="fldLogin" focusTraversable="false" prefHeight="70.0" promptText="Login" GridPane.columnSpan="3">
+                    <GridPane.margin>
+                        <Insets left="18.0" right="18.0" />
+                    </GridPane.margin>
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </TextField>
+                <PasswordField fx:id="fldPassword" focusTraversable="false" prefHeight="70.0" promptText="Password" GridPane.columnSpan="3" GridPane.rowIndex="1">
+                    <GridPane.margin>
+                        <Insets left="18.0" right="18.0" />
+                    </GridPane.margin>
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </PasswordField>
+                <Button fx:id="btnAutorisation" focusTraversable="false" mnemonicParsing="false" prefHeight="60.0" prefWidth="130.0" text="Authorisation" textAlignment="CENTER" textFill="#000000b2" GridPane.rowIndex="2">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Button>
+                <Button fx:id="btnSignUp" focusTraversable="false" mnemonicParsing="false" prefHeight="60.0" prefWidth="130.0" text="Sign up" textFill="#000000b2" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Button>
+                <Button fx:id="btnExit" focusTraversable="false" mnemonicParsing="false" prefHeight="60.0" prefWidth="130.0" text="Exit" textFill="#9c062cb2" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Button>
+            </children>
+            <effect>
+                <InnerShadow choke="0.25" height="32.86" radius="15.19" width="29.9" />
+            </effect>
+        </GridPane>
+    </children>
+    <effect>
+        <InnerShadow choke="0.35" height="38.05" radius="26.1225" width="68.44" />
+    </effect>
+</AnchorPane>
