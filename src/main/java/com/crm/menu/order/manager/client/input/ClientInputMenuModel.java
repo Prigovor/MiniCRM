@@ -2,7 +2,6 @@ package com.crm.menu.order.manager.client.input;
 
 import com.crm.entity.client.Client;
 import com.crm.main.Main;
-import com.crm.menu.authorization.AuthorizationMenuController;
 import com.crm.menu.order.manager.OrderManagerMenuModel;
 import com.crm.service.UserExistsException;
 
@@ -36,6 +35,13 @@ public class ClientInputMenuModel
     public void back()
     {
         OrderManagerMenuModel.getInstance().clearData();
-        Main.getInstance().replaceSceneContent(new AuthorizationMenuController());
+        try
+        {
+            Main.getInstance().replaceSceneContent("/fxml-files/order-manager-main-menu.fxml");
+        }
+        catch (IOException e)
+        {
+
+        }
     }
 }

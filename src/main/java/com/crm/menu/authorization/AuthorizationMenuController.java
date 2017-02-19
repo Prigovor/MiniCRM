@@ -43,7 +43,7 @@ public class AuthorizationMenuController implements Controller
                         {
                             case MANAGER:
                             {
-                                Main.getInstance().replaceSceneContent("/fxml-files/client-input-menu.fxml");
+                                Main.getInstance().replaceSceneContent("/fxml-files/order-manager-main-menu.fxml");
                                 break;
                             }
                             default:

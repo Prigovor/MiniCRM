@@ -30,6 +30,8 @@ public class OrderInputMenuModel
             JsonFileManager.serializeToJsonFile(order,
                     "D:\\Bohdan\\IdeaProjects\\MiniCRM\\src\\main\\resources\\json-files\\order-" +
                     order.getClient().getSurname().toLowerCase() + ".json");
+
+            Main.getInstance().replaceSceneContent("/fxml-files/order-manager-main-menu.fxml");
         }
         catch (IOException e)
         {
@@ -52,5 +54,13 @@ public class OrderInputMenuModel
     public void cancel()
     {
         OrderManagerMenuModel.getInstance().clearData();
+        try
+        {
+            Main.getInstance().replaceSceneContent("/fxml-files/order-manager-main-menu.fxml");
+        }
+        catch (IOException e)
+        {
+
+        }
     }
 }

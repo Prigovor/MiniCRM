@@ -3,7 +3,6 @@ package com.crm.menu.order.manager.good.choose;
 import com.crm.entity.good.Good;
 import com.crm.entity.order.Order;
 import com.crm.main.Main;
-import com.crm.menu.authorization.AuthorizationMenuController;
 import com.crm.menu.order.manager.OrderManagerMenuModel;
 import com.crm.menu.order.manager.good.info.GoodInfoMenuModel;
 import com.crm.service.good.GoodService;
@@ -145,7 +144,14 @@ public class ChooseGoodsMenuModel
     public void cancel()
     {
         OrderManagerMenuModel.getInstance().clearData();
-        Main.getInstance().replaceSceneContent(new AuthorizationMenuController());
+        try
+        {
+            Main.getInstance().replaceSceneContent("/fxml-files/order-manager-main-menu.fxml");
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void back()
