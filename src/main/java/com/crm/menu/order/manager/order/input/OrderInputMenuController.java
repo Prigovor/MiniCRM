@@ -34,6 +34,7 @@ public class OrderInputMenuController
 
         buttonConfirm.setOnAction(event ->
         {
+            OrderManagerMenuModel.getInstance().getOrder().setAddress(textFieldAddress.getText());
             model.confirm();
         });
 

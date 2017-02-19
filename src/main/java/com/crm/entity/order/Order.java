@@ -20,7 +20,7 @@ public class Order {
     @Column(name = "ID")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Client.class, cascade = CascadeType.ALL)
     private Client client;
 
     @Temporal(TemporalType.DATE)
@@ -28,8 +28,8 @@ public class Order {
     private Date registrationDate;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "DELIVERY_TIME")
-    private Date deliveryTime;
+    @Column(name = "RECEIVE_DATE")
+    private Date receiveDate;
 
     @Column(name = "ADDRESS")
     private String address;
@@ -51,10 +51,10 @@ public class Order {
     public Order() {
     }
 
-    public Order(Client client, Date registrationDate, Date deliveryTime, String address, OrderStatus orderStatus, List<Good> goods, Double orderPrice) {
+    public Order(Client client, Date registrationDate, Date receiveDate, String address, OrderStatus orderStatus, List<Good> goods, Double orderPrice) {
         this.client = client;
         this.registrationDate = registrationDate;
-        this.deliveryTime = deliveryTime;
+        this.receiveDate = receiveDate;
         this.address = address;
         this.orderStatus = orderStatus;
         this.goods = goods;
@@ -85,12 +85,12 @@ public class Order {
         this.registrationDate = registrationDate;
     }
 
-    public Date getDeliveryTime() {
-        return deliveryTime;
+    public Date getReceiveDate() {
+        return receiveDate;
     }
 
-    public void setDeliveryTime(Date deliveryTime) {
-        this.deliveryTime = deliveryTime;
+    public void setReceiveDate(Date receiveDate) {
+        this.receiveDate = receiveDate;
     }
 
     public String getAddress() {

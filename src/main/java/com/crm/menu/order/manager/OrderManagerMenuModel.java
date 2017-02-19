@@ -16,6 +16,11 @@ public class OrderManagerMenuModel
         return client;
     }
 
+    public void setClient(Client client)
+    {
+        this.client = client;
+    }
+
     private Order order = new Order();
 
     public Order getOrder()

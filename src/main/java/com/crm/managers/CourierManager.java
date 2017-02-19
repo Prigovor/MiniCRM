@@ -35,16 +35,30 @@ public class CourierManager
     private OrderService orderService = new OrderServiceImpl();
     private CourierService courierService = new CourierServiceImpl();
 
-    public void orderDelivery(Courier courier, Order order) throws MessagingException
+    public void orderDelivery(Courier courier, Order order)
     {
         if (courier != null && order != null)
         {
             order.setCourier(courier);
             order.getCourier().setCourierStatus(CourierStatus.BUSY);
             order.setOrderStatus(OrderStatus.DELIVERY_PROCESS);
-            orderService.updateOrder(order);
 
-            EmailManager.getInstance().sendMessage(order.getClient().getEmail(), "Order delivery", "Your order number: " + order.getId());
+            orderService.createOrder(order);
+
+            new Thread(() ->
+            {
+                try
+                {
+                    EmailManager.getInstance().sendMessage(order.getClient().getEmail(),
+                            "Order delivery",
+                            String.format("Your order number is %s. It will be delivered on %s at %s",
+                                    order.getId(), order.getAddress(), order.getReceiveDate()));
+                }
+                catch (MessagingException e)
+                {
+                    e.printStackTrace();
+                }
+            });
         }
     }
     /**

@@ -1,5 +1,6 @@
 package com.crm.menu.order.manager.client.input;
 
+import com.crm.menu.order.manager.OrderManagerMenuModel;
 import com.crm.service.UserExistsException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -27,10 +28,14 @@ public class ClientInputMenuController
     @FXML
     public void initialize()
     {
-        textFieldName.setText(model.getClient().getName());
-        textFieldSurname.setText(model.getClient().getSurname());
-        textFieldEmail.setText(model.getClient().getEmail());
-        textFieldPhone.setText(model.getClient().getPhone());
+        textFieldName.setText(
+                OrderManagerMenuModel.getInstance().getClient().getName());
+        textFieldSurname.setText(
+                OrderManagerMenuModel.getInstance().getClient().getSurname());
+        textFieldEmail.setText(
+                OrderManagerMenuModel.getInstance().getClient().getEmail());
+        textFieldPhone.setText(
+                OrderManagerMenuModel.getInstance().getClient().getPhone());
     }
 
     public void confirm()

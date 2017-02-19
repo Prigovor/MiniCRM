@@ -1,12 +1,14 @@
 package com.crm.menu.order.manager.order.input;
 
 import com.crm.entity.courier.Courier;
+import com.crm.entity.order.Order;
 import com.crm.main.Main;
 import com.crm.managers.CourierManager;
+import com.crm.managers.JsonFileManager;
 import com.crm.menu.order.manager.OrderManagerMenuModel;
 
-import javax.mail.MessagingException;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * Created by Bohdan on 16.02.2017.
@@ -20,6 +22,8 @@ public class OrderInputMenuModel
         return courier;
     }
 
+    private Order order = OrderManagerMenuModel.getInstance().getOrder();
+
     public void setCourier(Courier courier)
     {
         this.courier = courier;
@@ -29,11 +33,25 @@ public class OrderInputMenuModel
     {
         try
         {
-            CourierManager.getInstance().orderDelivery(courier, OrderManagerMenuModel.getInstance().getOrder());
-        }
-        catch (MessagingException e)
-        {
+            order.setClient(OrderManagerMenuModel.getInstance().getClient());
+            order.setCourier(courier);
 
+            order.setRegistrationDate(new Date());
+            order.setReceiveDate(new Date());
+
+            CourierManager.getInstance().orderDelivery(courier, order);
+
+            JsonFileManager.serializeToJsonFile(order,
+                    "D:\\Bohdan\\IdeaProjects\\MiniCRM\\src\\main\\resources\\json-files\\order-" +
+                    order.getClient().getSurname().toLowerCase() + ".json");
+
+            System.out.println(JsonFileManager.deserializeFromJsonFile(Order.class,
+                    "D:\\Bohdan\\IdeaProjects\\MiniCRM\\src\\main\\resources\\json-files\\order-" +
+                            order.getClient().getSurname().toLowerCase() + ".json"));
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
         }
     }
 

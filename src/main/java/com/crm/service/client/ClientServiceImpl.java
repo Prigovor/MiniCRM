@@ -91,7 +91,17 @@ public class ClientServiceImpl implements ClientService
 
         createClient(clientEntry);
 
-        EmailManager.getInstance().sendMessage(clientEntry.getEmail(), "Login and password from MiniSRM client account",
-                "Login: " + clientEntry.getLogin() + "\nPassword: " + clientEntry.getPassword());
+        new Thread(() ->
+        {
+            try
+            {
+                EmailManager.getInstance().sendMessage(clientEntry.getEmail(), "Login and password from MiniSRM client account",
+                        "Login: " + clientEntry.getLogin() + "\nPassword: " + clientEntry.getPassword());
+            }
+            catch (MessagingException e)
+            {
+
+            }
+        });
     }
 }

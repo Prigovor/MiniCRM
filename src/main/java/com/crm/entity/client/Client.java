@@ -36,7 +36,7 @@ public class Client {
     @Column(name = "EMAIL")
     private String email;
 
-    @OneToMany(mappedBy = "client",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Order.class, cascade = CascadeType.ALL)
     private Set<Order> orders;
 
     public Client() {

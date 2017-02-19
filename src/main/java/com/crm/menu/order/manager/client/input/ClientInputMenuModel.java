@@ -16,21 +16,14 @@ import java.io.IOException;
  */
 public class ClientInputMenuModel
 {
-    private Client client = OrderManagerMenuModel.getInstance().getClient();
-
-    public Client getClient()
-    {
-        return client;
-    }
-
     private ClientService clientService = new ClientServiceImpl();
 
     public void confirm(String name, String surname, String email, String phone) throws UserExistsException, MessagingException
     {
-        client.setName(name);
-        client.setSurname(surname);
-        client.setEmail(email);
-        client.setPhone(phone);
+        OrderManagerMenuModel.getInstance().getClient().setName(name);
+        OrderManagerMenuModel.getInstance().getClient().setSurname(surname);
+        OrderManagerMenuModel.getInstance().getClient().setEmail(email);
+        OrderManagerMenuModel.getInstance().getClient().setPhone(phone);
 
         Client clientEntry = clientService.getEntryByField("email", email);
 
@@ -40,17 +33,17 @@ public class ClientInputMenuModel
             {
                 try
                 {
-                    clientService.generateClient(client);
+                    clientService.generateClient(OrderManagerMenuModel.getInstance().getClient());
                 }
                 catch (MessagingException | UserExistsException e)
                 {
-
+                    e.printStackTrace();
                 }
             });
         }
         else
         {
-            client = clientEntry;
+            OrderManagerMenuModel.getInstance().setClient(clientEntry);
         }
 
         try

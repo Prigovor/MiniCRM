@@ -25,13 +25,33 @@ public class AutoOrderManager
             CourierManager.getInstance()
                     .orderDelivery(courierService.getEntryByField("status", CourierStatus.FREE), order);
 
-            EmailManager.getInstance()
-                    .sendMessage(order.getClient().getEmail(), "Order", "Order is delivering");
+            new Thread(() ->
+            {
+                try
+                {
+                    EmailManager.getInstance()
+                            .sendMessage(order.getClient().getEmail(), "Order", "Order is delivering");
+                }
+                catch (MessagingException e)
+                {
+
+                }
+            });
         }
         else
         {
-            EmailManager.getInstance()
-                    .sendMessage(order.getClient().getEmail(), "Order", "Wait for free couriers");
+            new Thread(() ->
+            {
+                try
+                {
+                    EmailManager.getInstance()
+                            .sendMessage(order.getClient().getEmail(), "Order", "Wait for free couriers");
+                }
+                catch (MessagingException e)
+                {
+
+                }
+            });
         }
     }
 

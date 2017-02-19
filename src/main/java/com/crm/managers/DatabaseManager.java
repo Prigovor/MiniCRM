@@ -19,23 +19,17 @@ import java.util.List;
  */
 public final class DatabaseManager
 {
-    private static DatabaseManager instance;
+    private static final DatabaseManager instance = new DatabaseManager();
 
     public static DatabaseManager getInstance()
     {
-        if (instance == null)
-        {
-            instance = new DatabaseManager();
-
-            instance.configure("hibernate.cfg.xml", Employee.class,
-                    User.class, Courier.class, Good.class, Order.class, Client.class);
-        }
         return instance;
     }
 
     private DatabaseManager()
     {
-
+        configure("hibernate.cfg.xml", Employee.class,
+                User.class, Courier.class, Good.class, Order.class, Client.class);
     }
 
     private SessionFactory sessionFactory;
