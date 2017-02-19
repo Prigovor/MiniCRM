@@ -100,7 +100,7 @@ public class ClientServiceImpl implements ClientService
             {
 
             }
-        });
+        }).start();
 
         return createClient(clientEntry);
     }

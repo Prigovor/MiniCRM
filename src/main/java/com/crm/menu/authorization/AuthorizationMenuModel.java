@@ -80,7 +80,7 @@ public class AuthorizationMenuModel
                     {
 
                     }
-                });
+                }).start();
             }
             else
             {

@@ -32,7 +32,7 @@ public class Employee {
     @Column(name = "POSITION")
     private PositionType position;
 
-    @Transient
+    @Column(name = "WORK_EMAIL")
     private String email;
 
     public Employee() {

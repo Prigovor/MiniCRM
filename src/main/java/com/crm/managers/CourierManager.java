@@ -59,7 +59,23 @@ public class CourierManager
                 {
                     e.printStackTrace();
                 }
-            });
+            }).start();
+
+
+            new Thread(() ->
+            {
+                try
+                {
+                    EmailManager.getInstance().sendMessage(order.getCourier().getEmail(),
+                            "Order delivery",
+                            String.format("Your order number is %s. You should deliver it on %s at %s",
+                                    order.getId(), order.getAddress(), order.getReceiveDate()));
+                }
+                catch (MessagingException e)
+                {
+                    e.printStackTrace();
+                }
+            }).start();
         }
     }
     /**

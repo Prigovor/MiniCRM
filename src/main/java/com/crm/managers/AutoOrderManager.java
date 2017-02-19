@@ -36,7 +36,7 @@ public class AutoOrderManager
                 {
 
                 }
-            });
+            }).start();
         }
         else
         {
@@ -51,7 +51,7 @@ public class AutoOrderManager
                 {
 
                 }
-            });
+            }).start();
         }
     }
 
