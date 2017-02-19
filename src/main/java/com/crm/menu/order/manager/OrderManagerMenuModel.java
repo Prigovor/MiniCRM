@@ -1,6 +1,7 @@
 package com.crm.menu.order.manager;
 
 import com.crm.entity.client.Client;
+import com.crm.entity.courier.Courier;
 import com.crm.entity.employee.Employee;
 import com.crm.entity.order.Order;
 
@@ -19,6 +20,18 @@ public class OrderManagerMenuModel
     public void setClient(Client client)
     {
         this.client = client;
+    }
+
+    private Courier courier = new Courier();
+
+    public Courier getCourier()
+    {
+        return courier;
+    }
+
+    public void setCourier(Courier courier)
+    {
+        this.courier = courier;
     }
 
     private Order order = new Order();

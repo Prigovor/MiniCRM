@@ -1,6 +1,7 @@
 package com.crm.menu.order.manager.order.input;
 
 import com.crm.dao.FactoryDAO;
+import com.crm.entity.courier.Courier;
 import com.crm.entity.courier.CourierStatus;
 import com.crm.menu.order.manager.OrderManagerMenuModel;
 import javafx.collections.FXCollections;
@@ -34,7 +35,11 @@ public class OrderInputMenuController
 
         buttonConfirm.setOnAction(event ->
         {
-            OrderManagerMenuModel.getInstance().getOrder().setAddress(textFieldAddress.getText());
+            OrderManagerMenuModel.getInstance().getOrder().setAddress(
+                    textFieldAddress.getText());
+            OrderManagerMenuModel.getInstance().getOrder().setCourier(
+                    (Courier) choiceBoxCouriers.getSelectionModel().getSelectedItem());
+
             model.confirm();
         });
 

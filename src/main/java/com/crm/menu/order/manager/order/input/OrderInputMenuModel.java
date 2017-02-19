@@ -1,6 +1,5 @@
 package com.crm.menu.order.manager.order.input;
 
-import com.crm.entity.courier.Courier;
 import com.crm.entity.order.Order;
 import com.crm.main.Main;
 import com.crm.managers.CourierManager;
@@ -15,39 +14,22 @@ import java.util.Date;
  */
 public class OrderInputMenuModel
 {
-    private Courier courier = new Courier();
-
-    public Courier getCourier()
-    {
-        return courier;
-    }
-
     private Order order = OrderManagerMenuModel.getInstance().getOrder();
-
-    public void setCourier(Courier courier)
-    {
-        this.courier = courier;
-    }
 
     public void confirm()
     {
         try
         {
             order.setClient(OrderManagerMenuModel.getInstance().getClient());
-            order.setCourier(courier);
 
             order.setRegistrationDate(new Date());
             order.setReceiveDate(new Date());
 
-            CourierManager.getInstance().orderDelivery(courier, order);
+            CourierManager.getInstance().orderDelivery(order.getCourier(), order);
 
             JsonFileManager.serializeToJsonFile(order,
                     "D:\\Bohdan\\IdeaProjects\\MiniCRM\\src\\main\\resources\\json-files\\order-" +
                     order.getClient().getSurname().toLowerCase() + ".json");
-
-            System.out.println(JsonFileManager.deserializeFromJsonFile(Order.class,
-                    "D:\\Bohdan\\IdeaProjects\\MiniCRM\\src\\main\\resources\\json-files\\order-" +
-                            order.getClient().getSurname().toLowerCase() + ".json"));
         }
         catch (IOException e)
         {

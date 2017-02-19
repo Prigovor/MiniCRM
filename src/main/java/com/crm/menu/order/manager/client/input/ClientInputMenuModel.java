@@ -5,8 +5,6 @@ import com.crm.main.Main;
 import com.crm.menu.authorization.AuthorizationMenuController;
 import com.crm.menu.order.manager.OrderManagerMenuModel;
 import com.crm.service.UserExistsException;
-import com.crm.service.client.ClientService;
-import com.crm.service.client.ClientServiceImpl;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -16,35 +14,14 @@ import java.io.IOException;
  */
 public class ClientInputMenuModel
 {
-    private ClientService clientService = new ClientServiceImpl();
+    private Client client = OrderManagerMenuModel.getInstance().getClient();
 
     public void confirm(String name, String surname, String email, String phone) throws UserExistsException, MessagingException
     {
-        OrderManagerMenuModel.getInstance().getClient().setName(name);
-        OrderManagerMenuModel.getInstance().getClient().setSurname(surname);
-        OrderManagerMenuModel.getInstance().getClient().setEmail(email);
-        OrderManagerMenuModel.getInstance().getClient().setPhone(phone);
-
-        Client clientEntry = clientService.getEntryByField("email", email);
-
-        if (clientEntry == null)
-        {
-            new Thread(() ->
-            {
-                try
-                {
-                    clientService.generateClient(OrderManagerMenuModel.getInstance().getClient());
-                }
-                catch (MessagingException | UserExistsException e)
-                {
-                    e.printStackTrace();
-                }
-            });
-        }
-        else
-        {
-            OrderManagerMenuModel.getInstance().setClient(clientEntry);
-        }
+        client.setName(name);
+        client.setSurname(surname);
+        client.setEmail(email);
+        client.setPhone(phone);
 
         try
         {

@@ -41,6 +41,7 @@ public class CourierManager
         {
             order.setCourier(courier);
             order.getCourier().setCourierStatus(CourierStatus.BUSY);
+
             order.setOrderStatus(OrderStatus.DELIVERY_PROCESS);
 
             orderService.createOrder(order);

@@ -58,7 +58,7 @@ public class ClientServiceImpl implements ClientService
         return clientDAO.getEntryByField(fieldName, fieldValue);
     }
 
-    public void generateClient(Client client) throws MessagingException, UserExistsException
+    public Long generateClient(Client client) throws MessagingException, UserExistsException
     {
         Client clientEntry = new Client();
 
@@ -89,8 +89,6 @@ public class ClientServiceImpl implements ClientService
             clientEntry.setLogin(clientEntry.getLogin().concat("." + sameClientCount));
         }
 
-        createClient(clientEntry);
-
         new Thread(() ->
         {
             try
@@ -103,5 +101,7 @@ public class ClientServiceImpl implements ClientService
 
             }
         });
+
+        return createClient(clientEntry);
     }
 }

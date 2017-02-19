@@ -23,5 +23,5 @@ public interface ClientService {
 
     Client getEntryByField(String fieldName, Object fieldValue);
 
-    void generateClient(Client client) throws MessagingException, UserExistsException;
+    Long generateClient(Client client) throws MessagingException, UserExistsException;
 }
