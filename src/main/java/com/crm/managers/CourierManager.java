@@ -1,7 +1,7 @@
 package com.crm.managers;
 
 import com.crm.entity.courier.Courier;
-import com.crm.entity.courier.Status;
+import com.crm.entity.courier.CourierStatus;
 import com.crm.entity.order.Order;
 import com.crm.entity.order.OrderStatus;
 import com.crm.service.courier.CourierService;
@@ -41,7 +41,7 @@ public class CourierManager
         if (courier != null && order != null)
         {
             order.setCourier(courier);
-            order.getCourier().setStatus(Status.BUSY);
+            order.getCourier().setCourierStatus(CourierStatus.BUSY);
             order.setOrderStatus(OrderStatus.DELIVERY_PROCESS);
             orderService.updateOrder(order);
 

@@ -36,6 +36,12 @@ public class ChooseGoodsMenuModel
         return listChosenGoods;
     }
 
+    private Double orderSum = 0.0;
+
+    public Double getOrderSum()
+    {
+        return orderSum;
+    }
 
     private static ChooseGoodsMenuModel instance;
 
@@ -96,6 +102,8 @@ public class ChooseGoodsMenuModel
 
                 listChosenGoods.add(goodToAdd);
             }
+
+            orderSum += goodInStore.getPrice();
         }
     }
 
@@ -114,6 +122,8 @@ public class ChooseGoodsMenuModel
 
             Integer amountOfGoodInStore = goodInStore.getAmount();
             goodInStore.setAmount(amountOfGoodInStore + 1);
+
+            orderSum -= goodInChosen.getPrice();
         }
 
         if (goodInChosen.getAmount() == 0)
@@ -124,10 +134,8 @@ public class ChooseGoodsMenuModel
 
     public void confirm()
     {
-        listChosenGoods.forEach(good ->
-        {
-            order.getGoods().add(good);
-        });
+        order.setGoods(listChosenGoods);
+        order.setOrderPrice(orderSum);
 
         try
         {
@@ -141,6 +149,7 @@ public class ChooseGoodsMenuModel
 
     public void cancel()
     {
+        OrderManagerMenuModel.getInstance().clearData();
         Main.getInstance().replaceSceneContent(new AuthorizationMenuController());
     }
 

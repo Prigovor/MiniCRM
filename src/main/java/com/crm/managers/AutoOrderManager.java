@@ -1,6 +1,6 @@
 package com.crm.managers;
 
-import com.crm.entity.courier.Status;
+import com.crm.entity.courier.CourierStatus;
 import com.crm.entity.order.Order;
 import com.crm.entity.order.OrderStatus;
 import com.crm.service.courier.CourierService;
@@ -23,7 +23,7 @@ public class AutoOrderManager
         if (order.getOrderStatus().equals(OrderStatus.PAID_UP))
         {
             CourierManager.getInstance()
-                    .orderDelivery(courierService.getEntryByField("status", Status.FREE), order);
+                    .orderDelivery(courierService.getEntryByField("status", CourierStatus.FREE), order);
 
             EmailManager.getInstance()
                     .sendMessage(order.getClient().getEmail(), "Order", "Order in delivery process");

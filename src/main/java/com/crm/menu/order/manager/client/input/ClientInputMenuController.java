@@ -35,21 +35,13 @@ public class ClientInputMenuController
 
     public void confirm()
     {
-        if (textFieldName.getText().isEmpty() || textFieldSurname.getText().isEmpty()
-                || textFieldEmail.getText().isEmpty() || textFieldPhone.getText().isEmpty())
+        try
         {
-            new Alert(Alert.AlertType.INFORMATION, "Fill all text fields", ButtonType.OK);
+            model.confirm(textFieldName.getText(), textFieldSurname.getText(), textFieldEmail.getText(), textFieldPhone.getText());
         }
-        else
+        catch (UserExistsException | MessagingException e)
         {
-            try
-            {
-                model.confirm(textFieldName.getText(), textFieldSurname.getText(), textFieldEmail.getText(), textFieldPhone.getText());
-            }
-            catch (UserExistsException | MessagingException e)
-            {
-                new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
-            }
+            new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK).showAndWait();
         }
     }
 

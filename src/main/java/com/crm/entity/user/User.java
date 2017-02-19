@@ -41,7 +41,6 @@ public class User {
     private String answer;
 
     public User() {
-        userType = UserType.EMPTY;
     }
 
     public User(String password, Employee employee, UserType userType) {

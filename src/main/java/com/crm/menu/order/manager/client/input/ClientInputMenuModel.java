@@ -65,6 +65,7 @@ public class ClientInputMenuModel
 
     public void back()
     {
+        OrderManagerMenuModel.getInstance().clearData();
         Main.getInstance().replaceSceneContent(new AuthorizationMenuController());
     }
 }

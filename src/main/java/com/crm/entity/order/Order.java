@@ -6,7 +6,7 @@ import com.crm.entity.good.Good;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by Prigovor on 14.02.2017.
@@ -39,7 +39,7 @@ public class Order {
     private OrderStatus orderStatus;
 
     @Transient
-    private Set<Good> goods;
+    private List<Good> goods;
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Courier courier;
@@ -50,7 +50,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Client client, Date registrationDate, Date deliveryTime, String address, OrderStatus orderStatus, Set<Good> goods, Double orderPrice) {
+    public Order(Client client, Date registrationDate, Date deliveryTime, String address, OrderStatus orderStatus, List<Good> goods, Double orderPrice) {
         this.client = client;
         this.registrationDate = registrationDate;
         this.deliveryTime = deliveryTime;
@@ -108,11 +108,11 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
-    public Set<Good> getGoods() {
+    public List<Good> getGoods() {
         return goods;
     }
 
-    public void setGoods(Set<Good> goods) {
+    public void setGoods(List<Good> goods) {
         this.goods = goods;
     }
 

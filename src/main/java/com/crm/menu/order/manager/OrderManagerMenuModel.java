@@ -3,7 +3,6 @@ package com.crm.menu.order.manager;
 import com.crm.entity.client.Client;
 import com.crm.entity.employee.Employee;
 import com.crm.entity.order.Order;
-import com.crm.main.MainModel;
 
 /**
  * Created by Bohdan on 15.02.2017.
@@ -41,5 +40,10 @@ public class OrderManagerMenuModel
         }
 
         return instance;
+    }
+
+    public void clearData()
+    {
+        instance = new OrderManagerMenuModel();
     }
 }

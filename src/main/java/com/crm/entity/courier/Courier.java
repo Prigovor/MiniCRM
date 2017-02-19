@@ -23,7 +23,7 @@ public class Courier {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "STATUS")
-    private Status status;
+    private CourierStatus courierStatus;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
@@ -32,10 +32,10 @@ public class Courier {
     public Courier() {
     }
 
-    public Courier(String name, String surname, Status status, Order order) {
+    public Courier(String name, String surname, CourierStatus courierStatus, Order order) {
         this.name = name;
         this.surname = surname;
-        this.status = status;
+        this.courierStatus = courierStatus;
         this.order = order;
     }
 
@@ -63,12 +63,12 @@ public class Courier {
         this.surname = surname;
     }
 
-    public Status getStatus() {
-        return status;
+    public CourierStatus getCourierStatus() {
+        return courierStatus;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setCourierStatus(CourierStatus courierStatus) {
+        this.courierStatus = courierStatus;
     }
 
     public Order getOrder() {

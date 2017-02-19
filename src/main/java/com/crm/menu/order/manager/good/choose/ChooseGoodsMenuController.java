@@ -4,6 +4,7 @@ import com.crm.entity.good.Good;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 /**
@@ -18,6 +19,8 @@ public class ChooseGoodsMenuController
     public ListView listViewStore;
     public ListView listViewChosen;
 
+    public Label labelOrderSum;
+
     private ChooseGoodsMenuModel model = ChooseGoodsMenuModel.getInstance();
 
     public ChooseGoodsMenuModel getModel()
@@ -30,6 +33,8 @@ public class ChooseGoodsMenuController
     {
         listViewStore.setItems(FXCollections.observableList(model.getListStoreGoods()));
         listViewChosen.setItems(FXCollections.observableList(model.getListChosenGoods()));
+
+        labelOrderSum.setText(String.valueOf(model.getOrderSum()));
 
         listViewStore.setOnMouseClicked(event ->
         {
@@ -96,6 +101,8 @@ public class ChooseGoodsMenuController
 
         listViewStore.setItems(FXCollections.observableList(model.getListStoreGoods()));
         listViewChosen.setItems(FXCollections.observableList(model.getListChosenGoods()));
+
+        labelOrderSum.setText(String.valueOf(model.getOrderSum()));
     }
 
     public void addGood()

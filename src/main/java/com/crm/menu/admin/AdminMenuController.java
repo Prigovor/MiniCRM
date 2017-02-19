@@ -49,14 +49,27 @@ public class AdminMenuController implements Controller
 
     public void showUserInfo()
     {
-        try
+        if (view.getUserListView().getSelectionModel().getSelectedItem() != null)
         {
-            model.validateUser();
-            view.getUserInfo().setUser(view.getUserListView().getSelectionModel().getSelectedItem());
+            try
+            {
+                model.validateUser();
+                view.getUserInfo().setUser(view.getUserListView().getSelectionModel().getSelectedItem());
+            }
+            catch (UserValidationException e)
+            {
+                view.getUserInfo().setDisable(true);
+                view.getUserInfo().cleanTextFields();
+
+                view.showInformationMessage(e.getMessage());
+            }
         }
-        catch (UserValidationException e)
+        else
         {
-            view.showInformationMessage(e.getMessage());
+            view.getUserInfo().setDisable(true);
+            view.getUserInfo().cleanTextFields();
+
+            view.showInformationMessage("Select user in left-side list");
         }
     }
 

@@ -5,5 +5,5 @@ package com.crm.entity.employee;
  */
 public enum Gender
 {
-    EMPTY, MALE, FEMALE
+    MALE, FEMALE
 }

@@ -34,8 +34,6 @@ public class Employee {
     private String email;
 
     public Employee() {
-        gender = Gender.EMPTY;
-        position = PositionType.EMPTY;
     }
 
     public Employee(String name, String surname, Integer age, Gender gender, PositionType position) {

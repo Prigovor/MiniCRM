@@ -58,6 +58,7 @@
 .table-view .column-header .label {
     -fx-font-size: 10pt;
     -fx-font-family: "Segoe UI Light";
+    -fx-background-color: inherit;
     -fx-text-fill: #bcc6cd;
     -fx-alignment: center;
     -fx-opacity: 1;
@@ -177,7 +178,7 @@
 }
 
 .choice-box {
-    -fx-border-color: #939ea5;
+    -fx-border-color: #545f66;
     -fx-border-width: 2;
     -fx-background-radius: 0;
     -fx-background-color: #2b2b2b;
@@ -186,6 +187,7 @@
 }
 
 .choice-box .label {
+    -fx-background-color: inherit;
     -fx-alignment: center;
     -fx-font-size: 11;
 }

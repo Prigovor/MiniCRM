@@ -5,6 +5,7 @@ import com.crm.entity.employee.PositionType;
 import com.crm.entity.user.User;
 import com.crm.entity.user.UserType;
 import com.crm.menu.node.factory.NodeFactory;
+import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
@@ -122,7 +123,7 @@ public class UserInfo extends GridPane
         pairAnswer.getSecondNode().setText(user.getAnswer());
         pairEmail.getSecondNode().setText(user.getEmail());
 
-        pairUserType.getSecondNode().setValue(UserType.EMPTY);
+        pairUserType.getSecondNode().setValue(user.getUserType());
 
         if (user.getEmployee() != null)
         {
@@ -130,11 +131,16 @@ public class UserInfo extends GridPane
             pairSurname.getSecondNode().setText(user.getEmployee().getSurname());
             pairAge.getSecondNode().setText(String.valueOf(user.getEmployee().getAge()));
 
-            pairGender.getSecondNode().setValue(Gender.EMPTY);
-            pairPosition.getSecondNode().setValue(PositionType.EMPTY);
+            pairGender.getSecondNode().setValue(user.getEmployee().getGender());
+            pairPosition.getSecondNode().setValue(user.getEmployee().getPosition());
         }
 
         this.user = user;
+
+        if (!isEditable)
+        {
+            setDisable(true);
+        }
     }
 
     public UserInfo(boolean isEditable)
@@ -209,7 +215,7 @@ public class UserInfo extends GridPane
 
         add(pairName, 0, 2);
         add(pairSurname, 1, 2);
-        add(pairAge, 2, 2);
+        add(pairAge, 2, 2, 2, 1);
         add(pairGender, 0, 3, 2, 1);
         add(pairPosition, 2, 3, 2, 1);
     }
@@ -225,13 +231,8 @@ public class UserInfo extends GridPane
             }
         });
 
-        pairPosition.getSecondNode().setValue(PositionType.EMPTY);
-        pairUserType.getSecondNode().setValue(UserType.EMPTY);
-        pairGender.getSecondNode().setValue(Gender.EMPTY);
-
-        if (!isEditable)
-        {
-            setDisable(true);
-        }
+        pairPosition.getSecondNode().setItems(FXCollections.observableList(Arrays.asList(PositionType.values())));
+        pairUserType.getSecondNode().setItems(FXCollections.observableList(Arrays.asList(UserType.values())));
+        pairGender.getSecondNode().setItems(FXCollections.observableList(Arrays.asList(Gender.values())));
     }
 }
