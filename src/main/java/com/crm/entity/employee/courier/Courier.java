@@ -1,5 +1,8 @@
-package com.crm.entity.courier;
+package com.crm.entity.employee.courier;
 
+import com.crm.entity.employee.Employee;
+import com.crm.entity.employee.Gender;
+import com.crm.entity.employee.PositionType;
 import com.crm.entity.order.Order;
 
 import javax.persistence.*;
@@ -7,19 +10,13 @@ import javax.persistence.*;
 /**
  * Created by Prigovor on 16.02.2017.
  */
-@Entity(name = "Courier")
-public class Courier {
-
+@Entity(name = "COURIERS")
+public class Courier extends Employee
+{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Long id;
-
-    @Column(name = "NAME")
-    private String name;
-
-    @Column(name = "SURNAME")
-    private String surname;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "STATUS")
@@ -29,53 +26,49 @@ public class Courier {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    public Courier() {
+    public Courier()
+    {
     }
 
-    public Courier(String name, String surname, CourierStatus courierStatus, Order order) {
-        this.name = name;
-        this.surname = surname;
+    public Courier(String name, String surname, Integer age, Gender gender, CourierStatus courierStatus, Order order)
+    {
+        setName(name);
+        setSurname(surname);
+        setAge(age);
+        setGender(gender);
+        setPosition(PositionType.COURIER);
+
         this.courierStatus = courierStatus;
         this.order = order;
     }
 
-    public Long getId() {
+    public Long getId()
+    {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Long id)
+    {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public CourierStatus getCourierStatus() {
+    public CourierStatus getCourierStatus()
+    {
         return courierStatus;
     }
 
-    public void setCourierStatus(CourierStatus courierStatus) {
+    public void setCourierStatus(CourierStatus courierStatus)
+    {
         this.courierStatus = courierStatus;
     }
 
-    public Order getOrder() {
+    public Order getOrder()
+    {
         return order;
     }
 
-    public void setOrder(Order order) {
+    public void setOrder(Order order)
+    {
         this.order = order;
     }
 

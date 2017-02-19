@@ -1,9 +1,9 @@
-package com.crm.menu.account.change;
+package com.crm.menu.admin.account.change;
 
 import com.crm.entity.user.User;
 import com.crm.main.Main;
 import com.crm.menu.Controller;
-import com.crm.menu.account.create.CreateAccountException;
+import com.crm.menu.admin.account.create.CreateAccountException;
 import com.crm.menu.admin.AdminMenuController;
 import com.crm.service.UserValidationException;
 

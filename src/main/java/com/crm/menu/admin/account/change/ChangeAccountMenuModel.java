@@ -1,4 +1,4 @@
-package com.crm.menu.account.change;
+package com.crm.menu.admin.account.change;
 
 import com.crm.dao.employee.EmployeeDAO;
 import com.crm.dao.employee.EmployeeDAOImpl;
@@ -9,7 +9,7 @@ import com.crm.entity.user.User;
 import com.crm.main.Main;
 import com.crm.main.MainModel;
 import com.crm.managers.PasswordManager;
-import com.crm.menu.account.create.CreateAccountException;
+import com.crm.menu.admin.account.create.CreateAccountException;
 import com.crm.menu.admin.AdminMenuController;
 import com.crm.service.UserValidationException;
 import com.crm.service.user.UserService;

@@ -1,6 +1,6 @@
 package com.crm.dao.courier;
 
-import com.crm.entity.courier.Courier;
+import com.crm.entity.employee.courier.Courier;
 
 import java.util.List;
 

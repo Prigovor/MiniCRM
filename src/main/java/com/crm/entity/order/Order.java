@@ -1,7 +1,7 @@
 package com.crm.entity.order;
 
 import com.crm.entity.client.Client;
-import com.crm.entity.courier.Courier;
+import com.crm.entity.employee.courier.Courier;
 import com.crm.entity.good.Good;
 
 import javax.persistence.*;

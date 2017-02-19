@@ -2,7 +2,7 @@ package com.crm.service.courier;
 
 import com.crm.dao.courier.CourierDAO;
 import com.crm.dao.courier.CourierDAOImpl;
-import com.crm.entity.courier.Courier;
+import com.crm.entity.employee.courier.Courier;
 
 import java.util.List;
 

@@ -1,15 +1,18 @@
-package com.crm.menu.account.create;
+package com.crm.menu.admin.account.create;
 
+import com.crm.dao.FactoryDAO;
 import com.crm.dao.employee.EmployeeDAO;
 import com.crm.dao.employee.EmployeeDAOImpl;
 import com.crm.dao.user.UserDAO;
 import com.crm.dao.user.UserDAOImpl;
 import com.crm.entity.employee.Employee;
+import com.crm.entity.employee.courier.Courier;
+import com.crm.entity.employee.courier.CourierStatus;
 import com.crm.entity.user.User;
+import com.crm.main.Main;
 import com.crm.managers.PasswordManager;
 import com.crm.menu.admin.AdminMenuController;
 import com.crm.service.UserValidationException;
-import com.crm.main.Main;
 import com.crm.service.user.UserService;
 import com.crm.service.user.UserServiceImpl;
 
@@ -52,10 +55,28 @@ public class CreateAccountMenuModel
 
             if (!employee.getName().isEmpty() && !employee.getSurname().isEmpty())
             {
-                employeeDAO.createEmployee(employee);
-                user.setEmployee(employee);
-                userService.createUser(user);
+                switch (employee.getPosition())
+                {
+                    case COURIER:
+                    {
+                        Courier courier = new Courier(employee.getName(), employee.getSurname(),
+                                employee.getAge(), employee.getGender(), CourierStatus.FREE, null);
 
+                        FactoryDAO.getCourierDAO().createCourier(courier);
+                        user.setEmployee(courier);
+
+                        break;
+                    }
+                    default:
+                    {
+                        employeeDAO.createEmployee(employee);
+                        user.setEmployee(employee);
+
+                        break;
+                    }
+                }
+
+                userService.createUser(user);
                 Main.getInstance().replaceSceneContent(new AdminMenuController());
             }
             else

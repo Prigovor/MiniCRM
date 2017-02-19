@@ -47,11 +47,7 @@
     -fx-size: 35;
     -fx-border-width: 0 0 1 0;
     -fx-background-color: transparent;
-    -fx-border-color:
-            transparent
-            transparent
-            derive(-fx-base, 80%)
-            transparent;
+    -fx-border-color: transparent transparent derive(-fx-base, 80%) transparent;
     -fx-border-insets: 0 10 1 0;
 }
 
@@ -87,11 +83,7 @@
     -fx-size: 35;
     -fx-border-width: 0 0 1 0;
     -fx-background-color: transparent;
-    -fx-border-color:
-            transparent
-            transparent
-            derive(-fx-base, 80%)
-            transparent;
+    -fx-border-color: transparent transparent derive(-fx-base, 80%) transparent;
     -fx-border-insets: 0 10 1 0;
 }
 
@@ -113,9 +105,8 @@
     -fx-background-color: -fx-focus-color;
 }
 
-
 .context-menu {
-    -fx-background-color: derive(#313335,50%);
+    -fx-background-color: derive(#313335, 50%);
 }
 
 .menu-bar .label {
@@ -174,7 +165,7 @@
 }
 
 .button:default:hover {
-    -fx-background-color: derive(-fx-focus-color,30%);
+    -fx-background-color: derive(-fx-focus-color, 30%);
 }
 
 .choice-box {
@@ -190,4 +181,11 @@
     -fx-background-color: inherit;
     -fx-alignment: center;
     -fx-font-size: 11;
+}
+
+.choice-box:focused {
+    -fx-border-color: #da8b7d;
+    -fx-border-width: 3, 3;
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
 }

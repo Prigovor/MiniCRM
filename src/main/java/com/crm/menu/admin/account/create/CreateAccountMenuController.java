@@ -1,4 +1,4 @@
-package com.crm.menu.account.create;
+package com.crm.menu.admin.account.create;
 
 import com.crm.main.Main;
 import com.crm.menu.Controller;
