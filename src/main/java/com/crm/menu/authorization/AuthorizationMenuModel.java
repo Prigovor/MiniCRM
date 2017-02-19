@@ -2,10 +2,8 @@ package com.crm.menu.authorization;
 
 import com.crm.dao.user.UserDAO;
 import com.crm.dao.user.UserDAOImpl;
-import com.crm.entity.employee.Employee;
 import com.crm.entity.user.User;
 import com.crm.main.MainModel;
-import com.crm.managers.DatabaseManager;
 import com.crm.managers.EmailManager;
 import com.crm.service.UserValidationException;
 import javafx.scene.control.TextInputDialog;
@@ -24,12 +22,6 @@ public class AuthorizationMenuModel
 
     public AuthorizationMenuModel()
     {
-        Thread thread = new Thread(() ->
-        {
-            DatabaseManager.getInstance().configure("hibernate.cfg.xml", User.class, Employee.class);
-        });
-        thread.setDaemon(true);
-        thread.start();
     }
 
     public boolean authorize(String login, String password) throws IOException

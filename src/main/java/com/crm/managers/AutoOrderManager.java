@@ -26,7 +26,7 @@ public class AutoOrderManager
                     .orderDelivery(courierService.getEntryByField("status", CourierStatus.FREE), order);
 
             EmailManager.getInstance()
-                    .sendMessage(order.getClient().getEmail(), "Order", "Order in delivery process");
+                    .sendMessage(order.getClient().getEmail(), "Order", "Order is delivering");
         }
         else
         {

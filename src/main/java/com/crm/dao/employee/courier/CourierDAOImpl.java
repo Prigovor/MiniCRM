@@ -1,4 +1,4 @@
-package com.crm.dao.courier;
+package com.crm.dao.employee.courier;
 
 import com.crm.entity.employee.courier.Courier;
 import com.crm.managers.DatabaseManager;

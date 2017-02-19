@@ -16,7 +16,6 @@ import javax.mail.MessagingException;
  */
 public class CourierManager
 {
-
     private static CourierManager instance;
 
     public static CourierManager getInstance()
@@ -45,7 +44,7 @@ public class CourierManager
             order.setOrderStatus(OrderStatus.DELIVERY_PROCESS);
             orderService.updateOrder(order);
 
-            EmailManager.getInstance().sendMessage(order.getClient().getEmail(), "123", "Your order number: " + order.getId());
+            EmailManager.getInstance().sendMessage(order.getClient().getEmail(), "Order delivery", "Your order number: " + order.getId());
         }
     }
     /**

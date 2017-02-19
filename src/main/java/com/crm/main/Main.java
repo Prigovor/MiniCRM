@@ -1,11 +1,17 @@
 package com.crm.main;
 
+import com.crm.dao.FactoryDAO;
+import com.crm.entity.employee.Employee;
+import com.crm.entity.employee.courier.Courier;
+import com.crm.entity.user.User;
+import com.crm.managers.DatabaseManager;
 import com.crm.menu.Controller;
 import com.crm.menu.authorization.AuthorizationMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.io.IOException;
 
@@ -92,6 +98,20 @@ public class Main extends Application
 
     public static void main(String[] args)
     {
+        Thread thread = new Thread(() ->
+        {
+            DatabaseManager.getInstance().configure("hibernate.cfg.xml", User.class, Employee.class);
+
+            GenericXmlApplicationContext context = new GenericXmlApplicationContext("/spring-config/spring-config.xml");
+
+            FactoryDAO.getUserDAO().createUser(context.getBean("userRoot", User.class));
+            FactoryDAO.getEmployeeDAO().createEmployee(context.getBean("employeeAlan", Employee.class));
+            FactoryDAO.getUserDAO().createUser(context.getBean("userManagerAlan", User.class));
+            FactoryDAO.getCourierDAO().createCourier(context.getBean("courierJane", Courier.class));
+        });
+        thread.setDaemon(true);
+        thread.start();
+
         launch(args);
     }
 }

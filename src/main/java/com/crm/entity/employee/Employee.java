@@ -28,6 +28,7 @@ public class Employee {
     @Column(name = "GENDER")
     private Gender gender;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "POSITION")
     private PositionType position;
 

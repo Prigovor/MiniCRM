@@ -10,7 +10,7 @@ import javax.persistence.*;
 /**
  * Created by Prigovor on 16.02.2017.
  */
-@Entity(name = "COURIERS")
+@Entity
 public class Courier extends Employee
 {
     @Id
@@ -26,12 +26,11 @@ public class Courier extends Employee
     @JoinColumn(name = "order_id")
     private Order order;
 
-    public Courier()
-    {
+    public Courier() {
+        setPosition(PositionType.COURIER);
     }
 
-    public Courier(String name, String surname, Integer age, Gender gender, CourierStatus courierStatus, Order order)
-    {
+    public Courier(String name, String surname, Integer age, Gender gender, CourierStatus courierStatus, Order order) {
         setName(name);
         setSurname(surname);
         setAge(age);
@@ -42,33 +41,27 @@ public class Courier extends Employee
         this.order = order;
     }
 
-    public Long getId()
-    {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id)
-    {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public CourierStatus getCourierStatus()
-    {
+    public CourierStatus getCourierStatus() {
         return courierStatus;
     }
 
-    public void setCourierStatus(CourierStatus courierStatus)
-    {
+    public void setCourierStatus(CourierStatus courierStatus) {
         this.courierStatus = courierStatus;
     }
 
-    public Order getOrder()
-    {
+    public Order getOrder() {
         return order;
     }
 
-    public void setOrder(Order order)
-    {
+    public void setOrder(Order order) {
         this.order = order;
     }
 

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.crm.entity.user.User" id="userRoot">
+        <property name="login" value="root"/>
+        <property name="password" value="root"/>
+        <property name="question" value="What is your name?"/>
+        <property name="answer" value="root"/>
+        <property name="userType" value="ADMINISTRATOR"/>
+        <property name="email" value="imrahill120@gmail.com"/>
+    </bean>
+
+    <bean class="com.crm.entity.user.User" id="userManagerAlan">
+        <property name="login" value="alan"/>
+        <property name="password" value="alan"/>
+        <property name="userType" value="EMPLOYEE"/>
+        <property name="employee" ref="employeeAlan"/>
+    </bean>
+
+    <bean class="com.crm.entity.employee.Employee" id="employeeAlan">
+        <property name="name" value="Alan"/>
+        <property name="surname" value="McJoys"/>
+        <property name="age" value="24"/>
+        <property name="gender" value="MALE"/>
+        <property name="position" value="MANAGER"/>
+    </bean>
+
+    <bean class="com.crm.entity.employee.courier.Courier" id="courierJane">
+        <property name="name" value="Jane"/>
+        <property name="surname" value="Lawsy"/>
+        <property name="age" value="19"/>
+        <property name="gender" value="FEMALE"/>
+        <property name="position" value="COURIER"/>
+
+        <property name="courierStatus" value="FREE"/>
+    </bean>
+</beans>

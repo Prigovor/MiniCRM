@@ -27,7 +27,8 @@ public final class DatabaseManager
         {
             instance = new DatabaseManager();
 
-            DatabaseManager.getInstance().configure("hibernate.cfg.xml", User.class, Employee.class, Client.class, Good.class, Order.class, Courier.class);
+            DatabaseManager.getInstance().configure("hibernate.cfg.xml",
+                    User.class, Employee.class, Client.class, Good.class, Order.class, Courier.class);
         }
         return instance;
     }
@@ -71,6 +72,7 @@ public final class DatabaseManager
             catch (HibernateException e)
             {
                 session.getTransaction().rollback();
+                e.printStackTrace();
             }
         }
 

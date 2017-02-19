@@ -2,8 +2,8 @@ package com.crm.dao;
 
 import com.crm.dao.client.ClientDAO;
 import com.crm.dao.client.ClientDAOImpl;
-import com.crm.dao.courier.CourierDAO;
-import com.crm.dao.courier.CourierDAOImpl;
+import com.crm.dao.employee.courier.CourierDAO;
+import com.crm.dao.employee.courier.CourierDAOImpl;
 import com.crm.dao.employee.EmployeeDAO;
 import com.crm.dao.employee.EmployeeDAOImpl;
 import com.crm.dao.good.GoodDAO;
