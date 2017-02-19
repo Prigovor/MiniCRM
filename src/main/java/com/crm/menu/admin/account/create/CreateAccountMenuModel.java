@@ -6,8 +6,8 @@ import com.crm.dao.employee.EmployeeDAOImpl;
 import com.crm.dao.user.UserDAO;
 import com.crm.dao.user.UserDAOImpl;
 import com.crm.entity.employee.Employee;
-import com.crm.entity.employee.courier.Courier;
-import com.crm.entity.employee.courier.CourierStatus;
+import com.crm.entity.courier.Courier;
+import com.crm.entity.courier.CourierStatus;
 import com.crm.entity.user.User;
 import com.crm.main.Main;
 import com.crm.managers.PasswordManager;
@@ -60,7 +60,7 @@ public class CreateAccountMenuModel
                     case COURIER:
                     {
                         Courier courier = new Courier(employee.getName(), employee.getSurname(),
-                                employee.getAge(), employee.getGender(), CourierStatus.FREE, null);
+                                employee.getAge(), employee.getGender(), CourierStatus.FREE);
 
                         FactoryDAO.getCourierDAO().createCourier(courier);
                         user.setEmployee(courier);

@@ -1,9 +1,8 @@
-package com.crm.entity.employee.courier;
+package com.crm.entity.courier;
 
 import com.crm.entity.employee.Employee;
 import com.crm.entity.employee.Gender;
 import com.crm.entity.employee.PositionType;
-import com.crm.entity.order.Order;
 
 import javax.persistence.*;
 
@@ -11,42 +10,27 @@ import javax.persistence.*;
  * Created by Prigovor on 16.02.2017.
  */
 @Entity
+@Table(name = "COURIER")
 public class Courier extends Employee
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
-    private Long id;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "STATUS")
     private CourierStatus courierStatus;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
-    private Order order;
-
     public Courier() {
         setPosition(PositionType.COURIER);
+        setCourierStatus(CourierStatus.FREE);
     }
 
-    public Courier(String name, String surname, Integer age, Gender gender, CourierStatus courierStatus, Order order) {
+    public Courier(String name, String surname, Integer age, Gender gender, CourierStatus courierStatus) {
         setName(name);
         setSurname(surname);
         setAge(age);
         setGender(gender);
         setPosition(PositionType.COURIER);
+        setCourierStatus(CourierStatus.FREE);
 
         this.courierStatus = courierStatus;
-        this.order = order;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public CourierStatus getCourierStatus() {
@@ -57,12 +41,10 @@ public class Courier extends Employee
         this.courierStatus = courierStatus;
     }
 
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
+    @Override
+    public String toString()
+    {
+        return getName() + " " + getSurname();
     }
 
     /**

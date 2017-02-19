@@ -1,8 +1,8 @@
 package com.crm.main;
 
 import com.crm.dao.FactoryDAO;
-import com.crm.entity.employee.Employee;
-import com.crm.entity.employee.courier.Courier;
+import com.crm.entity.courier.Courier;
+import com.crm.entity.good.Good;
 import com.crm.entity.user.User;
 import com.crm.managers.DatabaseManager;
 import com.crm.menu.Controller;
@@ -100,14 +100,18 @@ public class Main extends Application
     {
         Thread thread = new Thread(() ->
         {
-            DatabaseManager.getInstance().configure("hibernate.cfg.xml", User.class, Employee.class);
+            DatabaseManager.getInstance();
 
             GenericXmlApplicationContext context = new GenericXmlApplicationContext("/spring-config/spring-config.xml");
 
             FactoryDAO.getUserDAO().createUser(context.getBean("userRoot", User.class));
-            FactoryDAO.getEmployeeDAO().createEmployee(context.getBean("employeeAlan", Employee.class));
             FactoryDAO.getUserDAO().createUser(context.getBean("userManagerAlan", User.class));
+
             FactoryDAO.getCourierDAO().createCourier(context.getBean("courierJane", Courier.class));
+
+            FactoryDAO.getGoodDAO().createGood(context.getBean("goodLaptopHP", Good.class));
+            FactoryDAO.getGoodDAO().createGood(context.getBean("goodLaptopAcer", Good.class));
+            FactoryDAO.getGoodDAO().createGood(context.getBean("goodLaptopAsus", Good.class));
         });
         thread.setDaemon(true);
         thread.start();

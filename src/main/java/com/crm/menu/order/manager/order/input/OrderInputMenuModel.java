@@ -1,6 +1,6 @@
 package com.crm.menu.order.manager.order.input;
 
-import com.crm.entity.employee.courier.Courier;
+import com.crm.entity.courier.Courier;
 import com.crm.main.Main;
 import com.crm.managers.CourierManager;
 import com.crm.menu.order.manager.OrderManagerMenuModel;

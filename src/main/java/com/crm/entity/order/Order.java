@@ -1,7 +1,7 @@
 package com.crm.entity.order;
 
 import com.crm.entity.client.Client;
-import com.crm.entity.employee.courier.Courier;
+import com.crm.entity.courier.Courier;
 import com.crm.entity.good.Good;
 
 import javax.persistence.*;
@@ -38,11 +38,12 @@ public class Order {
     @Column(name = "ORDER_STATUS")
     private OrderStatus orderStatus;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "COURIER_ID", referencedColumnName = "ID")
+    private Courier courier;
+
     @Transient
     private List<Good> goods;
-
-    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Courier courier;
 
     @Column(name = "ORDER_PRICE")
     private Double orderPrice;

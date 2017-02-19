@@ -57,12 +57,14 @@ public class ChooseGoodsMenuModel
 
     private ChooseGoodsMenuModel()
     {
-        for (int i = 0; i < 10; i++)
+        listStoreGoods.addAll(goodService.findAll());
+
+        /*for (int i = 0; i < 10; i++)
         {
             Good good = new Good("Good" + i, 10, 890D);
             good.setDescription("DESC of " + good.getNomination());
             listStoreGoods.add(good);
-        }
+        }*/
     }
 
     public void showGoodInfo(Good good)

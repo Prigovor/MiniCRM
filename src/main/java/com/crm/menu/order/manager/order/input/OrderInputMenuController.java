@@ -1,7 +1,7 @@
 package com.crm.menu.order.manager.order.input;
 
 import com.crm.dao.FactoryDAO;
-import com.crm.entity.employee.courier.CourierStatus;
+import com.crm.entity.courier.CourierStatus;
 import com.crm.menu.order.manager.OrderManagerMenuModel;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
