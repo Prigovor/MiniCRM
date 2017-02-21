@@ -1,7 +1,7 @@
 package com.crm.menu.admin.account.create;
 
 import com.crm.menu.View;
-import com.crm.menu.node.custom.UserInfo;
+import com.crm.menu.node.custom.AccountInfo;
 import com.crm.menu.node.factory.NodeFactory;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -17,7 +17,7 @@ public class CreateAccountMenuView implements View
 {
     private GridPane gridPane = new GridPane();
 
-    private UserInfo userInfo = new UserInfo(true);
+    private AccountInfo accountInfo = new AccountInfo(true);
 
     private Button buttonCreate;
     private Button buttonGeneratePassword = new Button();
@@ -25,9 +25,9 @@ public class CreateAccountMenuView implements View
 
     private CreateAccountMenuController controller;
 
-    public UserInfo getUserInfo()
+    public AccountInfo getAccountInfo()
     {
-        return userInfo;
+        return accountInfo;
     }
 
     public CreateAccountMenuView(CreateAccountMenuController controller)
@@ -45,12 +45,12 @@ public class CreateAccountMenuView implements View
     @Override
     public void init()
     {
-        buttonCreate = NodeFactory.getButton("Create", Double.MAX_VALUE, userInfo.getPairPosition().getMaxHeight());
+        buttonCreate = NodeFactory.getButton("Create", Double.MAX_VALUE, accountInfo.getPairPosition().getMaxHeight());
         buttonCancel = NodeFactory.getButton("Cancel", Double.MAX_VALUE, buttonCreate.getMaxHeight());
         buttonGeneratePassword = NodeFactory.getButton("Generate password", Double.MAX_VALUE, buttonCancel.getMaxHeight());
 
         GridPane gridPaneButtons = NodeFactory.getGridPane(2, 2);
-        gridPaneButtons.setMaxWidth(userInfo.getMaxWidth());
+        gridPaneButtons.setMaxWidth(accountInfo.getMaxWidth());
         gridPaneButtons.add(buttonGeneratePassword, 0, 0, 2, 1);
         gridPaneButtons.add(buttonCreate, 0, 1);
         gridPaneButtons.add(buttonCancel, 1, 1);
@@ -59,7 +59,7 @@ public class CreateAccountMenuView implements View
         gridPane.setHgap(INSETS);
         gridPane.setVgap(INSETS);
 
-        gridPane.add(userInfo, 0, 0);
+        gridPane.add(accountInfo, 0, 0);
         gridPane.add(gridPaneButtons, 0, 1);
 
         buttonCreate.setOnAction(event ->

@@ -5,7 +5,7 @@ import com.crm.entity.courier.Courier;
 import com.crm.entity.employee.Employee;
 import com.crm.entity.good.Good;
 import com.crm.entity.order.Order;
-import com.crm.entity.user.User;
+import com.crm.entity.account.Account;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -29,7 +29,7 @@ public final class DatabaseManager
     private DatabaseManager()
     {
         configure("hibernate.cfg.xml", Employee.class,
-                User.class, Courier.class, Good.class, Order.class, Client.class);
+                Account.class, Courier.class, Good.class, Order.class, Client.class);
     }
 
     private SessionFactory sessionFactory;

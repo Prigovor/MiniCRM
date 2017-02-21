@@ -4,19 +4,19 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql://localhost:3306/mini_crm_database</property>
+        <property name="connection.url">jdbc:mysql://crm-test-database.cj1c02tq6cdz.eu-central-1.rds.amazonaws.com:3306/crm_test_database</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 
-        <property name="connection.username">root</property>
-        <property name="connection.password">8953900</property>
+        <property name="connection.username">rustle</property>
+        <property name="connection.password">Vulture011</property>
 
-        <property name="connection.pool_size">4</property>
+        <property name="connection.pool_size">6</property>
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 
         <property name="show_sql">true</property>
 
         <property name="current_session_context_class">thread</property>
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
     </session-factory>
 </hibernate-configuration>

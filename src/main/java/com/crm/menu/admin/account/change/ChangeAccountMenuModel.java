@@ -2,18 +2,18 @@ package com.crm.menu.admin.account.change;
 
 import com.crm.dao.employee.EmployeeDAO;
 import com.crm.dao.employee.EmployeeDAOImpl;
-import com.crm.dao.user.UserDAO;
-import com.crm.dao.user.UserDAOImpl;
+import com.crm.dao.account.AccountDAO;
+import com.crm.dao.account.AccountDAOImpl;
 import com.crm.entity.employee.Employee;
-import com.crm.entity.user.User;
+import com.crm.entity.account.Account;
 import com.crm.main.Main;
 import com.crm.main.MainModel;
 import com.crm.managers.PasswordManager;
 import com.crm.menu.admin.account.create.CreateAccountException;
 import com.crm.menu.admin.AdminMenuController;
 import com.crm.service.UserValidationException;
-import com.crm.service.user.UserService;
-import com.crm.service.user.UserServiceImpl;
+import com.crm.service.user.AccountService;
+import com.crm.service.user.AccountServiceImpl;
 
 import java.io.IOException;
 
@@ -22,24 +22,24 @@ import java.io.IOException;
  */
 public class ChangeAccountMenuModel
 {
-    private User user;
+    private Account account;
     private Employee employee = new Employee();
 
-    private UserDAO userDAO = new UserDAOImpl();
+    private AccountDAO accountDAO = new AccountDAOImpl();
     private EmployeeDAO employeeDAO = new EmployeeDAOImpl();
 
-    private UserService userService = new UserServiceImpl();
+    private AccountService accountService = new AccountServiceImpl();
 
-    public User getUser()
+    public Account getAccount()
     {
-        return user;
+        return account;
     }
 
-    public void setUser(User user)
+    public void setAccount(Account account)
     {
-        this.user = user;
-        if (user.getEmployee() != null) {
-            employee = user.getEmployee();
+        this.account = account;
+        if (account.getEmployee() != null) {
+            employee = account.getEmployee();
         }
     }
 
@@ -53,12 +53,12 @@ public class ChangeAccountMenuModel
         if (!employee.getName().isEmpty() && !employee.getSurname().isEmpty())
         {
             employeeDAO.updateEmployee(employee);
-            user.setEmployee(employee);
-            userService.updateUser(user);
+            account.setEmployee(employee);
+            accountService.updateUser(account);
 
-            if (MainModel.getInstance().getCurrentUser().getId().equals(user.getId()))
+            if (MainModel.getInstance().getCurrentAccount().getId().equals(account.getId()))
             {
-                MainModel.getInstance().setCurrentUser(user);
+                MainModel.getInstance().setCurrentAccount(account);
             }
             Main.getInstance().replaceSceneContent(new AdminMenuController());
         }
@@ -70,13 +70,13 @@ public class ChangeAccountMenuModel
 
     public void checkAccountSameLoginPassword() throws CreateAccountException
     {
-        if (!user.getLogin().isEmpty() && !user.getPassword().isEmpty())
+        if (!account.getLogin().isEmpty() && !account.getPassword().isEmpty())
         {
-            for (User userEntry : userDAO.findAll())
+            for (Account accountEntry : accountDAO.findAll())
             {
-                if (userEntry.getLogin().equals(user.getLogin()) || userEntry.getPassword().equals(user.getPassword()))
+                if (accountEntry.getLogin().equals(account.getLogin()) || accountEntry.getPassword().equals(account.getPassword()))
                 {
-                    throw new CreateAccountException("User with such login or password already exists");
+                    throw new CreateAccountException("Account with such login or password already exists");
                 }
             }
         }
@@ -86,9 +86,9 @@ public class ChangeAccountMenuModel
     {
         String password = PasswordManager.getInstance().generatePassword(length);
 
-        for (User userEntry : userDAO.findAll())
+        for (Account accountEntry : accountDAO.findAll())
         {
-            if (password.equals(userEntry.getPassword()))
+            if (password.equals(accountEntry.getPassword()))
             {
                 password = PasswordManager.getInstance().generatePassword(length);
             }

@@ -1,7 +1,7 @@
 package com.crm.menu.admin.account.change;
 
 import com.crm.menu.View;
-import com.crm.menu.node.custom.UserInfo;
+import com.crm.menu.node.custom.AccountInfo;
 import com.crm.menu.node.factory.NodeFactory;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -21,7 +21,7 @@ public class ChangeAccountMenuView implements View
     private Button buttonGeneratePassword = new Button();
     private Button buttonCancel = new Button();
 
-    private UserInfo userInfo;
+    private AccountInfo accountInfo;
 
     private ChangeAccountMenuController controller;
     private ChangeAccountMenuModel model;
@@ -31,7 +31,7 @@ public class ChangeAccountMenuView implements View
         this.controller = controller;
         model = controller.getModel();
 
-        userInfo = new UserInfo(model.getUser(), true);
+        accountInfo = new AccountInfo(model.getAccount(), true);
 
         init();
     }
@@ -42,20 +42,20 @@ public class ChangeAccountMenuView implements View
         return gridPane;
     }
 
-    public UserInfo getUserInfo()
+    public AccountInfo getAccountInfo()
     {
-        return userInfo;
+        return accountInfo;
     }
 
     @Override
     public void init()
     {
-        buttonChange = NodeFactory.getButton("Create", Double.MAX_VALUE, userInfo.getPairPosition().getMaxHeight());
+        buttonChange = NodeFactory.getButton("Change", Double.MAX_VALUE, accountInfo.getPairPosition().getMaxHeight());
         buttonCancel = NodeFactory.getButton("Cancel", Double.MAX_VALUE, buttonChange.getMaxHeight());
         buttonGeneratePassword = NodeFactory.getButton("Generate password", Double.MAX_VALUE, buttonCancel.getMaxHeight());
 
         GridPane gridPaneButtons = NodeFactory.getGridPane(2, 2);
-        gridPaneButtons.setMaxWidth(userInfo.getMaxWidth());
+        gridPaneButtons.setMaxWidth(accountInfo.getMaxWidth());
         gridPaneButtons.add(buttonGeneratePassword, 0, 0, 2, 1);
         gridPaneButtons.add(buttonChange, 0, 1);
         gridPaneButtons.add(buttonCancel, 1, 1);
@@ -64,7 +64,7 @@ public class ChangeAccountMenuView implements View
         gridPane.setHgap(INSETS);
         gridPane.setVgap(INSETS);
 
-        gridPane.add(userInfo, 0, 0);
+        gridPane.add(accountInfo, 0, 0);
         gridPane.add(gridPaneButtons, 0, 1);
 
         buttonGeneratePassword.setOnAction(event ->

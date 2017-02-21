@@ -1,7 +1,7 @@
 package com.crm.menu.admin;
 
 import com.crm.entity.employee.Employee;
-import com.crm.entity.user.User;
+import com.crm.entity.account.Account;
 import com.crm.main.Main;
 import com.crm.managers.JsonFileManager;
 import com.crm.menu.Controller;
@@ -54,22 +54,22 @@ public class AdminMenuController implements Controller
             try
             {
                 model.validateUser();
-                view.getUserInfo().setUser(view.getUserListView().getSelectionModel().getSelectedItem());
+                view.getAccountInfo().setAccount(view.getUserListView().getSelectionModel().getSelectedItem());
             }
             catch (UserValidationException e)
             {
-                view.getUserInfo().setDisable(true);
-                view.getUserInfo().cleanTextFields();
+                view.getAccountInfo().setDisable(true);
+                view.getAccountInfo().cleanTextFields();
 
                 view.showInformationMessage(e.getMessage());
             }
         }
         else
         {
-            view.getUserInfo().setDisable(true);
-            view.getUserInfo().cleanTextFields();
+            view.getAccountInfo().setDisable(true);
+            view.getAccountInfo().cleanTextFields();
 
-            view.showInformationMessage("Select user in left-side list");
+            view.showInformationMessage("Select account in left-side list");
         }
     }
 
@@ -81,7 +81,7 @@ public class AdminMenuController implements Controller
 
             view.getTableView().getColumns().clear();
 
-            for (Field field : User.class.getDeclaredFields())
+            for (Field field : Account.class.getDeclaredFields())
             {
                 TableColumn tableColumn = new TableColumn(field.getName());
                 view.getTableView().getColumns().add(tableColumn);
@@ -130,12 +130,12 @@ public class AdminMenuController implements Controller
 
     public void changeUser()
     {
-        if (model.getSelectedUser() != null)
+        if (model.getSelectedAccount() != null)
         {
             try
             {
                 model.validateUser();
-                Main.getInstance().replaceSceneContent(new ChangeAccountMenuController(model.getSelectedUser()));
+                Main.getInstance().replaceSceneContent(new ChangeAccountMenuController(model.getSelectedAccount()));
             }
             catch (UserValidationException e)
             {
@@ -144,17 +144,17 @@ public class AdminMenuController implements Controller
         }
         else
         {
-            view.showInformationMessage("Select user in left-side list");
+            view.showInformationMessage("Select account in left-side list");
         }
     }
 
     public void deleteUser()
     {
-        if (model.getSelectedUser() != null)
+        if (model.getSelectedAccount() != null)
         {
             try
             {
-                model.deleteUser(model.getSelectedUser());
+                model.deleteUser(model.getSelectedAccount());
                 showListUsers();
             }
             catch (UserValidationException e)
@@ -164,7 +164,7 @@ public class AdminMenuController implements Controller
         }
         else
         {
-            view.showInformationMessage("Select user in left-side list");
+            view.showInformationMessage("Select account in left-side list");
         }
     }
 

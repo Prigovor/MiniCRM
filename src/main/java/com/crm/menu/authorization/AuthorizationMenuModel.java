@@ -1,11 +1,11 @@
 package com.crm.menu.authorization;
 
 import com.crm.dao.FactoryDAO;
-import com.crm.dao.user.UserDAO;
-import com.crm.dao.user.UserDAOImpl;
+import com.crm.dao.account.AccountDAO;
+import com.crm.entity.account.LockType;
 import com.crm.entity.courier.Courier;
 import com.crm.entity.good.Good;
-import com.crm.entity.user.User;
+import com.crm.entity.account.Account;
 import com.crm.main.MainModel;
 import com.crm.managers.EmailManager;
 import com.crm.service.UserValidationException;
@@ -22,7 +22,10 @@ import java.util.Optional;
  */
 public class AuthorizationMenuModel
 {
-    private UserDAO userDAO = new UserDAOImpl();
+    private AccountDAO accountDAO = FactoryDAO.getAccountDAO();
+
+    private Integer logInAttempts = 0;
+    private static final int MAX_LOG_IN_ATTEMPTS = 3;
 
     public AuthorizationMenuModel()
     {
@@ -30,8 +33,8 @@ public class AuthorizationMenuModel
         {
             GenericXmlApplicationContext context = new GenericXmlApplicationContext("/spring-config/spring-config.xml");
 
-            FactoryDAO.getUserDAO().createUser(context.getBean("userRoot", User.class));
-            FactoryDAO.getUserDAO().createUser(context.getBean("userManagerAlan", User.class));
+            FactoryDAO.getAccountDAO().createAccount(context.getBean("accountAdmin", Account.class));
+            FactoryDAO.getAccountDAO().createAccount(context.getBean("accountManagerAlan", Account.class));
 
             FactoryDAO.getCourierDAO().createCourier(context.getBean("courierJane", Courier.class));
 
@@ -44,17 +47,39 @@ public class AuthorizationMenuModel
         thread.start();
     }
 
-    public boolean authorize(String login, String password) throws IOException
+    public AuthorizationResult authorize(String login, String password) throws IOException
     {
-        for (User user : userDAO.findAll())
+        Account account = accountDAO.getAccountByField("login", login);
+
+        if (account != null)
         {
-            if (user.getLogin().equals(login) && user.getPassword().equals(password))
+            if (account.getLockType().equals(LockType.UNLOCKED))
             {
-                MainModel.getInstance().setCurrentUser(user);
-                return true;
+                if (logInAttempts < MAX_LOG_IN_ATTEMPTS)
+                {
+                    if (account.getPassword().equals(password))
+                    {
+                        MainModel.getInstance().setCurrentAccount(account);
+                        return AuthorizationResult.SUCCESSFUL;
+                    }
+                    else
+                    {
+                        logInAttempts++;
+                    }
+                }
+                else
+                {
+                    account.setLockType(LockType.LOCKED);
+                    accountDAO.updateAccount(account);
+                }
+            }
+            else
+            {
+                return AuthorizationResult.LOCKED;
             }
         }
-        return false;
+
+        return AuthorizationResult.INCORRECT_LOGIN_PASSWORD;
     }
 
     public void remindPassword() throws MessagingException, UserValidationException
@@ -66,15 +91,15 @@ public class AuthorizationMenuModel
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent())
         {
-            List<User> listUsers = userDAO.getUsersByField("email", result.get());
+            List<Account> listAccounts = accountDAO.getAccountsByField("email", result.get());
 
-            if (!listUsers.isEmpty())
+            if (!listAccounts.isEmpty())
             {
                 new Thread(() ->
                 {
                     try
                     {
-                        EmailManager.getInstance().sendMessage(result.get(), "Password remind", "Your password:\n" + listUsers.get(0).getPassword());
+                        EmailManager.getInstance().sendMessage(result.get(), "Password remind", "Your password:\n" + listAccounts.get(0).getPassword());
                     }
                     catch (MessagingException e)
                     {
@@ -84,10 +109,10 @@ public class AuthorizationMenuModel
             }
             else
             {
-                throw new UserValidationException("User with such email is not registered");
+                throw new UserValidationException("Account with such email is not registered");
             }
         }
 
-        throw new UserValidationException("User with such email is not registered");
+        throw new UserValidationException("Account with such email is not registered");
     }
 }

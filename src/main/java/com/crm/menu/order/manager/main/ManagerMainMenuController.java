@@ -13,7 +13,7 @@ import java.io.IOException;
 public class ManagerMainMenuController
 {
     public Button buttonCreateOrder;
-    public Button buttonUnlogin;
+    public Button buttonLogOut;
 
     @FXML
     public void initialize()
@@ -30,7 +30,7 @@ public class ManagerMainMenuController
             }
         });
 
-        buttonUnlogin.setOnAction(event ->
+        buttonLogOut.setOnAction(event ->
         {
             Main.getInstance().replaceSceneContent(new AuthorizationMenuController());
         });

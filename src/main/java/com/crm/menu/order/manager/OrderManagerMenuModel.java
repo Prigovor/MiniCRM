@@ -41,7 +41,7 @@ public class OrderManagerMenuModel
         return order;
     }
 
-    private Employee employee = new Employee();// MainModel.getInstance().getCurrentUser().getEmployee();
+    private Employee employee = new Employee();// MainModel.getInstance().getCurrentAccount().getEmployee();
 
     public Employee getEmployee()
     {

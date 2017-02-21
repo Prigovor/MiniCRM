@@ -1,14 +1,14 @@
 package com.crm.menu.admin;
 
-import com.crm.dao.user.UserDAO;
-import com.crm.dao.user.UserDAOImpl;
+import com.crm.dao.account.AccountDAO;
+import com.crm.dao.account.AccountDAOImpl;
 import com.crm.entity.employee.Employee;
-import com.crm.entity.user.User;
+import com.crm.entity.account.Account;
 import com.crm.service.UserValidationException;
 import com.crm.service.employee.EmployeeService;
 import com.crm.service.employee.EmployeeServiceImpl;
-import com.crm.service.user.UserService;
-import com.crm.service.user.UserServiceImpl;
+import com.crm.service.user.AccountService;
+import com.crm.service.user.AccountServiceImpl;
 
 import javax.mail.MessagingException;
 import java.util.List;
@@ -18,21 +18,21 @@ import java.util.List;
  */
 public class AdminMenuModel
 {
-    private UserDAO userDAO = new UserDAOImpl();
+    private AccountDAO accountDAO = new AccountDAOImpl();
 
-    private UserService userService = new UserServiceImpl();
+    private AccountService accountService = new AccountServiceImpl();
     private EmployeeService employeeService = new EmployeeServiceImpl();
 
-    private User selectedUser;
+    private Account selectedAccount;
 
-    public List<User> getListUsers()
+    public List<Account> getListUsers()
     {
-        return userDAO.findAll();
+        return accountDAO.findAll();
     }
 
-    public List<User> secureGetListUsers() throws UserValidationException
+    public List<Account> secureGetListUsers() throws UserValidationException
     {
-        return userService.findAll();
+        return accountService.findAll();
     }
 
     public List<Employee> secureGetListEmployers() throws UserValidationException
@@ -40,29 +40,29 @@ public class AdminMenuModel
         return employeeService.findAll();
     }
 
-    public User getSelectedUser()
+    public Account getSelectedAccount()
     {
-        return selectedUser;
+        return selectedAccount;
     }
 
-    public void setSelectedUser(User selectedUser)
+    public void setSelectedAccount(Account selectedAccount)
     {
-        this.selectedUser = selectedUser;
+        this.selectedAccount = selectedAccount;
     }
 
     public void validateUser() throws UserValidationException
     {
-        userService.validateUser();
+        accountService.validateUser();
     }
 
-    public void deleteUser(User user) throws UserValidationException
+    public void deleteUser(Account account) throws UserValidationException
     {
-        userService.deleteUser(user.getId());
-        selectedUser = null;
+        accountService.deleteUser(account.getId());
+        selectedAccount = null;
     }
 
     public void generateUser(Employee employee) throws UserValidationException, MessagingException
     {
-        userService.generateUserFromEmployee(employee);
+        accountService.generateUserFromEmployee(employee);
     }
 }

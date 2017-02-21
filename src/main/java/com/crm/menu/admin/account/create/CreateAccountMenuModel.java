@@ -3,18 +3,18 @@ package com.crm.menu.admin.account.create;
 import com.crm.dao.FactoryDAO;
 import com.crm.dao.employee.EmployeeDAO;
 import com.crm.dao.employee.EmployeeDAOImpl;
-import com.crm.dao.user.UserDAO;
-import com.crm.dao.user.UserDAOImpl;
+import com.crm.dao.account.AccountDAO;
+import com.crm.dao.account.AccountDAOImpl;
 import com.crm.entity.employee.Employee;
 import com.crm.entity.courier.Courier;
 import com.crm.entity.courier.CourierStatus;
-import com.crm.entity.user.User;
+import com.crm.entity.account.Account;
 import com.crm.main.Main;
 import com.crm.managers.PasswordManager;
 import com.crm.menu.admin.AdminMenuController;
 import com.crm.service.UserValidationException;
-import com.crm.service.user.UserService;
-import com.crm.service.user.UserServiceImpl;
+import com.crm.service.user.AccountService;
+import com.crm.service.user.AccountServiceImpl;
 
 import java.io.IOException;
 
@@ -23,12 +23,12 @@ import java.io.IOException;
  */
 public class CreateAccountMenuModel
 {
-    private User user = new User();
+    private Account account = new Account();
     private Employee employee = new Employee();
 
-    public User getUser()
+    public Account getAccount()
     {
-        return user;
+        return account;
     }
 
     public Employee getEmployee()
@@ -36,20 +36,20 @@ public class CreateAccountMenuModel
         return employee;
     }
 
-    private UserDAO userDAO = new UserDAOImpl();
+    private AccountDAO accountDAO = new AccountDAOImpl();
     private EmployeeDAO employeeDAO = new EmployeeDAOImpl();
 
-    private UserService userService = new UserServiceImpl();
+    private AccountService accountService = new AccountServiceImpl();
 
     public void createAccount() throws CreateAccountException, IOException, UserValidationException
     {
-        if (!user.getLogin().isEmpty() && !user.getPassword().isEmpty())
+        if (!account.getLogin().isEmpty() && !account.getPassword().isEmpty())
         {
-            for (User userEntry : userDAO.findAll())
+            for (Account accountEntry : accountDAO.findAll())
             {
-                if (userEntry.getLogin().equals(user.getLogin()) || userEntry.getPassword().equals(user.getPassword()))
+                if (accountEntry.getLogin().equals(account.getLogin()) || accountEntry.getPassword().equals(account.getPassword()))
                 {
-                    throw new CreateAccountException("User with such login or password already exists");
+                    throw new CreateAccountException("Account with such login or password already exists");
                 }
             }
 
@@ -63,20 +63,20 @@ public class CreateAccountMenuModel
                                 employee.getAge(), employee.getGender(), CourierStatus.FREE);
 
                         FactoryDAO.getCourierDAO().createCourier(courier);
-                        user.setEmployee(courier);
+                        account.setEmployee(courier);
 
                         break;
                     }
                     default:
                     {
                         employeeDAO.createEmployee(employee);
-                        user.setEmployee(employee);
+                        account.setEmployee(employee);
 
                         break;
                     }
                 }
 
-                userService.createUser(user);
+                accountService.createUser(account);
                 Main.getInstance().replaceSceneContent(new AdminMenuController());
             }
             else
@@ -95,9 +95,9 @@ public class CreateAccountMenuModel
     {
         String password = PasswordManager.getInstance().generatePassword(length);
 
-        for (User userEntry : userDAO.findAll())
+        for (Account accountEntry : accountDAO.findAll())
         {
-            if (password.equals(userEntry.getPassword()))
+            if (password.equals(accountEntry.getPassword()))
             {
                 password = PasswordManager.getInstance().generatePassword(length);
             }

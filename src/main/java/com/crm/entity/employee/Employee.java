@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@Table(name = "EMPLOYEE")
+@Table(name = "EMPLOYEES")
 public class Employee {
 
     @Id
@@ -33,7 +33,7 @@ public class Employee {
     private PositionType position;
 
     @Column(name = "WORK_EMAIL")
-    private String email;
+    private String workEmail;
 
     public Employee() {
     }
@@ -100,13 +100,13 @@ public class Employee {
         return id.toString();
     }
 
-    public String getEmail()
+    public String getWorkEmail()
     {
-        return email;
+        return workEmail;
     }
 
-    public void setEmail(String email)
+    public void setWorkEmail(String workEmail)
     {
-        this.email = email;
+        this.workEmail = workEmail;
     }
 }

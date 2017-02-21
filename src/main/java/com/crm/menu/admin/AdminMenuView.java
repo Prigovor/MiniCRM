@@ -1,10 +1,10 @@
 package com.crm.menu.admin;
 
-import com.crm.entity.user.User;
+import com.crm.entity.account.Account;
 import com.crm.main.Main;
 import com.crm.menu.View;
 import com.crm.menu.authorization.AuthorizationMenuController;
-import com.crm.menu.node.custom.UserInfo;
+import com.crm.menu.node.custom.AccountInfo;
 import com.crm.menu.node.factory.NodeFactory;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -23,10 +23,10 @@ import static com.crm.menu.node.SizeConstants.SMALL_ELEMENT_HEIGHT;
 public class AdminMenuView implements View {
     private GridPane gridPane = new GridPane();
 
-    private ListView<User> userListView = new ListView<>();
+    private ListView<Account> userListView = new ListView<>();
 
     private TableView tableView = new TableView();
-    private UserInfo userInfo = new UserInfo(false);
+    private AccountInfo accountInfo = new AccountInfo(false);
 
     private Button buttonShowUserInfo = new Button();
 
@@ -43,7 +43,7 @@ public class AdminMenuView implements View {
     private AdminMenuModel model;
     private AdminMenuController controller;
 
-    public ListView<User> getUserListView() {
+    public ListView<Account> getUserListView() {
         return userListView;
     }
 
@@ -51,8 +51,8 @@ public class AdminMenuView implements View {
         return tableView;
     }
 
-    public UserInfo getUserInfo() {
-        return userInfo;
+    public AccountInfo getAccountInfo() {
+        return accountInfo;
     }
 
     public AdminMenuView(AdminMenuController controller) {
@@ -85,21 +85,21 @@ public class AdminMenuView implements View {
             buttonShowUserInfo.setMinWidth(newValue.doubleValue());
         });
 
-        buttonShowAllUsers = NodeFactory.getButton("Show all user accounts", tableView.getMaxWidth() / 2, SMALL_ELEMENT_HEIGHT * 1.5);
+        buttonShowAllUsers = NodeFactory.getButton("Show all accounts", tableView.getMaxWidth() / 2, SMALL_ELEMENT_HEIGHT * 1.5);
         buttonShowAllEmployers = NodeFactory.getButton("Show all employers", buttonShowAllUsers.getMaxWidth(), buttonShowAllUsers.getMaxHeight());
 
-        buttonShowUserInfo = NodeFactory.getButton("Show user info", userListView.getMaxWidth(), buttonShowAllUsers.getMaxHeight() * 3 + INSETS);
+        buttonShowUserInfo = NodeFactory.getButton("Show account info", userListView.getMaxWidth(), buttonShowAllUsers.getMaxHeight() * 3 + INSETS);
 
         GridPane gridPaneShowAllButtons = NodeFactory.getGridPane(1, 2);
         gridPaneShowAllButtons.add(buttonShowAllUsers, 0, 0);
         gridPaneShowAllButtons.add(buttonShowAllEmployers, 1, 0);
         gridPaneShowAllButtons.setMaxWidth(tableView.getMaxWidth());
 
-        buttonAdd = NodeFactory.getButton("Add user", tableView.getMaxWidth() / 4, SMALL_ELEMENT_HEIGHT * 1.5);
-        buttonChange = NodeFactory.getButton("Change user", tableView.getMaxWidth() / 4, SMALL_ELEMENT_HEIGHT * 1.5);
-        buttonDelete = NodeFactory.getButton("Delete user", tableView.getMaxWidth() / 4, SMALL_ELEMENT_HEIGHT * 1.5);
-        buttonGenerate = NodeFactory.getButton("Generate user", tableView.getMaxWidth() / 4, SMALL_ELEMENT_HEIGHT * 1.5);
-        buttonUnlogin = NodeFactory.getButton("Unlogin", tableView.getMaxWidth(), buttonAdd.getMaxHeight());
+        buttonAdd = NodeFactory.getButton("Add account", tableView.getMaxWidth() / 4, SMALL_ELEMENT_HEIGHT * 1.5);
+        buttonChange = NodeFactory.getButton("Change account", tableView.getMaxWidth() / 4, SMALL_ELEMENT_HEIGHT * 1.5);
+        buttonDelete = NodeFactory.getButton("Delete account", tableView.getMaxWidth() / 4, SMALL_ELEMENT_HEIGHT * 1.5);
+        buttonGenerate = NodeFactory.getButton("Generate account", tableView.getMaxWidth() / 4, SMALL_ELEMENT_HEIGHT * 1.5);
+        buttonUnlogin = NodeFactory.getButton("Log out", tableView.getMaxWidth(), buttonAdd.getMaxHeight());
 
         GridPane gridPaneDBControlButtons = NodeFactory.getGridPane(1, 4);
         gridPaneDBControlButtons.add(buttonAdd, 0, 0);
@@ -113,7 +113,7 @@ public class AdminMenuView implements View {
 
         GridPane gridPaneRightSideControls = NodeFactory.getGridPane(4, 2);
         gridPaneRightSideControls.add(tableView, 1, 0);
-        gridPaneRightSideControls.add(userInfo, 1, 0);
+        gridPaneRightSideControls.add(accountInfo, 1, 0);
         gridPaneRightSideControls.add(gridPaneShowAllButtons, 1, 1);
         gridPaneRightSideControls.add(gridPaneDBControlButtons, 1, 2);
         gridPaneRightSideControls.add(userListView, 0, 0);
@@ -136,12 +136,12 @@ public class AdminMenuView implements View {
 
         gridPane.add(gridPaneRightSideControls, 0, 0);
 
-        tableView.setMaxWidth(userInfo.getMaxWidth());
+        tableView.setMaxWidth(accountInfo.getMaxWidth());
 
         buttonShowUserInfo.setOnAction(event ->
         {
-            userInfo.setOpacity(1.0);
-            userInfo.setDisable(false);
+            accountInfo.setOpacity(1.0);
+            accountInfo.setDisable(false);
             tableView.setOpacity(0.0);
             tableView.setDisable(true);
             controller.showUserInfo();
@@ -149,8 +149,8 @@ public class AdminMenuView implements View {
 
         buttonShowAllUsers.setOnAction(event ->
         {
-            userInfo.setOpacity(0.0);
-            userInfo.setDisable(true);
+            accountInfo.setOpacity(0.0);
+            accountInfo.setDisable(true);
             tableView.setOpacity(1.0);
             tableView.setDisable(false);
             controller.showTableUsers();
@@ -158,8 +158,8 @@ public class AdminMenuView implements View {
 
         buttonShowAllEmployers.setOnAction(event ->
         {
-            userInfo.setOpacity(0.0);
-            userInfo.setDisable(true);
+            accountInfo.setOpacity(0.0);
+            accountInfo.setDisable(true);
             tableView.setOpacity(1.0);
             tableView.setDisable(false);
             controller.showTableEmployers();
@@ -172,13 +172,13 @@ public class AdminMenuView implements View {
 
         buttonChange.setOnAction(event ->
         {
-            model.setSelectedUser(userListView.getSelectionModel().getSelectedItem());
+            model.setSelectedAccount(userListView.getSelectionModel().getSelectedItem());
             controller.changeUser();
         });
 
         buttonDelete.setOnAction(event ->
         {
-            model.setSelectedUser(userListView.getSelectionModel().getSelectedItem());
+            model.setSelectedAccount(userListView.getSelectionModel().getSelectedItem());
             controller.deleteUser();
         });
 
@@ -189,7 +189,6 @@ public class AdminMenuView implements View {
 
         buttonUnlogin.setOnAction(event ->
         {
-            // TODO: 11.02.2017 COSTYIL!!!
             Main.getInstance().replaceSceneContent(new AuthorizationMenuController());
         });
     }

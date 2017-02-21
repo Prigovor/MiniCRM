@@ -1,9 +1,10 @@
 package com.crm.menu.node.custom;
 
+import com.crm.entity.account.LockType;
 import com.crm.entity.employee.Gender;
 import com.crm.entity.employee.PositionType;
-import com.crm.entity.user.User;
-import com.crm.entity.user.UserType;
+import com.crm.entity.account.Account;
+import com.crm.entity.account.RightType;
 import com.crm.menu.node.factory.NodeFactory;
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
@@ -15,6 +16,8 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
+import java.text.DateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 import static com.crm.menu.node.SizeConstants.INSETS;
@@ -23,23 +26,24 @@ import static com.crm.menu.node.SizeConstants.SMALL_ELEMENT_WIDTH;
 /**
  * Created by Bohdan on 10.02.2017.
  */
-public class UserInfo extends GridPane
+public class AccountInfo extends GridPane
 {
     private InfoInputPair pairLogin = new InfoInputPair("Login");
     private InfoInputPair pairPassword = new InfoInputPair("Password");
 
-    private PairNodePane<Label, ChoiceBox<UserType>> pairUserType = new PairNodePane<>(
-            NodeFactory.getLabel("User type", Double.MAX_VALUE, Double.MAX_VALUE),
-            NodeFactory.getChoiceBox(Arrays.asList(UserType.values()), Double.MAX_VALUE, Double.MAX_VALUE)
-    );
-
     private InfoInputPair pairQuestion = new InfoInputPair("Question");
     private InfoInputPair pairAnswer = new InfoInputPair("Answer");
+    private InfoInputPair pairRegistrationDate = new InfoInputPair("Registration date");
 
     private InfoInputPair pairName = new InfoInputPair("Name");
     private InfoInputPair pairSurname = new InfoInputPair("Surname");
     private InfoInputPair pairAge = new InfoInputPair("Age");
     private InfoInputPair pairEmail = new InfoInputPair("Email");
+
+    private PairNodePane<Label, ChoiceBox<RightType>> pairRights = new PairNodePane<>(
+            NodeFactory.getLabel("Rights", Double.MAX_VALUE, Double.MAX_VALUE),
+            NodeFactory.getChoiceBox(Arrays.asList(RightType.values()), Double.MAX_VALUE, Double.MAX_VALUE)
+    );
 
     private PairNodePane<Label, ChoiceBox<Gender>> pairGender = new PairNodePane<>(
             NodeFactory.getLabel("Gender", Double.MAX_VALUE, Double.MAX_VALUE),
@@ -49,6 +53,12 @@ public class UserInfo extends GridPane
             NodeFactory.getLabel("Position", Double.MAX_VALUE, Double.MAX_VALUE),
             NodeFactory.getChoiceBox(Arrays.asList(PositionType.values()), Double.MAX_VALUE, Double.MAX_VALUE)
     );
+
+    private PairNodePane<Label, ChoiceBox<LockType>> pairLock = new PairNodePane<>(
+            NodeFactory.getLabel("Is locked", Double.MAX_VALUE, Double.MAX_VALUE),
+            NodeFactory.getChoiceBox(Arrays.asList(LockType.values()), Double.MAX_VALUE, Double.MAX_VALUE)
+    );
+
     private boolean isEditable;
 
     public InfoInputPair getPairLogin()
@@ -61,9 +71,9 @@ public class UserInfo extends GridPane
         return pairPassword;
     }
 
-    public PairNodePane<Label, ChoiceBox<UserType>> getPairUserType()
+    public PairNodePane<Label, ChoiceBox<RightType>> getPairRights()
     {
-        return pairUserType;
+        return pairRights;
     }
 
     public InfoInputPair getPairQuestion()
@@ -106,36 +116,43 @@ public class UserInfo extends GridPane
         return pairPosition;
     }
 
-    private User user;
-
-    public User getUser()
+    public PairNodePane<Label, ChoiceBox<LockType>> getPairLock()
     {
-        return user;
+        return pairLock;
     }
 
-    public void setUser(User user)
+    private Account account;
+
+    public Account getAccount()
+    {
+        return account;
+    }
+
+    public void setAccount(Account account)
     {
         cleanTextFields();
 
-        pairLogin.getSecondNode().setText(user.getLogin());
-        pairPassword.getSecondNode().setText(user.getPassword());
-        pairQuestion.getSecondNode().setText(user.getQuestion());
-        pairAnswer.getSecondNode().setText(user.getAnswer());
-        pairEmail.getSecondNode().setText(user.getEmail());
+        pairLogin.getSecondNode().setText(account.getLogin());
+        pairPassword.getSecondNode().setText(account.getPassword());
+        pairQuestion.getSecondNode().setText(account.getQuestion());
+        pairAnswer.getSecondNode().setText(account.getAnswer());
+        pairEmail.getSecondNode().setText(account.getEmail());
+        pairRegistrationDate.getSecondNode().setText(account.getRegistrationDate().toString());
 
-        pairUserType.getSecondNode().setValue(user.getUserType());
+        pairRights.getSecondNode().setValue(account.getRightType());
+        pairLock.getSecondNode().setValue(account.getLockType());
 
-        if (user.getEmployee() != null)
+        if (account.getEmployee() != null)
         {
-            pairName.getSecondNode().setText(user.getEmployee().getName());
-            pairSurname.getSecondNode().setText(user.getEmployee().getSurname());
-            pairAge.getSecondNode().setText(String.valueOf(user.getEmployee().getAge()));
+            pairName.getSecondNode().setText(account.getEmployee().getName());
+            pairSurname.getSecondNode().setText(account.getEmployee().getSurname());
+            pairAge.getSecondNode().setText(String.valueOf(account.getEmployee().getAge()));
 
-            pairGender.getSecondNode().setValue(user.getEmployee().getGender());
-            pairPosition.getSecondNode().setValue(user.getEmployee().getPosition());
+            pairGender.getSecondNode().setValue(account.getEmployee().getGender());
+            pairPosition.getSecondNode().setValue(account.getEmployee().getPosition());
         }
 
-        this.user = user;
+        this.account = account;
 
         if (!isEditable)
         {
@@ -143,7 +160,7 @@ public class UserInfo extends GridPane
         }
     }
 
-    public UserInfo(boolean isEditable)
+    public AccountInfo(boolean isEditable)
     {
         this.isEditable = isEditable;
         init();
@@ -153,25 +170,27 @@ public class UserInfo extends GridPane
         }
     }
 
-    public UserInfo(User user, boolean isEditable)
+    public AccountInfo(Account account, boolean isEditable)
     {
-        pairLogin = new InfoInputPair("Login", user.getLogin());
-        pairPassword = new InfoInputPair("Password", user.getPassword());
+        pairLogin = new InfoInputPair("Login", account.getLogin());
+        pairPassword = new InfoInputPair("Password", account.getPassword());
 
-        pairUserType.getSecondNode().setValue(user.getUserType());
+        pairRights.getSecondNode().setValue(account.getRightType());
+        pairLock.getSecondNode().setValue(account.getLockType());
 
-        pairQuestion = new InfoInputPair("Question", user.getQuestion());
-        pairAnswer = new InfoInputPair("Answer", user.getAnswer());
-        pairEmail.getSecondNode().setText(user.getEmail());
+        pairQuestion = new InfoInputPair("Question", account.getQuestion());
+        pairAnswer = new InfoInputPair("Answer", account.getAnswer());
+        pairEmail.getSecondNode().setText(account.getEmail());
+        pairRegistrationDate.getSecondNode().setText(account.getRegistrationDate().toString());
 
-        if (user.getEmployee() != null)
+        if (account.getEmployee() != null)
         {
-            pairName.getSecondNode().setText(user.getEmployee().getName());
-            pairSurname.getSecondNode().setText(user.getEmployee().getSurname());
-            pairAge.getSecondNode().setText(String.valueOf(user.getEmployee().getAge()));
+            pairName.getSecondNode().setText(account.getEmployee().getName());
+            pairSurname.getSecondNode().setText(account.getEmployee().getSurname());
+            pairAge.getSecondNode().setText(String.valueOf(account.getEmployee().getAge()));
 
-            pairGender.getSecondNode().setValue(user.getEmployee().getGender());
-            pairPosition.getSecondNode().setValue(user.getEmployee().getPosition());
+            pairGender.getSecondNode().setValue(account.getEmployee().getGender());
+            pairPosition.getSecondNode().setValue(account.getEmployee().getPosition());
         }
 
         init();
@@ -208,16 +227,18 @@ public class UserInfo extends GridPane
 
         add(pairLogin, 0, 0);
         add(pairPassword, 1, 0);
-        add(pairEmail, 2, 0);
-        add(pairUserType, 3, 0);
-        add(pairQuestion, 0, 1, 2, 1);
-        add(pairAnswer, 2, 1, 2, 1);
+        add(pairEmail, 2, 0, 2, 1);
+        add(pairQuestion, 0, 1, 1, 1);
+        add(pairAnswer, 1, 1, 1, 1);
+        add(pairRegistrationDate, 2, 1, 2, 1);
 
         add(pairName, 0, 2);
         add(pairSurname, 1, 2);
         add(pairAge, 2, 2, 2, 1);
-        add(pairGender, 0, 3, 2, 1);
-        add(pairPosition, 2, 3, 2, 1);
+        add(pairGender, 0, 3, 1, 1);
+        add(pairPosition, 1, 3, 1, 1);
+        add(pairRights, 2, 3, 1, 1);
+        add(pairLock, 3, 3, 1, 1);
     }
 
     public void cleanTextFields()
@@ -232,7 +253,8 @@ public class UserInfo extends GridPane
         });
 
         pairPosition.getSecondNode().setItems(FXCollections.observableList(Arrays.asList(PositionType.values())));
-        pairUserType.getSecondNode().setItems(FXCollections.observableList(Arrays.asList(UserType.values())));
+        pairRights.getSecondNode().setItems(FXCollections.observableList(Arrays.asList(RightType.values())));
         pairGender.getSecondNode().setItems(FXCollections.observableList(Arrays.asList(Gender.values())));
+        pairLock.getSecondNode().setItems(FXCollections.observableList(Arrays.asList(LockType.values())));
     }
 }

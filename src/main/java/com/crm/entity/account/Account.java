@@ -1,17 +1,18 @@
-package com.crm.entity.user;
+package com.crm.entity.account;
 
 import com.crm.entity.employee.Employee;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by Prigovor on 05.02.2017.
  */
 
 @Entity
-@Table(name = "USER")
-public class User {
-
+@Table(name = "ACCOUNTS")
+public class Account
+{
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,8 +32,12 @@ public class User {
     private Employee employee;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "USER_TYPE")
-    private UserType userType;
+    @Column(name = "RIGHT_TYPE")
+    private RightType rightType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "LOCK_TYPE")
+    private LockType lockType;
 
     @Column(name = "SECURITY_QUESTION")
     private String question;
@@ -40,13 +45,18 @@ public class User {
     @Column(name = "ANSWER_TO_QUESTION")
     private String answer;
 
-    public User() {
+    @Temporal(value = TemporalType.DATE)
+    @Column(name = "REGISTRATION_DATE")
+    private Date registrationDate;
+
+    public Account() {
     }
 
-    public User(String password, Employee employee, UserType userType) {
+    public Account(String password, Employee employee, RightType rightType, LockType lockType) {
         this.password = password;
         this.employee = employee;
-        this.userType = userType;
+        this.rightType = rightType;
+        this.lockType = lockType;
     }
 
     public Long getId() {
@@ -93,12 +103,22 @@ public class User {
         this.employee = employee;
     }
 
-    public UserType getUserType() {
-        return userType;
+    public RightType getRightType() {
+        return rightType;
     }
 
-    public void setUserType(UserType userType) {
-        this.userType = userType;
+    public void setRightType(RightType rightType) {
+        this.rightType = rightType;
+    }
+
+    public LockType getLockType()
+    {
+        return lockType;
+    }
+
+    public void setLockType(LockType lockType)
+    {
+        this.lockType = lockType;
     }
 
     public String getQuestion()
@@ -119,6 +139,16 @@ public class User {
     public void setAnswer(String answer)
     {
         this.answer = answer;
+    }
+
+    public Date getRegistrationDate()
+    {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(Date registrationDate)
+    {
+        this.registrationDate = registrationDate;
     }
 
     @Override

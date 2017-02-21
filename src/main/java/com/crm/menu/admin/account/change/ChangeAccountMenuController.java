@@ -1,6 +1,6 @@
 package com.crm.menu.admin.account.change;
 
-import com.crm.entity.user.User;
+import com.crm.entity.account.Account;
 import com.crm.main.Main;
 import com.crm.menu.Controller;
 import com.crm.menu.admin.account.create.CreateAccountException;
@@ -14,10 +14,10 @@ public class ChangeAccountMenuController implements Controller
     private ChangeAccountMenuModel model;
     private ChangeAccountMenuView view;
 
-    public ChangeAccountMenuController(User user)
+    public ChangeAccountMenuController(Account account)
     {
         model = new ChangeAccountMenuModel();
-        model.setUser(user);
+        model.setAccount(account);
 
         view = new ChangeAccountMenuView(this);
     }
@@ -35,23 +35,24 @@ public class ChangeAccountMenuController implements Controller
 
     public void changeAccount()
     {
-        model.getUser().setLogin(view.getUserInfo().getPairLogin().getInputText());
-        model.getUser().setPassword(view.getUserInfo().getPairPassword().getInputText());
-        model.getUser().setQuestion(view.getUserInfo().getPairQuestion().getInputText());
-        model.getUser().setAnswer(view.getUserInfo().getPairAnswer().getInputText());
+        model.getAccount().setLogin(view.getAccountInfo().getPairLogin().getInputText());
+        model.getAccount().setPassword(view.getAccountInfo().getPairPassword().getInputText());
+        model.getAccount().setQuestion(view.getAccountInfo().getPairQuestion().getInputText());
+        model.getAccount().setAnswer(view.getAccountInfo().getPairAnswer().getInputText());
 
-        model.getEmployee().setName(view.getUserInfo().getPairName().getInputText());
-        model.getEmployee().setSurname(view.getUserInfo().getPairSurname().getInputText());
-        model.getEmployee().setAge(Integer.valueOf(view.getUserInfo().getPairAge().getInputText()));
-        model.getEmployee().setEmail(view.getUserInfo().getPairEmail().getInputText());
+        model.getEmployee().setName(view.getAccountInfo().getPairName().getInputText());
+        model.getEmployee().setSurname(view.getAccountInfo().getPairSurname().getInputText());
+        model.getEmployee().setAge(Integer.valueOf(view.getAccountInfo().getPairAge().getInputText()));
+        model.getEmployee().setWorkEmail(view.getAccountInfo().getPairEmail().getInputText());
 
         try
         {
-            model.getUser().setUserType(view.getUserInfo().getPairUserType().getSecondNode().getValue());
-            model.getEmployee().setGender(view.getUserInfo().getPairGender().getSecondNode().getValue());
-            model.getEmployee().setPosition(view.getUserInfo().getPairPosition().getSecondNode().getValue());
+            model.getAccount().setRightType(view.getAccountInfo().getPairRights().getSecondNode().getValue());
+            model.getAccount().setLockType(view.getAccountInfo().getPairLock().getSecondNode().getValue());
+            model.getEmployee().setGender(view.getAccountInfo().getPairGender().getSecondNode().getValue());
+            model.getEmployee().setPosition(view.getAccountInfo().getPairPosition().getSecondNode().getValue());
 
-            model.getEmployee().setAge(Integer.valueOf(view.getUserInfo().getPairAge().getInputText()));
+            model.getEmployee().setAge(Integer.valueOf(view.getAccountInfo().getPairAge().getInputText()));
         }
         catch (Exception e)
         {
@@ -59,8 +60,8 @@ public class ChangeAccountMenuController implements Controller
 
         try
         {
-            if (!model.getUser().getLogin().equals(view.getUserInfo().getPairLogin().getInputText()) ||
-                    !model.getUser().getPassword().equals(view.getUserInfo().getPairPassword().getInputText()))
+            if (!model.getAccount().getLogin().equals(view.getAccountInfo().getPairLogin().getInputText()) ||
+                    !model.getAccount().getPassword().equals(view.getAccountInfo().getPairPassword().getInputText()))
             {
                 model.checkAccountSameLoginPassword();
             }
@@ -75,7 +76,7 @@ public class ChangeAccountMenuController implements Controller
 
     public void generatePassword()
     {
-        view.getUserInfo().getPairPassword().getSecondNode().setText(model.generatePassword(6));
+        view.getAccountInfo().getPairPassword().getSecondNode().setText(model.generatePassword(6));
     }
 
     public void cancel()

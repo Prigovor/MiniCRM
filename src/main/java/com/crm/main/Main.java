@@ -1,16 +1,11 @@
 package com.crm.main;
 
-import com.crm.dao.FactoryDAO;
-import com.crm.entity.courier.Courier;
-import com.crm.entity.good.Good;
-import com.crm.entity.user.User;
 import com.crm.menu.Controller;
 import com.crm.menu.authorization.AuthorizationMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.io.IOException;
 

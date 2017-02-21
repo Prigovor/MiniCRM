@@ -23,7 +23,7 @@
          </rowConstraints>
          <children>
             <Button fx:id="buttonCreateOrder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Create order" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-            <Button fx:id="buttonUnlogin" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Unlogin" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <Button fx:id="buttonLogOut" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Log out" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>

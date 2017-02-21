@@ -10,21 +10,21 @@ import com.crm.dao.good.GoodDAO;
 import com.crm.dao.good.GoodDAOImpl;
 import com.crm.dao.order.OrderDAO;
 import com.crm.dao.order.OrderDAOImpl;
-import com.crm.dao.user.UserDAO;
-import com.crm.dao.user.UserDAOImpl;
+import com.crm.dao.account.AccountDAO;
+import com.crm.dao.account.AccountDAOImpl;
 
 /**
  * Created by Bohdan on 12.02.2017.
  */
 public final class FactoryDAO {
 
-    private static UserDAO userDAO;
+    private static AccountDAO accountDAO;
 
-    public static UserDAO getUserDAO() {
-        if (userDAO == null) {
-            userDAO = new UserDAOImpl();
+    public static AccountDAO getAccountDAO() {
+        if (accountDAO == null) {
+            accountDAO = new AccountDAOImpl();
         }
-        return userDAO;
+        return accountDAO;
     }
 
     private static EmployeeDAO employeeDAO;

@@ -28,37 +28,48 @@ public class AuthorizationMenuController implements Controller
     {
         try
         {
-            if (model.authorize(view.getTextFieldLogin().getText(), view.getPasswordField().getText()))
+            switch (model.authorize(view.getTextFieldLogin().getText(), view.getPasswordField().getText()))
             {
-                switch (MainModel.getInstance().getCurrentUser().getUserType())
+                case SUCCESSFUL:
                 {
-                    case ADMINISTRATOR:
+                    switch (MainModel.getInstance().getCurrentAccount().getRightType())
                     {
-                        Main.getInstance().replaceSceneContent(new AdminMenuController());
-                        break;
-                    }
-                    case EMPLOYEE:
-                    {
-                        switch (MainModel.getInstance().getCurrentUser().getEmployee().getPosition())
+                        case ADMIN:
                         {
-                            case MANAGER:
-                            {
-                                Main.getInstance().replaceSceneContent("/fxml-files/order-manager-main-menu.fxml");
-                                break;
-                            }
-                            default:
-                            {
-                                Main.getInstance().replaceSceneContent(new EmployeeMenuController());
-                                break;
-                            }
+                            Main.getInstance().replaceSceneContent(new AdminMenuController());
+                            break;
                         }
-                        break;
+                        case USER:
+                        {
+                            switch (MainModel.getInstance().getCurrentAccount().getEmployee().getPosition())
+                            {
+                                case MANAGER:
+                                {
+                                    Main.getInstance().replaceSceneContent("/fxml-files/order-manager-main-menu.fxml");
+                                    break;
+                                }
+                                default:
+                                {
+                                    Main.getInstance().replaceSceneContent(new EmployeeMenuController());
+                                    break;
+                                }
+                            }
+                            break;
+                        }
                     }
+
+                    break;
                 }
-            }
-            else
-            {
-                view.showInformationMessage("Incorrect login or password");
+                case LOCKED:
+                {
+                    view.showInformationMessage("Your account is locked");
+                    break;
+                }
+                case INCORRECT_LOGIN_PASSWORD:
+                {
+                    view.showInformationMessage("Incorrect login or password");
+                    break;
+                }
             }
         }
         catch (IOException e)
