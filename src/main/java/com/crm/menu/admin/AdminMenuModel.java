@@ -52,10 +52,13 @@ public class AdminMenuModel
         return employeeService.findAll();
     }
 
-    public void deleteAccount(Account account)
+    public void deleteAccount()
     {
-        accountService.deleteAccount(account.getId());
-        selectedAccount = null;
+        if (selectedAccount != null)
+        {
+            accountService.deleteAccount(selectedAccount.getId());
+            selectedAccount = null;
+        }
     }
 
     public void generateAccount(Employee employee) throws MessagingException
