@@ -2,12 +2,15 @@ package com.crm.menu.admin;
 
 import com.crm.entity.employee.Employee;
 import com.crm.entity.account.Account;
+import com.crm.main.MainModel;
+import com.crm.managers.JsonFileManager;
 import com.crm.service.employee.EmployeeService;
 import com.crm.service.employee.EmployeeServiceImpl;
 import com.crm.service.account.AccountService;
 import com.crm.service.account.AccountServiceImpl;
 
 import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -54,15 +57,12 @@ public class AdminMenuModel
 
     public void deleteAccount()
     {
-        if (selectedAccount != null)
-        {
-            accountService.deleteAccount(selectedAccount.getId());
-            selectedAccount = null;
-        }
+        accountService.deleteAccount(selectedAccount.getId());
+        selectedAccount = null;
     }
 
-    public void generateAccount(Employee employee) throws MessagingException
+    public void generateAccount(String filePath) throws MessagingException, IOException
     {
-        accountService.generateAccountFromEmployee(employee);
+        accountService.generateAccountFromEmployee(JsonFileManager.deserializeFromJsonFile(Employee.class, filePath));
     }
 }

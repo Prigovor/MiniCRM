@@ -11,15 +11,19 @@ import java.util.List;
  */
 public interface AccountService
 {
-    Long createAccount(Account account);
+    Long createAccount(Account account) throws CreateAccountException;
 
     Account readAccount(Long id);
 
-    void updateAccount(Account account);
+    void updateAccount(Account account) throws CreateAccountException;
 
     void deleteAccount(Long id);
 
     List<Account> findAll();
+
+    List<Account> getAccountsByField(String filedName, Object fieldValue);
+
+    Account getAccountByField(String filedName, Object fieldValue);
 
     void generateAccountFromEmployee(Employee employee) throws MessagingException;
 

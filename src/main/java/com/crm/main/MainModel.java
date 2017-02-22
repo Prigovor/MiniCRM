@@ -24,10 +24,11 @@ public class MainModel
 
     }
 
-    private Account currentAccount;
+    private Account currentAccount = new Account();
 
     public Account getCurrentAccount()
     {
+        currentAccount.setId(1293012849L);
         return currentAccount;
     }
 

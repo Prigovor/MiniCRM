@@ -20,8 +20,26 @@ public class AccountServiceImpl implements AccountService
     private EmployeeDAO employeeDAO = FactoryDAO.getEmployeeDAO();
 
     @Override
-    public Long createAccount(Account account)
+    public Long createAccount(Account account) throws CreateAccountException
     {
+        if (account.getLogin().isEmpty()
+                || account.getLogin() == null
+                || account.getPassword().isEmpty()
+                || account.getPassword() == null)
+        {
+            throw new CreateAccountException("Account should contain login and password");
+        }
+
+        if (accountDAO.getAccountByField("login", account.getLogin()) != null)
+        {
+            throw new CreateAccountException("Account with such login already exists");
+        }
+
+        if (accountDAO.getAccountByField("password", account.getPassword()) != null)
+        {
+            throw new CreateAccountException("Account with such password already exists");
+        }
+
         return accountDAO.createAccount(account);
     }
 
@@ -32,8 +50,28 @@ public class AccountServiceImpl implements AccountService
     }
 
     @Override
-    public void updateAccount(Account account)
+    public void updateAccount(Account account) throws CreateAccountException
     {
+        if (account.getLogin().isEmpty()
+                || account.getLogin() == null
+                || account.getPassword().isEmpty()
+                || account.getPassword() == null)
+        {
+            throw new CreateAccountException("Account should contain login and password");
+        }
+
+        Account accountByLogin = accountDAO.getAccountByField("login", account.getLogin());
+        if (accountByLogin != null && !accountByLogin.getId().equals(account.getId()))
+        {
+            throw new CreateAccountException("Account with such login already exists");
+        }
+
+        Account accountByPassword = accountDAO.getAccountByField("password", account.getPassword());
+        if (accountByPassword != null && !accountByPassword.getId().equals(account.getId()))
+        {
+            throw new CreateAccountException("Account with such password already exists");
+        }
+
         accountDAO.updateAccount(account);
     }
 
@@ -47,6 +85,18 @@ public class AccountServiceImpl implements AccountService
     public List<Account> findAll()
     {
         return accountDAO.findAll();
+    }
+
+    @Override
+    public List<Account> getAccountsByField(String filedName, Object fieldValue)
+    {
+        return accountDAO.getAccountsByField(filedName, fieldValue);
+    }
+
+    @Override
+    public Account getAccountByField(String filedName, Object fieldValue)
+    {
+        return accountDAO.getAccountByField(filedName, fieldValue);
     }
 
     @Override

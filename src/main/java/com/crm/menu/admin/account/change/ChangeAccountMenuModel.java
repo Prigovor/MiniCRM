@@ -6,11 +6,14 @@ import com.crm.dao.account.AccountDAO;
 import com.crm.dao.account.AccountDAOImpl;
 import com.crm.entity.employee.Employee;
 import com.crm.entity.account.Account;
+import com.crm.main.Main;
 import com.crm.main.MainModel;
 import com.crm.managers.PasswordManager;
-import com.crm.menu.admin.account.create.CreateAccountException;
+import com.crm.service.account.CreateAccountException;
 import com.crm.service.account.AccountService;
 import com.crm.service.account.AccountServiceImpl;
+import com.crm.service.employee.EmployeeService;
+import com.crm.service.employee.EmployeeServiceImpl;
 
 import java.io.IOException;
 
@@ -19,13 +22,11 @@ import java.io.IOException;
  */
 public class ChangeAccountMenuModel
 {
-    private Account account;
+    private Account account = new Account();
     private Employee employee = new Employee();
 
-    private AccountDAO accountDAO = new AccountDAOImpl();
-    private EmployeeDAO employeeDAO = new EmployeeDAOImpl();
-
     private AccountService accountService = new AccountServiceImpl();
+    private EmployeeService employeeService = new EmployeeServiceImpl();
 
     public Account getAccount()
     {
@@ -35,7 +36,8 @@ public class ChangeAccountMenuModel
     public void setAccount(Account account)
     {
         this.account = account;
-        if (account.getEmployee() != null) {
+        if (account.getEmployee() != null)
+        {
             employee = account.getEmployee();
         }
     }
@@ -45,36 +47,15 @@ public class ChangeAccountMenuModel
         return employee;
     }
 
-    public void changeAccount() throws CreateAccountException, IOException
+    public void changeAccount() throws IOException, CreateAccountException
     {
-        if (!employee.getName().isEmpty() && !employee.getSurname().isEmpty())
-        {
-            employeeDAO.updateEmployee(employee);
-            account.setEmployee(employee);
-            accountService.updateAccount(account);
+        employeeService.updateEmployee(employee);
+        account.setEmployee(employee);
+        accountService.updateAccount(account);
 
-            if (MainModel.getInstance().getCurrentAccount().getId().equals(account.getId()))
-            {
-                MainModel.getInstance().setCurrentAccount(account);
-            }
-        }
-        else
+        if (MainModel.getInstance().getCurrentAccount().getId().equals(account.getId()))
         {
-            throw new CreateAccountException("Enter name and surname of employee");
-        }
-    }
-
-    public void checkAccountSameLoginPassword() throws CreateAccountException
-    {
-        if (!account.getLogin().isEmpty() && !account.getPassword().isEmpty())
-        {
-            for (Account accountEntry : accountDAO.findAll())
-            {
-                if (accountEntry.getLogin().equals(account.getLogin()) || accountEntry.getPassword().equals(account.getPassword()))
-                {
-                    throw new CreateAccountException("Account with such login or password already exists");
-                }
-            }
+            MainModel.getInstance().setCurrentAccount(account);
         }
     }
 
@@ -82,12 +63,9 @@ public class ChangeAccountMenuModel
     {
         String password = PasswordManager.getInstance().generatePassword(length);
 
-        for (Account accountEntry : accountDAO.findAll())
+        if (accountService.getAccountByField("password", password) != null)
         {
-            if (password.equals(accountEntry.getPassword()))
-            {
-                password = PasswordManager.getInstance().generatePassword(length);
-            }
+            password = PasswordManager.getInstance().generatePassword(length);
         }
 
         return password;

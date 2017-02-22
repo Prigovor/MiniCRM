@@ -25,8 +25,8 @@ public class AccountInfo extends AnchorPane
 
     public DatePicker datePickerRegistrationDate;
 
-    public ChoiceBox choiceBoxRights;
-    public ChoiceBox choiceBoxLockType;
+    public ChoiceBox<RightType> choiceBoxRights;
+    public ChoiceBox<LockType> choiceBoxLockType;
 
     private Account account;
 
@@ -69,5 +69,17 @@ public class AccountInfo extends AnchorPane
         {
             throw new RuntimeException(e);
         }
+    }
+
+    public void applyChanges()
+    {
+        account.setLogin(textFieldLogin.getText());
+        account.setPassword(textFieldPassword.getText());
+        account.setEmail(textFieldEmail.getText());
+
+        account.setRegistrationDate(java.sql.Date.valueOf(datePickerRegistrationDate.getValue()));
+
+        account.setLockType(choiceBoxLockType.getValue());
+        account.setRightType(choiceBoxRights.getValue());
     }
 }

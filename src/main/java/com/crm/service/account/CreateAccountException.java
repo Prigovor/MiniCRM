@@ -1,4 +1,4 @@
-package com.crm.menu.admin.account.create;
+package com.crm.service.account;
 
 /**
  * Created by Bohdan on 07.02.2017.

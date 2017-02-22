@@ -3,16 +3,17 @@ package com.crm.menu.admin;
 import com.crm.entity.account.Account;
 import com.crm.entity.employee.Employee;
 import com.crm.main.Main;
+import com.crm.main.MainModel;
 import com.crm.menu.node.custom.account_info.AccountInfo;
 import com.crm.menu.node.custom.employee_info.EmployeeInfo;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 
+import javax.mail.MessagingException;
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 
@@ -22,34 +23,48 @@ import java.lang.reflect.Field;
 
 public class AdminMenuController
 {
-    @FXML private ListView<Account> listViewAccounts;
+    @FXML
+    private ListView<Account> listViewAccounts;
 
-    @FXML private Button buttonShowAccountInfo;
-    @FXML private Button buttonShowEmployeeInfo;
+    @FXML
+    private Button buttonShowAccountInfo;
+    @FXML
+    private Button buttonShowEmployeeInfo;
 
-    @FXML private Button buttonDeleteAccount;
-    @FXML private Button buttonChangeAccount;
-    @FXML private Button buttonAddAccount;
-    @FXML private Button buttonGenerateAccount;
+    @FXML
+    private Button buttonDeleteAccount;
+    @FXML
+    private Button buttonChangeAccount;
+    @FXML
+    private Button buttonAddAccount;
+    @FXML
+    private Button buttonGenerateAccount;
 
-    @FXML private Button buttonShowAllAccounts;
-    @FXML private Button buttonShowAllEmployers;
+    @FXML
+    private Button buttonShowAllAccounts;
+    @FXML
+    private Button buttonShowAllEmployers;
+    @FXML
+    private Button buttonLogOut;
 
-    @FXML private AccountInfo accountInfo;
-    @FXML private EmployeeInfo employeeInfo;
+    @FXML
+    private AccountInfo accountInfo;
+    @FXML
+    private EmployeeInfo employeeInfo;
 
-    @FXML private TableView tableView;
+    @FXML
+    private TableView tableView;
 
-    private AdminMenuModel adminMenuModel = AdminMenuModel.getInstance();
+    private AdminMenuModel model = AdminMenuModel.getInstance();
 
     @FXML
     public void initialize()
     {
-        listViewAccounts.setItems(FXCollections.observableList(adminMenuModel.getListAccounts()));
+        listViewAccounts.setItems(FXCollections.observableList(model.getListAccounts()));
 
         listViewAccounts.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
         {
-            adminMenuModel.setSelectedAccount(newValue);
+            model.setSelectedAccount(newValue);
         });
 
         buttonShowAccountInfo.setOnAction(event ->
@@ -58,9 +73,13 @@ public class AdminMenuController
             employeeInfo.setOpacity(0.0);
             accountInfo.setOpacity(1.0);
 
-            if (adminMenuModel.getSelectedAccount() != null)
+            if (model.getSelectedAccount() != null)
             {
-                accountInfo.setAccount(adminMenuModel.getSelectedAccount());
+                accountInfo.setAccount(model.getSelectedAccount());
+            }
+            else
+            {
+                showInformationMessage("Select account in left-side list");
             }
         });
 
@@ -70,9 +89,20 @@ public class AdminMenuController
             accountInfo.setOpacity(0.0);
             employeeInfo.setOpacity(1.0);
 
-            if (adminMenuModel.getSelectedAccount() != null && adminMenuModel.getSelectedAccount().getEmployee() != null)
+            if (model.getSelectedAccount() != null)
             {
-                employeeInfo.setEmployee(adminMenuModel.getSelectedAccount().getEmployee());
+                if (model.getSelectedAccount().getEmployee() != null)
+                {
+                    employeeInfo.setEmployee(model.getSelectedAccount().getEmployee());
+                }
+                else
+                {
+                    showInformationMessage("Selected account does not refer to any employee");
+                }
+            }
+            else
+            {
+                showInformationMessage("Select account in left-side list");
             }
         });
 
@@ -82,7 +112,7 @@ public class AdminMenuController
             accountInfo.setOpacity(0.0);
             tableView.setOpacity(1.0);
 
-            tableView.setItems(FXCollections.observableList(adminMenuModel.getListAccounts()));
+            tableView.setItems(FXCollections.observableList(model.getListAccounts()));
 
             tableView.getColumns().clear();
             for (Field field : Account.class.getDeclaredFields())
@@ -99,7 +129,7 @@ public class AdminMenuController
             accountInfo.setOpacity(0.0);
             tableView.setOpacity(1.0);
 
-            tableView.setItems(FXCollections.observableList(adminMenuModel.getListEmployers()));
+            tableView.setItems(FXCollections.observableList(model.getListEmployers()));
 
             tableView.getColumns().clear();
             for (Field field : Employee.class.getDeclaredFields())
@@ -124,24 +154,68 @@ public class AdminMenuController
 
         buttonChangeAccount.setOnAction(event ->
         {
-            try
+            if (model.getSelectedAccount() != null)
             {
-                Main.getInstance().replaceSceneContent("/fxml-files/admin-change-account-menu.fxml");
-            }
-            catch (IOException e)
-            {
+                try
+                {
+                    Main.getInstance().replaceSceneContent("/fxml-files/admin-change-account-menu.fxml");
+                }
+                catch (IOException e)
+                {
 
+                }
+            }
+            else
+            {
+                showInformationMessage("Select account in left-side list");
             }
         });
 
         buttonDeleteAccount.setOnAction(event ->
         {
-            adminMenuModel.deleteAccount();
+            if (model.getSelectedAccount() != null)
+            {
+                model.deleteAccount();
+            }
+            else
+            {
+                showInformationMessage("Select account in left-side list");
+            }
         });
 
         buttonGenerateAccount.setOnAction(event ->
         {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Open resource File");
+
+            FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Json files", "*.json");
+
+            fileChooser.getExtensionFilters().add(filter);
+            fileChooser.setSelectedExtensionFilter(filter);
+
+            File file = fileChooser.showOpenDialog(null);
+
+            if (file != null)
+            {
+                try
+                {
+                    model.generateAccount(file.getAbsolutePath());
+                }
+                catch (IOException | MessagingException e)
+                {
+
+                }
+            }
+        });
+
+        buttonLogOut.setOnAction(event ->
+        {
 
         });
+    }
+
+    public void showInformationMessage(String message)
+    {
+        new Alert(Alert.AlertType.INFORMATION, message, ButtonType.OK).show();
     }
 }

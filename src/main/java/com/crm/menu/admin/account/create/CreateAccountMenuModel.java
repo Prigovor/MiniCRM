@@ -12,6 +12,9 @@ import com.crm.entity.account.Account;
 import com.crm.managers.PasswordManager;
 import com.crm.service.account.AccountService;
 import com.crm.service.account.AccountServiceImpl;
+import com.crm.service.account.CreateAccountException;
+import com.crm.service.employee.EmployeeService;
+import com.crm.service.employee.EmployeeServiceImpl;
 
 import java.io.IOException;
 
@@ -23,9 +26,17 @@ public class CreateAccountMenuModel
     private Account account = new Account();
     private Employee employee = new Employee();
 
+    private AccountService accountService = new AccountServiceImpl();
+    private EmployeeService employeeService = new EmployeeServiceImpl();
+
     public Account getAccount()
     {
         return account;
+    }
+
+    public void setAccount(Account account)
+    {
+        this.account = account;
     }
 
     public Employee getEmployee()
@@ -33,70 +44,44 @@ public class CreateAccountMenuModel
         return employee;
     }
 
-    private AccountDAO accountDAO = new AccountDAOImpl();
-    private EmployeeDAO employeeDAO = new EmployeeDAOImpl();
-
-    private AccountService accountService = new AccountServiceImpl();
-
-    public void createAccount() throws CreateAccountException, IOException
+    public void setEmployee(Employee employee)
     {
-        if (!account.getLogin().isEmpty() && !account.getPassword().isEmpty())
-        {
-            for (Account accountEntry : accountDAO.findAll())
-            {
-                if (accountEntry.getLogin().equals(account.getLogin()) || accountEntry.getPassword().equals(account.getPassword()))
-                {
-                    throw new CreateAccountException("Account with such login or password already exists");
-                }
-            }
-
-            if (!employee.getName().isEmpty() && !employee.getSurname().isEmpty())
-            {
-                switch (employee.getPosition())
-                {
-                    case COURIER:
-                    {
-                        Courier courier = new Courier(employee.getName(), employee.getSurname(),
-                                employee.getAge(), employee.getGender(), CourierStatus.FREE);
-
-                        FactoryDAO.getCourierDAO().createCourier(courier);
-                        account.setEmployee(courier);
-
-                        break;
-                    }
-                    default:
-                    {
-                        employeeDAO.createEmployee(employee);
-                        account.setEmployee(employee);
-
-                        break;
-                    }
-                }
-
-                accountService.createAccount(account);
-            }
-            else
-            {
-                throw new CreateAccountException("Enter name and surname of employee");
-            }
-        }
-        else
-        {
-            throw new CreateAccountException("Enter login and password");
-        }
+        this.employee = employee;
     }
 
+    public void createAccount() throws CreateAccountException
+    {
+        switch (employee.getPosition())
+        {
+            case COURIER:
+            {
+                Courier courier = new Courier(employee.getName(), employee.getSurname(),
+                        employee.getAge(), employee.getGender(), CourierStatus.FREE);
+
+                FactoryDAO.getCourierDAO().createCourier(courier);
+                account.setEmployee(courier);
+
+                break;
+            }
+            default:
+            {
+                employeeService.createEmployee(employee);
+                account.setEmployee(employee);
+
+                break;
+            }
+        }
+
+        accountService.createAccount(account);
+    }
 
     public String generatePassword(int length)
     {
         String password = PasswordManager.getInstance().generatePassword(length);
 
-        for (Account accountEntry : accountDAO.findAll())
+        if (accountService.getAccountByField("password", password) != null)
         {
-            if (password.equals(accountEntry.getPassword()))
-            {
-                password = PasswordManager.getInstance().generatePassword(length);
-            }
+            password = PasswordManager.getInstance().generatePassword(length);
         }
 
         return password;

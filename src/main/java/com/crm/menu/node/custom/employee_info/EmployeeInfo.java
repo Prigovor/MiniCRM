@@ -23,8 +23,8 @@ public class EmployeeInfo extends AnchorPane
     public TextField textFieldPhone;
     public TextField textFieldAge;
 
-    public ChoiceBox choiceBoxGender;
-    public ChoiceBox choiceBoxPosition;
+    public ChoiceBox<Gender> choiceBoxGender;
+    public ChoiceBox<PositionType> choiceBoxPosition;
 
     private Employee employee;
 
@@ -41,7 +41,11 @@ public class EmployeeInfo extends AnchorPane
         textFieldSurname.setText(employee.getSurname());
         textFieldEmail.setText(employee.getEmail());
         textFieldPhone.setText(employee.getPhone());
-        textFieldAge.setText(String.valueOf(employee.getAge()));
+
+        if (employee.getAge() != null)
+        {
+            textFieldAge.setText(String.valueOf(employee.getAge()));
+        }
 
         choiceBoxGender.setValue(employee.getGender());
         choiceBoxPosition.setValue(employee.getPosition());
@@ -64,5 +68,26 @@ public class EmployeeInfo extends AnchorPane
         {
             throw new RuntimeException(e);
         }
+    }
+
+    public void applyChanges()
+    {
+        employee.setName(textFieldName.getText());
+        employee.setSurname(textFieldSurname.getText());
+        employee.setEmail(textFieldEmail.getText());
+
+        try
+        {
+            employee.setAge(Integer.valueOf(textFieldAge.getText()));
+        }
+        catch (NumberFormatException e)
+        {
+
+        }
+
+        employee.setPhone(textFieldPhone.getText());
+
+        employee.setGender(choiceBoxGender.getValue());
+        employee.setPosition(choiceBoxPosition.getValue());
     }
 }
