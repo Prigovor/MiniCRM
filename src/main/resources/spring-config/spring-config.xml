@@ -10,15 +10,13 @@
     <bean class="com.crm.entity.account.Account" id="accountAdmin">
         <property name="login" value="admin"/>
         <property name="password" value="admin"/>
-        <property name="question" value="What is your name?"/>
-        <property name="answer" value="admin"/>
         <property name="rightType" value="ADMIN"/>
         <property name="lockType" value="UNLOCKED"/>
         <property name="email" value="imrahill120@gmail.com"/>
 
         <property name="registrationDate">
             <bean factory-bean="dateFormat" factory-method="parse">
-                <constructor-arg value="2017-02-20"></constructor-arg>
+                <constructor-arg value="2017-02-13"></constructor-arg>
             </bean>
         </property>
     </bean>
@@ -28,6 +26,7 @@
         <property name="password" value="alan"/>
         <property name="rightType" value="USER"/>
         <property name="lockType" value="UNLOCKED"/>
+        <property name="email" value="alan@gmail.com"/>
         <property name="employee" ref="employeeAlan"/>
 
         <property name="registrationDate">
@@ -43,6 +42,8 @@
         <property name="age" value="24"/>
         <property name="gender" value="MALE"/>
         <property name="position" value="MANAGER"/>
+        <property name="email" value="alan@gmail.com"/>
+        <property name="phone" value="+1935511234"/>
     </bean>
 
     <bean class="com.crm.entity.courier.Courier" id="courierJane">

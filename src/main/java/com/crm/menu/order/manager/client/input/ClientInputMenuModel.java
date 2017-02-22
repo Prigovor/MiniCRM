@@ -3,7 +3,7 @@ package com.crm.menu.order.manager.client.input;
 import com.crm.entity.client.Client;
 import com.crm.main.Main;
 import com.crm.menu.order.manager.OrderManagerMenuModel;
-import com.crm.service.UserExistsException;
+import com.crm.service.AccountExistsException;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -15,7 +15,7 @@ public class ClientInputMenuModel
 {
     private Client client = OrderManagerMenuModel.getInstance().getClient();
 
-    public void confirm(String name, String surname, String email, String phone) throws UserExistsException, MessagingException
+    public void confirm(String name, String surname, String email, String phone) throws AccountExistsException, MessagingException
     {
         client.setName(name);
         client.setSurname(surname);

@@ -6,14 +6,11 @@ import com.crm.dao.account.AccountDAO;
 import com.crm.dao.account.AccountDAOImpl;
 import com.crm.entity.employee.Employee;
 import com.crm.entity.account.Account;
-import com.crm.main.Main;
 import com.crm.main.MainModel;
 import com.crm.managers.PasswordManager;
 import com.crm.menu.admin.account.create.CreateAccountException;
-import com.crm.menu.admin.AdminMenuController;
-import com.crm.service.UserValidationException;
-import com.crm.service.user.AccountService;
-import com.crm.service.user.AccountServiceImpl;
+import com.crm.service.account.AccountService;
+import com.crm.service.account.AccountServiceImpl;
 
 import java.io.IOException;
 
@@ -48,19 +45,18 @@ public class ChangeAccountMenuModel
         return employee;
     }
 
-    public void changeAccount() throws CreateAccountException, IOException, UserValidationException
+    public void changeAccount() throws CreateAccountException, IOException
     {
         if (!employee.getName().isEmpty() && !employee.getSurname().isEmpty())
         {
             employeeDAO.updateEmployee(employee);
             account.setEmployee(employee);
-            accountService.updateUser(account);
+            accountService.updateAccount(account);
 
             if (MainModel.getInstance().getCurrentAccount().getId().equals(account.getId()))
             {
                 MainModel.getInstance().setCurrentAccount(account);
             }
-            Main.getInstance().replaceSceneContent(new AdminMenuController());
         }
         else
         {

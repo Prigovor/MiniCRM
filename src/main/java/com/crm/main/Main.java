@@ -1,11 +1,15 @@
 package com.crm.main;
 
+import com.crm.dao.FactoryDAO;
+import com.crm.entity.account.Account;
+import com.crm.entity.courier.Courier;
+import com.crm.entity.good.Good;
 import com.crm.menu.Controller;
-import com.crm.menu.authorization.AuthorizationMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.io.IOException;
 
@@ -33,9 +37,7 @@ public class Main extends Application
     {
         this.primaryStage = primaryStage;
 
-        replaceSceneContent(new AuthorizationMenuController());
-
-        primaryStage.getScene().getStylesheets().addAll("/css-styles/mini-crm.css");
+        replaceSceneContent("/fxml-files/admin-main-menu.fxml");
 
         primaryStage.setTitle("MiniCRM");
         primaryStage.setMaximized(true);
@@ -92,6 +94,17 @@ public class Main extends Application
 
     public static void main(String[] args)
     {
+        GenericXmlApplicationContext context = new GenericXmlApplicationContext("/spring-config/spring-config.xml");
+
+        FactoryDAO.getAccountDAO().createAccount(context.getBean("accountAdmin", Account.class));
+        FactoryDAO.getAccountDAO().createAccount(context.getBean("accountManagerAlan", Account.class));
+
+        FactoryDAO.getCourierDAO().createCourier(context.getBean("courierJane", Courier.class));
+
+        FactoryDAO.getGoodDAO().createGood(context.getBean("goodLaptopHP", Good.class));
+        FactoryDAO.getGoodDAO().createGood(context.getBean("goodLaptopAcer", Good.class));
+        FactoryDAO.getGoodDAO().createGood(context.getBean("goodLaptopAsus", Good.class));
+
         launch(args);
     }
 }

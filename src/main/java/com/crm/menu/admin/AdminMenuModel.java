@@ -1,14 +1,11 @@
 package com.crm.menu.admin;
 
-import com.crm.dao.account.AccountDAO;
-import com.crm.dao.account.AccountDAOImpl;
 import com.crm.entity.employee.Employee;
 import com.crm.entity.account.Account;
-import com.crm.service.UserValidationException;
 import com.crm.service.employee.EmployeeService;
 import com.crm.service.employee.EmployeeServiceImpl;
-import com.crm.service.user.AccountService;
-import com.crm.service.user.AccountServiceImpl;
+import com.crm.service.account.AccountService;
+import com.crm.service.account.AccountServiceImpl;
 
 import javax.mail.MessagingException;
 import java.util.List;
@@ -18,27 +15,22 @@ import java.util.List;
  */
 public class AdminMenuModel
 {
-    private AccountDAO accountDAO = new AccountDAOImpl();
+    private static final AdminMenuModel instance = new AdminMenuModel();
+
+    public static AdminMenuModel getInstance()
+    {
+        return instance;
+    }
+
+    private AdminMenuModel()
+    {
+
+    }
 
     private AccountService accountService = new AccountServiceImpl();
     private EmployeeService employeeService = new EmployeeServiceImpl();
 
     private Account selectedAccount;
-
-    public List<Account> getListUsers()
-    {
-        return accountDAO.findAll();
-    }
-
-    public List<Account> secureGetListUsers() throws UserValidationException
-    {
-        return accountService.findAll();
-    }
-
-    public List<Employee> secureGetListEmployers() throws UserValidationException
-    {
-        return employeeService.findAll();
-    }
 
     public Account getSelectedAccount()
     {
@@ -50,19 +42,24 @@ public class AdminMenuModel
         this.selectedAccount = selectedAccount;
     }
 
-    public void validateUser() throws UserValidationException
+    public List<Account> getListAccounts()
     {
-        accountService.validateUser();
+        return accountService.findAll();
     }
 
-    public void deleteUser(Account account) throws UserValidationException
+    public List<Employee> getListEmployers()
     {
-        accountService.deleteUser(account.getId());
+        return employeeService.findAll();
+    }
+
+    public void deleteAccount(Account account)
+    {
+        accountService.deleteAccount(account.getId());
         selectedAccount = null;
     }
 
-    public void generateUser(Employee employee) throws UserValidationException, MessagingException
+    public void generateAccount(Employee employee) throws MessagingException
     {
-        accountService.generateUserFromEmployee(employee);
+        accountService.generateAccountFromEmployee(employee);
     }
 }

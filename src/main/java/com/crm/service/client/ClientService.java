@@ -1,7 +1,7 @@
 package com.crm.service.client;
 
 import com.crm.entity.client.Client;
-import com.crm.service.UserExistsException;
+import com.crm.service.AccountExistsException;
 
 import javax.mail.MessagingException;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface ClientService {
 
-    Long createClient(Client client) throws UserExistsException;
+    Long createClient(Client client) throws AccountExistsException;
 
     Client readClient(Long id);
 
@@ -23,5 +23,5 @@ public interface ClientService {
 
     Client getEntryByField(String fieldName, Object fieldValue);
 
-    Long generateClient(Client client) throws MessagingException, UserExistsException;
+    Long generateClient(Client client) throws MessagingException, AccountExistsException;
 }

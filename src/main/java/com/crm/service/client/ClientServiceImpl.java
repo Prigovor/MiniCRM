@@ -5,7 +5,7 @@ import com.crm.dao.client.ClientDAO;
 import com.crm.entity.client.Client;
 import com.crm.managers.EmailManager;
 import com.crm.managers.PasswordManager;
-import com.crm.service.UserExistsException;
+import com.crm.service.AccountExistsException;
 
 import javax.mail.MessagingException;
 import java.util.List;
@@ -18,11 +18,11 @@ public class ClientServiceImpl implements ClientService
     private ClientDAO clientDAO = FactoryDAO.getClientDAO();
 
     @Override
-    public Long createClient(Client client) throws UserExistsException
+    public Long createClient(Client client) throws AccountExistsException
     {
         if (getEntryByField("email", client.getEmail()) != null)
         {
-            throw new UserExistsException("Client with such email is registered");
+            throw new AccountExistsException("Client with such email is registered");
         }
 
         return clientDAO.createClient(client);
@@ -58,7 +58,7 @@ public class ClientServiceImpl implements ClientService
         return clientDAO.getEntryByField(fieldName, fieldValue);
     }
 
-    public Long generateClient(Client client) throws MessagingException, UserExistsException
+    public Long generateClient(Client client) throws MessagingException, AccountExistsException
     {
         Client clientEntry = new Client();
 

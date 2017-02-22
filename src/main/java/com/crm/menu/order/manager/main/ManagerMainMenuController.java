@@ -1,7 +1,6 @@
 package com.crm.menu.order.manager.main;
 
 import com.crm.main.Main;
-import com.crm.menu.authorization.AuthorizationMenuController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -32,7 +31,7 @@ public class ManagerMainMenuController
 
         buttonLogOut.setOnAction(event ->
         {
-            Main.getInstance().replaceSceneContent(new AuthorizationMenuController());
+
         });
     }
 }

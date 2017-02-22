@@ -66,7 +66,7 @@ public class CourierManager
             {
                 try
                 {
-                    EmailManager.getInstance().sendMessage(order.getCourier().getWorkEmail(),
+                    EmailManager.getInstance().sendMessage(order.getCourier().getEmail(),
                             "Order delivery",
                             String.format("Your order number is %s. You should deliver it on %s at %s",
                                     order.getId(), order.getAddress(), order.getReceiveDate()));

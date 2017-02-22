@@ -8,7 +8,6 @@ import com.crm.entity.good.Good;
 import com.crm.entity.account.Account;
 import com.crm.main.MainModel;
 import com.crm.managers.EmailManager;
-import com.crm.service.UserValidationException;
 import javafx.scene.control.TextInputDialog;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
@@ -29,22 +28,6 @@ public class AuthorizationMenuModel
 
     public AuthorizationMenuModel()
     {
-        Thread thread = new Thread(() ->
-        {
-            GenericXmlApplicationContext context = new GenericXmlApplicationContext("/spring-config/spring-config.xml");
-
-            FactoryDAO.getAccountDAO().createAccount(context.getBean("accountAdmin", Account.class));
-            FactoryDAO.getAccountDAO().createAccount(context.getBean("accountManagerAlan", Account.class));
-
-            FactoryDAO.getCourierDAO().createCourier(context.getBean("courierJane", Courier.class));
-
-            FactoryDAO.getGoodDAO().createGood(context.getBean("goodLaptopHP", Good.class));
-            FactoryDAO.getGoodDAO().createGood(context.getBean("goodLaptopAcer", Good.class));
-            FactoryDAO.getGoodDAO().createGood(context.getBean("goodLaptopAsus", Good.class));
-        });
-
-        thread.setDaemon(true);
-        thread.start();
     }
 
     public AuthorizationResult authorize(String login, String password) throws IOException
@@ -82,7 +65,7 @@ public class AuthorizationMenuModel
         return AuthorizationResult.INCORRECT_LOGIN_PASSWORD;
     }
 
-    public void remindPassword() throws MessagingException, UserValidationException
+    public void remindPassword() throws Exception
     {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Password sending");
@@ -109,10 +92,10 @@ public class AuthorizationMenuModel
             }
             else
             {
-                throw new UserValidationException("Account with such email is not registered");
+                throw new Exception("Account with such email is not registered");
             }
         }
 
-        throw new UserValidationException("Account with such email is not registered");
+        throw new Exception("Account with such email is not registered");
     }
 }

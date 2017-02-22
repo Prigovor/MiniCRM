@@ -14,7 +14,6 @@ public class JSONSample {
         Employee employee = new Employee();
         employee.setName("Lora");
         employee.setSurname("Rouslin");
-        employee.setWorkEmail("imrahill120@gmail.com");
 
         try {
             JsonFileManager.serializeToJsonFile(employee, "D:\\lora.json");

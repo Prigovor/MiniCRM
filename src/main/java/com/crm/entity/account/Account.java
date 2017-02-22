@@ -39,12 +39,6 @@ public class Account
     @Column(name = "LOCK_TYPE")
     private LockType lockType;
 
-    @Column(name = "SECURITY_QUESTION")
-    private String question;
-
-    @Column(name = "ANSWER_TO_QUESTION")
-    private String answer;
-
     @Temporal(value = TemporalType.DATE)
     @Column(name = "REGISTRATION_DATE")
     private Date registrationDate;
@@ -119,26 +113,6 @@ public class Account
     public void setLockType(LockType lockType)
     {
         this.lockType = lockType;
-    }
-
-    public String getQuestion()
-    {
-        return question;
-    }
-
-    public void setQuestion(String question)
-    {
-        this.question = question;
-    }
-
-    public String getAnswer()
-    {
-        return answer;
-    }
-
-    public void setAnswer(String answer)
-    {
-        this.answer = answer;
     }
 
     public Date getRegistrationDate()

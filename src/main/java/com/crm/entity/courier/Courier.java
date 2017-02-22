@@ -10,19 +10,21 @@ import javax.persistence.*;
  * Created by Prigovor on 16.02.2017.
  */
 @Entity
-@Table(name = "COURIER")
+@Table(name = "COURIERS")
 public class Courier extends Employee
 {
     @Enumerated(EnumType.STRING)
     @Column(name = "STATUS")
     private CourierStatus courierStatus;
 
-    public Courier() {
+    public Courier()
+    {
         setPosition(PositionType.COURIER);
         setCourierStatus(CourierStatus.FREE);
     }
 
-    public Courier(String name, String surname, Integer age, Gender gender, CourierStatus courierStatus) {
+    public Courier(String name, String surname, Integer age, Gender gender, CourierStatus courierStatus)
+    {
         setName(name);
         setSurname(surname);
         setAge(age);
@@ -33,11 +35,13 @@ public class Courier extends Employee
         this.courierStatus = courierStatus;
     }
 
-    public CourierStatus getCourierStatus() {
+    public CourierStatus getCourierStatus()
+    {
         return courierStatus;
     }
 
-    public void setCourierStatus(CourierStatus courierStatus) {
+    public void setCourierStatus(CourierStatus courierStatus)
+    {
         this.courierStatus = courierStatus;
     }
 

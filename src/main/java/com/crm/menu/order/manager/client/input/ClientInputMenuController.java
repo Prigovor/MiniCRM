@@ -1,7 +1,7 @@
 package com.crm.menu.order.manager.client.input;
 
 import com.crm.menu.order.manager.OrderManagerMenuModel;
-import com.crm.service.UserExistsException;
+import com.crm.service.AccountExistsException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -44,7 +44,7 @@ public class ClientInputMenuController
         {
             model.confirm(textFieldName.getText(), textFieldSurname.getText(), textFieldEmail.getText(), textFieldPhone.getText());
         }
-        catch (UserExistsException | MessagingException e)
+        catch (AccountExistsException | MessagingException e)
         {
             new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK).showAndWait();
         }

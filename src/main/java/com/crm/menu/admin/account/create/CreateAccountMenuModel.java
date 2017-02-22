@@ -9,12 +9,9 @@ import com.crm.entity.employee.Employee;
 import com.crm.entity.courier.Courier;
 import com.crm.entity.courier.CourierStatus;
 import com.crm.entity.account.Account;
-import com.crm.main.Main;
 import com.crm.managers.PasswordManager;
-import com.crm.menu.admin.AdminMenuController;
-import com.crm.service.UserValidationException;
-import com.crm.service.user.AccountService;
-import com.crm.service.user.AccountServiceImpl;
+import com.crm.service.account.AccountService;
+import com.crm.service.account.AccountServiceImpl;
 
 import java.io.IOException;
 
@@ -41,7 +38,7 @@ public class CreateAccountMenuModel
 
     private AccountService accountService = new AccountServiceImpl();
 
-    public void createAccount() throws CreateAccountException, IOException, UserValidationException
+    public void createAccount() throws CreateAccountException, IOException
     {
         if (!account.getLogin().isEmpty() && !account.getPassword().isEmpty())
         {
@@ -76,8 +73,7 @@ public class CreateAccountMenuModel
                     }
                 }
 
-                accountService.createUser(account);
-                Main.getInstance().replaceSceneContent(new AdminMenuController());
+                accountService.createAccount(account);
             }
             else
             {

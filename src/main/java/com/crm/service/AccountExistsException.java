@@ -3,9 +3,9 @@ package com.crm.service;
 /**
  * Created by Bohdan on 16.02.2017.
  */
-public class UserExistsException extends Exception
+public class AccountExistsException extends Exception
 {
-    public UserExistsException(String message)
+    public AccountExistsException(String message)
     {
         super(message);
     }

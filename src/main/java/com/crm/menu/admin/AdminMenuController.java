@@ -1,196 +1,105 @@
 package com.crm.menu.admin;
 
-import com.crm.entity.employee.Employee;
 import com.crm.entity.account.Account;
-import com.crm.main.Main;
-import com.crm.managers.JsonFileManager;
-import com.crm.menu.Controller;
-import com.crm.menu.admin.account.change.ChangeAccountMenuController;
-import com.crm.menu.admin.account.create.CreateAccountMenuController;
-import com.crm.service.UserValidationException;
+import com.crm.entity.employee.Employee;
+import com.crm.menu.node.custom.account_info.AccountInfo;
+import com.crm.menu.node.custom.employee_info.EmployeeInfo;
 import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.FileChooser;
+import javafx.scene.control.TableView;
 
-import javax.mail.MessagingException;
-import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Field;
 
 /**
- * Created by Жека on 2/5/2017.
+ * Created by Bohdan on 22.02.2017.
  */
-public class AdminMenuController implements Controller
+
+public class AdminMenuController
 {
-    private AdminMenuModel model = new AdminMenuModel();
-    private AdminMenuView view = new AdminMenuView(this);
+    @FXML private ListView<Account> listViewAccounts;
 
-    @Override
-    public AdminMenuView getView()
-    {
-        return view;
-    }
+    @FXML private Button buttonShowAccountInfo;
+    @FXML private Button buttonShowEmployeeInfo;
 
-    public AdminMenuModel getModel()
-    {
-        return model;
-    }
+    @FXML private Button buttonDeleteAccount;
+    @FXML private Button buttonChangeAccount;
+    @FXML private Button buttonAddAccount;
+    @FXML private Button buttonGenerateAccount;
 
-    public AdminMenuController()
-    {
-        showListUsers();
-    }
+    @FXML private Button buttonShowAllAccounts;
+    @FXML private Button buttonShowAllEmployers;
 
-    public void showListUsers()
-    {
-        view.getUserListView().setItems(FXCollections.observableList(model.getListUsers()));
-    }
+    @FXML private AccountInfo accountInfo;
+    @FXML private EmployeeInfo employeeInfo;
 
-    public void showUserInfo()
+    @FXML private TableView tableView;
+
+    private AdminMenuModel adminMenuModel = AdminMenuModel.getInstance();
+
+    @FXML
+    public void initialize()
     {
-        if (view.getUserListView().getSelectionModel().getSelectedItem() != null)
+        listViewAccounts.setItems(FXCollections.observableList(adminMenuModel.getListAccounts()));
+
+        listViewAccounts.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
         {
-            try
+            adminMenuModel.setSelectedAccount(newValue);
+        });
+
+        buttonShowAccountInfo.setOnAction(event ->
+        {
+            tableView.setOpacity(0.0);
+            employeeInfo.setOpacity(0.0);
+            accountInfo.setOpacity(1.0);
+
+            if (adminMenuModel.getSelectedAccount() != null)
             {
-                model.validateUser();
-                view.getAccountInfo().setAccount(view.getUserListView().getSelectionModel().getSelectedItem());
+                accountInfo.setAccount(adminMenuModel.getSelectedAccount());
             }
-            catch (UserValidationException e)
+        });
+
+        buttonShowEmployeeInfo.setOnAction(event ->
+        {
+            tableView.setOpacity(0.0);
+            accountInfo.setOpacity(0.0);
+            employeeInfo.setOpacity(1.0);
+
+            if (adminMenuModel.getSelectedAccount() != null && adminMenuModel.getSelectedAccount().getEmployee() != null)
             {
-                view.getAccountInfo().setDisable(true);
-                view.getAccountInfo().cleanTextFields();
-
-                view.showInformationMessage(e.getMessage());
+                employeeInfo.setEmployee(adminMenuModel.getSelectedAccount().getEmployee());
             }
-        }
-        else
+        });
+
+        buttonShowAllAccounts.setOnAction(event ->
         {
-            view.getAccountInfo().setDisable(true);
-            view.getAccountInfo().cleanTextFields();
+            employeeInfo.setOpacity(0.0);
+            accountInfo.setOpacity(0.0);
+            tableView.setOpacity(1.0);
 
-            view.showInformationMessage("Select account in left-side list");
-        }
-    }
-
-    public void showTableUsers()
-    {
-        try
-        {
-            view.getTableView().setItems(FXCollections.observableList(model.secureGetListUsers()));
-
-            view.getTableView().getColumns().clear();
-
+            tableView.getColumns().clear();
             for (Field field : Account.class.getDeclaredFields())
             {
                 TableColumn tableColumn = new TableColumn(field.getName());
-                view.getTableView().getColumns().add(tableColumn);
-                tableColumn.setCellValueFactory(new PropertyValueFactory(field.getName()));
+                tableView.getColumns().add(tableColumn);
             }
-        }
-        catch (UserValidationException e)
+        });
+
+        buttonShowAllEmployers.setOnAction(event ->
         {
-            view.showInformationMessage(e.getMessage());
-        }
-    }
 
-    public void showTableEmployers()
-    {
-        try
-        {
-            view.getTableView().setItems(FXCollections.observableList(model.secureGetListEmployers()));
+            employeeInfo.setOpacity(0.0);
+            accountInfo.setOpacity(0.0);
+            tableView.setOpacity(1.0);
 
-            view.getTableView().getColumns().clear();
-
+            tableView.getColumns().clear();
             for (Field field : Employee.class.getDeclaredFields())
             {
                 TableColumn tableColumn = new TableColumn(field.getName());
-                view.getTableView().getColumns().add(tableColumn);
-                tableColumn.setCellValueFactory(new PropertyValueFactory(field.getName()));
+                tableView.getColumns().add(tableColumn);
             }
-        }
-        catch (UserValidationException e)
-        {
-            view.showInformationMessage(e.getMessage());
-        }
-    }
-
-    public void addUser()
-    {
-        try
-        {
-            model.validateUser();
-            Main.getInstance().replaceSceneContent(new CreateAccountMenuController());
-        }
-        catch (UserValidationException e)
-        {
-            view.showInformationMessage(e.getMessage());
-        }
-    }
-
-    public void changeUser()
-    {
-        if (model.getSelectedAccount() != null)
-        {
-            try
-            {
-                model.validateUser();
-                Main.getInstance().replaceSceneContent(new ChangeAccountMenuController(model.getSelectedAccount()));
-            }
-            catch (UserValidationException e)
-            {
-                view.showInformationMessage(e.getMessage());
-            }
-        }
-        else
-        {
-            view.showInformationMessage("Select account in left-side list");
-        }
-    }
-
-    public void deleteUser()
-    {
-        if (model.getSelectedAccount() != null)
-        {
-            try
-            {
-                model.deleteUser(model.getSelectedAccount());
-                showListUsers();
-            }
-            catch (UserValidationException e)
-            {
-                view.showInformationMessage(e.getMessage());
-            }
-        }
-        else
-        {
-            view.showInformationMessage("Select account in left-side list");
-        }
-    }
-
-    public void generateUser()
-    {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open resource File");
-
-        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Json files", "*.json");
-
-        fileChooser.getExtensionFilters().add(filter);
-        fileChooser.setSelectedExtensionFilter(filter);
-
-        File file = fileChooser.showOpenDialog(view.getParent().getScene().getWindow());
-
-        if (file != null)
-        {
-            try
-            {
-                model.generateUser(JsonFileManager.deserializeFromJsonFile(Employee.class, file.getAbsolutePath()));
-                showListUsers();
-            }
-            catch (IOException | UserValidationException | MessagingException e)
-            {
-                view.showInformationMessage(e.getMessage());
-            }
-        }
+        });
     }
 }

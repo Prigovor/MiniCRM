@@ -9,8 +9,8 @@ import javax.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "EMPLOYEES")
-public class Employee {
-
+public class Employee
+{
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,13 +32,18 @@ public class Employee {
     @Column(name = "POSITION")
     private PositionType position;
 
-    @Column(name = "WORK_EMAIL")
-    private String workEmail;
+    @Column(name = "PHONE")
+    private String phone;
 
-    public Employee() {
+    @Column(name = "EMAIL")
+    private String email;
+
+    public Employee()
+    {
     }
 
-    public Employee(String name, String surname, Integer age, Gender gender, PositionType position) {
+    public Employee(String name, String surname, Integer age, Gender gender, PositionType position)
+    {
         this.name = name;
         this.surname = surname;
         this.age = age;
@@ -46,67 +51,89 @@ public class Employee {
         this.position = position;
     }
 
-    public Long getId() {
+    public Long getId()
+    {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Long id)
+    {
         this.id = id;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-    public String getSurname() {
+    public String getSurname()
+    {
         return surname;
     }
 
-    public void setSurname(String surname) {
+    public void setSurname(String surname)
+    {
         this.surname = surname;
     }
 
-    public Integer getAge() {
+    public Integer getAge()
+    {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(Integer age)
+    {
         this.age = age;
     }
 
-    public Gender getGender() {
+    public Gender getGender()
+    {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(Gender gender)
+    {
         this.gender = gender;
     }
 
-    public PositionType getPosition() {
+    public PositionType getPosition()
+    {
         return position;
     }
 
-    public void setPosition(PositionType position) {
+    public void setPosition(PositionType position)
+    {
         this.position = position;
+    }
+
+    public String getPhone()
+    {
+        return phone;
+    }
+
+    public void setPhone(String phone)
+    {
+        this.phone = phone;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
     }
 
     @Override
     public String toString()
     {
         return id.toString();
-    }
-
-    public String getWorkEmail()
-    {
-        return workEmail;
-    }
-
-    public void setWorkEmail(String workEmail)
-    {
-        this.workEmail = workEmail;
     }
 }
