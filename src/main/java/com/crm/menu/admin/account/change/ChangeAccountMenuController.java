@@ -2,8 +2,8 @@ package com.crm.menu.admin.account.change;
 
 import com.crm.main.Main;
 import com.crm.menu.admin.AdminMenuModel;
-import com.crm.menu.node.custom.account_info.AccountInfo;
-import com.crm.menu.node.custom.employee_info.EmployeeInfo;
+import com.crm.node_custom.account_info.AccountInfo;
+import com.crm.node_custom.employee_info.EmployeeInfo;
 import com.crm.service.account.CreateAccountException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -73,8 +73,8 @@ public class ChangeAccountMenuController
         {
             try
             {
-                accountInfo.applyChanges();
-                employeeInfo.applyChanges();
+                accountInfo.applyChangesToAccount();
+                employeeInfo.applyChangesToEmployee();
 
                 model.changeAccount();
                 Main.getInstance().replaceSceneContent("/fxml-files/admin-main-menu.fxml");

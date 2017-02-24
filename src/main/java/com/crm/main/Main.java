@@ -4,6 +4,7 @@ import com.crm.dao.FactoryDAO;
 import com.crm.entity.account.Account;
 import com.crm.entity.courier.Courier;
 import com.crm.entity.good.Good;
+import com.crm.entity.storekeeper.Storekeeper;
 import com.crm.menu.Controller;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -37,7 +38,7 @@ public class Main extends Application
     {
         this.primaryStage = primaryStage;
 
-        replaceSceneContent("/fxml-files/admin-main-menu.fxml");
+        replaceSceneContent("/fxml-files/authorization-menu.fxml");
 
         primaryStage.setTitle("MiniCRM");
         primaryStage.setMaximized(true);
@@ -98,6 +99,7 @@ public class Main extends Application
 
         FactoryDAO.getAccountDAO().createAccount(context.getBean("accountAdmin", Account.class));
         FactoryDAO.getAccountDAO().createAccount(context.getBean("accountManagerAlan", Account.class));
+        FactoryDAO.getAccountDAO().createAccount(context.getBean("accountStorekeeperJake", Account.class));
 
         FactoryDAO.getCourierDAO().createCourier(context.getBean("courierJane", Courier.class));
 

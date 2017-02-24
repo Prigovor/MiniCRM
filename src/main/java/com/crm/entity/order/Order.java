@@ -2,7 +2,7 @@ package com.crm.entity.order;
 
 import com.crm.entity.client.Client;
 import com.crm.entity.courier.Courier;
-import com.crm.entity.good.Good;
+import com.crm.entity.good.SelectedGood;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -42,8 +42,8 @@ public class Order {
     @JoinColumn(name = "COURIER_ID", referencedColumnName = "ID")
     private Courier courier;
 
-    @Transient
-    private List<Good> goods;
+    @OneToMany(targetEntity = SelectedGood.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<SelectedGood> goods;
 
     @Column(name = "ORDER_PRICE")
     private Double orderPrice;
@@ -51,7 +51,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Client client, Date registrationDate, Date receiveDate, String address, OrderStatus orderStatus, List<Good> goods, Double orderPrice) {
+    public Order(Client client, Date registrationDate, Date receiveDate, String address, OrderStatus orderStatus, List<SelectedGood> goods, Double orderPrice) {
         this.client = client;
         this.registrationDate = registrationDate;
         this.receiveDate = receiveDate;
@@ -109,11 +109,11 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
-    public List<Good> getGoods() {
+    public List<SelectedGood> getGoods() {
         return goods;
     }
 
-    public void setGoods(List<Good> goods) {
+    public void setGoods(List<SelectedGood> goods) {
         this.goods = goods;
     }
 
@@ -133,5 +133,16 @@ public class Order {
     public void setCourier(Courier courier)
     {
         this.courier = courier;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Order{" +
+                "id=" + id +
+                ", client=" + client +
+                ", orderStatus=" + orderStatus +
+                ", orderPrice=" + orderPrice +
+                '}';
     }
 }

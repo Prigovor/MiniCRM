@@ -7,6 +7,7 @@ import javax.persistence.*;
  */
 
 @Entity(name = "GOODS")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Good {
 
     @Id
@@ -84,7 +85,7 @@ public class Good {
         {
             return true;
         }
-        if (o == null || getClass() != o.getClass())
+        if (o == null || (!o.getClass().equals(Good.class) && !o.getClass().equals(SelectedGood.class)))
         {
             return false;
         }

@@ -3,7 +3,7 @@ package com.crm.entity.client;
 import com.crm.entity.order.Order;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by Prigovor on 14.02.2017.
@@ -36,8 +36,8 @@ public class Client {
     @Column(name = "EMAIL")
     private String email;
 
-    @OneToMany(targetEntity = Order.class, cascade = CascadeType.ALL)
-    private Set<Order> orders;
+    @OneToMany(targetEntity = Order.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Order> orders;
 
     public Client() {
     }
@@ -109,17 +109,17 @@ public class Client {
         this.email = email;
     }
 
-    public Set<Order> getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Order> orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
 
     @Override
     public String toString() {
-        return name;
+        return login;
     }
 
     /**

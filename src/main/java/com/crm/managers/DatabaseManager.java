@@ -4,12 +4,13 @@ import com.crm.entity.client.Client;
 import com.crm.entity.courier.Courier;
 import com.crm.entity.employee.Employee;
 import com.crm.entity.good.Good;
+import com.crm.entity.good.SelectedGood;
 import com.crm.entity.order.Order;
 import com.crm.entity.account.Account;
+import com.crm.entity.storekeeper.Storekeeper;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.SessionFactoryObserver;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
 
@@ -30,7 +31,7 @@ public final class DatabaseManager
     private DatabaseManager()
     {
         configure("hibernate.cfg.xml", Employee.class,
-                Account.class, Courier.class, Good.class, Order.class, Client.class);
+                Account.class, Courier.class, Good.class, SelectedGood.class,  Order.class,Client.class, Storekeeper.class);
     }
 
     private SessionFactory sessionFactory;

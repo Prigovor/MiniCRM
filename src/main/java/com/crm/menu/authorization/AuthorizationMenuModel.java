@@ -6,8 +6,10 @@ import com.crm.entity.account.LockType;
 import com.crm.entity.courier.Courier;
 import com.crm.entity.good.Good;
 import com.crm.entity.account.Account;
+import com.crm.main.Main;
 import com.crm.main.MainModel;
 import com.crm.managers.EmailManager;
+import com.crm.service.AccountExistsException;
 import javafx.scene.control.TextInputDialog;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
@@ -43,6 +45,43 @@ public class AuthorizationMenuModel
                     if (account.getPassword().equals(password))
                     {
                         MainModel.getInstance().setCurrentAccount(account);
+
+                        switch (account.getRightType())
+                        {
+                            case ADMIN:
+                            {
+                                Main.getInstance().replaceSceneContent("/fxml-files/admin-main-menu.fxml");
+                                break;
+                            }
+                            case SUPER:
+                            {
+                                break;
+                            }
+                            case USER:
+                            {
+                                switch (account.getEmployee().getPosition())
+                                {
+                                    case COURIER:
+                                    {
+                                        break;
+                                    }
+                                    case MANAGER:
+                                    {
+                                        Main.getInstance().replaceSceneContent("/fxml-files/order-manager-main-menu.fxml");
+                                        break;
+                                    }
+                                    case STOREKEEPER:
+                                    {
+                                        Main.getInstance().replaceSceneContent("/fxml-files/storekeeper-menu.fxml");
+                                    }
+                                    case CASHIER:
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
                         return AuthorizationResult.SUCCESSFUL;
                     }
                     else
@@ -65,7 +104,7 @@ public class AuthorizationMenuModel
         return AuthorizationResult.INCORRECT_LOGIN_PASSWORD;
     }
 
-    public void remindPassword() throws Exception
+    public void remindPassword() throws AccountExistsException
     {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Password sending");
@@ -92,10 +131,10 @@ public class AuthorizationMenuModel
             }
             else
             {
-                throw new Exception("Account with such email is not registered");
+                throw new AccountExistsException("Account with such email is not registered");
             }
         }
 
-        throw new Exception("Account with such email is not registered");
+        throw new AccountExistsException("Account with such email is not registered");
     }
 }
