@@ -19,4 +19,7 @@ public interface GoodService {
 
     List<Good> findAll();
 
+    Good getEntryByField(String fieldName, Object fieldValue);
+
+    List<Good> getEntriesByField(String fieldName, Object fieldValue);
 }

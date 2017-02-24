@@ -18,18 +18,16 @@ import java.util.List;
  */
 public class ChooseGoodsMenuModel
 {
-    private GoodService goodService = new GoodServiceImpl();
-
     private Order order = OrderManagerMenuModel.getInstance().getOrder();
 
-    private List<Good> listStoreGoods = new ArrayList<>();
+    private List<Good> listStoreGoods = OrderManagerMenuModel.getInstance().getListStoreGoods();
 
     public List<Good> getListStoreGoods()
     {
         return listStoreGoods;
     }
 
-    private List<SelectedGood> listChosenGoods = new ArrayList<>();
+    private List<SelectedGood> listChosenGoods = OrderManagerMenuModel.getInstance().getListChosenGoods();
 
     public List<SelectedGood> getListChosenGoods()
     {
@@ -41,23 +39,6 @@ public class ChooseGoodsMenuModel
     public Double getOrderSum()
     {
         return orderSum;
-    }
-
-    private static ChooseGoodsMenuModel instance;
-
-    public static ChooseGoodsMenuModel getInstance()
-    {
-        if (instance == null)
-        {
-            instance = new ChooseGoodsMenuModel();
-        }
-
-        return instance;
-    }
-
-    private ChooseGoodsMenuModel()
-    {
-        listStoreGoods.addAll(goodService.findAll());
     }
 
     public void showGoodInfo(Good good)

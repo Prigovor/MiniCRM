@@ -33,7 +33,6 @@ public class CourierManager
     }
 
     private OrderService orderService = new OrderServiceImpl();
-    private CourierService courierService = new CourierServiceImpl();
 
     public void orderDelivery(Courier courier, Order order)
     {
@@ -44,7 +43,14 @@ public class CourierManager
 
             order.setOrderStatus(OrderStatus.DELIVERY_PROCESS);
 
-            orderService.createOrder(order);
+            if (orderService.readOrder(order.getId()) == null)
+            {
+                orderService.createOrder(order);
+            }
+            else
+            {
+                orderService.updateOrder(order);
+            }
 
             new Thread(() ->
             {
@@ -57,7 +63,7 @@ public class CourierManager
                 }
                 catch (MessagingException e)
                 {
-                    e.printStackTrace();
+
                 }
             }).start();
 
@@ -73,7 +79,7 @@ public class CourierManager
                 }
                 catch (MessagingException e)
                 {
-                    e.printStackTrace();
+
                 }
             }).start();
         }

@@ -2,6 +2,10 @@ package com.crm.dao.order;
 
 import com.crm.entity.order.Order;
 import com.crm.managers.DatabaseManager;
+import com.sun.org.apache.xpath.internal.operations.Or;
+import org.hibernate.Hibernate;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 
 import java.util.List;
 
@@ -32,5 +36,57 @@ public class OrderDAOImpl implements OrderDAO {
     @Override
     public List<Order> findAll() {
         return DatabaseManager.getInstance().getEntries(Order.class);
+    }
+
+    @Override
+    public Order readOrderEager(Long id)
+    {
+        Order entry = null;
+
+        try (Session session = DatabaseManager.getInstance().getSessionFactory().getCurrentSession())
+        {
+            try
+            {
+                session.beginTransaction();
+                entry = session.get(Order.class, id);
+
+                Hibernate.initialize(entry.getGoods());
+
+                session.getTransaction().commit();
+            }
+            catch (HibernateException e)
+            {
+                session.getTransaction().rollback();
+            }
+        }
+
+        return entry;
+    }
+
+    @Override
+    public List<Order> findAllEager()
+    {
+        List<Order> list = null;
+        try (Session session = DatabaseManager.getInstance().getSessionFactory().getCurrentSession())
+        {
+            try
+            {
+                session.beginTransaction();
+                list = session.createQuery("From " + Order.class.getName()).list();
+
+                list.forEach(order ->
+                {
+                    Hibernate.initialize(order.getGoods());
+                });
+
+                session.getTransaction().commit();
+            }
+            catch (HibernateException e)
+            {
+                session.getTransaction().rollback();
+            }
+        }
+
+        return list;
     }
 }

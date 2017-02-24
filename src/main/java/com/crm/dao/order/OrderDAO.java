@@ -18,4 +18,8 @@ public interface OrderDAO {
     void deleteOrder(Long id);
 
     List<Order> findAll();
+
+    Order readOrderEager(Long id);
+
+    List<Order> findAllEager();
 }

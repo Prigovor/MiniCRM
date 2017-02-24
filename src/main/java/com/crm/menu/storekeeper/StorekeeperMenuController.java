@@ -29,17 +29,20 @@ public class StorekeeperMenuController
     @FXML
     public void initialize()
     {
-        listViewOrders.setItems(FXCollections.observableList(model.getListOrders()));
+        listViewOrders.setItems(FXCollections.observableList(model.getListReadyOrders()));
 
         listViewOrders.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
         {
+            model.setSelectedOrder(newValue);
+
             labelCourierName.setText(newValue.getCourier().getName() + " " + newValue.getCourier().getSurname());
             listViewOrderGoods.setItems(FXCollections.observableList(newValue.getGoods()));
         });
 
         buttonGiveGoods.setOnAction(event ->
         {
-
+            model.giveGoodsToCourier(listViewOrderGoods.getItems());
+            refreshView();
         });
 
         buttonLogOut.setOnAction(event ->
@@ -53,5 +56,10 @@ public class StorekeeperMenuController
 
             }
         });
+    }
+
+    public void refreshView()
+    {
+        listViewOrders.setItems(FXCollections.observableList(model.getListReadyOrders()));
     }
 }

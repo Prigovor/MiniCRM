@@ -84,6 +84,22 @@
 
     </bean>
 
+    <bean class="com.crm.entity.client.Client" id="clientMary">
+        <property name="name" value="Marry"/>
+        <property name="surname" value="McDonnell"/>
+        <property name="login" value="marry.mcdonnell"/>
+        <property name="password" value="mary"/>
+        <property name="email" value="mary.mcdonnell@gmail.com"/>
+        <property name="phone" value="+15678913"/>
+    </bean>
+
+    <bean class="com.crm.entity.order.Order" id="orderMary">
+        <property name="client" ref="clientMary"/>
+        <property name="courier" ref="courierJane"/>
+        <property name="address" value="Addison st, 12"/>
+        <property name="orderStatus" value="READY"/>
+    </bean>
+
     <bean class="com.crm.entity.good.Good" id="goodLaptopHP">
         <property name="nomination" value="HP-011"/>
         <property name="description" value="HP-011 DESC"/>

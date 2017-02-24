@@ -39,6 +39,8 @@ public class OrderInputMenuModel
                     "json-files/order-" +
                             order.getClient().getSurname().toLowerCase() + ".json");
 
+            OrderManagerMenuModel.getInstance().clearData();
+
             Main.getInstance().replaceSceneContent("/fxml-files/order-manager-main-menu.fxml");
         }
         catch (IOException e)

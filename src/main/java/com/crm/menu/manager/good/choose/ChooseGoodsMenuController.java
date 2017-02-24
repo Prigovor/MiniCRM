@@ -21,7 +21,7 @@ public class ChooseGoodsMenuController
 
     public Label labelOrderSum;
 
-    private ChooseGoodsMenuModel model = ChooseGoodsMenuModel.getInstance();
+    private ChooseGoodsMenuModel model = new ChooseGoodsMenuModel();
 
     public ChooseGoodsMenuModel getModel()
     {

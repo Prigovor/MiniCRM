@@ -3,6 +3,8 @@ package com.crm.entity.order;
 import com.crm.entity.client.Client;
 import com.crm.entity.courier.Courier;
 import com.crm.entity.good.SelectedGood;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -42,7 +44,7 @@ public class Order {
     @JoinColumn(name = "COURIER_ID", referencedColumnName = "ID")
     private Courier courier;
 
-    @OneToMany(targetEntity = SelectedGood.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = SelectedGood.class, cascade = CascadeType.ALL)
     private List<SelectedGood> goods;
 
     @Column(name = "ORDER_PRICE")

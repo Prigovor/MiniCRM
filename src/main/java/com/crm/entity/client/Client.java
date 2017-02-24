@@ -1,6 +1,8 @@
 package com.crm.entity.client;
 
 import com.crm.entity.order.Order;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
@@ -36,7 +38,7 @@ public class Client {
     @Column(name = "EMAIL")
     private String email;
 
-    @OneToMany(targetEntity = Order.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = Order.class, cascade = CascadeType.ALL)
     private List<Order> orders;
 
     public Client() {
