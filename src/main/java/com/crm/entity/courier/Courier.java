@@ -3,8 +3,10 @@ package com.crm.entity.courier;
 import com.crm.entity.employee.Employee;
 import com.crm.entity.employee.Gender;
 import com.crm.entity.employee.PositionType;
+import com.crm.entity.order.Order;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Prigovor on 16.02.2017.
@@ -16,6 +18,9 @@ public class Courier extends Employee
     @Enumerated(EnumType.STRING)
     @Column(name = "STATUS")
     private CourierStatus courierStatus;
+
+    @OneToMany(targetEntity = Order.class, cascade = CascadeType.ALL)
+    List<Order> listOrders;
 
     public Courier()
     {
@@ -43,6 +48,16 @@ public class Courier extends Employee
     public void setCourierStatus(CourierStatus courierStatus)
     {
         this.courierStatus = courierStatus;
+    }
+
+    public List<Order> getListOrders()
+    {
+        return listOrders;
+    }
+
+    public void setListOrders(List<Order> listOrders)
+    {
+        this.listOrders = listOrders;
     }
 
     @Override

@@ -1,8 +1,7 @@
 package com.crm.dao.good;
 
 import com.crm.entity.good.Good;
-import com.crm.entity.good.SelectedGood;
-import com.crm.managers.DatabaseManager;
+import com.crm.managers.database.DatabaseManager;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,8 +1,7 @@
 package com.crm.dao.order;
 
 import com.crm.entity.order.Order;
-import com.crm.managers.DatabaseManager;
-import com.sun.org.apache.xpath.internal.operations.Or;
+import com.crm.managers.database.DatabaseManager;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

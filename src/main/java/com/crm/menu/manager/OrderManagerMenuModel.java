@@ -5,9 +5,8 @@ import com.crm.entity.client.Client;
 import com.crm.entity.courier.Courier;
 import com.crm.entity.employee.Employee;
 import com.crm.entity.good.Good;
-import com.crm.entity.good.SelectedGood;
+import com.crm.entity.selected_good.SelectedGood;
 import com.crm.entity.order.Order;
-import com.crm.service.good.GoodServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;

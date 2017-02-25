@@ -1,7 +1,10 @@
 package com.crm.dao.courier;
 
 import com.crm.entity.courier.Courier;
-import com.crm.managers.DatabaseManager;
+import com.crm.managers.database.DatabaseManager;
+import org.hibernate.Hibernate;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 
 import java.util.List;
 
@@ -44,5 +47,30 @@ public class CourierDAOImpl implements CourierDAO {
     public List<Courier> getEntriesByField(String fieldName, Object fieldValue)
     {
         return DatabaseManager.getInstance().getEntriesByField(fieldName, fieldValue, Courier.class);
+    }
+
+    @Override
+    public Courier readCourierEager(Long id)
+    {
+        Courier entry = null;
+
+        try (Session session = DatabaseManager.getInstance().getSessionFactory().getCurrentSession())
+        {
+            try
+            {
+                session.beginTransaction();
+                entry = session.get(Courier.class, id);
+
+                Hibernate.initialize(entry.getListOrders());
+
+                session.getTransaction().commit();
+            }
+            catch (HibernateException e)
+            {
+                session.getTransaction().rollback();
+            }
+        }
+
+        return entry;
     }
 }

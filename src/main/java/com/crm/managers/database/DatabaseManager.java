@@ -1,10 +1,10 @@
-package com.crm.managers;
+package com.crm.managers.database;
 
 import com.crm.entity.client.Client;
 import com.crm.entity.courier.Courier;
 import com.crm.entity.employee.Employee;
 import com.crm.entity.good.Good;
-import com.crm.entity.good.SelectedGood;
+import com.crm.entity.selected_good.SelectedGood;
 import com.crm.entity.order.Order;
 import com.crm.entity.account.Account;
 import com.crm.entity.storekeeper.Storekeeper;
@@ -68,7 +68,6 @@ public final class DatabaseManager
             catch (HibernateException e)
             {
                 session.getTransaction().rollback();
-                e.printStackTrace();
             }
         }
 
@@ -87,6 +86,7 @@ public final class DatabaseManager
             }
             catch (HibernateException e)
             {
+                e.printStackTrace();
                 session.getTransaction().rollback();
             }
         }

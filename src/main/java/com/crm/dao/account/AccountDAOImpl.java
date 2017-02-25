@@ -1,10 +1,9 @@
 package com.crm.dao.account;
 
 import com.crm.entity.account.Account;
-import com.crm.managers.DatabaseManager;
+import com.crm.managers.database.DatabaseManager;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by Prigovor on 05.02.2017.

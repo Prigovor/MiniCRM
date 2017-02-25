@@ -1,9 +1,7 @@
 package com.crm.dao.employee;
 
 import com.crm.entity.employee.Employee;
-import com.crm.managers.DatabaseManager;
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
+import com.crm.managers.database.DatabaseManager;
 
 import java.util.List;
 

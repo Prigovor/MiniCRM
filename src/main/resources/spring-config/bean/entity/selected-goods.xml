@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.crm.entity.selected_good.SelectedGood" id="selectedGoodLaptopHPMary">
+        <property name="nomination" value="HP-011"/>
+        <property name="description" value="HP-011 DESC"/>
+        <property name="amount" value="1"/>
+        <property name="price" value="1000"/>
+        <property name="order" ref="orderMary"/>
+    </bean>
+
+    <bean class="com.crm.entity.selected_good.SelectedGood" id="selectedGoodLaptopAcerMary">
+        <property name="nomination" value="ACER-011"/>
+        <property name="description" value="ACER-011 DESC"/>
+        <property name="amount" value="2"/>
+        <property name="price" value="1200"/>
+        <property name="order" ref="orderMary"/>
+    </bean>
+
+    <bean class="com.crm.entity.selected_good.SelectedGood" id="selectedGoodLaptopAsusMary">
+        <property name="nomination" value="ASUS-011"/>
+        <property name="description" value="ASUS-011 DESC"/>
+        <property name="amount" value="1"/>
+        <property name="price" value="1500"/>
+        <property name="order" ref="orderMary"/>
+    </bean>
+
+    <bean class="com.crm.entity.selected_good.SelectedGood" id="selectedGoodLaptopAcerLara">
+        <property name="nomination" value="ACER-011"/>
+        <property name="description" value="ACER-011 DESC"/>
+        <property name="amount" value="1"/>
+        <property name="price" value="1200"/>
+        <property name="order" ref="orderMary"/>
+    </bean>
+
+    <bean class="com.crm.entity.selected_good.SelectedGood" id="selectedGoodLaptopAsusLara">
+        <property name="nomination" value="ASUS-011"/>
+        <property name="description" value="ASUS-011 DESC"/>
+        <property name="amount" value="3"/>
+        <property name="price" value="1500"/>
+        <property name="order" ref="orderMary"/>
+    </bean>
+</beans>

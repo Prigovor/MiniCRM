@@ -1,7 +1,7 @@
 package com.crm.dao.client;
 
 import com.crm.entity.client.Client;
-import com.crm.managers.DatabaseManager;
+import com.crm.managers.database.DatabaseManager;
 
 import java.util.List;
 

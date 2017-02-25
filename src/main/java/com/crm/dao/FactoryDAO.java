@@ -16,12 +16,14 @@ import com.crm.dao.account.AccountDAOImpl;
 /**
  * Created by Bohdan on 12.02.2017.
  */
-public final class FactoryDAO {
-
+public final class FactoryDAO
+{
     private static AccountDAO accountDAO;
 
-    public static AccountDAO getAccountDAO() {
-        if (accountDAO == null) {
+    public static AccountDAO getAccountDAO()
+    {
+        if (accountDAO == null)
+        {
             accountDAO = new AccountDAOImpl();
         }
         return accountDAO;
@@ -29,8 +31,10 @@ public final class FactoryDAO {
 
     private static EmployeeDAO employeeDAO;
 
-    public static EmployeeDAO getEmployeeDAO() {
-        if (employeeDAO == null) {
+    public static EmployeeDAO getEmployeeDAO()
+    {
+        if (employeeDAO == null)
+        {
             employeeDAO = new EmployeeDAOImpl();
         }
         return employeeDAO;
@@ -38,8 +42,10 @@ public final class FactoryDAO {
 
     private static ClientDAO clientDAO;
 
-    public static ClientDAO getClientDAO() {
-        if (clientDAO == null) {
+    public static ClientDAO getClientDAO()
+    {
+        if (clientDAO == null)
+        {
             clientDAO = new ClientDAOImpl();
         }
         return clientDAO;
@@ -47,8 +53,10 @@ public final class FactoryDAO {
 
     private static GoodDAO goodDAO;
 
-    public static GoodDAO getGoodDAO() {
-        if (goodDAO == null) {
+    public static GoodDAO getGoodDAO()
+    {
+        if (goodDAO == null)
+        {
             goodDAO = new GoodDAOImpl();
         }
         return goodDAO;
@@ -56,8 +64,10 @@ public final class FactoryDAO {
 
     private static OrderDAO orderDAO;
 
-    public static OrderDAO getOrderDAO() {
-        if (orderDAO == null) {
+    public static OrderDAO getOrderDAO()
+    {
+        if (orderDAO == null)
+        {
             orderDAO = new OrderDAOImpl();
         }
         return orderDAO;
@@ -65,8 +75,10 @@ public final class FactoryDAO {
 
     private static CourierDAO courierDAO;
 
-    public static CourierDAO getCourierDAO() {
-        if (courierDAO == null) {
+    public static CourierDAO getCourierDAO()
+    {
+        if (courierDAO == null)
+        {
             courierDAO = new CourierDAOImpl();
         }
         return courierDAO;

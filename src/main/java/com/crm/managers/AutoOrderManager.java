@@ -24,19 +24,6 @@ public class AutoOrderManager
         {
             CourierManager.getInstance()
                     .orderDelivery(courierService.getEntryByField("status", CourierStatus.FREE), order);
-
-            new Thread(() ->
-            {
-                try
-                {
-                    EmailManager.getInstance()
-                            .sendMessage(order.getClient().getEmail(), "Order", "Order is delivering");
-                }
-                catch (MessagingException e)
-                {
-
-                }
-            }).start();
         }
         else
         {

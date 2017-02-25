@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.crm.entity.storekeeper.Storekeeper" id="storekeeperJake">
+        <property name="name" value="Jake"/>
+        <property name="surname" value="Valentine"/>
+        <property name="age" value="23"/>
+        <property name="gender" value="MALE"/>
+        <property name="position" value="STOREKEEPER"/>
+        <property name="email" value="jake.valentine@gmail.com"/>
+        <property name="phone" value="+18724512"/>
+
+    </bean>
+
+</beans>

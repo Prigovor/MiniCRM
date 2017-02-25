@@ -2,9 +2,7 @@ package com.crm.entity.order;
 
 import com.crm.entity.client.Client;
 import com.crm.entity.courier.Courier;
-import com.crm.entity.good.SelectedGood;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import com.crm.entity.selected_good.SelectedGood;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,7 +20,7 @@ public class Order {
     @Column(name = "ID")
     private Long id;
 
-    @ManyToOne(targetEntity = Client.class, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Client.class, cascade = CascadeType.MERGE)
     private Client client;
 
     @Temporal(TemporalType.DATE)
@@ -40,7 +38,7 @@ public class Order {
     @Column(name = "ORDER_STATUS")
     private OrderStatus orderStatus;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Courier.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "COURIER_ID", referencedColumnName = "ID")
     private Courier courier;
 

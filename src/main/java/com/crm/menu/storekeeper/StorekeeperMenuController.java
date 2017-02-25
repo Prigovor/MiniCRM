@@ -1,6 +1,6 @@
 package com.crm.menu.storekeeper;
 
-import com.crm.entity.good.SelectedGood;
+import com.crm.entity.selected_good.SelectedGood;
 import com.crm.entity.order.Order;
 import com.crm.main.Main;
 import javafx.collections.FXCollections;
@@ -23,6 +23,7 @@ public class StorekeeperMenuController
 
     public Button buttonGiveGoods;
     public Button buttonLogOut;
+    public Button buttonRefresh;
 
     private StorekeeperMenuModel model = new StorekeeperMenuModel();
 
@@ -33,15 +34,23 @@ public class StorekeeperMenuController
 
         listViewOrders.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
         {
-            model.setSelectedOrder(newValue);
+            if (newValue != null)
+            {
+                model.setSelectedOrder(newValue);
 
-            labelCourierName.setText(newValue.getCourier().getName() + " " + newValue.getCourier().getSurname());
-            listViewOrderGoods.setItems(FXCollections.observableList(newValue.getGoods()));
+                labelCourierName.setText(newValue.getCourier().getName() + " " + newValue.getCourier().getSurname());
+                listViewOrderGoods.setItems(FXCollections.observableList(newValue.getGoods()));
+            }
         });
 
         buttonGiveGoods.setOnAction(event ->
         {
             model.giveGoodsToCourier(listViewOrderGoods.getItems());
+            refreshView();
+        });
+
+        buttonRefresh.setOnAction(event ->
+        {
             refreshView();
         });
 
@@ -61,5 +70,6 @@ public class StorekeeperMenuController
     public void refreshView()
     {
         listViewOrders.setItems(FXCollections.observableList(model.getListReadyOrders()));
+        listViewOrderGoods.getItems().clear();
     }
 }

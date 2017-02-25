@@ -1,7 +1,7 @@
 package com.crm.menu.storekeeper;
 
 import com.crm.entity.good.Good;
-import com.crm.entity.good.SelectedGood;
+import com.crm.entity.selected_good.SelectedGood;
 import com.crm.entity.order.Order;
 import com.crm.entity.order.OrderStatus;
 import com.crm.managers.CourierManager;
@@ -46,7 +46,13 @@ public class StorekeeperMenuModel
     {
         listSelectedGoods.forEach(selectedGood ->
         {
-            Good goodInStore = goodService.getEntriesByField("nomination", selectedGood.getNomination()).get(0);
+            List<Good> entries = goodService.getEntriesByField("nomination", selectedGood.getNomination())
+                    .stream().filter(good ->
+                    {
+                        return good.getClass().equals(Good.class);
+                    }).collect(Collectors.toList());
+
+            Good goodInStore = entries.get(0);
 
             if (goodInStore != null)
             {

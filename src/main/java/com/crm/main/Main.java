@@ -1,11 +1,15 @@
 package com.crm.main;
 
 import com.crm.dao.FactoryDAO;
+import com.crm.dao.account.AccountDAOImplSpring;
 import com.crm.entity.account.Account;
+import com.crm.entity.client.Client;
 import com.crm.entity.courier.Courier;
 import com.crm.entity.good.Good;
+import com.crm.entity.order.Order;
 import com.crm.entity.storekeeper.Storekeeper;
 import com.crm.menu.Controller;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -106,6 +110,9 @@ public class Main extends Application
         FactoryDAO.getGoodDAO().createGood(context.getBean("goodLaptopHP", Good.class));
         FactoryDAO.getGoodDAO().createGood(context.getBean("goodLaptopAcer", Good.class));
         FactoryDAO.getGoodDAO().createGood(context.getBean("goodLaptopAsus", Good.class));
+
+        FactoryDAO.getClientDAO().createClient(context.getBean("clientMary", Client.class));
+        FactoryDAO.getClientDAO().createClient(context.getBean("clientLara", Client.class));
 
         launch(args);
     }

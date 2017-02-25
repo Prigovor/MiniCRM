@@ -1,5 +1,6 @@
 package com.crm.managers;
 
+import com.crm.dao.FactoryDAO;
 import com.crm.entity.courier.Courier;
 import com.crm.entity.courier.CourierStatus;
 import com.crm.entity.order.Order;
@@ -38,8 +39,10 @@ public class CourierManager
     {
         if (courier != null && order != null)
         {
-            order.setCourier(courier);
-            order.getCourier().setCourierStatus(CourierStatus.BUSY);
+            Courier courierEntry = FactoryDAO.getCourierDAO().readCourierEager(courier.getId());
+
+            courierEntry.getListOrders().add(order);
+            order.setCourier(courierEntry);
 
             order.setOrderStatus(OrderStatus.DELIVERY_PROCESS);
 

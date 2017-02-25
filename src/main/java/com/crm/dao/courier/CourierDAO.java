@@ -19,6 +19,8 @@ public interface CourierDAO {
 
     List<Courier> findAll();
 
+    Courier readCourierEager(Long id);
+
     Courier getEntryByField(String fieldName, Object fieldValue);
 
     List<Courier> getEntriesByField(String fieldName, Object fieldValue);

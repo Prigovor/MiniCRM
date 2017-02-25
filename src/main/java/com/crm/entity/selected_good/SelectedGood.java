@@ -1,5 +1,6 @@
-package com.crm.entity.good;
+package com.crm.entity.selected_good;
 
+import com.crm.entity.good.Good;
 import com.crm.entity.order.Order;
 
 import javax.persistence.*;

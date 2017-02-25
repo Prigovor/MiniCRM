@@ -3,7 +3,6 @@ package com.crm.service.good;
 import com.crm.dao.FactoryDAO;
 import com.crm.dao.good.GoodDAO;
 import com.crm.entity.good.Good;
-import com.crm.managers.DatabaseManager;
 
 import java.util.List;
 

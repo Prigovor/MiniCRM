@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/aop
+                http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+    <bean class="com.crm.managers.database.DatabaseManagerLogger" id="databaseManagerLogger">
+
+    </bean>
+
+    <aop:config>
+        <aop:aspect id="loggerDatabaseManager" ref="databaseManagerLogger">
+            <aop:pointcut id="saveEntryDbManager" expression="execution(* com.crm.managers.database.DatabaseManager.saveEntry(..))"/>
+            <aop:before method="beforeSave" pointcut-ref="saveEntryDbManager"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>

@@ -1,16 +1,13 @@
 package com.crm.menu.manager.good.choose;
 
 import com.crm.entity.good.Good;
-import com.crm.entity.good.SelectedGood;
+import com.crm.entity.selected_good.SelectedGood;
 import com.crm.entity.order.Order;
 import com.crm.main.Main;
 import com.crm.menu.manager.OrderManagerMenuModel;
 import com.crm.menu.manager.good.info.GoodInfoMenuModel;
-import com.crm.service.good.GoodService;
-import com.crm.service.good.GoodServiceImpl;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
