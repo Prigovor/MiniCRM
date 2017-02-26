@@ -40,7 +40,7 @@ public class CourierMenuController
                 listViewSelectedGoods.setItems(FXCollections.observableList(newValue.getGoods()));
                 labelClientName.setText("Client: " + newValue.getClient().getName()
                         .concat(" ").concat(newValue.getClient().getSurname()
-                                .concat(" Phone: ").concat(newValue.getClient().getPhone())));
+                                .concat(", Phone: ").concat(newValue.getClient().getPhone())));
             }
         });
 

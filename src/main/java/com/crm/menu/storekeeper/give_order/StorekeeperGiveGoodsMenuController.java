@@ -40,7 +40,7 @@ public class StorekeeperGiveGoodsMenuController
 
                 labelCourierName.setText("Courier: " + newValue.getCourier().getName()
                         .concat(" ").concat(newValue.getCourier().getSurname())
-                        .concat(" Phone: ").concat(newValue.getCourier().getPhone()));
+                        .concat(", Phone: ").concat(newValue.getCourier().getPhone()));
 
                 listViewOrderGoods.setItems(FXCollections.observableList(newValue.getGoods()));
             }

@@ -18,7 +18,7 @@
     </bean>
 
     <bean class="com.crm.entity.order.Order" id="orderLara">
-        <property name="client" ref="clientMary"/>
+        <property name="client" ref="clientLara"/>
         <property name="courier" ref="courierJane"/>
         <property name="address" value="Callen st, 45"/>
         <property name="orderStatus" value="READY"/>

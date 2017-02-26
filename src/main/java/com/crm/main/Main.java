@@ -104,7 +104,6 @@ public class Main extends Application
         FactoryDAO.getAccountDAO().createAccount(context.getBean("accountAdmin", Account.class));
         FactoryDAO.getAccountDAO().createAccount(context.getBean("accountManagerAlan", Account.class));
         FactoryDAO.getAccountDAO().createAccount(context.getBean("accountStorekeeperJake", Account.class));
-        FactoryDAO.getAccountDAO().createAccount(context.getBean("accountCourierJane", Account.class));
 
         FactoryDAO.getGoodDAO().createGood(context.getBean("goodLaptopHP", Good.class));
         FactoryDAO.getGoodDAO().createGood(context.getBean("goodLaptopAcer", Good.class));
@@ -112,6 +111,8 @@ public class Main extends Application
 
         FactoryDAO.getClientDAO().createClient(context.getBean("clientMary", Client.class));
         FactoryDAO.getClientDAO().createClient(context.getBean("clientLara", Client.class));
+
+        FactoryDAO.getAccountDAO().createAccount(context.getBean("accountCourierJane", Account.class));
 
         launch(args);
     }
