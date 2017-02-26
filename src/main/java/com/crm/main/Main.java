@@ -104,8 +104,7 @@ public class Main extends Application
         FactoryDAO.getAccountDAO().createAccount(context.getBean("accountAdmin", Account.class));
         FactoryDAO.getAccountDAO().createAccount(context.getBean("accountManagerAlan", Account.class));
         FactoryDAO.getAccountDAO().createAccount(context.getBean("accountStorekeeperJake", Account.class));
-
-        FactoryDAO.getCourierDAO().createCourier(context.getBean("courierJane", Courier.class));
+        FactoryDAO.getAccountDAO().createAccount(context.getBean("accountCourierJane", Account.class));
 
         FactoryDAO.getGoodDAO().createGood(context.getBean("goodLaptopHP", Good.class));
         FactoryDAO.getGoodDAO().createGood(context.getBean("goodLaptopAcer", Good.class));

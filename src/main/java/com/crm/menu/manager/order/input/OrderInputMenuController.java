@@ -38,10 +38,10 @@ public class OrderInputMenuController
         {
             OrderManagerMenuModel.getInstance().getOrder().setAddress(
                     textFieldAddress.getText());
-            OrderManagerMenuModel.getInstance().getOrder().setCourier(
-                    (Courier) choiceBoxCouriers.getSelectionModel().getSelectedItem());
 
-            model.confirm();
+            Courier courier = (Courier) choiceBoxCouriers.getSelectionModel().getSelectedItem();
+
+            model.confirm(courier);
         });
 
         buttonBack.setOnAction(event ->

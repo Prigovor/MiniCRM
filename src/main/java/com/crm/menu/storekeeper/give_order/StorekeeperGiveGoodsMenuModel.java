@@ -1,4 +1,4 @@
-package com.crm.menu.storekeeper;
+package com.crm.menu.storekeeper.give_order;
 
 import com.crm.entity.good.Good;
 import com.crm.entity.selected_good.SelectedGood;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Bohdan on 24.02.2017.
  */
-public class StorekeeperMenuModel
+public class StorekeeperGiveGoodsMenuModel
 {
     private OrderService orderService = new OrderServiceImpl();
     private GoodService goodService = new GoodServiceImpl();

@@ -1,4 +1,4 @@
-package com.crm.menu.storekeeper;
+package com.crm.menu.storekeeper.give_order;
 
 import com.crm.entity.selected_good.SelectedGood;
 import com.crm.entity.order.Order;
@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Created by Bohdan on 24.02.2017.
  */
-public class StorekeeperMenuController
+public class StorekeeperGiveGoodsMenuController
 {
     public ListView<Order> listViewOrders;
     public ListView<SelectedGood> listViewOrderGoods;
@@ -22,10 +22,10 @@ public class StorekeeperMenuController
     public Label labelCourierName;
 
     public Button buttonGiveGoods;
-    public Button buttonLogOut;
+    public Button buttonCancel;
     public Button buttonRefresh;
 
-    private StorekeeperMenuModel model = new StorekeeperMenuModel();
+    private StorekeeperGiveGoodsMenuModel model = new StorekeeperGiveGoodsMenuModel();
 
     @FXML
     public void initialize()
@@ -38,7 +38,10 @@ public class StorekeeperMenuController
             {
                 model.setSelectedOrder(newValue);
 
-                labelCourierName.setText(newValue.getCourier().getName() + " " + newValue.getCourier().getSurname());
+                labelCourierName.setText("Courier: " + newValue.getCourier().getName()
+                        .concat(" ").concat(newValue.getCourier().getSurname())
+                        .concat(" Phone: ").concat(newValue.getCourier().getPhone()));
+
                 listViewOrderGoods.setItems(FXCollections.observableList(newValue.getGoods()));
             }
         });
@@ -54,11 +57,11 @@ public class StorekeeperMenuController
             refreshView();
         });
 
-        buttonLogOut.setOnAction(event ->
+        buttonCancel.setOnAction(event ->
         {
             try
             {
-                Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
+                Main.getInstance().replaceSceneContent("/fxml-files/storekeeper-main-menu.fxml");
             }
             catch (IOException e)
             {
@@ -71,5 +74,6 @@ public class StorekeeperMenuController
     {
         listViewOrders.setItems(FXCollections.observableList(model.getListReadyOrders()));
         listViewOrderGoods.getItems().clear();
+        labelCourierName.setText("");
     }
 }

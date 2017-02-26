@@ -41,19 +41,10 @@ public class CourierManager
         {
             Courier courierEntry = FactoryDAO.getCourierDAO().readCourierEager(courier.getId());
 
-            courierEntry.getListOrders().add(order);
-            order.setCourier(courierEntry);
-
             order.setOrderStatus(OrderStatus.DELIVERY_PROCESS);
 
-            if (orderService.readOrder(order.getId()) == null)
-            {
-                orderService.createOrder(order);
-            }
-            else
-            {
-                orderService.updateOrder(order);
-            }
+            FactoryDAO.getOrderDAO().updateOrder(order);
+            FactoryDAO.getCourierDAO().updateCourier(courierEntry);
 
             new Thread(() ->
             {

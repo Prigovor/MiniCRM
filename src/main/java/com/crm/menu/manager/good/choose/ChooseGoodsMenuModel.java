@@ -31,10 +31,15 @@ public class ChooseGoodsMenuModel
         return listChosenGoods;
     }
 
-    private Double orderSum = 0.0;
+    private Double orderSum;
 
     public Double getOrderSum()
     {
+        orderSum = 0.0;
+        for (SelectedGood selectedGood : listChosenGoods)
+        {
+            orderSum += selectedGood.getPrice() * selectedGood.getAmount();
+        }
         return orderSum;
     }
 

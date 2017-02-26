@@ -1,5 +1,7 @@
 package com.crm.menu.manager.order.input;
 
+import com.crm.dao.FactoryDAO;
+import com.crm.entity.courier.Courier;
 import com.crm.entity.order.Order;
 import com.crm.entity.order.OrderStatus;
 import com.crm.main.Main;
@@ -25,7 +27,7 @@ public class OrderInputMenuModel
 
     private OrderService orderService = new OrderServiceImpl();
 
-    public void confirm()
+    public void confirm(Courier courier)
     {
         try
         {
@@ -33,11 +35,13 @@ public class OrderInputMenuModel
             order.setReceiveDate(new Date());
             order.setOrderStatus(OrderStatus.READY);
 
-            orderService.createOrder(order);
+            Courier courierEntry = FactoryDAO.getCourierDAO().readCourierEager(courier.getId());
 
-            JsonFileManager.serializeToJsonFile(order,
-                    "json-files/order-" +
-                            order.getClient().getSurname().toLowerCase() + ".json");
+            order.setCourier(courierEntry);
+            courierEntry.getListOrders().add(order);
+
+            orderService.createOrder(order);
+            FactoryDAO.getCourierDAO().updateCourier(courierEntry);
 
             OrderManagerMenuModel.getInstance().clearData();
 

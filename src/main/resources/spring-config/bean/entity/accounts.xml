@@ -51,4 +51,18 @@
         <property name="employee" ref="storekeeperJake"/>
     </bean>
 
+    <bean class="com.crm.entity.account.Account" id="accountCourierJane">
+        <property name="login" value="jane"/>
+        <property name="password" value="jane"/>
+        <property name="email" value="jane.lawsy@gmail.com"/>
+        <property name="lockType" value="UNLOCKED"/>
+        <property name="rightType" value="USER"/>
+        <property name="registrationDate">
+            <bean factory-bean="dateFormat" factory-method="parse">
+                <constructor-arg value="2017-02-26"/>
+            </bean>
+        </property>
+
+        <property name="employee" ref="courierJane"/>
+    </bean>
 </beans>
