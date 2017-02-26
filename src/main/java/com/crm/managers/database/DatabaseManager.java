@@ -13,6 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -34,6 +35,7 @@ public final class DatabaseManager
                 Account.class, Courier.class, Good.class, SelectedGood.class,  Order.class,Client.class, Storekeeper.class);
     }
 
+    @Autowired
     private SessionFactory sessionFactory;
 
     public void configure(String configFilePath, Class ...annotatedClasses)

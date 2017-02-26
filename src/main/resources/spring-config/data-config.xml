@@ -5,9 +5,9 @@
 
     <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/mini_crm_database"/>
-        <property name="username" value="root"/>
-        <property name="password" value="8953900"/>
+        <property name="url" value="jdbc:mysql://crm-test-database.cj1c02tq6cdz.eu-central-1.rds.amazonaws.com:3306/crm_test_database"/>
+        <property name="username" value="rustle"/>
+        <property name="password" value="Vulture011"/>
     </bean>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
