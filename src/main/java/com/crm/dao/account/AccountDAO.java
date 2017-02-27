@@ -19,7 +19,7 @@ public interface AccountDAO
 
     List<Account> findAll();
 
-    List<Account> getAccountsByField(String filedName, Object fieldValue);
-
     Account getAccountByField(String filedName, Object fieldValue);
+
+    List<Account> getAccountsByField(String filedName, Object fieldValue);
 }

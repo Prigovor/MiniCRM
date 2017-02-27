@@ -13,13 +13,13 @@ public interface CourierDAO {
 
     Courier readCourier(Long id);
 
+    Courier readCourierEager(Long id);
+
     void updateCourier(Courier courier);
 
     void deleteCourier(Long id);
 
     List<Courier> findAll();
-
-    Courier readCourierEager(Long id);
 
     Courier getEntryByField(String fieldName, Object fieldValue);
 

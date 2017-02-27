@@ -1,76 +1,64 @@
 package com.crm.dao.courier;
 
 import com.crm.entity.courier.Courier;
-import com.crm.managers.database.DatabaseManager;
+import com.crm.managers.database.HibernateDatabaseManager;
 import org.hibernate.Hibernate;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
 
 import java.util.List;
 
 /**
  * Created by Prigovor on 16.02.2017.
  */
-public class CourierDAOImpl implements CourierDAO {
+public class CourierDAOImpl implements CourierDAO
+{
     @Override
-    public Long createCourier(Courier courier) {
-        return DatabaseManager.getInstance().saveEntry(courier);
-    }
-
-    @Override
-    public Courier readCourier(Long id) {
-        return DatabaseManager.getInstance().getEntry(id, Courier.class);
-    }
-
-    @Override
-    public void updateCourier(Courier courier) {
-        DatabaseManager.getInstance().updateEntry(courier);
-    }
-
-    @Override
-    public void deleteCourier(Long id) {
-        DatabaseManager.getInstance().deleteEntry(id, Courier.class);
-    }
-
-    @Override
-    public List<Courier> findAll() {
-        return DatabaseManager.getInstance().getEntries(Courier.class);
-    }
-
-    @Override
-    public Courier getEntryByField(String fieldName, Object fieldValue)
+    public Long createCourier(Courier courier)
     {
-        return DatabaseManager.getInstance().getEntryByField(fieldName, fieldValue, Courier.class);
+        return HibernateDatabaseManager.getInstance().saveEntry(courier);
     }
 
     @Override
-    public List<Courier> getEntriesByField(String fieldName, Object fieldValue)
+    public Courier readCourier(Long id)
     {
-        return DatabaseManager.getInstance().getEntriesByField(fieldName, fieldValue, Courier.class);
+        return HibernateDatabaseManager.getInstance().getEntry(id, Courier.class);
     }
 
     @Override
     public Courier readCourierEager(Long id)
     {
-        Courier entry = null;
-
-        try (Session session = DatabaseManager.getInstance().getSessionFactory().getCurrentSession())
+        return HibernateDatabaseManager.getInstance().getEntry(id, Courier.class, courier ->
         {
-            try
-            {
-                session.beginTransaction();
-                entry = session.get(Courier.class, id);
+            Hibernate.initialize(courier.getListOrders());
+        });
+    }
 
-                Hibernate.initialize(entry.getListOrders());
+    @Override
+    public void updateCourier(Courier courier)
+    {
+        HibernateDatabaseManager.getInstance().updateEntry(courier);
+    }
 
-                session.getTransaction().commit();
-            }
-            catch (HibernateException e)
-            {
-                session.getTransaction().rollback();
-            }
-        }
+    @Override
+    public void deleteCourier(Long id)
+    {
+        HibernateDatabaseManager.getInstance().deleteEntry(id, Courier.class);
+    }
 
-        return entry;
+    @Override
+    public List<Courier> findAll()
+    {
+        return HibernateDatabaseManager.getInstance().getEntries(Courier.class);
+    }
+
+    @Override
+    public Courier getEntryByField(String fieldName, Object fieldValue)
+    {
+        return HibernateDatabaseManager.getInstance().getEntryByField(fieldName, fieldValue, Courier.class);
+    }
+
+    @Override
+    public List<Courier> getEntriesByField(String fieldName, Object fieldValue)
+    {
+        return HibernateDatabaseManager.getInstance().getEntriesByField(fieldName, fieldValue, Courier.class);
     }
 }

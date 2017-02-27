@@ -1,7 +1,7 @@
 package com.crm.dao.account;
 
 import com.crm.entity.account.Account;
-import com.crm.managers.database.DatabaseManager;
+import com.crm.managers.database.HibernateDatabaseManager;
 
 import java.util.List;
 
@@ -13,42 +13,42 @@ public class AccountDAOImpl implements AccountDAO
     @Override
     public Long createAccount(Account account)
     {
-        return DatabaseManager.getInstance().saveEntry(account);
+        return HibernateDatabaseManager.getInstance().saveEntry(account);
     }
 
     @Override
     public Account readAccount(Long id)
     {
-        return DatabaseManager.getInstance().getEntry(id, Account.class);
+        return HibernateDatabaseManager.getInstance().getEntry(id, Account.class);
     }
 
     @Override
     public void updateAccount(Account account)
     {
-        DatabaseManager.getInstance().updateEntry(account);
+        HibernateDatabaseManager.getInstance().updateEntry(account);
     }
 
     @Override
     public void deleteAccount(Long id)
     {
-        DatabaseManager.getInstance().deleteEntry(id, Account.class);
+        HibernateDatabaseManager.getInstance().deleteEntry(id, Account.class);
     }
 
     @Override
     public List<Account> findAll()
     {
-        return DatabaseManager.getInstance().getEntries(Account.class);
-    }
-
-    @Override
-    public List<Account> getAccountsByField(String filedName, Object fieldValue)
-    {
-        return DatabaseManager.getInstance().getEntriesByField(filedName, fieldValue, Account.class);
+        return HibernateDatabaseManager.getInstance().getEntries(Account.class);
     }
 
     @Override
     public Account getAccountByField(String filedName, Object fieldValue)
     {
-        return DatabaseManager.getInstance().getEntryByField(filedName, fieldValue, Account.class);
+        return HibernateDatabaseManager.getInstance().getEntryByField(filedName, fieldValue, Account.class);
+    }
+
+    @Override
+    public List<Account> getAccountsByField(String filedName, Object fieldValue)
+    {
+        return HibernateDatabaseManager.getInstance().getEntriesByField(filedName, fieldValue, Account.class);
     }
 }

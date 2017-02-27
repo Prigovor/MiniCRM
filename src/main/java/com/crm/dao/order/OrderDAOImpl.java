@@ -1,10 +1,8 @@
 package com.crm.dao.order;
 
 import com.crm.entity.order.Order;
-import com.crm.managers.database.DatabaseManager;
+import com.crm.managers.database.HibernateDatabaseManager;
 import org.hibernate.Hibernate;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
 
 import java.util.List;
 
@@ -14,78 +12,44 @@ import java.util.List;
 public class OrderDAOImpl implements OrderDAO {
     @Override
     public Long createOrder(Order order) {
-        return DatabaseManager.getInstance().saveEntry(order);
+        return HibernateDatabaseManager.getInstance().saveEntry(order);
     }
 
     @Override
     public Order readOrder(Long id) {
-        return DatabaseManager.getInstance().getEntry(id, Order.class);
+        return HibernateDatabaseManager.getInstance().getEntry(id, Order.class);
     }
 
     @Override
     public void updateOrder(Order order) {
-        DatabaseManager.getInstance().updateEntry(order);
+        HibernateDatabaseManager.getInstance().updateEntry(order);
     }
 
     @Override
     public void deleteOrder(Long id) {
-        DatabaseManager.getInstance().deleteEntry(id, Order.class);
+        HibernateDatabaseManager.getInstance().deleteEntry(id, Order.class);
     }
 
     @Override
     public List<Order> findAll() {
-        return DatabaseManager.getInstance().getEntries(Order.class);
+        return HibernateDatabaseManager.getInstance().getEntries(Order.class);
     }
 
     @Override
     public Order readOrderEager(Long id)
     {
-        Order entry = null;
-
-        try (Session session = DatabaseManager.getInstance().getSessionFactory().getCurrentSession())
+        return HibernateDatabaseManager.getInstance().getEntry(id, Order.class, order ->
         {
-            try
-            {
-                session.beginTransaction();
-                entry = session.get(Order.class, id);
-
-                Hibernate.initialize(entry.getGoods());
-
-                session.getTransaction().commit();
-            }
-            catch (HibernateException e)
-            {
-                session.getTransaction().rollback();
-            }
-        }
-
-        return entry;
+            Hibernate.initialize(order.getGoods());
+        });
     }
 
     @Override
     public List<Order> findAllEager()
     {
-        List<Order> list = null;
-        try (Session session = DatabaseManager.getInstance().getSessionFactory().getCurrentSession())
+        return HibernateDatabaseManager.getInstance().getEntries(Order.class, order ->
         {
-            try
-            {
-                session.beginTransaction();
-                list = session.createQuery("From " + Order.class.getName()).list();
-
-                list.forEach(order ->
-                {
-                    Hibernate.initialize(order.getGoods());
-                });
-
-                session.getTransaction().commit();
-            }
-            catch (HibernateException e)
-            {
-                session.getTransaction().rollback();
-            }
-        }
-
-        return list;
+            Hibernate.initialize(order.getGoods());
+        });
     }
 }

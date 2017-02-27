@@ -1,5 +1,6 @@
 package com.crm;
 
+import com.crm.managers.SmsManager;
 import no.vianett.sms.Sms;
 import no.vianett.sms.SmsEvent;
 import no.vianett.sms.SmsEventListener;
@@ -79,6 +80,6 @@ public class SmsSample
     // Just make new instance of this class.
     public static void main(String[] args)
     {
-        new SmsSender();
+        SmsManager.getInstance().sendSms("380509442389", "380962896711", "1111");
     }
 }

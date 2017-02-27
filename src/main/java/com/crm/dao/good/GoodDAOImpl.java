@@ -1,7 +1,7 @@
 package com.crm.dao.good;
 
 import com.crm.entity.good.Good;
-import com.crm.managers.database.DatabaseManager;
+import com.crm.managers.database.HibernateDatabaseManager;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,37 +14,37 @@ public class GoodDAOImpl implements GoodDAO
     @Override
     public Long createGood(Good good)
     {
-        return DatabaseManager.getInstance().saveEntry(good);
+        return HibernateDatabaseManager.getInstance().saveEntry(good);
     }
 
     @Override
     public Good readGood(Long id)
     {
-        return DatabaseManager.getInstance().getEntry(id, Good.class);
+        return HibernateDatabaseManager.getInstance().getEntry(id, Good.class);
     }
 
     @Override
     public void updateGood(Good good)
     {
-        DatabaseManager.getInstance().updateEntry(good);
+        HibernateDatabaseManager.getInstance().updateEntry(good);
     }
 
     @Override
     public void deleteGood(Long id)
     {
-        DatabaseManager.getInstance().deleteEntry(id, Good.class);
+        HibernateDatabaseManager.getInstance().deleteEntry(id, Good.class);
     }
 
     @Override
     public List<Good> findAll()
     {
-        return DatabaseManager.getInstance().getEntries(Good.class);
+        return HibernateDatabaseManager.getInstance().getEntries(Good.class);
     }
 
     @Override
     public List<Good> findAllStoreGoods()
     {
-        List<Good> listAllGoods = DatabaseManager.getInstance().getEntries(Good.class);
+        List<Good> listAllGoods = HibernateDatabaseManager.getInstance().getEntries(Good.class);
 
         return listAllGoods.stream().filter(good ->
                 {
@@ -55,12 +55,12 @@ public class GoodDAOImpl implements GoodDAO
     @Override
     public Good getEntryByField(String fieldName, Object fieldValue)
     {
-        return DatabaseManager.getInstance().getEntryByField(fieldName, fieldValue, Good.class);
+        return HibernateDatabaseManager.getInstance().getEntryByField(fieldName, fieldValue, Good.class);
     }
 
     @Override
     public List<Good> getEntriesByField(String fieldName, Object fieldValue)
     {
-        return DatabaseManager.getInstance().getEntriesByField(fieldName, fieldValue, Good.class);
+        return HibernateDatabaseManager.getInstance().getEntriesByField(fieldName, fieldValue, Good.class);
     }
 }

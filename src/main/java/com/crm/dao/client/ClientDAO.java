@@ -20,4 +20,6 @@ public interface ClientDAO {
     List<Client> findAll();
 
     Client getEntryByField(String fieldName, Object fieldValue);
+
+    List<Client> getEntriesByField(String fieldName, Object fieldValue);
 }

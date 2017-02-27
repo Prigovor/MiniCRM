@@ -1,7 +1,7 @@
 package com.crm.dao.client;
 
 import com.crm.entity.client.Client;
-import com.crm.managers.database.DatabaseManager;
+import com.crm.managers.database.HibernateDatabaseManager;
 
 import java.util.List;
 
@@ -12,32 +12,38 @@ public class ClientDAOImpl implements ClientDAO {
 
     @Override
     public Long createClient(Client client) {
-        return DatabaseManager.getInstance().saveEntry(client);
+        return HibernateDatabaseManager.getInstance().saveEntry(client);
     }
 
     @Override
     public Client readClient(Long id) {
-        return DatabaseManager.getInstance().getEntry(id, Client.class);
+        return HibernateDatabaseManager.getInstance().getEntry(id, Client.class);
     }
 
     @Override
     public void updateClient(Client client) {
-        DatabaseManager.getInstance().updateEntry(client);
+        HibernateDatabaseManager.getInstance().updateEntry(client);
     }
 
     @Override
     public void deleteClient(Long id) {
-        DatabaseManager.getInstance().deleteEntry(id, Client.class);
+        HibernateDatabaseManager.getInstance().deleteEntry(id, Client.class);
     }
 
     @Override
     public List<Client> findAll() {
-        return DatabaseManager.getInstance().getEntries(Client.class);
+        return HibernateDatabaseManager.getInstance().getEntries(Client.class);
     }
 
     @Override
     public Client getEntryByField(String fieldName, Object fieldValue)
     {
-        return DatabaseManager.getInstance().getEntryByField(fieldName, fieldValue, Client.class);
+        return HibernateDatabaseManager.getInstance().getEntryByField(fieldName, fieldValue, Client.class);
+    }
+
+    @Override
+    public List<Client> getEntriesByField(String fieldName, Object fieldValue)
+    {
+        return HibernateDatabaseManager.getInstance().getEntriesByField(fieldName, fieldValue, Client.class);
     }
 }

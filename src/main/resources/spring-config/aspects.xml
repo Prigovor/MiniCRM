@@ -14,7 +14,7 @@
 
     <aop:config>
         <aop:aspect id="loggerDatabaseManager" ref="databaseManagerLogger">
-            <aop:pointcut id="saveEntryDbManager" expression="execution(* com.crm.managers.database.DatabaseManager.saveEntry(..))"/>
+            <aop:pointcut id="saveEntryDbManager" expression="execution(* com.crm.managers.database.HibernateDatabaseManager.saveEntry(..))"/>
             <aop:before method="beforeSave" pointcut-ref="saveEntryDbManager"/>
         </aop:aspect>
     </aop:config>
