@@ -1,25 +1,12 @@
 package com.crm.service.order;
 
 import com.crm.entity.order.Order;
-
-import java.util.List;
+import com.crm.service.GenericService;
 
 /**
  * Created by Prigovor on 15.02.2017.
  */
-public interface OrderService {
+public interface OrderService extends GenericService<Order, Long>
+{
 
-    Long createOrder(Order order);
-
-    Order readOrder(Long id);
-
-    void updateOrder(Order order);
-
-    void deleteOrder(Long id);
-
-    List<Order> findAll();
-
-    Order readOrderEager(Long id);
-
-    List<Order> findAllEager();
 }

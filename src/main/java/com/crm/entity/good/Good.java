@@ -1,6 +1,6 @@
 package com.crm.entity.good;
 
-import com.crm.entity.selected_good.SelectedGood;
+import com.crm.entity.good.selected_good.SelectedGood;
 
 import javax.persistence.*;
 

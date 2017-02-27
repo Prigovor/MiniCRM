@@ -1,7 +1,6 @@
 package com.crm.menu.authorization;
 
 import com.crm.main.Main;
-import com.crm.service.AccountExistsException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;

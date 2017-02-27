@@ -1,4 +1,4 @@
-package com.crm.entity.courier;
+package com.crm.entity.employee.courier;
 
 import com.crm.entity.employee.Employee;
 import com.crm.entity.employee.Gender;

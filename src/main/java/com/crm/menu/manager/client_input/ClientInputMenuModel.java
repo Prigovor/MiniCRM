@@ -4,7 +4,6 @@ import com.crm.entity.client.Client;
 import com.crm.entity.order.Order;
 import com.crm.main.Main;
 import com.crm.menu.manager.OrderManagerMenuModel;
-import com.crm.service.AccountExistsException;
 import com.crm.service.client.ClientService;
 import com.crm.service.client.ClientServiceImpl;
 

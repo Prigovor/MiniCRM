@@ -27,11 +27,11 @@
                 <value>com.crm.entity.account.Account</value>
                 <value>com.crm.entity.employee.Employee</value>
                 <value>com.crm.entity.client.Client</value>
-                <value>com.crm.entity.courier.Courier</value>
+                <value>com.crm.entity.employee.courier.Courier</value>
                 <value>com.crm.entity.good.Good</value>
-                <value>com.crm.entity.selected_good.SelectedGood</value>
+                <value>com.crm.entity.good.selected_good.SelectedGood</value>
                 <value>com.crm.entity.order.Order</value>
-                <value>com.crm.entity.storekeeper.Storekeeper</value>
+                <value>com.crm.entity.employee.storekeeper.Storekeeper</value>
             </list>
         </property>
     </bean>

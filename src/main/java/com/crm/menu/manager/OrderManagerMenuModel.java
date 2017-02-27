@@ -1,11 +1,11 @@
 package com.crm.menu.manager;
 
-import com.crm.dao.FactoryDAO;
+import com.crm.dao.FactoryDao;
 import com.crm.entity.client.Client;
-import com.crm.entity.courier.Courier;
+import com.crm.entity.employee.courier.Courier;
 import com.crm.entity.employee.Employee;
 import com.crm.entity.good.Good;
-import com.crm.entity.selected_good.SelectedGood;
+import com.crm.entity.good.selected_good.SelectedGood;
 import com.crm.entity.order.Order;
 
 import java.util.ArrayList;
@@ -66,7 +66,7 @@ public class OrderManagerMenuModel
         this.listChosenGoods = listChosenGoods;
     }
 
-    private List<Good> listStoreGoods = FactoryDAO.getGoodDAO().findAllStoreGoods();
+    private List<Good> listStoreGoods = FactoryDao.getGoodDao().findAllStoreGoods();
 
     public List<Good> getListStoreGoods()
     {

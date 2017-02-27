@@ -11,8 +11,16 @@ public class DatabaseManagerFactory
             new GenericXmlApplicationContext("spring-config/spring-config.xml")
                     .getBean(HibernateDatabaseManager.class);
 
-    public static HibernateDatabaseManager getHibernateDatabaseManager()
+    public static HibernateDatabaseManager getDatabaseManager(DatabaseManagerType type)
     {
-        return hibernateDatabaseManager;
+        switch (type)
+        {
+            case HIBERNATE:
+            {
+                return hibernateDatabaseManager;
+            }
+        }
+
+        return null;
     }
 }

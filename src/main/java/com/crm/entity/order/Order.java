@@ -1,8 +1,8 @@
 package com.crm.entity.order;
 
 import com.crm.entity.client.Client;
-import com.crm.entity.courier.Courier;
-import com.crm.entity.selected_good.SelectedGood;
+import com.crm.entity.employee.courier.Courier;
+import com.crm.entity.good.selected_good.SelectedGood;
 
 import javax.persistence.*;
 import java.util.Date;

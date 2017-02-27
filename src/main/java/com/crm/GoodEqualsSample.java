@@ -1,7 +1,7 @@
 package com.crm;
 
 import com.crm.entity.good.Good;
-import com.crm.entity.selected_good.SelectedGood;
+import com.crm.entity.good.selected_good.SelectedGood;
 
 /**
  * Created by Bohdan on 24.02.2017.

@@ -3,7 +3,6 @@ package com.crm.menu.admin.account.create;
 import com.crm.main.Main;
 import com.crm.node_custom.account_info.AccountInfo;
 import com.crm.node_custom.employee_info.EmployeeInfo;
-import com.crm.service.account.CreateAccountException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;

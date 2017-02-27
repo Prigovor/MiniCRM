@@ -1,20 +1,14 @@
 package com.crm.menu.manager.order.input;
 
-import com.crm.dao.FactoryDAO;
-import com.crm.entity.courier.Courier;
+import com.crm.dao.FactoryDao;
+import com.crm.entity.employee.courier.Courier;
 import com.crm.entity.order.Order;
 import com.crm.entity.order.OrderStatus;
 import com.crm.main.Main;
-import com.crm.managers.JsonFileManager;
 import com.crm.menu.manager.OrderManagerMenuModel;
-import com.crm.service.AccountExistsException;
-import com.crm.service.client.ClientService;
-import com.crm.service.client.ClientServiceImpl;
 import com.crm.service.order.OrderService;
 import com.crm.service.order.OrderServiceImpl;
-import org.hibernate.Hibernate;
 
-import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.Date;
 
@@ -35,13 +29,13 @@ public class OrderInputMenuModel
             order.setReceiveDate(new Date());
             order.setOrderStatus(OrderStatus.READY);
 
-            Courier courierEntry = FactoryDAO.getCourierDAO().readCourierEager(courier.getId());
+            Courier courierEntry = FactoryDao.getCourierDao().readCourierEager(courier.getId());
 
             order.setCourier(courierEntry);
             courierEntry.getListOrders().add(order);
 
             orderService.createOrder(order);
-            FactoryDAO.getCourierDAO().updateCourier(courierEntry);
+            FactoryDao.getCourierDao().updateCourier(courierEntry);
 
             OrderManagerMenuModel.getInstance().clearData();
 

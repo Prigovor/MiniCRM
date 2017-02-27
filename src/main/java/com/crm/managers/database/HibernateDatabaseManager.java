@@ -4,10 +4,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -17,21 +17,19 @@ import java.util.function.Consumer;
 @Repository
 public class HibernateDatabaseManager
 {
-    private static final HibernateDatabaseManager instance =
-            new GenericXmlApplicationContext("spring-config/spring-config.xml").getBean(HibernateDatabaseManager.class);
-
-    public static HibernateDatabaseManager getInstance()
-    {
-        return instance;
-    }
-
     @Autowired
     private SessionFactory sessionFactory;
 
     @Transactional
-    public Long saveEntry(Object entry)
+    public <PK extends Serializable> PK saveEntry(Object entry)
     {
-        return (Long) sessionFactory.getCurrentSession().save(entry);
+        return (PK) sessionFactory.getCurrentSession().save(entry);
+    }
+
+    @Transactional
+    public <T> void saveOrUpdate(T entry)
+    {
+        sessionFactory.getCurrentSession().saveOrUpdate(entry);
     }
 
     @Transactional
@@ -41,20 +39,20 @@ public class HibernateDatabaseManager
     }
 
     @Transactional
-    public void deleteEntry(Long id, Class entityClass)
+    public<PK extends Serializable> void deleteEntry(PK id, Class entityClass)
     {
         Session session = sessionFactory.getCurrentSession();
         session.delete(session.load(entityClass, id));
     }
 
     @Transactional
-    public <T> T getEntry(Long id, Class<T> entityClass)
+    public <T, PK extends Serializable> T getEntry(PK id, Class<T> entityClass)
     {
         return sessionFactory.getCurrentSession().get(entityClass, id);
     }
 
     @Transactional
-    public <T> T getEntry(Long id, Class<T> entityClass, Consumer<T> consumer)
+    public <T, PK extends Serializable> T getEntry(PK id, Class<T> entityClass, Consumer<T> consumer)
     {
         T entry = getEntry(id, entityClass);
         consumer.accept(entry);

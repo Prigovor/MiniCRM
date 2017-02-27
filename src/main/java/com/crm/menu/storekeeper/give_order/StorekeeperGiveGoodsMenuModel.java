@@ -1,7 +1,7 @@
 package com.crm.menu.storekeeper.give_order;
 
 import com.crm.entity.good.Good;
-import com.crm.entity.selected_good.SelectedGood;
+import com.crm.entity.good.selected_good.SelectedGood;
 import com.crm.entity.order.Order;
 import com.crm.entity.order.OrderStatus;
 import com.crm.managers.CourierManager;

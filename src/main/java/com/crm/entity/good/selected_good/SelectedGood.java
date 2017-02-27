@@ -1,4 +1,4 @@
-package com.crm.entity.selected_good;
+package com.crm.entity.good.selected_good;
 
 import com.crm.entity.good.Good;
 import com.crm.entity.order.Order;

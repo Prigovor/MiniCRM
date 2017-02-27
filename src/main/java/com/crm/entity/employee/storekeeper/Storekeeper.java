@@ -1,4 +1,4 @@
-package com.crm.entity.storekeeper;
+package com.crm.entity.employee.storekeeper;
 
 import com.crm.entity.employee.Employee;
 import com.crm.entity.employee.PositionType;

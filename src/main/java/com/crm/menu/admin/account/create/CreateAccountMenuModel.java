@@ -1,22 +1,15 @@
 package com.crm.menu.admin.account.create;
 
-import com.crm.dao.FactoryDAO;
-import com.crm.dao.employee.EmployeeDAO;
-import com.crm.dao.employee.EmployeeDAOImpl;
-import com.crm.dao.account.AccountDAO;
-import com.crm.dao.account.AccountDAOImpl;
+import com.crm.dao.FactoryDao;
 import com.crm.entity.employee.Employee;
-import com.crm.entity.courier.Courier;
-import com.crm.entity.courier.CourierStatus;
+import com.crm.entity.employee.courier.Courier;
+import com.crm.entity.employee.courier.CourierStatus;
 import com.crm.entity.account.Account;
 import com.crm.managers.PasswordManager;
 import com.crm.service.account.AccountService;
 import com.crm.service.account.AccountServiceImpl;
-import com.crm.service.account.CreateAccountException;
 import com.crm.service.employee.EmployeeService;
 import com.crm.service.employee.EmployeeServiceImpl;
-
-import java.io.IOException;
 
 /**
  * Created by Bohdan on 07.02.2017.
@@ -58,7 +51,7 @@ public class CreateAccountMenuModel
                 Courier courier = new Courier(employee.getName(), employee.getSurname(),
                         employee.getAge(), employee.getGender(), CourierStatus.FREE);
 
-                FactoryDAO.getCourierDAO().createCourier(courier);
+                FactoryDao.getCourierDao().createCourier(courier);
                 account.setEmployee(courier);
 
                 break;

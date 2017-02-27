@@ -1,6 +1,6 @@
 package com.crm.managers;
 
-import com.crm.entity.courier.CourierStatus;
+import com.crm.entity.employee.courier.CourierStatus;
 import com.crm.entity.order.Order;
 import com.crm.entity.order.OrderStatus;
 import com.crm.service.courier.CourierService;

@@ -1,7 +1,7 @@
 package com.crm.menu.courier;
 
 import com.crm.entity.order.Order;
-import com.crm.entity.selected_good.SelectedGood;
+import com.crm.entity.good.selected_good.SelectedGood;
 import com.crm.main.Main;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;

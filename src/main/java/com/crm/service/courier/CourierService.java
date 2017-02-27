@@ -1,23 +1,12 @@
 package com.crm.service.courier;
 
-import com.crm.entity.courier.Courier;
-
-import java.util.List;
+import com.crm.entity.employee.courier.Courier;
+import com.crm.service.GenericService;
 
 /**
  * Created by Prigovor on 16.02.2017.
  */
-public interface CourierService {
+public interface CourierService extends GenericService<Courier, Long>
+{
 
-    Long createCourier(Courier courier);
-
-    Courier readCourier(Long id);
-
-    void updateCourier(Courier courier);
-
-    void deleteCourier(Long id);
-
-    List<Courier> findAll();
-
-    Courier getEntryByField(String fieldName, Object fieldValue);
 }

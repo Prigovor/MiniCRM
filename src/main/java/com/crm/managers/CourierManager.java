@@ -1,12 +1,9 @@
 package com.crm.managers;
 
-import com.crm.dao.FactoryDAO;
-import com.crm.entity.courier.Courier;
-import com.crm.entity.courier.CourierStatus;
+import com.crm.dao.FactoryDao;
+import com.crm.entity.employee.courier.Courier;
 import com.crm.entity.order.Order;
 import com.crm.entity.order.OrderStatus;
-import com.crm.service.courier.CourierService;
-import com.crm.service.courier.CourierServiceImpl;
 import com.crm.service.order.OrderService;
 import com.crm.service.order.OrderServiceImpl;
 
@@ -39,12 +36,12 @@ public class CourierManager
     {
         if (courier != null && order != null)
         {
-            Courier courierEntry = FactoryDAO.getCourierDAO().readCourierEager(courier.getId());
+            Courier courierEntry = FactoryDao.getCourierDao().readCourierEager(courier.getId());
 
             order.setOrderStatus(OrderStatus.DELIVERY_PROCESS);
 
-            FactoryDAO.getOrderDAO().updateOrder(order);
-            FactoryDAO.getCourierDAO().updateCourier(courierEntry);
+            FactoryDao.getOrderDao().updateOrder(order);
+            FactoryDao.getCourierDao().updateCourier(courierEntry);
 
             new Thread(() ->
             {

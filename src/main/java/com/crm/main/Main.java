@@ -1,15 +1,10 @@
 package com.crm.main;
 
-import com.crm.dao.FactoryDAO;
-import com.crm.dao.account.AccountDAOImplSpring;
+import com.crm.dao.FactoryDao;
 import com.crm.entity.account.Account;
 import com.crm.entity.client.Client;
-import com.crm.entity.courier.Courier;
 import com.crm.entity.good.Good;
-import com.crm.entity.order.Order;
-import com.crm.entity.storekeeper.Storekeeper;
 import com.crm.menu.Controller;
-import com.sun.org.apache.xpath.internal.operations.Or;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -101,18 +96,18 @@ public class Main extends Application
     {
         GenericXmlApplicationContext context = new GenericXmlApplicationContext("/spring-config/spring-config.xml");
 
-        FactoryDAO.getAccountDAO().createAccount(context.getBean("accountAdmin", Account.class));
-        FactoryDAO.getAccountDAO().createAccount(context.getBean("accountManagerAlan", Account.class));
-        FactoryDAO.getAccountDAO().createAccount(context.getBean("accountStorekeeperJake", Account.class));
+        FactoryDao.getAccountDao().createAccount(context.getBean("accountAdmin", Account.class));
+        FactoryDao.getAccountDao().createAccount(context.getBean("accountManagerAlan", Account.class));
+        FactoryDao.getAccountDao().createAccount(context.getBean("accountStorekeeperJake", Account.class));
 
-        FactoryDAO.getGoodDAO().createGood(context.getBean("goodLaptopHP", Good.class));
-        FactoryDAO.getGoodDAO().createGood(context.getBean("goodLaptopAcer", Good.class));
-        FactoryDAO.getGoodDAO().createGood(context.getBean("goodLaptopAsus", Good.class));
+        FactoryDao.getGoodDao().createGood(context.getBean("goodLaptopHP", Good.class));
+        FactoryDao.getGoodDao().createGood(context.getBean("goodLaptopAcer", Good.class));
+        FactoryDao.getGoodDao().createGood(context.getBean("goodLaptopAsus", Good.class));
 
-        FactoryDAO.getClientDAO().createClient(context.getBean("clientMary", Client.class));
-        FactoryDAO.getClientDAO().createClient(context.getBean("clientLara", Client.class));
+        FactoryDao.getClientDao().createClient(context.getBean("clientMary", Client.class));
+        FactoryDao.getClientDao().createClient(context.getBean("clientLara", Client.class));
 
-        FactoryDAO.getAccountDAO().createAccount(context.getBean("accountCourierJane", Account.class));
+        FactoryDao.getAccountDao().createAccount(context.getBean("accountCourierJane", Account.class));
 
         launch(args);
     }

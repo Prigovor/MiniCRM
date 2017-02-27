@@ -1,13 +1,11 @@
 package com.crm.menu.authorization;
 
-import com.crm.dao.FactoryDAO;
-import com.crm.dao.account.AccountDAO;
+import com.crm.dao.FactoryDao;
 import com.crm.entity.account.LockType;
 import com.crm.entity.account.Account;
 import com.crm.main.Main;
 import com.crm.main.MainModel;
 import com.crm.managers.EmailManager;
-import com.crm.service.AccountExistsException;
 import javafx.scene.control.TextInputDialog;
 
 import javax.mail.MessagingException;
@@ -20,7 +18,7 @@ import java.util.Optional;
  */
 public class AuthorizationMenuModel
 {
-    private AccountDAO accountDAO = FactoryDAO.getAccountDAO();
+    private AccountDAO accountDAO = FactoryDao.getAccountDao();
 
     private Integer logInAttempts = 0;
     private static final int MAX_LOG_IN_ATTEMPTS = 3;
