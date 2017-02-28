@@ -27,6 +27,9 @@ public class Account
     @Column(name = "EMAIL")
     private String email;
 
+    @Column(name = "PHONE")
+    private String phone;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "ID")
     private Employee employee;
@@ -87,6 +90,16 @@ public class Account
     public void setEmail(String email)
     {
         this.email = email;
+    }
+
+    public String getPhone()
+    {
+        return phone;
+    }
+
+    public void setPhone(String phone)
+    {
+        this.phone = phone;
     }
 
     public Employee getEmployee() {

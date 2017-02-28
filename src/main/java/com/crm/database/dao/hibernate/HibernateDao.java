@@ -1,9 +1,11 @@
 package com.crm.database.dao.hibernate;
 
 import com.crm.database.dao.GenericDao;
-import com.crm.database.manager.DatabaseManagerType;
-import com.crm.database.manager.FactoryDatabaseManager;
-import org.springframework.stereotype.Repository;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,9 +14,11 @@ import java.util.function.Consumer;
 /**
  * Created by Bohdan on 27.02.2017.
  */
-@Repository(value = "hibernateDao")
 public class HibernateDao<T, PK extends Serializable> implements GenericDao<T, PK>
 {
+    @Autowired
+    private SessionFactory sessionFactory;
+
     private Class<T> tClass;
 
     public HibernateDao(Class<T> tClass)
@@ -22,54 +26,69 @@ public class HibernateDao<T, PK extends Serializable> implements GenericDao<T, P
         this.tClass = tClass;
     }
 
+    @Transactional
     public PK saveEntry(T entry)
     {
-        return FactoryDatabaseManager.getDatabaseManager(DatabaseManagerType.HIBERNATE).saveEntry(entry);
+        return (PK) sessionFactory.getCurrentSession().save(entry);
     }
 
-    @Override
+    @Transactional
     public void saveOrUpdate(T entry)
     {
-        FactoryDatabaseManager.getDatabaseManager(DatabaseManagerType.HIBERNATE).saveOrUpdate(entry);
+        sessionFactory.getCurrentSession().saveOrUpdate(entry);
     }
 
+    @Transactional
     public void updateEntry(T entry)
     {
-        FactoryDatabaseManager.getDatabaseManager(DatabaseManagerType.HIBERNATE).updateEntry(entry);
+        sessionFactory.getCurrentSession().saveOrUpdate(entry);
     }
 
+    @Transactional
     public void deleteEntry(PK id)
     {
-        FactoryDatabaseManager.getDatabaseManager(DatabaseManagerType.HIBERNATE).deleteEntry(id, tClass);
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(session.load(tClass, id));
     }
 
+    @Transactional
     public T getEntry(PK id)
     {
-        return FactoryDatabaseManager.getDatabaseManager(DatabaseManagerType.HIBERNATE).getEntry(id, tClass);
+        return sessionFactory.getCurrentSession().get(tClass, id);
     }
 
+    @Transactional
     public T getEntry(PK id, Consumer<T> consumer)
     {
-        return FactoryDatabaseManager.getDatabaseManager(DatabaseManagerType.HIBERNATE).getEntry(id, tClass, consumer);
+        T entry = getEntry(id);
+        consumer.accept(entry);
+        return entry;
     }
 
+    @Transactional
     public List<T> getEntries()
     {
-        return FactoryDatabaseManager.getDatabaseManager(DatabaseManagerType.HIBERNATE).getEntries(tClass);
+        return sessionFactory.getCurrentSession().createQuery("From " + tClass.getName()).list();
     }
 
+    @Transactional
     public List<T> getEntries(Consumer<T> consumer)
     {
-        return FactoryDatabaseManager.getDatabaseManager(DatabaseManagerType.HIBERNATE).getEntries(tClass, consumer);
+        List<T> list = getEntries();
+        list.forEach(consumer);
+        return list;
     }
 
+    @Transactional
     public T getEntryByField(String fieldName, Object fieldValue)
     {
-        return FactoryDatabaseManager.getDatabaseManager(DatabaseManagerType.HIBERNATE).getEntryByField(fieldName, fieldValue, tClass);
+        List<T> list = getEntriesByField(fieldName, fieldValue);
+        return list.isEmpty() ? null : list.get(0);
     }
 
+    @Transactional
     public List<T> getEntriesByField(String fieldName, Object fieldValue)
     {
-        return FactoryDatabaseManager.getDatabaseManager(DatabaseManagerType.HIBERNATE).getEntriesByField(fieldName, fieldValue, tClass);
+        return sessionFactory.getCurrentSession().createCriteria(tClass).add(Restrictions.eq(fieldName, fieldValue)).list();
     }
 }

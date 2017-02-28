@@ -13,16 +13,21 @@ public class DataValidationManager
 {
     public static boolean isLoginValid(String login)
     {
-        return login.matches("^\\w+$");
+        return login != null && login.matches("^\\w+$");
     }
 
     public static boolean isPasswordValid(String password)
     {
-        return password.matches("^\\S{8,}$");
+        return password != null && password.matches("^\\S{8,}$");
     }
 
     public static boolean isEmailValid(String email)
     {
+        if (email == null)
+        {
+            return false;
+        }
+
         try
         {
             new InternetAddress(email).validate();

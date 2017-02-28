@@ -3,10 +3,11 @@ package com.crm.database.dao;
 import com.crm.database.dao.hibernate.HibernateDao;
 import com.crm.database.entity.account.Account;
 import com.crm.database.entity.client.Client;
-import com.crm.database.entity.employee.courier.Courier;
 import com.crm.database.entity.employee.Employee;
+import com.crm.database.entity.employee.courier.Courier;
 import com.crm.database.entity.good.Good;
 import com.crm.database.entity.order.Order;
+import com.crm.database.manager.ContextManager;
 import com.crm.database.manager.DatabaseManagerType;
 
 /**
@@ -14,7 +15,8 @@ import com.crm.database.manager.DatabaseManagerType;
  */
 public final class FactoryDao
 {
-    private static final HibernateDao<Account, Long> accountDaoHibernate = new HibernateDao<>(Account.class);
+    private static final GenericDao<Account, Long> accountDaoHibernate
+            = ContextManager.getInstance().getContext().getBean("hibernateDaoAccount", HibernateDao.class);
 
     public static GenericDao<Account, Long> getAccountDao(DatabaseManagerType databaseManagerType)
     {

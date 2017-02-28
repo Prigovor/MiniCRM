@@ -1,20 +1,21 @@
 package com.crm.database.service;
 
-import com.crm.database.dao.FactoryDao;
+import com.crm.database.manager.ContextManager;
 import com.crm.database.manager.DatabaseManagerType;
+import com.crm.database.service.account.AccountService;
 import com.crm.database.service.client.ClientService;
 import com.crm.database.service.courier.CourierService;
-import com.crm.database.service.order.OrderService;
-import com.crm.database.service.account.AccountService;
 import com.crm.database.service.employee.EmployeeService;
 import com.crm.database.service.good.GoodService;
+import com.crm.database.service.order.OrderService;
 
 /**
  * Created by Bohdan on 27.02.2017.
  */
 public class FactoryService
 {
-    private static final AccountService accountServiceHibernate = new AccountService(FactoryDao.getAccountDao(DatabaseManagerType.HIBERNATE));
+    private static AccountService accountServiceHibernate =
+            ContextManager.getInstance().getContext().getBean(AccountService.class);
 
     public static AccountService getAccountService(DatabaseManagerType databaseManagerType)
     {
@@ -28,8 +29,7 @@ public class FactoryService
         return accountServiceHibernate;
     }
 
-    private static final ClientService clientServiceHibernate = new ClientService(FactoryDao.getClientDao(DatabaseManagerType.HIBERNATE));
-
+    private static ClientService clientServiceHibernate = null;
     public static ClientService getClientService(DatabaseManagerType databaseManagerType)
     {
         switch (databaseManagerType)
@@ -43,8 +43,7 @@ public class FactoryService
         return clientServiceHibernate;
     }
 
-    private static final CourierService courierServiceHibernate = new CourierService(FactoryDao.getCourierDao(DatabaseManagerType.HIBERNATE));
-
+    private static CourierService courierServiceHibernate = null;
     public static CourierService getCourierService(DatabaseManagerType databaseManagerType)
     {
         switch (databaseManagerType)
@@ -58,8 +57,7 @@ public class FactoryService
         return courierServiceHibernate;
     }
 
-    private static final EmployeeService employeeServiceHibernate = new EmployeeService(FactoryDao.getEmployeeDao(DatabaseManagerType.HIBERNATE));
-
+    private static EmployeeService employeeServiceHibernate = null;
     public static EmployeeService getEmployeeService(DatabaseManagerType databaseManagerType)
     {
         switch (databaseManagerType)
@@ -73,8 +71,7 @@ public class FactoryService
         return employeeServiceHibernate;
     }
 
-    private static final GoodService goodServiceHibernate = new GoodService(FactoryDao.getGoodDao(DatabaseManagerType.HIBERNATE));
-
+    private static GoodService goodServiceHibernate = null;
     public static GoodService getGoodService(DatabaseManagerType databaseManagerType)
     {
         switch (databaseManagerType)
@@ -88,8 +85,7 @@ public class FactoryService
         return goodServiceHibernate;
     }
 
-    private static final OrderService orderServiceHibernate = new OrderService(FactoryDao.getOrderDao(DatabaseManagerType.HIBERNATE));
-
+    private static OrderService orderServiceHibernate = null;
     public static OrderService getOrderService(DatabaseManagerType databaseManagerType)
     {
         switch (databaseManagerType)
