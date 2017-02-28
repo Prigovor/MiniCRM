@@ -1,6 +1,6 @@
 package com.crm.menu.manager.good.choose;
 
-import com.crm.entity.good.Good;
+import com.crm.database.entity.good.Good;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

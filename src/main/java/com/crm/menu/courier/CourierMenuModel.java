@@ -1,22 +1,22 @@
 package com.crm.menu.courier;
 
-import com.crm.entity.order.Order;
-import com.crm.entity.order.OrderStatus;
-import com.crm.service.good.GoodService;
-import com.crm.service.good.GoodServiceImpl;
-import com.crm.service.order.OrderService;
-import com.crm.service.order.OrderServiceImpl;
+import com.crm.database.entity.order.Order;
+import com.crm.database.entity.order.OrderStatus;
+import com.crm.database.service.FactoryService;
+import com.crm.database.service.order.OrderService;
+import org.hibernate.Hibernate;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.crm.database.manager.DatabaseManagerType.HIBERNATE;
 
 /**
  * Created by Bohdan on 26.02.2017.
  */
 public class CourierMenuModel
 {
-    private OrderService orderService = new OrderServiceImpl();
-    private GoodService goodService = new GoodServiceImpl();
+    private OrderService orderService = FactoryService.getOrderService(HIBERNATE);
 
     private Order selectedOrder;
 
@@ -32,7 +32,11 @@ public class CourierMenuModel
 
     public List<Order> getListOrdersDelivering()
     {
-        List<Order> list = orderService.findAllEager();
+        List<Order> list = orderService.getEntries(order ->
+        {
+            Hibernate.initialize(order.getGoods());
+        });
+
         return list.stream().filter(order ->
         {
             return order.getOrderStatus().equals(OrderStatus.DELIVERY_PROCESS);
@@ -44,7 +48,7 @@ public class CourierMenuModel
         if (order != null)
         {
             order.setOrderStatus(OrderStatus.CLOSED);
-            orderService.updateOrder(order);
+            orderService.updateEntry(order);
         }
     }
 }

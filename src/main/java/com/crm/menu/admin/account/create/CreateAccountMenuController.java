@@ -8,8 +8,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 
-import java.io.IOException;
-
 /**
  * Created by Bohdan on 22.02.2017.
  */
@@ -64,30 +62,16 @@ public class CreateAccountMenuController
 
         buttonAdd.setOnAction(event ->
         {
-            try
-            {
-                accountInfo.applyChangesToAccount();
-                employeeInfo.applyChangesToEmployee();
+            accountInfo.applyChangesToAccount();
+            employeeInfo.applyChangesToEmployee();
 
-                model.createAccount();
-                Main.getInstance().replaceSceneContent("/fxml-files/admin-main-menu.fxml");
-            }
-            catch (CreateAccountException | IOException e)
-            {
-                showInformationMessage(e.getMessage());
-            }
+            model.createAccount();
+            Main.getInstance().replaceSceneContent("/fxml-files/admin-main-menu.fxml");
         });
 
         buttonCancel.setOnAction(event ->
         {
-            try
-            {
-                Main.getInstance().replaceSceneContent("/fxml-files/admin-main-menu.fxml");
-            }
-            catch (IOException e)
-            {
-                showInformationMessage(e.getMessage());
-            }
+            Main.getInstance().replaceSceneContent("/fxml-files/admin-main-menu.fxml");
         });
     }
 

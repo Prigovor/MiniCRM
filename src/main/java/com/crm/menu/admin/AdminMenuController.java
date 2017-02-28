@@ -1,7 +1,7 @@
 package com.crm.menu.admin;
 
-import com.crm.entity.account.Account;
-import com.crm.entity.employee.Employee;
+import com.crm.database.entity.account.Account;
+import com.crm.database.entity.employee.Employee;
 import com.crm.main.Main;
 import com.crm.node_custom.account_info.AccountInfo;
 import com.crm.node_custom.employee_info.EmployeeInfo;
@@ -11,9 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 
-import javax.mail.MessagingException;
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Field;
 
 /**
@@ -127,14 +125,7 @@ public class AdminMenuController
 
     private void logOut()
     {
-        try
-        {
-            Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
-        }
-        catch (IOException e)
-        {
-
-        }
+        Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
     }
 
     private void generateAccount()
@@ -151,15 +142,8 @@ public class AdminMenuController
 
         if (file != null)
         {
-            try
-            {
-                model.generateAccount(file.getAbsolutePath());
-                refreshView();
-            }
-            catch (IOException | MessagingException e)
-            {
-
-            }
+            model.generateAccount(file.getAbsolutePath());
+            refreshView();
         }
     }
 
@@ -180,14 +164,7 @@ public class AdminMenuController
     {
         if (model.getSelectedAccount() != null)
         {
-            try
-            {
-                Main.getInstance().replaceSceneContent("/fxml-files/admin-change-account-menu.fxml");
-            }
-            catch (IOException e)
-            {
-
-            }
+            Main.getInstance().replaceSceneContent("/fxml-files/admin-change-account-menu.fxml");
         }
         else
         {
@@ -197,14 +174,7 @@ public class AdminMenuController
 
     private void addAccount()
     {
-        try
-        {
-            Main.getInstance().replaceSceneContent("/fxml-files/admin-add-account-menu.fxml");
-        }
-        catch (IOException e)
-        {
-
-        }
+        Main.getInstance().replaceSceneContent("/fxml-files/admin-add-account-menu.fxml");
     }
 
     private void showAllEmployers()

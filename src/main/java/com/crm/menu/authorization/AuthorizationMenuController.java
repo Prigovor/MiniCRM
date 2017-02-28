@@ -56,14 +56,7 @@ public class AuthorizationMenuController
 
         buttonRemindPassword.setOnAction(event ->
         {
-            try
-            {
-                model.remindPassword();
-            }
-            catch (AccountExistsException e)
-            {
-                showInformationMessage(e.getMessage());
-            }
+            model.remindPassword();
         });
 
         buttonExit.setOnAction(event ->

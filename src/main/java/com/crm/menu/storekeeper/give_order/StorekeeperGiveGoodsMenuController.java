@@ -1,15 +1,13 @@
 package com.crm.menu.storekeeper.give_order;
 
-import com.crm.entity.good.selected_good.SelectedGood;
-import com.crm.entity.order.Order;
+import com.crm.database.entity.good.selected_good.SelectedGood;
+import com.crm.database.entity.order.Order;
 import com.crm.main.Main;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-
-import java.io.IOException;
 
 /**
  * Created by Bohdan on 24.02.2017.
@@ -59,14 +57,7 @@ public class StorekeeperGiveGoodsMenuController
 
         buttonCancel.setOnAction(event ->
         {
-            try
-            {
-                Main.getInstance().replaceSceneContent("/fxml-files/storekeeper-main-menu.fxml");
-            }
-            catch (IOException e)
-            {
-
-            }
+            Main.getInstance().replaceSceneContent("/fxml-files/storekeeper-main-menu.fxml");
         });
     }
 

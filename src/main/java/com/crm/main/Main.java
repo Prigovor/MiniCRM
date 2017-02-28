@@ -1,10 +1,9 @@
 package com.crm.main;
 
-import com.crm.dao.FactoryDao;
-import com.crm.entity.account.Account;
-import com.crm.entity.client.Client;
-import com.crm.entity.good.Good;
-import com.crm.menu.Controller;
+import com.crm.database.entity.account.Account;
+import com.crm.database.entity.client.Client;
+import com.crm.database.entity.good.Good;
+import com.crm.database.service.FactoryService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,6 +11,8 @@ import javafx.stage.Stage;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.io.IOException;
+
+import static com.crm.database.manager.DatabaseManagerType.HIBERNATE;
 
 /**
  * Created by Prigovor on 04.02.2017.
@@ -50,40 +51,26 @@ public class Main extends Application
         primaryStage.show();
     }
 
-    public void replaceSceneContent(String filePath) throws IOException
+    public void replaceSceneContent(String filePath)
     {
         Scene scene = primaryStage.getScene();
 
-        if (scene == null)
+        try
         {
-            scene = new Scene(FXMLLoader.load(getClass().getResource(filePath)));
-            primaryStage.setScene(scene);
+            if (scene == null)
+            {
+                scene = new Scene(FXMLLoader.load(getClass().getResource(filePath)));
+                primaryStage.setScene(scene);
+            }
+            else
+            {
+                primaryStage.getScene().setRoot(FXMLLoader.load(getClass().getResource(filePath)));
+            }
         }
-        else
+        catch (IOException e)
         {
-            primaryStage.getScene().setRoot(FXMLLoader.load(getClass().getResource(filePath)));
-        }
-    }
 
-    /**
-     * Replaces the application primary stage scene with view parent object taken from controller object
-     */
-    public void replaceSceneContent(Controller controller)
-    {
-        Scene scene = primaryStage.getScene();
-
-        if (scene == null)
-        {
-            scene = new Scene(controller.getView().getParent());
-            primaryStage.setScene(scene);
         }
-        else
-        {
-            primaryStage.getScene().setRoot(controller.getView().getParent());
-        }
-
-        primaryStage.getScene().getRoot().setStyle("-fx-background-color: #393c3e;");
-        controller.getView().getParent().requestFocus();
     }
 
     public void exit()
@@ -96,18 +83,18 @@ public class Main extends Application
     {
         GenericXmlApplicationContext context = new GenericXmlApplicationContext("/spring-config/spring-config.xml");
 
-        FactoryDao.getAccountDao().createAccount(context.getBean("accountAdmin", Account.class));
-        FactoryDao.getAccountDao().createAccount(context.getBean("accountManagerAlan", Account.class));
-        FactoryDao.getAccountDao().createAccount(context.getBean("accountStorekeeperJake", Account.class));
+        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountAdmin", Account.class));
+        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountManagerAlan", Account.class));
+        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountStorekeeperJake", Account.class));
 
-        FactoryDao.getGoodDao().createGood(context.getBean("goodLaptopHP", Good.class));
-        FactoryDao.getGoodDao().createGood(context.getBean("goodLaptopAcer", Good.class));
-        FactoryDao.getGoodDao().createGood(context.getBean("goodLaptopAsus", Good.class));
+        FactoryService.getGoodService(HIBERNATE).saveEntry(context.getBean("goodLaptopHP", Good.class));
+        FactoryService.getGoodService(HIBERNATE).saveEntry(context.getBean("goodLaptopAcer", Good.class));
+        FactoryService.getGoodService(HIBERNATE).saveEntry(context.getBean("goodLaptopAsus", Good.class));
 
-        FactoryDao.getClientDao().createClient(context.getBean("clientMary", Client.class));
-        FactoryDao.getClientDao().createClient(context.getBean("clientLara", Client.class));
+        FactoryService.getClientService(HIBERNATE).saveEntry(context.getBean("clientMary", Client.class));
+        FactoryService.getClientService(HIBERNATE).saveEntry(context.getBean("clientLara", Client.class));
 
-        FactoryDao.getAccountDao().createAccount(context.getBean("accountCourierJane", Account.class));
+        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountCourierJane", Account.class));
 
         launch(args);
     }

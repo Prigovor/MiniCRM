@@ -1,15 +1,15 @@
 package com.crm.menu.admin.account.create;
 
-import com.crm.dao.FactoryDao;
-import com.crm.entity.employee.Employee;
-import com.crm.entity.employee.courier.Courier;
-import com.crm.entity.employee.courier.CourierStatus;
-import com.crm.entity.account.Account;
+import com.crm.database.entity.account.Account;
+import com.crm.database.entity.employee.Employee;
+import com.crm.database.entity.employee.courier.Courier;
+import com.crm.database.entity.employee.courier.CourierStatus;
 import com.crm.managers.PasswordManager;
-import com.crm.service.account.AccountService;
-import com.crm.service.account.AccountServiceImpl;
-import com.crm.service.employee.EmployeeService;
-import com.crm.service.employee.EmployeeServiceImpl;
+import com.crm.database.service.FactoryService;
+import com.crm.database.service.account.AccountService;
+import com.crm.database.service.employee.EmployeeService;
+
+import static com.crm.database.manager.DatabaseManagerType.HIBERNATE;
 
 /**
  * Created by Bohdan on 07.02.2017.
@@ -19,8 +19,8 @@ public class CreateAccountMenuModel
     private Account account = new Account();
     private Employee employee = new Employee();
 
-    private AccountService accountService = new AccountServiceImpl();
-    private EmployeeService employeeService = new EmployeeServiceImpl();
+    private AccountService accountService = FactoryService.getAccountService(HIBERNATE);
+    private EmployeeService employeeService = FactoryService.getEmployeeService(HIBERNATE);
 
     public Account getAccount()
     {
@@ -42,7 +42,7 @@ public class CreateAccountMenuModel
         this.employee = employee;
     }
 
-    public void createAccount() throws CreateAccountException
+    public void createAccount()
     {
         switch (employee.getPosition())
         {
@@ -51,28 +51,28 @@ public class CreateAccountMenuModel
                 Courier courier = new Courier(employee.getName(), employee.getSurname(),
                         employee.getAge(), employee.getGender(), CourierStatus.FREE);
 
-                FactoryDao.getCourierDao().createCourier(courier);
+                FactoryService.getCourierService(HIBERNATE).saveEntry(courier);
                 account.setEmployee(courier);
 
                 break;
             }
             default:
             {
-                employeeService.createEmployee(employee);
+                employeeService.saveEntry(employee);
                 account.setEmployee(employee);
 
                 break;
             }
         }
 
-        accountService.createAccount(account);
+        accountService.saveEntry(account);
     }
 
     public String generatePassword(int length)
     {
         String password = PasswordManager.getInstance().generatePassword(length);
 
-        if (accountService.getAccountByField("password", password) != null)
+        if (accountService.getEntryByField("password", password) != null)
         {
             password = PasswordManager.getInstance().generatePassword(length);
         }

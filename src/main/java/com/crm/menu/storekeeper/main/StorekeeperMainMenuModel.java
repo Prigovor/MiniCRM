@@ -1,11 +1,11 @@
 package com.crm.menu.storekeeper.main;
 
-import com.crm.entity.good.Good;
+import com.crm.database.entity.good.Good;
+import com.crm.database.manager.DatabaseManagerType;
+import com.crm.database.service.FactoryService;
+import com.crm.database.service.good.GoodService;
 import com.crm.main.Main;
-import com.crm.service.good.GoodService;
-import com.crm.service.good.GoodServiceImpl;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,11 +14,11 @@ import java.util.stream.Collectors;
  */
 public class StorekeeperMainMenuModel
 {
-    private GoodService goodService = new GoodServiceImpl();
+    private GoodService goodService = FactoryService.getGoodService(DatabaseManagerType.HIBERNATE);
 
     public List<Good> getListGoods()
     {
-        return goodService.findAll().stream().filter(good ->
+        return goodService.getEntries().stream().filter(good ->
         {
             return good.getClass().equals(Good.class);
         }).collect(Collectors.toList());
@@ -26,25 +26,11 @@ public class StorekeeperMainMenuModel
 
     public void openGiveGoodsMenu()
     {
-        try
-        {
-            Main.getInstance().replaceSceneContent("/fxml-files/storekeeper-give-goods-menu.fxml");
-        }
-        catch (IOException e)
-        {
-
-        }
+        Main.getInstance().replaceSceneContent("/fxml-files/storekeeper-give-goods-menu.fxml");
     }
 
     public void logOut()
     {
-        try
-        {
-            Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
-        }
-        catch (IOException e)
-        {
-
-        }
+        Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
     }
 }

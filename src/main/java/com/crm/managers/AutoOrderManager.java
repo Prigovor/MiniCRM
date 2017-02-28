@@ -1,20 +1,22 @@
 package com.crm.managers;
 
-import com.crm.entity.employee.courier.CourierStatus;
-import com.crm.entity.order.Order;
-import com.crm.entity.order.OrderStatus;
-import com.crm.service.courier.CourierService;
-import com.crm.service.courier.CourierServiceImpl;
+import com.crm.database.entity.employee.courier.CourierStatus;
+import com.crm.database.entity.order.Order;
+import com.crm.database.entity.order.OrderStatus;
+import com.crm.database.service.FactoryService;
+import com.crm.database.service.courier.CourierService;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
+
+import static com.crm.database.manager.DatabaseManagerType.HIBERNATE;
 
 /**
  * Created by Bohdan on 15.02.2017.
  */
 public class AutoOrderManager
 {
-    private CourierService courierService = new CourierServiceImpl();
+    private CourierService courierService = FactoryService.getCourierService(HIBERNATE);
 
     public void formOrder(String jsonFilePath) throws IOException, MessagingException
     {
@@ -29,15 +31,9 @@ public class AutoOrderManager
         {
             new Thread(() ->
             {
-                try
-                {
-                    EmailManager.getInstance()
-                            .sendMessage(order.getClient().getEmail(), "Order", "Wait for free couriers");
-                }
-                catch (MessagingException e)
-                {
+                EmailManager.getInstance()
+                        .sendMessage(order.getClient().getEmail(), "Order", "Wait for free couriers");
 
-                }
             }).start();
         }
     }

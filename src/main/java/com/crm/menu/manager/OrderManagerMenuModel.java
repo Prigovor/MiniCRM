@@ -1,12 +1,13 @@
 package com.crm.menu.manager;
 
-import com.crm.dao.FactoryDao;
-import com.crm.entity.client.Client;
-import com.crm.entity.employee.courier.Courier;
-import com.crm.entity.employee.Employee;
-import com.crm.entity.good.Good;
-import com.crm.entity.good.selected_good.SelectedGood;
-import com.crm.entity.order.Order;
+import com.crm.database.entity.client.Client;
+import com.crm.database.entity.employee.Employee;
+import com.crm.database.entity.employee.courier.Courier;
+import com.crm.database.entity.good.Good;
+import com.crm.database.entity.good.selected_good.SelectedGood;
+import com.crm.database.entity.order.Order;
+import com.crm.database.manager.DatabaseManagerType;
+import com.crm.database.service.FactoryService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,7 @@ public class OrderManagerMenuModel
         this.listChosenGoods = listChosenGoods;
     }
 
-    private List<Good> listStoreGoods = FactoryDao.getGoodDao().findAllStoreGoods();
+    private List<Good> listStoreGoods = FactoryService.getGoodService(DatabaseManagerType.HIBERNATE).getEntries();
 
     public List<Good> getListStoreGoods()
     {

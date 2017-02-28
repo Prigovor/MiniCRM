@@ -1,6 +1,6 @@
 package com.crm.main;
 
-import com.crm.entity.account.Account;
+import com.crm.database.entity.account.Account;
 
 /**
  * Created by Bohdan on 05.02.2017.

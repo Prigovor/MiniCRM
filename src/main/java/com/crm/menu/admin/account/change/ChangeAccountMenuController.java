@@ -78,7 +78,7 @@ public class ChangeAccountMenuController
                 model.changeAccount();
                 Main.getInstance().replaceSceneContent("/fxml-files/admin-main-menu.fxml");
             }
-            catch (IOException | CreateAccountException e)
+            catch (IOException e)
             {
                 showInformationMessage(e.getMessage());
             }
@@ -91,14 +91,7 @@ public class ChangeAccountMenuController
 
         buttonCancel.setOnAction(event ->
         {
-            try
-            {
-                Main.getInstance().replaceSceneContent("/fxml-files/admin-main-menu.fxml");
-            }
-            catch (IOException e)
-            {
-                showInformationMessage(e.getMessage());
-            }
+            Main.getInstance().replaceSceneContent("/fxml-files/admin-main-menu.fxml");
         });
     }
 

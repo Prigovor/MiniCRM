@@ -1,8 +1,8 @@
 package com.crm.node_custom.employee_info;
 
-import com.crm.entity.employee.Employee;
-import com.crm.entity.employee.Gender;
-import com.crm.entity.employee.PositionType;
+import com.crm.database.entity.employee.Employee;
+import com.crm.database.entity.employee.Gender;
+import com.crm.database.entity.employee.PositionType;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ChoiceBox;

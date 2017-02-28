@@ -1,15 +1,13 @@
 package com.crm.menu.manager.main;
 
-import com.crm.entity.client.Client;
-import com.crm.entity.order.Order;
+import com.crm.database.entity.client.Client;
+import com.crm.database.entity.order.Order;
+import com.crm.database.manager.DatabaseManagerType;
+import com.crm.database.service.FactoryService;
+import com.crm.database.service.client.ClientService;
+import com.crm.database.service.order.OrderService;
 import com.crm.main.Main;
-import com.crm.menu.manager.OrderManagerMenuModel;
-import com.crm.service.client.ClientService;
-import com.crm.service.client.ClientServiceImpl;
-import com.crm.service.order.OrderService;
-import com.crm.service.order.OrderServiceImpl;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -17,8 +15,8 @@ import java.util.List;
  */
 public class ManagerMainMenuModel
 {
-    private OrderService orderService = new OrderServiceImpl();
-    private ClientService clientService = new ClientServiceImpl();
+    private OrderService orderService = FactoryService.getOrderService(DatabaseManagerType.HIBERNATE);
+    private ClientService clientService = FactoryService.getClientService(DatabaseManagerType.HIBERNATE);
 
     private Order selectedOrder;
 
@@ -34,35 +32,21 @@ public class ManagerMainMenuModel
 
     public List<Order> getListOrders()
     {
-        return orderService.findAll();
+        return orderService.getEntries();
     }
 
     public List<Client> getListClients()
     {
-        return clientService.findAll();
+        return clientService.getEntries();
     }
 
     public void addOrder()
     {
-        try
-        {
-            Main.getInstance().replaceSceneContent("/fxml-files/client-input-menu.fxml");
-        }
-        catch (IOException e)
-        {
-
-        }
+        Main.getInstance().replaceSceneContent("/fxml-files/client-input-menu.fxml");
     }
 
     public void logOut()
     {
-        try
-        {
-            Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
-        }
-        catch (IOException e)
-        {
-
-        }
+        Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
     }
 }

@@ -1,6 +1,6 @@
 package com.crm.menu.manager.good.info;
 
-import com.crm.entity.good.Good;
+import com.crm.database.entity.good.Good;
 import com.crm.main.Main;
 
 import java.io.IOException;

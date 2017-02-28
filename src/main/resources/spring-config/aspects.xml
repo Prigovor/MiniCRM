@@ -8,15 +8,4 @@
                 http://www.springframework.org/schema/aop
                 http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-    <bean class="com.crm.managers.database.DatabaseManagerLogger" id="databaseManagerLogger">
-
-    </bean>
-
-    <aop:config>
-        <aop:aspect id="loggerDatabaseManager" ref="databaseManagerLogger">
-            <aop:pointcut id="saveEntryDbManager" expression="execution(* com.crm.managers.database.HibernateDatabaseManager.saveEntry(..))"/>
-            <aop:before method="beforeSave" pointcut-ref="saveEntryDbManager"/>
-        </aop:aspect>
-    </aop:config>
-
 </beans>

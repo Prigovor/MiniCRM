@@ -1,8 +1,10 @@
 package com.crm.menu.manager.order.input;
 
-import com.crm.dao.FactoryDao;
-import com.crm.entity.employee.courier.Courier;
-import com.crm.entity.employee.courier.CourierStatus;
+import com.crm.database.entity.employee.courier.Courier;
+import com.crm.database.entity.employee.courier.CourierStatus;
+import com.crm.database.manager.DatabaseManagerType;
+import com.crm.database.service.FactoryService;
+import com.crm.database.service.courier.CourierService;
 import com.crm.menu.manager.OrderManagerMenuModel;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -24,11 +26,13 @@ public class OrderInputMenuController
 
     private OrderInputMenuModel model = new OrderInputMenuModel();
 
+    private CourierService courierService = FactoryService.getCourierService(DatabaseManagerType.HIBERNATE);
+
     @FXML
     public void initialize()
     {
         choiceBoxCouriers.setItems(FXCollections.observableList(
-                FactoryDao.getCourierDao().getEntriesByField("courierStatus", CourierStatus.FREE)));
+                courierService.getEntriesByField("courierStatus", CourierStatus.FREE)));
 
         choiceBoxCouriers.setValue(OrderManagerMenuModel.getInstance().getOrder().getCourier());
 

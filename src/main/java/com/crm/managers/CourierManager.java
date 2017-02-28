@@ -1,13 +1,14 @@
 package com.crm.managers;
 
-import com.crm.dao.FactoryDao;
-import com.crm.entity.employee.courier.Courier;
-import com.crm.entity.order.Order;
-import com.crm.entity.order.OrderStatus;
-import com.crm.service.order.OrderService;
-import com.crm.service.order.OrderServiceImpl;
+import com.crm.database.entity.employee.courier.Courier;
+import com.crm.database.entity.order.Order;
+import com.crm.database.entity.order.OrderStatus;
+import com.crm.database.service.FactoryService;
+import com.crm.database.service.courier.CourierService;
+import com.crm.database.service.order.OrderService;
+import org.hibernate.Hibernate;
 
-import javax.mail.MessagingException;
+import static com.crm.database.manager.DatabaseManagerType.HIBERNATE;
 
 /**
  * Created by Bohdan on 15.02.2017.
@@ -30,48 +31,39 @@ public class CourierManager
 
     }
 
-    private OrderService orderService = new OrderServiceImpl();
+    private OrderService orderService = FactoryService.getOrderService(HIBERNATE);
+    private CourierService courierService = FactoryService.getCourierService(HIBERNATE);
 
     public void orderDelivery(Courier courier, Order order)
     {
         if (courier != null && order != null)
         {
-            Courier courierEntry = FactoryDao.getCourierDao().readCourierEager(courier.getId());
+            Courier courierEntry = courierService.getEntry(courier.getId(), courierWithOrders ->
+            {
+                Hibernate.initialize(courierWithOrders.getListOrders());
+            });
 
             order.setOrderStatus(OrderStatus.DELIVERY_PROCESS);
 
-            FactoryDao.getOrderDao().updateOrder(order);
-            FactoryDao.getCourierDao().updateCourier(courierEntry);
+            orderService.updateEntry(order);
+            courierService.updateEntry(courierEntry);
 
             new Thread(() ->
             {
-                try
-                {
-                    EmailManager.getInstance().sendMessage(order.getClient().getEmail(),
-                            "Order delivery",
-                            String.format("Your order number is %s. It will be delivered on %s at %s",
-                                    order.getId(), order.getAddress(), order.getReceiveDate()));
-                }
-                catch (MessagingException e)
-                {
+                EmailManager.getInstance().sendMessage(order.getClient().getEmail(),
+                        "Order delivery",
+                        String.format("Your order number is %s. It will be delivered on %s at %s",
+                                order.getId(), order.getAddress(), order.getReceiveDate()));
 
-                }
             }).start();
 
 
             new Thread(() ->
             {
-                try
-                {
-                    EmailManager.getInstance().sendMessage(order.getCourier().getEmail(),
-                            "Order delivery",
-                            String.format("Your order number is %s. You should deliver it on %s at %s",
-                                    order.getId(), order.getAddress(), order.getReceiveDate()));
-                }
-                catch (MessagingException e)
-                {
-
-                }
+                EmailManager.getInstance().sendMessage(order.getCourier().getEmail(),
+                        "Order delivery",
+                        String.format("Your order number is %s. You should deliver it on %s at %s",
+                                order.getId(), order.getAddress(), order.getReceiveDate()));
             }).start();
         }
     }

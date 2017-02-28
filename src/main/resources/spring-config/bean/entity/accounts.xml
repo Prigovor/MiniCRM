@@ -7,7 +7,7 @@
         <constructor-arg value="yyyy-MM-dd"/>
     </bean>
 
-    <bean class="com.crm.entity.account.Account" id="accountAdmin">
+    <bean class="com.crm.database.entity.account.Account" id="accountAdmin">
         <property name="login" value="admin"/>
         <property name="password" value="admin"/>
         <property name="rightType" value="ADMIN"/>
@@ -21,7 +21,7 @@
         </property>
     </bean>
 
-    <bean class="com.crm.entity.account.Account" id="accountManagerAlan">
+    <bean class="com.crm.database.entity.account.Account" id="accountManagerAlan">
         <property name="login" value="alan"/>
         <property name="password" value="alan"/>
         <property name="rightType" value="USER"/>
@@ -36,7 +36,7 @@
         </property>
     </bean>
 
-    <bean class="com.crm.entity.account.Account" id="accountStorekeeperJake">
+    <bean class="com.crm.database.entity.account.Account" id="accountStorekeeperJake">
         <property name="login" value="jake"/>
         <property name="password" value="jake"/>
         <property name="email" value="jake.valentine@gmail.com"/>
@@ -51,7 +51,7 @@
         <property name="employee" ref="storekeeperJake"/>
     </bean>
 
-    <bean class="com.crm.entity.account.Account" id="accountCourierJane">
+    <bean class="com.crm.database.entity.account.Account" id="accountCourierJane">
         <property name="login" value="jane"/>
         <property name="password" value="jane"/>
         <property name="email" value="jane.lawsy@gmail.com"/>

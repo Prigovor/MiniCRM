@@ -1,14 +1,14 @@
 package com.crm.menu.storekeeper.give_order;
 
-import com.crm.entity.good.Good;
-import com.crm.entity.good.selected_good.SelectedGood;
-import com.crm.entity.order.Order;
-import com.crm.entity.order.OrderStatus;
+import com.crm.database.entity.good.Good;
+import com.crm.database.entity.good.selected_good.SelectedGood;
+import com.crm.database.entity.order.Order;
+import com.crm.database.entity.order.OrderStatus;
+import com.crm.database.manager.DatabaseManagerType;
+import com.crm.database.service.FactoryService;
 import com.crm.managers.CourierManager;
-import com.crm.service.good.GoodService;
-import com.crm.service.good.GoodServiceImpl;
-import com.crm.service.order.OrderService;
-import com.crm.service.order.OrderServiceImpl;
+import com.crm.database.service.good.GoodService;
+import com.crm.database.service.order.OrderService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,8 +18,8 @@ import java.util.stream.Collectors;
  */
 public class StorekeeperGiveGoodsMenuModel
 {
-    private OrderService orderService = new OrderServiceImpl();
-    private GoodService goodService = new GoodServiceImpl();
+    private OrderService orderService = FactoryService.getOrderService(DatabaseManagerType.HIBERNATE);
+    private GoodService goodService = FactoryService.getGoodService(DatabaseManagerType.HIBERNATE);
 
     private Order selectedOrder;
 
@@ -35,7 +35,7 @@ public class StorekeeperGiveGoodsMenuModel
 
     public List<Order> getListReadyOrders()
     {
-        List<Order> list = orderService.findAllEager();
+        List<Order> list = orderService.getEntries();
         return list.stream().filter(order ->
         {
             return order.getOrderStatus().equals(OrderStatus.READY);
@@ -57,7 +57,7 @@ public class StorekeeperGiveGoodsMenuModel
             if (goodInStore != null)
             {
                 goodInStore.setAmount(goodInStore.getAmount() - selectedGood.getAmount());
-                goodService.updateGood(goodInStore);
+                goodService.updateEntry(goodInStore);
             }
         });
 

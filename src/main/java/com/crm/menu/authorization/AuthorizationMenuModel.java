@@ -1,24 +1,26 @@
 package com.crm.menu.authorization;
 
-import com.crm.dao.FactoryDao;
-import com.crm.entity.account.LockType;
-import com.crm.entity.account.Account;
+import com.crm.database.entity.account.LockType;
+import com.crm.database.entity.account.Account;
 import com.crm.main.Main;
 import com.crm.main.MainModel;
 import com.crm.managers.EmailManager;
+import com.crm.database.service.FactoryService;
+import com.crm.database.service.account.AccountService;
 import javafx.scene.control.TextInputDialog;
 
-import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+
+import static com.crm.database.manager.DatabaseManagerType.*;
 
 /**
  * Created by Bohdan on 05.02.2017.
  */
 public class AuthorizationMenuModel
 {
-    private AccountDAO accountDAO = FactoryDao.getAccountDao();
+    private AccountService accountService = FactoryService.getAccountService(HIBERNATE);
 
     private Integer logInAttempts = 0;
     private static final int MAX_LOG_IN_ATTEMPTS = 3;
@@ -29,7 +31,7 @@ public class AuthorizationMenuModel
 
     public AuthorizationResult authorize(String login, String password) throws IOException
     {
-        Account account = accountDAO.getAccountByField("login", login);
+        Account account = accountService.getEntryByField("login", login);
 
         if (account != null)
         {
@@ -89,7 +91,7 @@ public class AuthorizationMenuModel
                 else
                 {
                     account.setLockType(LockType.LOCKED);
-                    accountDAO.updateAccount(account);
+                    accountService.updateEntry(account);
                 }
             }
             else
@@ -101,7 +103,7 @@ public class AuthorizationMenuModel
         return AuthorizationResult.INCORRECT_LOGIN_PASSWORD;
     }
 
-    public void remindPassword() throws AccountExistsException
+    public void remindPassword()
     {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Password sending");
@@ -110,28 +112,18 @@ public class AuthorizationMenuModel
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent())
         {
-            List<Account> listAccounts = accountDAO.getAccountsByField("email", result.get());
+            List<Account> listAccounts = accountService.getEntriesByField("email", result.get());
 
             if (!listAccounts.isEmpty())
             {
-                new Thread(() ->
-                {
-                    try
-                    {
-                        EmailManager.getInstance().sendMessage(result.get(), "Password remind", "Your password:\n" + listAccounts.get(0).getPassword());
-                    }
-                    catch (MessagingException e)
-                    {
-
-                    }
-                }).start();
+                EmailManager.getInstance().sendMessage(result.get(), "Password remind", "Your password:\n" + listAccounts.get(0).getPassword());
             }
             else
             {
-                throw new AccountExistsException("Account with such email is not registered");
+                throw new RuntimeException("Account with such email is not registered");
             }
         }
 
-        throw new AccountExistsException("Account with such email is not registered");
+        throw new RuntimeException("Account with such email is not registered");
     }
 }

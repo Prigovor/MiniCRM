@@ -1,15 +1,16 @@
 package com.crm.menu.manager.order.input;
 
-import com.crm.dao.FactoryDao;
-import com.crm.entity.employee.courier.Courier;
-import com.crm.entity.order.Order;
-import com.crm.entity.order.OrderStatus;
+import com.crm.database.entity.employee.courier.Courier;
+import com.crm.database.entity.order.Order;
+import com.crm.database.entity.order.OrderStatus;
+import com.crm.database.manager.DatabaseManagerType;
+import com.crm.database.service.FactoryService;
+import com.crm.database.service.courier.CourierService;
+import com.crm.database.service.order.OrderService;
 import com.crm.main.Main;
 import com.crm.menu.manager.OrderManagerMenuModel;
-import com.crm.service.order.OrderService;
-import com.crm.service.order.OrderServiceImpl;
+import org.hibernate.Hibernate;
 
-import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -19,56 +20,39 @@ public class OrderInputMenuModel
 {
     private Order order = OrderManagerMenuModel.getInstance().getOrder();
 
-    private OrderService orderService = new OrderServiceImpl();
+    private OrderService orderService = FactoryService.getOrderService(DatabaseManagerType.HIBERNATE);
+    private CourierService courierService = FactoryService.getCourierService(DatabaseManagerType.HIBERNATE);
 
     public void confirm(Courier courier)
     {
-        try
+        order.setRegistrationDate(new Date());
+        order.setReceiveDate(new Date());
+        order.setOrderStatus(OrderStatus.READY);
+
+        Courier courierEntry = courierService.getEntry(courier.getId(), courierWithOrders ->
         {
-            order.setRegistrationDate(new Date());
-            order.setReceiveDate(new Date());
-            order.setOrderStatus(OrderStatus.READY);
+            Hibernate.initialize(courierWithOrders.getListOrders());
+        });
 
-            Courier courierEntry = FactoryDao.getCourierDao().readCourierEager(courier.getId());
+        order.setCourier(courierEntry);
+        courierEntry.getListOrders().add(order);
 
-            order.setCourier(courierEntry);
-            courierEntry.getListOrders().add(order);
+        orderService.saveEntry(order);
+        courierService.updateEntry(courierEntry);
 
-            orderService.createOrder(order);
-            FactoryDao.getCourierDao().updateCourier(courierEntry);
+        OrderManagerMenuModel.getInstance().clearData();
 
-            OrderManagerMenuModel.getInstance().clearData();
-
-            Main.getInstance().replaceSceneContent("/fxml-files/order-manager-main-menu.fxml");
-        }
-        catch (IOException e)
-        {
-
-        }
+        Main.getInstance().replaceSceneContent("/fxml-files/order-manager-main-menu.fxml");
     }
 
     public void back()
     {
-        try
-        {
-            Main.getInstance().replaceSceneContent("/fxml-files/good-choose-menu.fxml");
-        }
-        catch (IOException e)
-        {
-
-        }
+        Main.getInstance().replaceSceneContent("/fxml-files/good-choose-menu.fxml");
     }
 
     public void cancel()
     {
         OrderManagerMenuModel.getInstance().clearData();
-        try
-        {
-            Main.getInstance().replaceSceneContent("/fxml-files/order-manager-main-menu.fxml");
-        }
-        catch (IOException e)
-        {
-
-        }
+        Main.getInstance().replaceSceneContent("/fxml-files/order-manager-main-menu.fxml");
     }
 }

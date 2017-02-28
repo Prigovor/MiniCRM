@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean class="com.crm.entity.employee.Employee" id="employeeAlan">
+    <bean class="com.crm.database.entity.employee.Employee" id="employeeAlan">
         <property name="name" value="Alan"/>
         <property name="surname" value="McJoys"/>
         <property name="age" value="24"/>

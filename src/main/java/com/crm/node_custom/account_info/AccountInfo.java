@@ -1,8 +1,8 @@
 package com.crm.node_custom.account_info;
 
-import com.crm.entity.account.Account;
-import com.crm.entity.account.LockType;
-import com.crm.entity.account.RightType;
+import com.crm.database.entity.account.Account;
+import com.crm.database.entity.account.LockType;
+import com.crm.database.entity.account.RightType;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ChoiceBox;

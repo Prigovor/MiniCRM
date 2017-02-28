@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean class="com.crm.entity.order.Order" id="orderMary">
+    <bean class="com.crm.database.entity.order.Order" id="orderMary">
         <property name="client" ref="clientMary"/>
         <property name="courier" ref="courierJane"/>
         <property name="address" value="Addison st, 12"/>
@@ -17,7 +17,7 @@
         </property>
     </bean>
 
-    <bean class="com.crm.entity.order.Order" id="orderLara">
+    <bean class="com.crm.database.entity.order.Order" id="orderLara">
         <property name="client" ref="clientLara"/>
         <property name="courier" ref="courierJane"/>
         <property name="address" value="Callen st, 45"/>

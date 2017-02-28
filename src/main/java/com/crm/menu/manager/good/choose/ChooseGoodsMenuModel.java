@@ -1,13 +1,12 @@
 package com.crm.menu.manager.good.choose;
 
-import com.crm.entity.good.Good;
-import com.crm.entity.good.selected_good.SelectedGood;
-import com.crm.entity.order.Order;
+import com.crm.database.entity.good.Good;
+import com.crm.database.entity.good.selected_good.SelectedGood;
+import com.crm.database.entity.order.Order;
 import com.crm.main.Main;
 import com.crm.menu.manager.OrderManagerMenuModel;
 import com.crm.menu.manager.good.info.GoodInfoMenuModel;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -45,14 +44,8 @@ public class ChooseGoodsMenuModel
 
     public void showGoodInfo(Good good)
     {
-        try
-        {
-            GoodInfoMenuModel.getInstance().setGood(good);
-            Main.getInstance().replaceSceneContent("/fxml-files/good-info-menu.fxml");
-        }
-        catch (IOException e)
-        {
-        }
+        GoodInfoMenuModel.getInstance().setGood(good);
+        Main.getInstance().replaceSceneContent("/fxml-files/good-info-menu.fxml");
     }
 
     public void addGood(Good good)
@@ -114,35 +107,17 @@ public class ChooseGoodsMenuModel
         order.setGoods(listChosenGoods);
         order.setOrderPrice(orderSum);
 
-        try
-        {
-            Main.getInstance().replaceSceneContent("/fxml-files/order-input-menu.fxml");
-        }
-        catch (IOException e)
-        {
-        }
+        Main.getInstance().replaceSceneContent("/fxml-files/order-input-menu.fxml");
     }
 
     public void cancel()
     {
         OrderManagerMenuModel.getInstance().clearData();
-        try
-        {
-            Main.getInstance().replaceSceneContent("/fxml-files/order-manager-main-menu.fxml");
-        }
-        catch (IOException e)
-        {
-        }
+        Main.getInstance().replaceSceneContent("/fxml-files/order-manager-main-menu.fxml");
     }
 
     public void back()
     {
-        try
-        {
-            Main.getInstance().replaceSceneContent("/fxml-files/client-input-menu.fxml");
-        }
-        catch (IOException e)
-        {
-        }
+        Main.getInstance().replaceSceneContent("/fxml-files/client-input-menu.fxml");
     }
 }

@@ -1,15 +1,16 @@
 package com.crm.menu.admin.account.change;
 
-import com.crm.entity.employee.Employee;
-import com.crm.entity.account.Account;
+import com.crm.database.entity.account.Account;
+import com.crm.database.entity.employee.Employee;
 import com.crm.main.MainModel;
 import com.crm.managers.PasswordManager;
-import com.crm.service.account.AccountService;
-import com.crm.service.account.AccountServiceImpl;
-import com.crm.service.employee.EmployeeService;
-import com.crm.service.employee.EmployeeServiceImpl;
+import com.crm.database.service.FactoryService;
+import com.crm.database.service.account.AccountService;
+import com.crm.database.service.employee.EmployeeService;
 
 import java.io.IOException;
+
+import static com.crm.database.manager.DatabaseManagerType.HIBERNATE;
 
 /**
  * Created by Bohdan on 09.02.2017.
@@ -19,8 +20,8 @@ public class ChangeAccountMenuModel
     private Account account = new Account();
     private Employee employee = new Employee();
 
-    private AccountService accountService = new AccountServiceImpl();
-    private EmployeeService employeeService = new EmployeeServiceImpl();
+    private AccountService accountService = FactoryService.getAccountService(HIBERNATE);
+    private EmployeeService employeeService = FactoryService.getEmployeeService(HIBERNATE);
 
     public Account getAccount()
     {
@@ -41,11 +42,11 @@ public class ChangeAccountMenuModel
         return employee;
     }
 
-    public void changeAccount() throws IOException, CreateAccountException
+    public void changeAccount() throws IOException
     {
-        employeeService.updateEmployee(employee);
+        employeeService.updateEntry(employee);
         account.setEmployee(employee);
-        accountService.updateAccount(account);
+        accountService.updateEntry(account);
 
         if (MainModel.getInstance().getCurrentAccount().getId().equals(account.getId()))
         {
@@ -57,7 +58,7 @@ public class ChangeAccountMenuModel
     {
         String password = PasswordManager.getInstance().generatePassword(length);
 
-        if (accountService.getAccountByField("password", password) != null)
+        if (accountService.getEntryByField("password", password) != null)
         {
             password = PasswordManager.getInstance().generatePassword(length);
         }

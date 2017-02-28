@@ -1,15 +1,13 @@
 package com.crm.menu.courier;
 
-import com.crm.entity.order.Order;
-import com.crm.entity.good.selected_good.SelectedGood;
+import com.crm.database.entity.good.selected_good.SelectedGood;
+import com.crm.database.entity.order.Order;
 import com.crm.main.Main;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-
-import java.io.IOException;
 
 /**
  * Created by Bohdan on 26.02.2017.
@@ -57,14 +55,7 @@ public class CourierMenuController
 
         buttonLogOut.setOnAction(event ->
         {
-            try
-            {
-                Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
-            }
-            catch (IOException e)
-            {
-
-            }
+            Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
         });
     }
 

@@ -1,6 +1,7 @@
 package com.crm.managers;
 
 import javax.mail.*;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
@@ -21,38 +22,52 @@ public class EmailManager
     {
     }
 
-    public synchronized void sendMessage(String emailTo, String subject, String message) throws MessagingException
+    public void sendMessage(final String emailTo, final String subject, final String message)
     {
-        final String username = "company.mini.crm";
-        final String password = "HobbitsAreBastards";
-
-        String host = "smtp.gmail.com";
-
-        Properties properties = new Properties();
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.host", host);
-        properties.put("mail.smtp.port", "587");
-
-        Session session = Session.getInstance(properties, new Authenticator()
+        new Thread(() ->
         {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication()
+            final String username = "company.mini.crm";
+            final String password = "HobbitsAreBastards";
+
+            String host = "smtp.gmail.com";
+
+            Properties properties = new Properties();
+            properties.put("mail.smtp.auth", "true");
+            properties.put("mail.smtp.starttls.enable", "true");
+            properties.put("mail.smtp.host", host);
+            properties.put("mail.smtp.port", "587");
+
+            Session session = Session.getInstance(properties, new Authenticator()
             {
-                return new PasswordAuthentication(username, password);
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication()
+                {
+                    return new PasswordAuthentication(username, password);
+                }
+            });
+
+            String from = "company.mini.crm@gmail.com";
+
+            MimeMessage mimeMessage = new MimeMessage(session);
+
+            try
+            {
+                mimeMessage.setFrom(new InternetAddress(from));
+                mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(emailTo));
+
+                mimeMessage.setSubject(subject);
+                mimeMessage.setText(message);
+
+                Transport.send(mimeMessage);
             }
-        });
+            catch (AddressException e)
+            {
 
-        String from = "company.mini.crm@gmail.com";
+            }
+            catch (MessagingException e)
+            {
 
-        MimeMessage mimeMessage = new MimeMessage(session);
-
-        mimeMessage.setFrom(new InternetAddress(from));
-        mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(emailTo));
-
-        mimeMessage.setSubject(subject);
-        mimeMessage.setText(message);
-
-        Transport.send(mimeMessage);
+            }
+        }).start();
     }
 }
