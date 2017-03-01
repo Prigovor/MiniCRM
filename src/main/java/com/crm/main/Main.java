@@ -1,14 +1,19 @@
 package com.crm.main;
 
 import com.crm.database.entity.account.Account;
-import com.crm.database.manager.DatabaseManagerType;
+import com.crm.database.entity.client.Client;
+import com.crm.database.entity.good.Good;
+import com.crm.database.manager.ContextManager;
 import com.crm.database.service.FactoryService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.springframework.context.ApplicationContext;
 
 import java.io.IOException;
+
+import static com.crm.database.manager.DatabaseManagerType.HIBERNATE;
 
 /**
  * Created by Prigovor on 04.02.2017.
@@ -77,29 +82,21 @@ public class Main extends Application
 
     public static void main(String[] args)
     {
+        ApplicationContext context = ContextManager.getInstance().getContext();
 
-//        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountAdmin", Account.class));
-//        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountManagerAlan", Account.class));
-//        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountStorekeeperJake", Account.class));
-//
-//        FactoryService.getGoodService(HIBERNATE).saveEntry(context.getBean("goodLaptopHP", Good.class));
-//        FactoryService.getGoodService(HIBERNATE).saveEntry(context.getBean("goodLaptopAcer", Good.class));
-//        FactoryService.getGoodService(HIBERNATE).saveEntry(context.getBean("goodLaptopAsus", Good.class));
-//
-//        FactoryService.getClientService(HIBERNATE).saveEntry(context.getBean("clientMary", Client.class));
-//        FactoryService.getClientService(HIBERNATE).saveEntry(context.getBean("clientLara", Client.class));
-//
-//        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountCourierJane", Account.class));
-//
-//        launch(args);
+        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountAdmin", Account.class));
+        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountManagerAlan", Account.class));
+        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountStorekeeperJake", Account.class));
 
-        Account account = new Account();
+        FactoryService.getGoodService(HIBERNATE).saveEntry(context.getBean("goodLaptopHP", Good.class));
+        FactoryService.getGoodService(HIBERNATE).saveEntry(context.getBean("goodLaptopAcer", Good.class));
+        FactoryService.getGoodService(HIBERNATE).saveEntry(context.getBean("goodLaptopAsus", Good.class));
 
-        account.setLogin("login");
-        account.setPassword(null);
-        account.setEmail(null);
-        account.setPhone(null);
+        FactoryService.getClientService(HIBERNATE).saveEntry(context.getBean("clientMary", Client.class));
+        FactoryService.getClientService(HIBERNATE).saveEntry(context.getBean("clientLara", Client.class));
 
-        FactoryService.getAccountService(DatabaseManagerType.HIBERNATE).saveEntry(account);
+        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountCourierJane", Account.class));
+
+        launch(args);
     }
 }
