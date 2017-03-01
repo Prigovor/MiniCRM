@@ -63,7 +63,7 @@ public class AuthorizationMenuModel
                                         Main.getInstance().replaceSceneContent("/fxml-files/courier-menu.fxml");
                                         break;
                                     }
-                                    case MANAGER:
+                                    case ORDER_MANAGER:
                                     {
                                         Main.getInstance().replaceSceneContent("/fxml-files/order-manager-main-menu.fxml");
                                         break;

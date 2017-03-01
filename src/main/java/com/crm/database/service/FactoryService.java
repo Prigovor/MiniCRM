@@ -1,5 +1,6 @@
 package com.crm.database.service;
 
+import com.crm.database.dao.hibernate.HibernateDao;
 import com.crm.database.manager.ContextManager;
 import com.crm.database.manager.DatabaseManagerType;
 import com.crm.database.service.account.AccountService;
@@ -8,28 +9,32 @@ import com.crm.database.service.courier.CourierService;
 import com.crm.database.service.employee.EmployeeService;
 import com.crm.database.service.good.GoodService;
 import com.crm.database.service.order.OrderService;
+import org.springframework.context.ApplicationContext;
 
 /**
  * Created by Bohdan on 27.02.2017.
  */
 public class FactoryService
 {
-    private static AccountService accountServiceHibernate =
-            ContextManager.getInstance().getContext().getBean(AccountService.class);
+    private static ApplicationContext context = ContextManager.getInstance().getContext();
 
+    private static AccountService accountServiceHibernate = context.getBean(AccountService.class);
     public static AccountService getAccountService(DatabaseManagerType databaseManagerType)
     {
         switch (databaseManagerType)
         {
             case HIBERNATE:
             {
+                accountServiceHibernate.setDao(context.getBean("hibernateDaoAccount", HibernateDao.class));
                 return accountServiceHibernate;
             }
         }
+
+        accountServiceHibernate.setDao(context.getBean("hibernateDaoAccount", HibernateDao.class));
         return accountServiceHibernate;
     }
 
-    private static ClientService clientServiceHibernate = null;
+    private static ClientService clientServiceHibernate = context.getBean(ClientService.class);
     public static ClientService getClientService(DatabaseManagerType databaseManagerType)
     {
         switch (databaseManagerType)

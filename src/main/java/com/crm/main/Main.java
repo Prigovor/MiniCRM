@@ -1,8 +1,8 @@
 package com.crm.main;
 
 import com.crm.database.entity.account.Account;
-import com.crm.database.manager.ContextManager;
-import com.crm.database.service.account.AccountService;
+import com.crm.database.manager.DatabaseManagerType;
+import com.crm.database.service.FactoryService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -100,6 +100,6 @@ public class Main extends Application
         account.setEmail(null);
         account.setPhone(null);
 
-        ContextManager.getInstance().getContext().getBean(AccountService.class).saveEntry(account);
+        FactoryService.getAccountService(DatabaseManagerType.HIBERNATE).saveEntry(account);
     }
 }

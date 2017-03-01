@@ -11,9 +11,14 @@ import java.util.function.Consumer;
  */
 public class GenericServiceImpl<T, PK extends Serializable> implements GenericService<T, PK>
 {
-    protected GenericDao<T, PK> dao;
+    private GenericDao<T, PK> dao;
 
-    public GenericServiceImpl(GenericDao<T, PK> dao)
+    public GenericDao<T, PK> getDao()
+    {
+        return dao;
+    }
+
+    public void setDao(GenericDao<T, PK> dao)
     {
         this.dao = dao;
     }

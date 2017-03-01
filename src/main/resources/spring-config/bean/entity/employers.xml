@@ -8,7 +8,7 @@
         <property name="surname" value="McJoys"/>
         <property name="age" value="24"/>
         <property name="gender" value="MALE"/>
-        <property name="position" value="MANAGER"/>
+        <property name="position" value="ORDER_MANAGER"/>
         <property name="email" value="alan.mcjoys@gmail.com"/>
         <property name="phone" value="+19358912"/>
     </bean>
