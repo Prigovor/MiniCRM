@@ -4,7 +4,7 @@ import com.crm.database.entity.employee.courier.CourierStatus;
 import com.crm.database.entity.order.Order;
 import com.crm.database.entity.order.OrderStatus;
 import com.crm.database.service.FactoryService;
-import com.crm.database.service.courier.CourierService;
+import com.crm.database.service.employee.courier.CourierService;
 
 import javax.mail.MessagingException;
 import java.io.IOException;

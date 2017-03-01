@@ -5,7 +5,7 @@ import com.crm.database.entity.order.Order;
 import com.crm.database.entity.order.OrderStatus;
 import com.crm.database.manager.DatabaseManagerType;
 import com.crm.database.service.FactoryService;
-import com.crm.database.service.courier.CourierService;
+import com.crm.database.service.employee.courier.CourierService;
 import com.crm.database.service.order.OrderService;
 import com.crm.main.Main;
 import com.crm.menu.manager.OrderManagerMenuModel;

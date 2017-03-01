@@ -7,6 +7,10 @@
         <constructor-arg value="com.crm.database.entity.account.Account"/>
     </bean>
 
+    <bean class="com.crm.database.dao.hibernate.HibernateDao" id="hibernateDaoEmployee">
+        <constructor-arg value="com.crm.database.entity.employee.Employee"/>
+    </bean>
+
     <bean class="com.crm.database.dao.hibernate.HibernateDao" id="hibernateDaoCourier">
         <constructor-arg value="com.crm.database.entity.employee.courier.Courier"/>
     </bean>
@@ -31,7 +35,7 @@
         <constructor-arg value="com.crm.database.entity.good.selected_good.SelectedGood"/>
     </bean>
 
-    <bean class="com.crm.database.dao.hibernate.HibernateDao" id="hibernateDaoOeder">
+    <bean class="com.crm.database.dao.hibernate.HibernateDao" id="hibernateDaoOrder">
         <constructor-arg value="com.crm.database.entity.order.Order"/>
     </bean>
 </beans>

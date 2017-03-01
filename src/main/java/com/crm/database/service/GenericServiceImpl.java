@@ -13,11 +13,6 @@ public class GenericServiceImpl<T, PK extends Serializable> implements GenericSe
 {
     private GenericDao<T, PK> dao;
 
-    public GenericDao<T, PK> getDao()
-    {
-        return dao;
-    }
-
     public void setDao(GenericDao<T, PK> dao)
     {
         this.dao = dao;

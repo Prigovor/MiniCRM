@@ -4,7 +4,7 @@ import com.crm.database.entity.employee.courier.Courier;
 import com.crm.database.entity.employee.courier.CourierStatus;
 import com.crm.database.manager.DatabaseManagerType;
 import com.crm.database.service.FactoryService;
-import com.crm.database.service.courier.CourierService;
+import com.crm.database.service.employee.courier.CourierService;
 import com.crm.menu.manager.OrderManagerMenuModel;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;

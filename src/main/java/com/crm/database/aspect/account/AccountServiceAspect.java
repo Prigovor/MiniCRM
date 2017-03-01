@@ -24,8 +24,6 @@ public class AccountServiceAspect
     @Before(value = "pointcutSaveEntry(account)", argNames = "account")
     private void beforeSave(Account account)
     {
-        System.out.println("Before saving account");
-
         if (!DataValidationManager.isLoginValid(account.getLogin()))
         {
 
@@ -50,6 +48,6 @@ public class AccountServiceAspect
     @After(value = "pointcutSaveEntry(account)", argNames = "account")
     private void afterSave(Account account)
     {
-        System.out.println("After saving account");
+
     }
 }
