@@ -30,7 +30,7 @@ public class Account
     @Column(name = "PHONE")
     private String phone;
 
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @OneToOne(targetEntity = Employee.class, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "ID", nullable = false)
     private Employee employee;
 

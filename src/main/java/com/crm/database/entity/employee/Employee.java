@@ -1,5 +1,7 @@
 package com.crm.database.entity.employee;
 
+import com.crm.database.entity.account.Account;
+
 import javax.persistence.*;
 
 /**
@@ -37,6 +39,10 @@ public class Employee
 
     @Column(name = "EMAIL")
     private String email;
+
+    @OneToOne(mappedBy = "employee", targetEntity = Account.class)
+    @JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID")
+    private Account account;
 
     public Employee()
     {
@@ -129,6 +135,16 @@ public class Employee
     public void setEmail(String email)
     {
         this.email = email;
+    }
+
+    public Account getAccount()
+    {
+        return account;
+    }
+
+    public void setAccount(Account account)
+    {
+        this.account = account;
     }
 
     @Override
