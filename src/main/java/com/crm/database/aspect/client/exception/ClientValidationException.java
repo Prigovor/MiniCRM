@@ -1,9 +1,11 @@
-package com.crm.database.aspect.client;
+package com.crm.database.aspect.client.exception;
+
+import com.crm.database.aspect.ServiceException;
 
 /**
  * Created by Bohdan on 01.03.2017.
  */
-public class ClientValidationException extends RuntimeException
+public class ClientValidationException extends ServiceException
 {
     public ClientValidationException()
     {

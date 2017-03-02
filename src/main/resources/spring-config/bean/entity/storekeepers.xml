@@ -10,7 +10,7 @@
         <property name="gender" value="MALE"/>
         <property name="position" value="STOREKEEPER"/>
         <property name="email" value="jake.valentine@gmail.com"/>
-        <property name="phone" value="+18724512"/>
+        <property name="phone" value="+380962896703"/>
 
     </bean>
 

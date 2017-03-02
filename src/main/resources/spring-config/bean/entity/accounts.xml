@@ -12,8 +12,7 @@
         <property name="password" value="adminadmin"/>
         <property name="rightType" value="ADMIN"/>
         <property name="lockType" value="UNLOCKED"/>
-        <property name="email" value="imrahill120@gmail.com"/>
-        <property name="phone" value="+380962896711"/>
+        <property name="employee" ref="employeeAdmin"/>
 
         <property name="registrationDate">
             <bean factory-bean="dateFormat" factory-method="parse">
@@ -27,9 +26,7 @@
         <property name="password" value="alanalan"/>
         <property name="rightType" value="USER"/>
         <property name="lockType" value="UNLOCKED"/>
-        <property name="email" value="alan.mcjoys@gmail.com"/>
         <property name="employee" ref="employeeAlan"/>
-        <property name="phone" value="+380962896711"/>
 
         <property name="registrationDate">
             <bean factory-bean="dateFormat" factory-method="parse">
@@ -41,34 +38,28 @@
     <bean class="com.crm.database.entity.account.Account" id="accountStorekeeperJake">
         <property name="login" value="jake"/>
         <property name="password" value="jakejake"/>
-        <property name="email" value="jake.valentine@gmail.com"/>
         <property name="lockType" value="UNLOCKED"/>
         <property name="rightType" value="USER"/>
-        <property name="phone" value="+380962896711"/>
+        <property name="employee" ref="storekeeperJake"/>
 
         <property name="registrationDate">
             <bean factory-bean="dateFormat" factory-method="parse">
                 <constructor-arg value="2017-02-24"/>
             </bean>
         </property>
-
-        <property name="employee" ref="storekeeperJake"/>
     </bean>
 
     <bean class="com.crm.database.entity.account.Account" id="accountCourierJane">
         <property name="login" value="jane"/>
         <property name="password" value="janejane"/>
-        <property name="email" value="jane.lawsy@gmail.com"/>
         <property name="lockType" value="UNLOCKED"/>
         <property name="rightType" value="USER"/>
-        <property name="phone" value="+380962896711"/>
+        <property name="employee" ref="courierJane"/>
 
         <property name="registrationDate">
             <bean factory-bean="dateFormat" factory-method="parse">
                 <constructor-arg value="2017-02-26"/>
             </bean>
         </property>
-
-        <property name="employee" ref="courierJane"/>
     </bean>
 </beans>

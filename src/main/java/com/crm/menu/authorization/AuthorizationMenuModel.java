@@ -2,6 +2,7 @@ package com.crm.menu.authorization;
 
 import com.crm.database.entity.account.LockType;
 import com.crm.database.entity.account.Account;
+import com.crm.database.manager.PasswordManager;
 import com.crm.main.Main;
 import com.crm.main.MainModel;
 import com.crm.managers.EmailManager;
@@ -39,7 +40,7 @@ public class AuthorizationMenuModel
             {
                 if (logInAttempts < MAX_LOG_IN_ATTEMPTS)
                 {
-                    if (account.getPassword().equals(password))
+                    if (PasswordManager.getInstance().isPasswordCorrect(password, account.getPassword()))
                     {
                         MainModel.getInstance().setCurrentAccount(account);
 

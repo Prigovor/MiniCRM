@@ -10,6 +10,16 @@
         <property name="gender" value="MALE"/>
         <property name="position" value="ORDER_MANAGER"/>
         <property name="email" value="alan.mcjoys@gmail.com"/>
-        <property name="phone" value="+19358912"/>
+        <property name="phone" value="+380962896700"/>
+    </bean>
+
+    <bean class="com.crm.database.entity.employee.Employee" id="employeeAdmin">
+        <property name="name" value="Bohdan"/>
+        <property name="surname" value="Koreniak"/>
+        <property name="age" value="21"/>
+        <property name="gender" value="MALE"/>
+        <property name="position" value="ADMIN"/>
+        <property name="email" value="imrahill120@gmail.com"/>
+        <property name="phone" value="+380962896701"/>
     </bean>
 </beans>

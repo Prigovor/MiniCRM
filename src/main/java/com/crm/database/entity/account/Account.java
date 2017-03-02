@@ -30,8 +30,8 @@ public class Account
     @Column(name = "PHONE")
     private String phone;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "ID")
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "ID", nullable = false)
     private Employee employee;
 
     @Enumerated(EnumType.STRING)
@@ -46,21 +46,25 @@ public class Account
     @Column(name = "REGISTRATION_DATE")
     private Date registrationDate;
 
-    public Account() {
+    public Account()
+    {
     }
 
-    public Account(String password, Employee employee, RightType rightType, LockType lockType) {
+    public Account(String password, Employee employee, RightType rightType, LockType lockType)
+    {
         this.password = password;
         this.employee = employee;
         this.rightType = rightType;
         this.lockType = lockType;
     }
 
-    public Long getId() {
+    public Long getId()
+    {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Long id)
+    {
         this.id = id;
     }
 
@@ -74,11 +78,13 @@ public class Account
         this.login = login;
     }
 
-    public String getPassword() {
+    public String getPassword()
+    {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password)
+    {
         this.password = password;
     }
 
@@ -87,34 +93,31 @@ public class Account
         return email;
     }
 
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
-
     public String getPhone()
     {
         return phone;
     }
 
-    public void setPhone(String phone)
+    public Employee getEmployee()
     {
-        this.phone = phone;
-    }
-
-    public Employee getEmployee() {
         return employee;
     }
 
-    public void setEmployee(Employee employee) {
+    public void setEmployee(Employee employee)
+    {
         this.employee = employee;
+
+        this.email = employee.getEmail();
+        this.phone = employee.getPhone();
     }
 
-    public RightType getRightType() {
+    public RightType getRightType()
+    {
         return rightType;
     }
 
-    public void setRightType(RightType rightType) {
+    public void setRightType(RightType rightType)
+    {
         this.rightType = rightType;
     }
 

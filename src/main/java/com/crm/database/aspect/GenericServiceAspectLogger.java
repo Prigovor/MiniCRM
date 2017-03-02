@@ -26,28 +26,28 @@ public class GenericServiceAspectLogger
     @Before("pointcutMethodExecution()")
     private void beforeExecution(JoinPoint joinPoint)
     {
-        logger.info("Entering:\n\t{} with arguments {}",
+        logger.info("Entering: {} with arguments {}",
                 joinPoint.getSignature(), Arrays.toString(joinPoint.getArgs()));
     }
 
     @After("pointcutMethodExecution()")
     private void afterExecution(JoinPoint joinPoint)
     {
-        logger.info("Leaving:\n\t{} with arguments {}",
+        logger.info("Leaving: {} with arguments {}",
             joinPoint.getSignature(), Arrays.toString(joinPoint.getArgs()));
     }
 
     @AfterThrowing(value = "pointcutMethodExecution()", throwing = "exc")
     private void afterThrowing(JoinPoint joinPoint, Throwable exc)
     {
-        logger.error("Exception was thrown in:\n\t{} stack trace is: {}",
+        logger.error("Exception was thrown in: {} stack trace is: {}",
                 joinPoint.getSignature(), exc.getStackTrace());
     }
 
     @AfterReturning(value = "pointcutMethodExecution()", returning = "obj")
     private void afterReturning(JoinPoint joinPoint, Object obj)
     {
-        logger.info("Value was returned in:\n\t{} value is: {}",
+        logger.info("Value was returned in: {} value is: {}",
                 joinPoint.getSignature(), obj);
     }
 }

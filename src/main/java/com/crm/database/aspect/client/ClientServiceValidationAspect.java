@@ -1,8 +1,11 @@
 package com.crm.database.aspect.client;
 
+import com.crm.database.aspect.client.exception.ClientExistenceException;
+import com.crm.database.aspect.client.exception.ClientValidationException;
 import com.crm.database.data.MessageDataContainer;
 import com.crm.database.entity.client.Client;
-import com.crm.managers.DataValidationManager;
+import com.crm.database.manager.DataValidator;
+import com.crm.database.manager.EntityChecker;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -21,27 +24,68 @@ public class ClientServiceValidationAspect
 
     }
 
-    @Before(value = "pointcutSaveEntry(client)", argNames = "client")
+    @Pointcut("execution(* com.crm.database.service.client.ClientService.updateEntry(*)) && args(client)")
+    private void pointcutSaveOrUpdateEntry(Client client)
+    {
+
+    }
+
+    @Pointcut("execution(* com.crm.database.service.client.ClientService.saveOrUpdate(*)) && args(client)")
+    private void pointcutUpdateEntry(Client client)
+    {
+
+    }
+
+    @Before(value = "pointcutSaveEntry(client) || pointcutSaveOrUpdateEntry(client) || pointcutUpdateEntry(client)", argNames = "client")
     private void beforeSave(Client client)
     {
-        if (!DataValidationManager.isLoginValid(client.getLogin()))
+        validateClient(client);
+        checkClientExistence(client);
+    }
+
+    private void validateClient(Client client)
+    {
+        if (!DataValidator.isLoginValid(client.getLogin()))
         {
             throw new ClientValidationException(MessageDataContainer.LOGIN_INVALID);
         }
 
-        if (!DataValidationManager.isPasswordValid(client.getPassword()))
+        if (!DataValidator.isPasswordValid(client.getPassword()))
         {
             throw new ClientValidationException(MessageDataContainer.PASSWORD_INVALID);
         }
 
-        if (!DataValidationManager.isEmailValid(client.getEmail()))
+        if (!DataValidator.isEmailValid(client.getEmail()))
         {
             throw new ClientValidationException(MessageDataContainer.EMAIL_INVALID);
         }
 
-        if (!DataValidationManager.isPhoneValid(client.getPhone()))
+        if (!DataValidator.isPhoneValid(client.getPhone()))
         {
             throw new ClientValidationException(MessageDataContainer.PHONE_INVALID);
+        }
+    }
+    
+    private void checkClientExistence(Client client)
+    {
+        if (EntityChecker.isClientWithLoginExists(client.getLogin()))
+        {
+            throw new ClientExistenceException(MessageDataContainer.LOGIN_EXISTS);
+        }
+
+        if (EntityChecker.isClientWithPasswordExists(client.getPassword()))
+        {
+            throw new ClientExistenceException(MessageDataContainer.PASSWORD_EXISTS);
+        }
+
+        if (EntityChecker.isClientWithEmailExists(client.getEmail()))
+        {
+            throw new ClientExistenceException(MessageDataContainer.EMAIL_EXISTS);
+        }
+
+        if (EntityChecker.isClientWithPhoneExists(client.getPhone()))
+        {
+            throw new ClientExistenceException(MessageDataContainer.PHONE_EXISTS);
         }
     }
 }

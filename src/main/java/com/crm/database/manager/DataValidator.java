@@ -1,4 +1,4 @@
-package com.crm.managers;
+package com.crm.database.manager;
 
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
@@ -9,11 +9,11 @@ import javax.mail.internet.InternetAddress;
 /**
  * Created by Bohdan on 28.02.2017.
  */
-public class DataValidationManager
+public class DataValidator
 {
     public static boolean isLoginValid(String login)
     {
-        return login != null && login.matches("^\\w+$");
+        return login != null && login.matches("^[\\w\\.]+$");
     }
 
     public static boolean isPasswordValid(String password)
