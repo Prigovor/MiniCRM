@@ -1,68 +1,65 @@
 package com.crm.menu.admin;
 
-import com.crm.dao.user.UserDAO;
-import com.crm.dao.user.UserDAOImpl;
-import com.crm.entity.employee.Employee;
-import com.crm.entity.user.User;
-import com.crm.service.UserValidationException;
-import com.crm.service.employee.EmployeeService;
-import com.crm.service.employee.EmployeeServiceImpl;
-import com.crm.service.user.UserService;
-import com.crm.service.user.UserServiceImpl;
+import com.crm.database.entity.account.Account;
+import com.crm.database.entity.employee.Employee;
+import com.crm.database.service.FactoryService;
+import com.crm.database.service.account.AccountService;
+import com.crm.database.service.employee.EmployeeService;
 
-import javax.mail.MessagingException;
 import java.util.List;
+
+import static com.crm.database.manager.DatabaseManagerType.HIBERNATE;
 
 /**
  * Created by Bohdan on 05.02.2017.
  */
 public class AdminMenuModel
 {
-    private UserDAO userDAO = new UserDAOImpl();
+    private static final AdminMenuModel instance = new AdminMenuModel();
 
-    private UserService userService = new UserServiceImpl();
-    private EmployeeService employeeService = new EmployeeServiceImpl();
-
-    private User selectedUser;
-
-    public List<User> getListUsers()
+    public static AdminMenuModel getInstance()
     {
-        return userDAO.findAll();
+        return instance;
     }
 
-    public List<User> secureGetListUsers() throws UserValidationException
+    private AdminMenuModel()
     {
-        return userService.findAll();
+
     }
 
-    public List<Employee> secureGetListEmployers() throws UserValidationException
+    private AccountService accountService = FactoryService.getAccountService(HIBERNATE);
+    private EmployeeService employeeService = FactoryService.getEmployeeService(HIBERNATE);
+
+    private Account selectedAccount;
+
+    public Account getSelectedAccount()
     {
-        return employeeService.findAll();
+        return selectedAccount;
     }
 
-    public User getSelectedUser()
+    public void setSelectedAccount(Account selectedAccount)
     {
-        return selectedUser;
+        this.selectedAccount = selectedAccount;
     }
 
-    public void setSelectedUser(User selectedUser)
+    public List<Account> getListAccounts()
     {
-        this.selectedUser = selectedUser;
+        return accountService.getEntries();
     }
 
-    public void validateUser() throws UserValidationException
+    public List<Employee> getListEmployers()
     {
-        userService.validateUser();
+        return employeeService.getEntries();
     }
 
-    public void deleteUser(User user) throws UserValidationException
+    public void deleteAccount()
     {
-        userService.deleteUser(user.getId());
-        selectedUser = null;
+        accountService.deleteEntry(selectedAccount.getId());
+        selectedAccount = null;
     }
 
-    public void generateUser(Employee employee) throws UserValidationException, MessagingException
+    public void generateAccount(String filePath)
     {
-        userService.generateUserFromEmployee(employee);
+
     }
 }

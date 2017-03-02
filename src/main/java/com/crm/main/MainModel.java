@@ -1,6 +1,6 @@
 package com.crm.main;
 
-import com.crm.entity.user.User;
+import com.crm.database.entity.account.Account;
 
 /**
  * Created by Bohdan on 05.02.2017.
@@ -24,15 +24,16 @@ public class MainModel
 
     }
 
-    private User currentUser;
+    private Account currentAccount = new Account();
 
-    public User getCurrentUser()
+    public Account getCurrentAccount()
     {
-        return currentUser;
+        currentAccount.setId(1293012849L);
+        return currentAccount;
     }
 
-    public void setCurrentUser(User currentUser)
+    public void setCurrentAccount(Account currentAccount)
     {
-        this.currentUser = currentUser;
+        this.currentAccount = currentAccount;
     }
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.crm.database.entity.order.Order" id="orderMary">
+        <property name="client" ref="clientMary"/>
+        <property name="courier" ref="courierJane"/>
+        <property name="address" value="Addison st, 12"/>
+        <property name="orderStatus" value="READY"/>
+        <property name="goods">
+            <list>
+                <ref bean="selectedGoodLaptopAcerMary"/>
+                <ref bean="selectedGoodLaptopAsusMary"/>
+                <ref bean="selectedGoodLaptopHPMary"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="com.crm.database.entity.order.Order" id="orderLara">
+        <property name="client" ref="clientLara"/>
+        <property name="courier" ref="courierJane"/>
+        <property name="address" value="Callen st, 45"/>
+        <property name="orderStatus" value="READY"/>
+        <property name="goods">
+            <list>
+                <ref bean="selectedGoodLaptopAcerLara"/>
+                <ref bean="selectedGoodLaptopAsusLara"/>
+            </list>
+        </property>
+    </bean>
+</beans>

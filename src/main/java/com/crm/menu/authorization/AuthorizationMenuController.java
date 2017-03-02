@@ -1,87 +1,72 @@
 package com.crm.menu.authorization;
 
 import com.crm.main.Main;
-import com.crm.main.MainModel;
-import com.crm.menu.Controller;
-import com.crm.menu.admin.AdminMenuController;
-import com.crm.menu.employee.EmployeeMenuController;
-import com.crm.service.UserValidationException;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
 
-import javax.mail.MessagingException;
 import java.io.IOException;
 
 /**
- * Created by Жека on 2/5/2017.
+ * Created by Bohdan on 23.02.2017.
  */
-public class AuthorizationMenuController implements Controller
+public class AuthorizationMenuController
 {
+    public Button buttonLogIn;
+    public Button buttonRemindPassword;
+    public Button buttonExit;
+
+    public TextField textFieldLogin;
+    public TextField textFieldPassword;
+
     private AuthorizationMenuModel model = new AuthorizationMenuModel();
-    private AuthorizationMenuView view = new AuthorizationMenuView(this);
 
-    @Override
-    public AuthorizationMenuView getView()
+    @FXML
+    public void initialize()
     {
-        return view;
-    }
-
-    public void logIn()
-    {
-        try
+        buttonLogIn.setOnAction(event ->
         {
-            if (model.authorize(view.getTextFieldLogin().getText(), view.getPasswordField().getText()))
+            try
             {
-                switch (MainModel.getInstance().getCurrentUser().getUserType())
+                switch (model.authorize(textFieldLogin.getText(), textFieldPassword.getText()))
                 {
-                    case ADMINISTRATOR:
+                    case LOCKED:
                     {
-                        Main.getInstance().replaceSceneContent(new AdminMenuController());
+                        showInformationMessage("Account is locked");
                         break;
                     }
-                    case EMPLOYEE:
+                    case INCORRECT_LOGIN_PASSWORD:
                     {
-                        switch (MainModel.getInstance().getCurrentUser().getEmployee().getPosition())
-                        {
-                            case MANAGER:
-                            {
-                                Main.getInstance().replaceSceneContent("/fxml-files/client-input-menu.fxml");
-                                break;
-                            }
-                            default:
-                            {
-                                Main.getInstance().replaceSceneContent(new EmployeeMenuController());
-                                break;
-                            }
-                        }
+                        showInformationMessage("Incorrect login or password");
                         break;
+                    }
+                    case SUCCESSFUL:
+                    {
+                        return;
                     }
                 }
             }
-            else
+            catch (IOException e)
             {
-                view.showInformationMessage("Incorrect login or password");
-            }
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-            view.showInformationMessage(e.getMessage());
-        }
-    }
 
-    public void remindPassword()
-    {
-        try
+            }
+        });
+
+        buttonRemindPassword.setOnAction(event ->
         {
             model.remindPassword();
-        }
-        catch (MessagingException | UserValidationException e)
+        });
+
+        buttonExit.setOnAction(event ->
         {
-            view.showInformationMessage(e.getMessage());
-        }
+            Main.getInstance().exit();
+        });
     }
 
-    public void exit()
+    public void showInformationMessage(String message)
     {
-        Main.getInstance().exit();
+        new Alert(Alert.AlertType.INFORMATION, message, ButtonType.OK).show();
     }
 }

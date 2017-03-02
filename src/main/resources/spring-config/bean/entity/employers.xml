@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.crm.database.entity.employee.Employee" id="employeeAlan">
+        <property name="name" value="Alan"/>
+        <property name="surname" value="McJoys"/>
+        <property name="age" value="24"/>
+        <property name="gender" value="MALE"/>
+        <property name="position" value="ORDER_MANAGER"/>
+        <property name="email" value="alan.mcjoys@gmail.com"/>
+        <property name="phone" value="+19358912"/>
+    </bean>
+</beans>

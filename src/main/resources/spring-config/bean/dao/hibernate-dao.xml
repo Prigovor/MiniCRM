@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.crm.database.dao.hibernate.HibernateDao" id="hibernateDaoAccount">
+        <constructor-arg value="com.crm.database.entity.account.Account"/>
+    </bean>
+
+    <bean class="com.crm.database.dao.hibernate.HibernateDao" id="hibernateDaoEmployee">
+        <constructor-arg value="com.crm.database.entity.employee.Employee"/>
+    </bean>
+
+    <bean class="com.crm.database.dao.hibernate.HibernateDao" id="hibernateDaoCourier">
+        <constructor-arg value="com.crm.database.entity.employee.courier.Courier"/>
+    </bean>
+
+    <bean class="com.crm.database.dao.hibernate.HibernateDao" id="hibernateDaoStorekeeper">
+        <constructor-arg value="com.crm.database.entity.employee.storekeeper.Storekeeper"/>
+    </bean>
+
+    <bean class="com.crm.database.dao.hibernate.HibernateDao" id="hibernateDaoOrderManager">
+        <constructor-arg value="com.crm.database.entity.employee.order_manager.OrderManager"/>
+    </bean>
+
+    <bean class="com.crm.database.dao.hibernate.HibernateDao" id="hibernateDaoClient">
+        <constructor-arg value="com.crm.database.entity.client.Client"/>
+    </bean>
+
+    <bean class="com.crm.database.dao.hibernate.HibernateDao" id="hibernateDaoGood">
+        <constructor-arg value="com.crm.database.entity.good.Good"/>
+    </bean>
+
+    <bean class="com.crm.database.dao.hibernate.HibernateDao" id="hibernateDaoSelectedGood">
+        <constructor-arg value="com.crm.database.entity.good.selected_good.SelectedGood"/>
+    </bean>
+
+    <bean class="com.crm.database.dao.hibernate.HibernateDao" id="hibernateDaoOrder">
+        <constructor-arg value="com.crm.database.entity.order.Order"/>
+    </bean>
+</beans>

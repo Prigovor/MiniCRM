@@ -2,10 +2,13 @@ package com.crm.managers;
 
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.CharBuffer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Created by Bohdan on 10.02.2017.
@@ -16,6 +19,8 @@ public class JsonFileManager
 
     public static void serializeToJsonFile(Object object, String path) throws IOException
     {
+        Files.deleteIfExists(Paths.get(path));
+
         try (FileWriter fileWriter = new FileWriter(path))
         {
             fileWriter.write(gson.toJson(object));

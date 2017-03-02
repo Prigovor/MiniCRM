@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.crm.database.entity.employee.courier.Courier" id="courierJane">
+        <property name="name" value="Jane"/>
+        <property name="surname" value="Lawsy"/>
+        <property name="age" value="19"/>
+        <property name="gender" value="FEMALE"/>
+        <property name="position" value="COURIER"/>
+        <property name="email" value="jane.lawsy@gmail.com"/>
+        <property name="phone" value="+18917823"/>
+
+        <property name="courierStatus" value="FREE"/>
+    </bean>
+
+</beans>
