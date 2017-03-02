@@ -1,4 +1,4 @@
-package com.crm.database.aspect.employee.exception;
+package com.crm.database.aspect.employee;
 
 import com.crm.database.aspect.ServiceException;
 

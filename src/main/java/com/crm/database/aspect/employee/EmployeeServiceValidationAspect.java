@@ -1,6 +1,5 @@
 package com.crm.database.aspect.employee;
 
-import com.crm.database.aspect.employee.exception.EmployeeExistenceException;
 import com.crm.database.data.MessageDataContainer;
 import com.crm.database.entity.employee.Employee;
 import com.crm.database.manager.EntityChecker;

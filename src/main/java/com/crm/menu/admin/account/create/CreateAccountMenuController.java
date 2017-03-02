@@ -57,7 +57,7 @@ public class CreateAccountMenuController
 
         buttonGeneratePassword.setOnAction(event ->
         {
-            accountInfo.textFieldPassword.setText(model.generatePassword(4));
+            accountInfo.textFieldPassword.setText(model.generatePassword(8));
         });
 
         buttonAdd.setOnAction(event ->

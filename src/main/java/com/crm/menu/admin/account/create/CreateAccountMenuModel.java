@@ -4,7 +4,7 @@ import com.crm.database.entity.account.Account;
 import com.crm.database.entity.employee.Employee;
 import com.crm.database.entity.employee.courier.Courier;
 import com.crm.database.entity.employee.courier.CourierStatus;
-import com.crm.managers.PasswordManager;
+import com.crm.database.manager.PasswordManager;
 import com.crm.database.service.FactoryService;
 import com.crm.database.service.account.AccountService;
 import com.crm.database.service.employee.EmployeeService;
