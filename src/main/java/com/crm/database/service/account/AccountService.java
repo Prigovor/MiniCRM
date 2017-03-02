@@ -14,4 +14,16 @@ public class AccountService extends GenericServiceImpl<Account, Long>
     {
         return super.saveEntry(entry);
     }
+
+    @Override
+    public void saveOrUpdate(Account entry)
+    {
+        super.saveOrUpdate(entry);
+    }
+
+    @Override
+    public void updateEntry(Account entry)
+    {
+        super.updateEntry(entry);
+    }
 }

@@ -74,7 +74,6 @@ public class AccountInfo extends AnchorPane
     {
         account.setLogin(textFieldLogin.getText());
         account.setPassword(textFieldPassword.getText());
-        account.setEmail(textFieldEmail.getText());
 
         account.setRegistrationDate(java.sql.Date.valueOf(datePickerRegistrationDate.getValue()));
 

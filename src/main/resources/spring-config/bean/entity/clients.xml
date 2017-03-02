@@ -9,7 +9,7 @@
         <property name="login" value="marry.mcdonnell"/>
         <property name="password" value="marymary"/>
         <property name="email" value="mary.mcdonnell@gmail.com"/>
-        <property name="phone" value="+380962896711"/>
+        <property name="phone" value="+380962896704"/>
 
         <property name="orders">
             <list>
@@ -24,7 +24,7 @@
         <property name="login" value="lara.wolfkeep"/>
         <property name="password" value="laralara"/>
         <property name="email" value="lara.wolfkeep@gmail.com"/>
-        <property name="phone" value="+380962896711"/>
+        <property name="phone" value="+380962896705"/>
 
         <property name="orders">
             <list>

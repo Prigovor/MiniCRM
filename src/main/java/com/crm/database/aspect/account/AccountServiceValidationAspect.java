@@ -1,8 +1,11 @@
 package com.crm.database.aspect.account;
 
+import com.crm.database.aspect.account.exception.AccountExistenceException;
+import com.crm.database.aspect.account.exception.AccountValidationException;
 import com.crm.database.data.MessageDataContainer;
 import com.crm.database.entity.account.Account;
-import com.crm.managers.DataValidationManager;
+import com.crm.database.manager.DataValidator;
+import com.crm.database.manager.EntityChecker;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -21,27 +24,68 @@ public class AccountServiceValidationAspect
 
     }
 
-    @Before(value = "pointcutSaveEntry(account)", argNames = "account")
+    @Pointcut("execution(* com.crm.database.service.account.AccountService.updateEntry(*)) && args(account)")
+    private void pointcutUpdateEntry(Account account)
+    {
+
+    }
+
+    @Pointcut("execution(* com.crm.database.service.account.AccountService.saveOrUpdate(*)) && args(account)")
+    private void pointcutSaveOrUpdateEntry(Account account)
+    {
+
+    }
+
+    @Before(value = "pointcutSaveEntry(account) || pointcutSaveOrUpdateEntry(account) || pointcutUpdateEntry(account)", argNames = "account")
     private void beforeSave(Account account)
     {
-        if (!DataValidationManager.isLoginValid(account.getLogin()))
+        validateAccount(account);
+        checkAccountExistence(account);
+    }
+
+    private void validateAccount(Account account)
+    {
+        if (!DataValidator.isLoginValid(account.getLogin()))
         {
             throw new AccountValidationException(MessageDataContainer.LOGIN_INVALID);
         }
 
-        if (!DataValidationManager.isPasswordValid(account.getPassword()))
+        if (!DataValidator.isPasswordValid(account.getPassword()))
         {
             throw new AccountValidationException(MessageDataContainer.PASSWORD_INVALID);
         }
 
-        if (!DataValidationManager.isEmailValid(account.getEmail()))
+        if (!DataValidator.isEmailValid(account.getEmail()))
         {
             throw new AccountValidationException(MessageDataContainer.EMAIL_INVALID);
         }
 
-        if (!DataValidationManager.isPhoneValid(account.getPhone()))
+        if (!DataValidator.isPhoneValid(account.getPhone()))
         {
             throw new AccountValidationException(MessageDataContainer.PHONE_INVALID);
+        }
+    }
+
+    private void checkAccountExistence(Account account)
+    {
+        if (EntityChecker.isAccountWithLoginExists(account.getLogin()))
+        {
+            throw new AccountExistenceException(MessageDataContainer.LOGIN_EXISTS);
+        }
+
+        if (EntityChecker.isAccountWithPasswordExists(account.getPassword()))
+        {
+            throw new AccountExistenceException(MessageDataContainer.PASSWORD_EXISTS);
+        }
+
+        if (EntityChecker.isAccountWithEmailExists(account.getEmail()))
+        {
+            throw new AccountExistenceException(MessageDataContainer.EMAIL_EXISTS);
+        }
+
+        if (EntityChecker.isAccountWithPhoneExists(account.getPhone()))
+        {
+            throw new AccountExistenceException(MessageDataContainer.PHONE_EXISTS);
         }
     }
 }
