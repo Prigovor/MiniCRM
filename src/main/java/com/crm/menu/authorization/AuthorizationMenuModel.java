@@ -1,36 +1,31 @@
 package com.crm.menu.authorization;
 
-import com.crm.database.entity.account.LockType;
 import com.crm.database.entity.account.Account;
+import com.crm.database.entity.account.LockType;
 import com.crm.database.manager.PasswordManager;
-import com.crm.main.Main;
-import com.crm.main.MainModel;
-import com.crm.managers.EmailManager;
 import com.crm.database.service.FactoryService;
 import com.crm.database.service.account.AccountService;
-import javafx.scene.control.TextInputDialog;
+import com.crm.main.Main;
+import com.crm.main.MainModel;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
-
-import static com.crm.database.manager.DatabaseManagerType.*;
+import static com.crm.database.manager.DatabaseManagerType.HIBERNATE;
 
 /**
  * Created by Bohdan on 05.02.2017.
  */
 public class AuthorizationMenuModel
 {
+    private static final int MAX_LOG_IN_ATTEMPTS = 3;
+
     private AccountService accountService = FactoryService.getAccountService(HIBERNATE);
 
     private Integer logInAttempts = 0;
-    private static final int MAX_LOG_IN_ATTEMPTS = 3;
 
     public AuthorizationMenuModel()
     {
     }
 
-    public AuthorizationResult authorize(String login, String password) throws IOException
+    public void authorize(String login, String password)
     {
         Account account = accountService.getEntryByField("login", login);
 
@@ -82,7 +77,7 @@ public class AuthorizationMenuModel
                             }
                         }
 
-                        return AuthorizationResult.SUCCESSFUL;
+                        return;
                     }
                     else
                     {
@@ -97,34 +92,20 @@ public class AuthorizationMenuModel
             }
             else
             {
-                return AuthorizationResult.LOCKED;
+                throw new RuntimeException("Account is locked");
             }
         }
 
-        return AuthorizationResult.INCORRECT_LOGIN_PASSWORD;
+        throw new RuntimeException("Incorrect login or password");
     }
 
     public void remindPassword()
     {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Password sending");
-        dialog.setContentText("Enter your email");
+        Main.getInstance().replaceSceneContent("/fxml-files/password-recovery/phone-verification-menu.fxml");
+    }
 
-        Optional<String> result = dialog.showAndWait();
-        if (result.isPresent())
-        {
-            List<Account> listAccounts = accountService.getEntriesByField("email", result.get());
-
-            if (!listAccounts.isEmpty())
-            {
-                EmailManager.getInstance().sendMessage(result.get(), "Password remind", "Your password:\n" + listAccounts.get(0).getPassword());
-            }
-            else
-            {
-                throw new RuntimeException("Account with such email is not registered");
-            }
-        }
-
-        throw new RuntimeException("Account with such email is not registered");
+    public void exit()
+    {
+        Main.getInstance().exit();
     }
 }

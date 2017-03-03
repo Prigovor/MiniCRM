@@ -1,13 +1,10 @@
 package com.crm.menu.authorization;
 
-import com.crm.main.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
-
-import java.io.IOException;
 
 /**
  * Created by Bohdan on 23.02.2017.
@@ -30,42 +27,33 @@ public class AuthorizationMenuController
         {
             try
             {
-                switch (model.authorize(textFieldLogin.getText(), textFieldPassword.getText()))
-                {
-                    case LOCKED:
-                    {
-                        showInformationMessage("Account is locked");
-                        break;
-                    }
-                    case INCORRECT_LOGIN_PASSWORD:
-                    {
-                        showInformationMessage("Incorrect login or password");
-                        break;
-                    }
-                    case SUCCESSFUL:
-                    {
-                        return;
-                    }
-                }
+                model.authorize(textFieldLogin.getText(), textFieldPassword.getText());
             }
-            catch (IOException e)
+            catch (RuntimeException e)
             {
-
+                showInformationMessage(e.getMessage());
             }
         });
 
         buttonRemindPassword.setOnAction(event ->
         {
-            model.remindPassword();
+            try
+            {
+                model.remindPassword();
+            }
+            catch (RuntimeException e)
+            {
+                showInformationMessage(e.getMessage());
+            }
         });
 
         buttonExit.setOnAction(event ->
         {
-            Main.getInstance().exit();
+            model.exit();
         });
     }
 
-    public void showInformationMessage(String message)
+    private void showInformationMessage(String message)
     {
         new Alert(Alert.AlertType.INFORMATION, message, ButtonType.OK).show();
     }
