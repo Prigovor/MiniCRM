@@ -1,5 +1,7 @@
 package com.crm.database.entity.employee;
 
+import com.crm.database.entity.account.Account;
+
 import javax.persistence.*;
 
 /**
@@ -37,6 +39,10 @@ public class Employee
 
     @Column(name = "EMAIL")
     private String email;
+
+    @OneToOne(mappedBy = "employee", targetEntity = Account.class)
+    @JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID")
+    private Account account;
 
     public Employee()
     {
@@ -129,6 +135,75 @@ public class Employee
     public void setEmail(String email)
     {
         this.email = email;
+    }
+
+    public Account getAccount()
+    {
+        return account;
+    }
+
+    public void setAccount(Account account)
+    {
+        this.account = account;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+        {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass())
+        {
+            return false;
+        }
+
+        Employee employee = (Employee) o;
+
+        if (id != null ? !id.equals(employee.id) : employee.id != null)
+        {
+            return false;
+        }
+        if (name != null ? !name.equals(employee.name) : employee.name != null)
+        {
+            return false;
+        }
+        if (surname != null ? !surname.equals(employee.surname) : employee.surname != null)
+        {
+            return false;
+        }
+        if (age != null ? !age.equals(employee.age) : employee.age != null)
+        {
+            return false;
+        }
+        if (gender != employee.gender)
+        {
+            return false;
+        }
+        if (position != employee.position)
+        {
+            return false;
+        }
+        if (phone != null ? !phone.equals(employee.phone) : employee.phone != null)
+        {
+            return false;
+        }
+        return email != null ? email.equals(employee.email) : employee.email == null;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (age != null ? age.hashCode() : 0);
+        result = 31 * result + (gender != null ? gender.hashCode() : 0);
+        result = 31 * result + (position != null ? position.hashCode() : 0);
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        return result;
     }
 
     @Override
