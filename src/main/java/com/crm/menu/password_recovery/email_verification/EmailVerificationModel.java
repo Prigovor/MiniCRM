@@ -28,7 +28,7 @@ public class EmailVerificationModel
             if (attempts < PasswordRecoveryModel.MAX_ATTEMPTS)
             {
                 attempts++;
-                new Alert(Alert.AlertType.INFORMATION, "Email is incorrect.\nAttempts left: "
+                new Alert(Alert.AlertType.INFORMATION, "EmailCustom is incorrect.\nAttempts left: "
                         +(PasswordRecoveryModel.MAX_ATTEMPTS - attempts), ButtonType.OK).showAndWait();
             }
 

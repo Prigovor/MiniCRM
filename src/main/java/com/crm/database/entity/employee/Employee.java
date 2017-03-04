@@ -1,8 +1,10 @@
 package com.crm.database.entity.employee;
 
 import com.crm.database.entity.account.Account;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Prigovor on 05.02.2017.
@@ -18,25 +20,32 @@ public class Employee
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank
     @Column(name = "NAME")
     private String name;
 
+    @NotBlank
     @Column(name = "SURNAME")
     private String surname;
 
+    @NotNull
     @Column(name = "AGE")
     private Integer age;
 
+    @NotNull
     @Column(name = "GENDER")
     private Gender gender;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "POSITION")
     private PositionType position;
 
+    @NotBlank
     @Column(name = "PHONE")
     private String phone;
 
+    @NotBlank
     @Column(name = "EMAIL")
     private String email;
 

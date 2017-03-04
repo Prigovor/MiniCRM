@@ -1,8 +1,18 @@
 package com.crm.database.entity.account;
 
 import com.crm.database.entity.employee.Employee;
+import com.crm.database.validation.email.EmailCustom;
+import com.crm.database.validation.login.LoginCustom;
+import com.crm.database.validation.password.PasswordCustom;
+import com.crm.database.validation.phone.PhoneCustom;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 /**
@@ -18,30 +28,38 @@ public class Account
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @LoginCustom
     @Column(name = "LOGIN")
     private String login;
 
+    @PasswordCustom
     @Column(name = "PASSWORD")
     private String password;
 
+    @EmailCustom
     @Column(name = "EMAIL")
     private String email;
 
+    @PhoneCustom
     @Column(name = "PHONE")
     private String phone;
 
+    @NotNull
     @OneToOne(targetEntity = Employee.class, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "ID", nullable = false)
     private Employee employee;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "RIGHT_TYPE")
     private RightType rightType;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "LOCK_TYPE")
     private LockType lockType;
 
+    @NotNull
     @Temporal(value = TemporalType.DATE)
     @Column(name = "REGISTRATION_DATE")
     private Date registrationDate;
@@ -83,7 +101,7 @@ public class Account
         return password;
     }
 
-    public void setPassword(String password)
+    public void setPassword(@NotBlank String password)
     {
         this.password = password;
     }

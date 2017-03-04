@@ -164,7 +164,7 @@ public class AdminMenuController
     {
         if (model.getSelectedAccount() != null)
         {
-            Main.getInstance().replaceSceneContent("/fxml-files/admin-change-account-menu.fxml");
+            Main.getInstance().replaceSceneContent("/fxml-files/admin/admin-change-account-menu.fxml");
         }
         else
         {
@@ -174,7 +174,7 @@ public class AdminMenuController
 
     private void addAccount()
     {
-        Main.getInstance().replaceSceneContent("/fxml-files/admin-add-account-menu.fxml");
+        Main.getInstance().replaceSceneContent("/fxml-files/admin/set-account-data-menu.fxml");
     }
 
     private void showAllEmployers()

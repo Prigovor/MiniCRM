@@ -19,7 +19,7 @@ import java.util.Arrays;
 public class AccountInfo extends AnchorPane
 {
     public TextField textFieldLogin;
-    public TextField textFieldPassword;
+    public TextField textFieldPhone;
     public TextField textFieldEmail;
 
     public DatePicker datePickerRegistrationDate;
@@ -39,7 +39,7 @@ public class AccountInfo extends AnchorPane
         this.account = account;
 
         textFieldLogin.setText(account.getLogin());
-        textFieldPassword.setText(account.getPassword());
+        textFieldPhone.setText(account.getPhone());
         textFieldEmail.setText(account.getEmail());
 
         if (account.getRegistrationDate() != null)
@@ -73,7 +73,6 @@ public class AccountInfo extends AnchorPane
     public void applyChangesToAccount()
     {
         account.setLogin(textFieldLogin.getText());
-        account.setPassword(textFieldPassword.getText());
 
         account.setRegistrationDate(java.sql.Date.valueOf(datePickerRegistrationDate.getValue()));
 
@@ -84,7 +83,7 @@ public class AccountInfo extends AnchorPane
     public void clear()
     {
         textFieldLogin.clear();
-        textFieldPassword.clear();
+        textFieldPhone.clear();
         textFieldEmail.clear();
 
         datePickerRegistrationDate.setValue(null);

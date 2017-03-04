@@ -42,6 +42,8 @@ public class GenericServiceAspectLogger
     {
         logger.error("Exception was thrown in: {} stack trace is: {}",
                 joinPoint.getSignature(), exc.getStackTrace());
+
+        exc.printStackTrace();
     }
 
     @AfterReturning(value = "pointcutMethodExecution()", returning = "obj")

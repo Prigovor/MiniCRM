@@ -1,4 +1,4 @@
-package com.crm.database.manager;
+package com.crm.database.validation;
 
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
@@ -11,17 +11,29 @@ import javax.mail.internet.InternetAddress;
  */
 public class DataValidator
 {
-    public static boolean isLoginValid(String login)
+    private static final DataValidator instance = new DataValidator();
+
+    public static DataValidator getInstance()
+    {
+        return instance;
+    }
+
+    private DataValidator()
+    {
+
+    }
+
+    public boolean isLoginValid(String login)
     {
         return login != null && login.matches("^[\\w\\.]+$");
     }
 
-    public static boolean isPasswordValid(String password)
+    public boolean isPasswordValid(String password)
     {
         return password != null && password.matches("^\\S{8,}$");
     }
 
-    public static boolean isEmailValid(String email)
+    public boolean isEmailValid(String email)
     {
         if (email == null)
         {
@@ -40,7 +52,7 @@ public class DataValidator
         return true;
     }
 
-    public static boolean isPhoneValid(String phone)
+    public boolean isPhoneValid(String phone)
     {
         PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.getInstance();
         try
