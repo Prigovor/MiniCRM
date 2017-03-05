@@ -26,7 +26,7 @@ public class AccountDataModel
         account.setPassword(PasswordManager.getInstance().generatePassword(8));
         account.setRegistrationDate(new Date());
 
-        EntityValidator.getInstance().validateAccount(account);
+        EntityValidator.getInstance().validateEntry(account);
     }
 
     public void next()

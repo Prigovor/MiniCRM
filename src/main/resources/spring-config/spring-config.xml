@@ -9,6 +9,7 @@
     <import resource="data-config.xml"/>
     <import resource="bean/dao/*.xml"/>
     <import resource="bean/entity/*.xml"/>
+    <import resource="bean/service/*.xml"/>
 
     <context:annotation-config/>
     <context:component-scan base-package="com.crm.database.dao"/>

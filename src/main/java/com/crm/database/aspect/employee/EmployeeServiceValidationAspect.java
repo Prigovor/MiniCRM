@@ -1,8 +1,6 @@
 package com.crm.database.aspect.employee;
 
-import com.crm.database.data.MessageDataContainer;
 import com.crm.database.entity.employee.Employee;
-import com.crm.database.manager.EntityChecker;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -41,14 +39,5 @@ public class EmployeeServiceValidationAspect
 
     private void checkEmployeeExistence(Employee employee)
     {
-        if (EntityChecker.isEmployeeWithEmailExists(employee.getEmail()))
-        {
-            throw new EmployeeExistenceException(MessageDataContainer.EMAIL_EXISTS);
-        }
-
-        if (EntityChecker.isAccountWithPhoneExists(employee.getPhone()))
-        {
-            throw new EmployeeExistenceException(MessageDataContainer.PHONE_EXISTS);
-        }
     }
 }

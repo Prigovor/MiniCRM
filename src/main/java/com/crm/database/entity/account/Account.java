@@ -1,18 +1,12 @@
 package com.crm.database.entity.account;
 
 import com.crm.database.entity.employee.Employee;
-import com.crm.database.validation.email.EmailCustom;
-import com.crm.database.validation.login.LoginCustom;
-import com.crm.database.validation.password.PasswordCustom;
-import com.crm.database.validation.phone.PhoneCustom;
-import org.hibernate.validator.constraints.Email;
+import com.crm.database.service.account.AccountService;
+import com.crm.database.validation.unique.Unique;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 /**
@@ -28,38 +22,37 @@ public class Account
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @LoginCustom
+    @NotNull(message = "Account login should be set")
+    @Unique(serviceClass = AccountService.class)
     @Column(name = "LOGIN")
     private String login;
 
-    @PasswordCustom
+    @Unique(serviceClass = AccountService.class)
     @Column(name = "PASSWORD")
     private String password;
 
-    @EmailCustom
+    @Unique(serviceClass = AccountService.class)
     @Column(name = "EMAIL")
     private String email;
 
-    @PhoneCustom
+    @Unique(serviceClass = AccountService.class)
     @Column(name = "PHONE")
     private String phone;
 
-    @NotNull
     @OneToOne(targetEntity = Employee.class, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "ID", nullable = false)
     private Employee employee;
 
-    @NotNull
+    @NotNull(message = "Account rights should be set")
     @Enumerated(EnumType.STRING)
     @Column(name = "RIGHT_TYPE")
     private RightType rightType;
 
-    @NotNull
+    @NotNull(message = "Account lock type should be set")
     @Enumerated(EnumType.STRING)
     @Column(name = "LOCK_TYPE")
     private LockType lockType;
 
-    @NotNull
     @Temporal(value = TemporalType.DATE)
     @Column(name = "REGISTRATION_DATE")
     private Date registrationDate;

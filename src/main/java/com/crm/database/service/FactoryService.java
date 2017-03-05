@@ -1,6 +1,5 @@
 package com.crm.database.service;
 
-import com.crm.database.dao.hibernate.HibernateDao;
 import com.crm.database.manager.ContextManager;
 import com.crm.database.manager.DatabaseManagerType;
 import com.crm.database.service.account.AccountService;
@@ -10,6 +9,7 @@ import com.crm.database.service.employee.courier.CourierService;
 import com.crm.database.service.employee.order_manager.OrderManagerService;
 import com.crm.database.service.employee.storekeeper.StorekeeperService;
 import com.crm.database.service.good.GoodService;
+import com.crm.database.service.good.selected_good.SelectedGoodService;
 import com.crm.database.service.order.OrderService;
 import org.springframework.context.ApplicationContext;
 
@@ -20,123 +20,170 @@ public class FactoryService
 {
     private static ApplicationContext context = ContextManager.getInstance().getContext();
 
-    private static AccountService accountService = context.getBean(AccountService.class);
+    public static GenericService getService(DatabaseManagerType databaseManagerType, Class serviceClass)
+    {
+        if (serviceClass.equals(AccountService.class))
+        {
+            return getAccountService(databaseManagerType);
+        }
+
+        if (serviceClass.equals(ClientService.class))
+        {
+            return getClientService(databaseManagerType);
+        }
+
+        if (serviceClass.equals(EmployeeService.class))
+        {
+            return getEmployeeService(databaseManagerType);
+        }
+
+        if (serviceClass.equals(CourierService.class))
+        {
+            return getClientService(databaseManagerType);
+        }
+
+        if (serviceClass.equals(StorekeeperService.class))
+        {
+            return getStorekeeperService(databaseManagerType);
+        }
+
+        if (serviceClass.equals(OrderManagerService.class))
+        {
+            return getOrderManagerService(databaseManagerType);
+        }
+
+        if (serviceClass.equals(GoodService.class))
+        {
+            return getGoodService(databaseManagerType);
+        }
+
+        if (serviceClass.equals(SelectedGoodService.class))
+        {
+            return getSelectedGoodService(databaseManagerType);
+        }
+
+        if (serviceClass.equals(OrderService.class))
+        {
+            return getOrderService(databaseManagerType);
+        }
+
+        return null;
+    }
+
     public static AccountService getAccountService(DatabaseManagerType databaseManagerType)
     {
         switch (databaseManagerType)
         {
             case HIBERNATE:
             {
-                accountService.setDao(context.getBean("hibernateDaoAccount", HibernateDao.class));
-                break;
+                return context.getBean("accountHibernateService", AccountService.class);
             }
         }
 
-        return accountService;
+        return null;
     }
 
-    private static ClientService clientService = context.getBean(ClientService.class);
     public static ClientService getClientService(DatabaseManagerType databaseManagerType)
     {
         switch (databaseManagerType)
         {
             case HIBERNATE:
             {
-                clientService.setDao(context.getBean("hibernateDaoClient", HibernateDao.class));
-                break;
+                return context.getBean("clientHibernateService", ClientService.class);
             }
         }
 
-        return clientService;
+        return null;
     }
 
-    private static EmployeeService employeeService = context.getBean(EmployeeService.class);
     public static EmployeeService getEmployeeService(DatabaseManagerType databaseManagerType)
     {
         switch (databaseManagerType)
         {
             case HIBERNATE:
             {
-                employeeService.setDao(context.getBean("hibernateDaoEmployee", HibernateDao.class));
-                break;
+                return context.getBean("employeeHibernateService", EmployeeService.class);
             }
         }
 
-        return employeeService;
+        return null;
     }
 
-    private static CourierService courierService = context.getBean(CourierService.class);
     public static CourierService getCourierService(DatabaseManagerType databaseManagerType)
     {
         switch (databaseManagerType)
         {
             case HIBERNATE:
             {
-                courierService.setDao(context.getBean("hibernateDaoCourier", HibernateDao.class));
-                break;
+                return context.getBean("courierHibernateService", CourierService.class);
             }
         }
 
-        return courierService;
+        return null;
     }
 
-    private static OrderManagerService orderManagerService = context.getBean(OrderManagerService.class);
     public static OrderManagerService getOrderManagerService(DatabaseManagerType databaseManagerType)
     {
         switch (databaseManagerType)
         {
             case HIBERNATE:
             {
-                orderManagerService.setDao(context.getBean("hibernateDaoOrderManager", HibernateDao.class));
-                break;
+                return context.getBean("orderManagerHibernateService", OrderManagerService.class);
             }
         }
 
-        return orderManagerService;
+        return null;
     }
 
-    private static StorekeeperService storekeeperService = context.getBean(StorekeeperService.class);
     public static StorekeeperService getStorekeeperService(DatabaseManagerType databaseManagerType)
     {
         switch (databaseManagerType)
         {
             case HIBERNATE:
             {
-                storekeeperService.setDao(context.getBean("hibernateDaoStorekeeper", HibernateDao.class));
-                break;
+                return context.getBean("storekeeperHibernateService", StorekeeperService.class);
             }
         }
 
-        return storekeeperService;
+        return null;
     }
 
-    private static GoodService goodService = context.getBean(GoodService.class);
     public static GoodService getGoodService(DatabaseManagerType databaseManagerType)
     {
         switch (databaseManagerType)
         {
             case HIBERNATE:
             {
-                goodService.setDao(context.getBean("hibernateDaoGood", HibernateDao.class));
-                break;
+                return context.getBean("goodHibernateService", GoodService.class);
             }
         }
 
-        return goodService;
+        return null;
     }
 
-    private static OrderService orderService = context.getBean(OrderService.class);
+    public static GoodService getSelectedGoodService(DatabaseManagerType databaseManagerType)
+    {
+        switch (databaseManagerType)
+        {
+            case HIBERNATE:
+            {
+                return context.getBean("selectedGoodHibernateService", GoodService.class);
+            }
+        }
+
+        return null;
+    }
+
     public static OrderService getOrderService(DatabaseManagerType databaseManagerType)
     {
         switch (databaseManagerType)
         {
             case HIBERNATE:
             {
-                orderService.setDao(context.getBean("hibernateDaoOrder", HibernateDao.class));
-                break;
+                return context.getBean("orderHibernateService", OrderService.class);
             }
         }
 
-        return orderService;
+        return null;
     }
 }

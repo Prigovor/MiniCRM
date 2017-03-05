@@ -1,9 +1,6 @@
 package com.crm.database.aspect.client;
 
-import com.crm.database.aspect.client.exception.ClientExistenceException;
-import com.crm.database.data.MessageDataContainer;
 import com.crm.database.entity.client.Client;
-import com.crm.database.manager.EntityChecker;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -38,33 +35,9 @@ public class ClientServiceValidationAspect
     private void beforeSave(Client client)
     {
         validateClient(client);
-        checkClientExistence(client);
     }
 
     private void validateClient(Client client)
     {
-    }
-    
-    private void checkClientExistence(Client client)
-    {
-        if (EntityChecker.isClientWithLoginExists(client.getLogin()))
-        {
-            throw new ClientExistenceException(MessageDataContainer.LOGIN_EXISTS);
-        }
-
-        if (EntityChecker.isClientWithPasswordExists(client.getPassword()))
-        {
-            throw new ClientExistenceException(MessageDataContainer.PASSWORD_EXISTS);
-        }
-
-        if (EntityChecker.isClientWithEmailExists(client.getEmail()))
-        {
-            throw new ClientExistenceException(MessageDataContainer.EMAIL_EXISTS);
-        }
-
-        if (EntityChecker.isClientWithPhoneExists(client.getPhone()))
-        {
-            throw new ClientExistenceException(MessageDataContainer.PHONE_EXISTS);
-        }
     }
 }

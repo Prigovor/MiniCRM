@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.crm.database.service.account.AccountService" id="accountHibernateService">
+        <property name="dao" ref="hibernateDaoAccount"/>
+    </bean>
+
+    <bean class="com.crm.database.service.client.ClientService" id="clientHibernateService">
+        <property name="dao" ref="hibernateDaoClient"/>
+    </bean>
+
+    <bean class="com.crm.database.service.employee.EmployeeService" id="employeeHibernateService">
+        <property name="dao" ref="hibernateDaoEmployee"/>
+    </bean>
+
+    <bean class="com.crm.database.service.employee.courier.CourierService" id="courierHibernateService">
+        <property name="dao" ref="hibernateDaoCourier"/>
+    </bean>
+
+    <bean class="com.crm.database.service.employee.order_manager.OrderManagerService" id="orderManagerHibernateService">
+        <property name="dao" ref="hibernateDaoOrderManager"/>
+    </bean>
+
+    <bean class="com.crm.database.service.employee.storekeeper.StorekeeperService" id="storekeeperHibernateService">
+        <property name="dao" ref="hibernateDaoStorekeeper"/>
+    </bean>
+
+    <bean class="com.crm.database.service.good.GoodService" id="goodHibernateService">
+        <property name="dao" ref="hibernateDaoGood"/>
+    </bean>
+
+    <bean class="com.crm.database.service.good.selected_good.SelectedGoodService" id="selectedGoodHibernateService">
+        <property name="dao" ref="hibernateDaoSelectedGood"/>
+    </bean>
+
+    <bean class="com.crm.database.service.order.OrderService" id="orderHibernateService">
+        <property name="dao" ref="hibernateDaoOrder"/>
+    </bean>
+</beans>

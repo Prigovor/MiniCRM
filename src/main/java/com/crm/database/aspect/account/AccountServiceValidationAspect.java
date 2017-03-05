@@ -1,9 +1,6 @@
 package com.crm.database.aspect.account;
 
-import com.crm.database.aspect.account.exception.AccountExistenceException;
-import com.crm.database.data.MessageDataContainer;
 import com.crm.database.entity.account.Account;
-import com.crm.database.manager.EntityChecker;
 import com.crm.database.validation.EntityValidator;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -39,34 +36,10 @@ public class AccountServiceValidationAspect
     private void beforeSave(Account account)
     {
         validateAccount(account);
-        checkAccountExistence(account);
     }
 
     private void validateAccount(Account account)
     {
-        EntityValidator.getInstance().validateAccount(account);
-    }
-
-    private void checkAccountExistence(Account account)
-    {
-        if (EntityChecker.isAccountWithLoginExists(account.getLogin()))
-        {
-            throw new AccountExistenceException(MessageDataContainer.LOGIN_EXISTS);
-        }
-
-        if (EntityChecker.isAccountWithPasswordExists(account.getPassword()))
-        {
-            throw new AccountExistenceException(MessageDataContainer.PASSWORD_EXISTS);
-        }
-
-        if (EntityChecker.isAccountWithEmailExists(account.getEmail()))
-        {
-            throw new AccountExistenceException(MessageDataContainer.EMAIL_EXISTS);
-        }
-
-        if (EntityChecker.isAccountWithPhoneExists(account.getPhone()))
-        {
-            throw new AccountExistenceException(MessageDataContainer.PHONE_EXISTS);
-        }
+        EntityValidator.getInstance().validateEntry(account);
     }
 }
