@@ -174,7 +174,7 @@ public class AdminMenuController
 
     private void addAccount()
     {
-        Main.getInstance().replaceSceneContent("/fxml-files/admin/set-account-data-menu.fxml");
+        Main.getInstance().replaceSceneContent("/fxml-files/admin/account-creation/set-account-data-menu.fxml");
     }
 
     private void showAllEmployers()

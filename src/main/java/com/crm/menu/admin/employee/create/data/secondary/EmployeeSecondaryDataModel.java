@@ -1,0 +1,40 @@
+package com.crm.menu.admin.employee.create.data.secondary;
+
+import com.crm.database.entity.employee.Employee;
+import com.crm.database.entity.employee.Gender;
+import com.crm.database.entity.employee.PositionType;
+import com.crm.database.validation.EntityValidator;
+import com.crm.main.Main;
+import com.crm.menu.admin.employee.create.EmployeeCreationModel;
+
+/**
+ * Created by Bohdan on 06.03.2017.
+ */
+public class EmployeeSecondaryDataModel
+{
+    public void setSecondaryEmployeeData(Integer age, Gender gender, PositionType positionType)
+    {
+        Employee employee = EmployeeCreationModel.getInstance().getEmployeeToCreate();
+
+        employee.setAge(age);
+        employee.setGender(gender);
+        employee.setPosition(positionType);
+
+        EntityValidator.getInstance().validateEntry(employee);
+    }
+
+    public void confirm()
+    {
+        EmployeeCreationModel.getInstance().saveEmployee();
+    }
+
+    public void back()
+    {
+        Main.getInstance().replaceSceneContent("/fxml-files/admin/employee-creation/set-main-employee-data-menu.fxml");
+    }
+
+    public void cancel()
+    {
+        EmployeeCreationModel.getInstance().cancel();
+    }
+}

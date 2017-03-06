@@ -45,7 +45,7 @@ public class EntityValidator
                 Unique uniqueAnnotation = field.getAnnotation(Unique.class);
                 field.setAccessible(true);
 
-                GenericService service = FactoryService.getService(uniqueAnnotation.serviceType(), uniqueAnnotation.serviceClass());
+                GenericService service = FactoryService.getService(uniqueAnnotation.serviceType(), tObj.getClass());
 
                 try
                 {

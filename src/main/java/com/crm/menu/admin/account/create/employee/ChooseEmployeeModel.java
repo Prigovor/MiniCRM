@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Bohdan on 03.03.2017.
  */
-public class AccountEmployeeModel
+public class ChooseEmployeeModel
 {
     public List<Employee> getListFreeEmployers()
     {
@@ -30,7 +30,7 @@ public class AccountEmployeeModel
 
     public void back()
     {
-        Main.getInstance().replaceSceneContent("/fxml-files/admin/set-account-data-menu.fxml");
+        Main.getInstance().replaceSceneContent("/fxml-files/admin/account-creation/set-account-data-menu.fxml");
     }
 
     public void cancel()

@@ -1,5 +1,14 @@
 package com.crm.database.service;
 
+import com.crm.database.entity.account.Account;
+import com.crm.database.entity.client.Client;
+import com.crm.database.entity.employee.Employee;
+import com.crm.database.entity.employee.courier.Courier;
+import com.crm.database.entity.employee.order_manager.OrderManager;
+import com.crm.database.entity.employee.storekeeper.Storekeeper;
+import com.crm.database.entity.good.Good;
+import com.crm.database.entity.good.selected_good.SelectedGood;
+import com.crm.database.entity.order.Order;
 import com.crm.database.manager.ContextManager;
 import com.crm.database.manager.DatabaseManagerType;
 import com.crm.database.service.account.AccountService;
@@ -9,7 +18,6 @@ import com.crm.database.service.employee.courier.CourierService;
 import com.crm.database.service.employee.order_manager.OrderManagerService;
 import com.crm.database.service.employee.storekeeper.StorekeeperService;
 import com.crm.database.service.good.GoodService;
-import com.crm.database.service.good.selected_good.SelectedGoodService;
 import com.crm.database.service.order.OrderService;
 import org.springframework.context.ApplicationContext;
 
@@ -20,49 +28,49 @@ public class FactoryService
 {
     private static ApplicationContext context = ContextManager.getInstance().getContext();
 
-    public static GenericService getService(DatabaseManagerType databaseManagerType, Class serviceClass)
+    public static GenericService getService(DatabaseManagerType databaseManagerType, Class entityClass)
     {
-        if (serviceClass.equals(AccountService.class))
+        if (entityClass.equals(Account.class))
         {
             return getAccountService(databaseManagerType);
         }
 
-        if (serviceClass.equals(ClientService.class))
+        if (entityClass.equals(Client.class))
         {
             return getClientService(databaseManagerType);
         }
 
-        if (serviceClass.equals(EmployeeService.class))
+        if (entityClass.equals(Employee.class))
         {
             return getEmployeeService(databaseManagerType);
         }
 
-        if (serviceClass.equals(CourierService.class))
+        if (entityClass.equals(Courier.class))
         {
             return getClientService(databaseManagerType);
         }
 
-        if (serviceClass.equals(StorekeeperService.class))
+        if (entityClass.equals(Storekeeper.class))
         {
             return getStorekeeperService(databaseManagerType);
         }
 
-        if (serviceClass.equals(OrderManagerService.class))
+        if (entityClass.equals(OrderManager.class))
         {
             return getOrderManagerService(databaseManagerType);
         }
 
-        if (serviceClass.equals(GoodService.class))
+        if (entityClass.equals(Good.class))
         {
             return getGoodService(databaseManagerType);
         }
 
-        if (serviceClass.equals(SelectedGoodService.class))
+        if (entityClass.equals(SelectedGood.class))
         {
             return getSelectedGoodService(databaseManagerType);
         }
 
-        if (serviceClass.equals(OrderService.class))
+        if (entityClass.equals(Order.class))
         {
             return getOrderService(databaseManagerType);
         }

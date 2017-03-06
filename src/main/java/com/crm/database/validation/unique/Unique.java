@@ -1,7 +1,6 @@
 package com.crm.database.validation.unique;
 
 import com.crm.database.manager.DatabaseManagerType;
-import com.crm.database.service.GenericService;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -15,7 +14,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Unique
 {
-    Class<? extends GenericService> serviceClass();
-
     DatabaseManagerType serviceType() default DatabaseManagerType.HIBERNATE;
 }

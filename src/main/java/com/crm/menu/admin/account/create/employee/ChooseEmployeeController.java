@@ -9,7 +9,7 @@ import javafx.scene.control.ListView;
 /**
  * Created by Bohdan on 04.03.2017.
  */
-public class AccountEmployeeController
+public class ChooseEmployeeController
 {
     public ListView<Employee> listViewFreeEmployers;
 
@@ -17,7 +17,7 @@ public class AccountEmployeeController
     public Button buttonBack;
     public Button buttonCancel;
 
-    private AccountEmployeeModel model = new AccountEmployeeModel();
+    private ChooseEmployeeModel model = new ChooseEmployeeModel();
 
     @FXML
     public void initialize()

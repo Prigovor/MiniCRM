@@ -31,7 +31,7 @@ public class AccountDataModel
 
     public void next()
     {
-        Main.getInstance().replaceSceneContent("/fxml-files/admin/chose-employee-menu.fxml");
+        Main.getInstance().replaceSceneContent("/fxml-files/admin/account-creation/chose-employee-menu.fxml");
     }
 
     public void cancel()

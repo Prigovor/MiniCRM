@@ -2,6 +2,10 @@ package com.crm.database.entity.account;
 
 import com.crm.database.entity.employee.Employee;
 import com.crm.database.service.account.AccountService;
+import com.crm.database.validation.email.EmailCustom;
+import com.crm.database.validation.login.LoginCustom;
+import com.crm.database.validation.password.PasswordCustom;
+import com.crm.database.validation.phone.PhoneCustom;
 import com.crm.database.validation.unique.Unique;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -22,20 +26,23 @@ public class Account
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull(message = "Account login should be set")
-    @Unique(serviceClass = AccountService.class)
+    @Unique
+    @LoginCustom
     @Column(name = "LOGIN")
     private String login;
 
-    @Unique(serviceClass = AccountService.class)
+    @Unique
+    @PasswordCustom
     @Column(name = "PASSWORD")
     private String password;
 
-    @Unique(serviceClass = AccountService.class)
+    @Unique
+    @EmailCustom
     @Column(name = "EMAIL")
     private String email;
 
-    @Unique(serviceClass = AccountService.class)
+    @Unique
+    @PhoneCustom
     @Column(name = "PHONE")
     private String phone;
 
@@ -94,7 +101,7 @@ public class Account
         return password;
     }
 
-    public void setPassword(@NotBlank String password)
+    public void setPassword(String password)
     {
         this.password = password;
     }

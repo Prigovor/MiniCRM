@@ -1,6 +1,10 @@
 package com.crm.database.entity.employee;
 
 import com.crm.database.entity.account.Account;
+import com.crm.database.service.employee.EmployeeService;
+import com.crm.database.validation.email.EmailCustom;
+import com.crm.database.validation.phone.PhoneCustom;
+import com.crm.database.validation.unique.Unique;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -20,32 +24,33 @@ public class Employee
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Employee name should be set")
     @Column(name = "NAME")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "Employee surname should be set")
     @Column(name = "SURNAME")
     private String surname;
 
-    @NotNull
     @Column(name = "AGE")
     private Integer age;
 
-    @NotNull
+    @NotNull(message = "Employee gender should be set")
     @Column(name = "GENDER")
     private Gender gender;
 
-    @NotNull
+    @NotNull(message = "Employee position should be set")
     @Enumerated(EnumType.STRING)
     @Column(name = "POSITION")
     private PositionType position;
 
-    @NotBlank
+    @Unique
+    @PhoneCustom
     @Column(name = "PHONE")
     private String phone;
 
-    @NotBlank
+    @Unique
+    @EmailCustom
     @Column(name = "EMAIL")
     private String email;
 
