@@ -21,13 +21,13 @@ public class AccountManagementModel
 
     public void addAccount()
     {
-        Main.getInstance().replaceSceneContent("/fxml-files/admin/account-creation/set-account-data-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/admin/account/create/set-account-data-menu.fxml");
     }
 
     public void changeAccount()
     {
         AccountCreationModel.getInstance().setAccountToCreate(selectedAccount);
-        Main.getInstance().replaceSceneContent("/fxml-files/admin/account-creation/set-account-data-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/admin/account/create/set-account-data-menu.fxml");
     }
 
     public void deleteAccount()
@@ -48,5 +48,10 @@ public class AccountManagementModel
     public List<Employee> getListEmployers()
     {
         return FactoryService.getEmployeeService(DatabaseManagerType.HIBERNATE).getEntries();
+    }
+
+    public void back()
+    {
+        Main.getInstance().replaceSceneContent("/com/crm/menu/admin/admin-main-menu.fxml");
     }
 }

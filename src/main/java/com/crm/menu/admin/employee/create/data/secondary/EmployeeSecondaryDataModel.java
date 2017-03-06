@@ -30,7 +30,7 @@ public class EmployeeSecondaryDataModel
 
     public void back()
     {
-        Main.getInstance().replaceSceneContent("/fxml-files/admin/employee-creation/set-main-employee-data-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/admin/employee/create/set-main-employee-data-menu.fxml");
     }
 
     public void cancel()

@@ -26,11 +26,11 @@ public class StorekeeperMainMenuModel
 
     public void openGiveGoodsMenu()
     {
-        Main.getInstance().replaceSceneContent("/fxml-files/storekeeper-give-goods-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/storekeeper/give_goods/storekeeper-give-goods-menu.fxml");
     }
 
     public void logOut()
     {
-        Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");
     }
 }

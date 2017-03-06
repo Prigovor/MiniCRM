@@ -21,13 +21,13 @@ public class EmployeeManagementModel
 
     public void addEmployee()
     {
-        Main.getInstance().replaceSceneContent("/fxml-files/admin/employee-creation/set-main-employee-data-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/admin/employee/create/set-main-employee-data-menu.fxml");
     }
 
     public void changeEmloyee()
     {
         EmployeeCreationModel.getInstance().setEmployeeToCreate(selectedEmployee);
-        Main.getInstance().replaceSceneContent("/fxml-files/admin/employee-creation/set-secondary-employee-data-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/admin/employee/create/set-secondary-employee-data-menu.fxml");
     }
 
     public void deleteEmployee()
@@ -48,5 +48,10 @@ public class EmployeeManagementModel
     public List<Account> getListAccounts()
     {
         return FactoryService.getAccountService(DatabaseManagerType.HIBERNATE).getEntries();
+    }
+
+    public void back()
+    {
+        Main.getInstance().replaceSceneContent("/com/crm/menu/admin/admin-main-menu.fxml");
     }
 }

@@ -30,7 +30,7 @@ public class ChooseEmployeeModel
 
     public void back()
     {
-        Main.getInstance().replaceSceneContent("/fxml-files/admin/account-creation/set-account-data-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/admin/account/create/set-account-data-menu.fxml");
     }
 
     public void cancel()

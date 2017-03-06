@@ -17,7 +17,7 @@ public class SmsCodeVerificationModel
     {
         if (smsCode.equals(PasswordRecoveryModel.getInstance().getSmsCode()))
         {
-            Main.getInstance().replaceSceneContent("/fxml-files/password-recovery/email-verification-menu.fxml");
+            Main.getInstance().replaceSceneContent("/com/crm/menu/password_recovery/email_verification/email-verification-menu.fxml");
         }
         else
         {
@@ -33,13 +33,13 @@ public class SmsCodeVerificationModel
                 FactoryService.getAccountService(DatabaseManagerType.HIBERNATE).lockAccount(
                         PasswordRecoveryModel.getInstance().getAccountToRecover()
                 );
-                Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
+                Main.getInstance().replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");
             }
         }
     }
 
     public void cancel()
     {
-        Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");
     }
 }

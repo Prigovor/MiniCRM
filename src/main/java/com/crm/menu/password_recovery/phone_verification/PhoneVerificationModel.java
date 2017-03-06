@@ -28,7 +28,7 @@ public class PhoneVerificationModel
             PasswordRecoveryModel.getInstance().setAccountToRecover(account);
             PasswordRecoveryModel.getInstance().setSmsCode(smsCode);
 
-            Main.getInstance().replaceSceneContent("/fxml-files/password-recovery/sms-code-verification-menu.fxml");
+            Main.getInstance().replaceSceneContent("/com/crm/menu/password_recovery/sms_code_verification/sms-code-verification-menu.fxml");
         }
         else
         {
@@ -42,13 +42,13 @@ public class PhoneVerificationModel
 
             if (attempts >= PasswordRecoveryModel.MAX_ATTEMPTS)
             {
-                Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
+                Main.getInstance().replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");
             }
         }
     }
 
     public void cancel()
     {
-        Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");
     }
 }

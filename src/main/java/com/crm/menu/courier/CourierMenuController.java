@@ -55,7 +55,7 @@ public class CourierMenuController
 
         buttonLogOut.setOnAction(event ->
         {
-            Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
+            Main.getInstance().replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");
         });
     }
 

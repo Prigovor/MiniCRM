@@ -39,7 +39,7 @@ public class Main extends Application
     {
         this.primaryStage = primaryStage;
 
-        replaceSceneContent("/fxml-files/authorization-menu.fxml");
+        replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");
 
         primaryStage.setTitle("MiniCRM");
         primaryStage.setMaximized(true);

@@ -35,6 +35,6 @@ public class EmployeeCreationModel
     public void cancel()
     {
         employeeToCreate = new Employee();
-        Main.getInstance().replaceSceneContent("/fxml-files/admin/admin-main-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/admin/admin-main-menu.fxml");
     }
 }

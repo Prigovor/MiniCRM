@@ -21,7 +21,7 @@ public class EmailVerificationModel
 
         if (account.equals(PasswordRecoveryModel.getInstance().getAccountToRecover()))
         {
-            Main.getInstance().replaceSceneContent("/fxml-files/password-recovery/email-code-verification-menu.fxml");
+            Main.getInstance().replaceSceneContent("/com/crm/menu/password_recovery/email_code_verification/email-code-verification-menu.fxml");
         }
         else
         {
@@ -37,13 +37,13 @@ public class EmailVerificationModel
                 FactoryService.getAccountService(DatabaseManagerType.HIBERNATE).lockAccount(
                         PasswordRecoveryModel.getInstance().getAccountToRecover()
                 );
-                Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
+                Main.getInstance().replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");
             }
         }
     }
 
     public void cancel()
     {
-        Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");
     }
 }
