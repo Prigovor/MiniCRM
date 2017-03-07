@@ -223,6 +223,6 @@ public class Employee
     @Override
     public String toString()
     {
-        return id.toString();
+        return name + " " + surname + " (" + email + ")";
     }
 }

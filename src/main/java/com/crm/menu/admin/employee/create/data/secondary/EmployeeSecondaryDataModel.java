@@ -26,6 +26,7 @@ public class EmployeeSecondaryDataModel
     public void confirm()
     {
         EmployeeCreationModel.getInstance().saveEmployee();
+        EmployeeCreationModel.getInstance().close();
     }
 
     public void back()
@@ -35,6 +36,6 @@ public class EmployeeSecondaryDataModel
 
     public void cancel()
     {
-        EmployeeCreationModel.getInstance().cancel();
+        EmployeeCreationModel.getInstance().close();
     }
 }

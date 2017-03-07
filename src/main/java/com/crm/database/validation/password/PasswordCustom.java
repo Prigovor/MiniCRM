@@ -4,6 +4,8 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
+import static com.crm.database.data.MessageDataContainer.PASSWORD_INVALID;
+
 /**
  * Created by Bohdan on 05.03.2017.
  */
@@ -13,7 +15,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface PasswordCustom
 {
-    String message() default "Password is not valid";
+    String message() default PASSWORD_INVALID;
 
     Class<?>[] groups() default {};
 

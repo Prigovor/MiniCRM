@@ -32,7 +32,7 @@ public class EmployeeCreationModel
         FactoryService.getEmployeeService(DatabaseManagerType.HIBERNATE).saveOrUpdate(employeeToCreate);
     }
 
-    public void cancel()
+    public void close()
     {
         employeeToCreate = new Employee();
         Main.getInstance().replaceSceneContent("/com/crm/menu/admin/admin-main-menu.fxml");

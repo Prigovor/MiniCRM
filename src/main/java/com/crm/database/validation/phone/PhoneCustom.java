@@ -4,6 +4,8 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
+import static com.crm.database.data.MessageDataContainer.PHONE_INVALID;
+
 /**
  * Created by Bohdan on 05.03.2017.
  */
@@ -13,7 +15,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface PhoneCustom
 {
-    String message() default "Phone is not valid";
+    String message() default PHONE_INVALID;
 
     Class<?>[] groups() default {};
 

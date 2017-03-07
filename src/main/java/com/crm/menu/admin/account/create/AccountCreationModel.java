@@ -31,7 +31,7 @@ public class AccountCreationModel
         FactoryService.getAccountService(DatabaseManagerType.HIBERNATE).saveOrUpdate(accountToCreate);
     }
 
-    public void cancel()
+    public void close()
     {
         accountToCreate = new Account();
         Main.getInstance().replaceSceneContent("/com/crm/menu/admin/admin-main-menu.fxml");

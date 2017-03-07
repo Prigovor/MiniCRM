@@ -59,19 +59,4 @@ public class Courier extends Employee
     {
         this.listOrders = listOrders;
     }
-
-    @Override
-    public String toString()
-    {
-        return getName() + " " + getSurname();
-    }
-
-    /**
-     * Курьер занимается доставкой заказа.
-     *
-     * Поля: Имя, фамилия, статус (занят, свободен), заказ
-     *
-     * Реализовать DAO, Service (не имплементировать SecureService),
-     * добавить DAO в фабрику
-     */
 }

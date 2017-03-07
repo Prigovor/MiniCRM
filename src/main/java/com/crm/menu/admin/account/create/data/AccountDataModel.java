@@ -4,7 +4,6 @@ import com.crm.database.entity.account.Account;
 import com.crm.database.entity.account.LockType;
 import com.crm.database.entity.account.RightType;
 import com.crm.database.manager.PasswordManager;
-import com.crm.database.validation.EntityValidator;
 import com.crm.main.Main;
 import com.crm.menu.admin.account.create.AccountCreationModel;
 
@@ -25,8 +24,6 @@ public class AccountDataModel
 
         account.setPassword(PasswordManager.getInstance().generatePassword(8));
         account.setRegistrationDate(new Date());
-
-        EntityValidator.getInstance().validateEntry(account);
     }
 
     public void next()
@@ -36,6 +33,6 @@ public class AccountDataModel
 
     public void cancel()
     {
-        AccountCreationModel.getInstance().cancel();
+        AccountCreationModel.getInstance().close();
     }
 }

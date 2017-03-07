@@ -46,6 +46,7 @@ public class Account
     @Column(name = "PHONE")
     private String phone;
 
+    @NotNull
     @OneToOne(targetEntity = Employee.class, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "ID", nullable = false)
     private Employee employee;
@@ -60,6 +61,7 @@ public class Account
     @Column(name = "LOCK_TYPE")
     private LockType lockType;
 
+    @NotNull
     @Temporal(value = TemporalType.DATE)
     @Column(name = "REGISTRATION_DATE")
     private Date registrationDate;

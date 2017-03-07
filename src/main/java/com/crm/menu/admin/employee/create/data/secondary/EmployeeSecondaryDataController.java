@@ -1,5 +1,6 @@
 package com.crm.menu.admin.employee.create.data.secondary;
 
+import com.crm.database.entity.employee.Employee;
 import com.crm.database.entity.employee.Gender;
 import com.crm.database.entity.employee.PositionType;
 import com.crm.database.validation.ValidationException;
@@ -31,7 +32,15 @@ public class EmployeeSecondaryDataController
         choiceBoxGender.setItems(FXCollections.observableList(Arrays.asList(Gender.values())));
         choiceBoxPosition.setItems(FXCollections.observableList(Arrays.asList(PositionType.values())));
 
-        textFieldAge.setText(String.valueOf(EmployeeCreationModel.getInstance().getEmployeeToCreate().getAge()));
+        Employee employee = EmployeeCreationModel.getInstance().getEmployeeToCreate();
+
+        choiceBoxGender.setValue(employee.getGender());
+        choiceBoxPosition.setValue(employee.getPosition());
+
+        if (employee.getAge() != null)
+        {
+            textFieldAge.setText(String.valueOf(employee.getAge()));
+        }
 
         buttonConfirm.setOnAction(event ->
         {

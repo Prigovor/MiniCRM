@@ -4,6 +4,8 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
+import static com.crm.database.data.MessageDataContainer.LOGIN_INVALID;
+
 /**
  * Created by Bohdan on 05.03.2017.
  */
@@ -13,7 +15,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface LoginCustom
 {
-    String message() default "Login is not valid";
+    String message() default LOGIN_INVALID;
 
     Class<?>[] groups() default {};
 
