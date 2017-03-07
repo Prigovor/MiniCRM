@@ -12,6 +12,7 @@
         <property name="email" value="jake.valentine@gmail.com"/>
         <property name="phone" value="+380962896703"/>
 
+        <property name="account" ref="accountStorekeeperJake"/>
     </bean>
 
 </beans>

@@ -11,6 +11,8 @@
         <property name="position" value="ORDER_MANAGER"/>
         <property name="email" value="alan.mcjoys@gmail.com"/>
         <property name="phone" value="+380962896700"/>
+
+        <property name="account" ref="accountManagerAlan"/>
     </bean>
 
     <bean class="com.crm.database.entity.employee.Employee" id="employeeAdmin">
@@ -21,5 +23,7 @@
         <property name="position" value="ADMIN"/>
         <property name="email" value="imrahill120@gmail.com"/>
         <property name="phone" value="+380962896701"/>
+
+        <property name="account" ref="accountAdmin"/>
     </bean>
 </beans>

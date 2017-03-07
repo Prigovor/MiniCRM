@@ -54,9 +54,19 @@ public class EntityValidator
 
                 try
                 {
-                    if (!field.get(tObj).equals(field.get(tObjInDb)) && service.getEntryByField(field.getName(), field.get(tObj)) != null)
+                    if (tObjInDb != null)
                     {
-                        throw new ValidationException(String.format("%s with such %s already exists", tObj.getClass().getSimpleName(), field.getName()));
+                        if (!field.get(tObj).equals(field.get(tObjInDb)) && service.getEntryByField(field.getName(), field.get(tObj)) != null)
+                        {
+                            throw new ValidationException(String.format("%s with such %s already exists", tObj.getClass().getSimpleName(), field.getName()));
+                        }
+                    }
+                    else
+                    {
+                        if (service.getEntryByField(field.getName(), field.get(tObj)) != null)
+                        {
+                            throw new ValidationException(String.format("%s with such %s already exists", tObj.getClass().getSimpleName(), field.getName()));
+                        }
                     }
                 }
                 catch (IllegalAccessException e)
@@ -78,7 +88,10 @@ public class EntityValidator
                 field.setAccessible(true);
                 try
                 {
-                    return (T) service.getEntry((Serializable) field.get(tObj));
+                    if (field.get(tObj) != null)
+                    {
+                        return (T) service.getEntry((Serializable) field.get(tObj));
+                    }
                 }
                 catch (IllegalAccessException e)
                 {

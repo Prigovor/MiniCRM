@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
  */
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "EMPLOYEES")
 public class Employee
 {

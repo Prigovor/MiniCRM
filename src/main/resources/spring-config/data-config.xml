@@ -32,6 +32,7 @@
                 <value>com.crm.database.entity.good.selected_good.SelectedGood</value>
                 <value>com.crm.database.entity.order.Order</value>
                 <value>com.crm.database.entity.employee.storekeeper.Storekeeper</value>
+                <value>com.crm.database.entity.employee.order_manager.OrderManager</value>
             </list>
         </property>
     </bean>

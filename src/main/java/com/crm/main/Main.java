@@ -77,6 +77,10 @@ public class Main extends Application
     public static void main(String[] args)
     {
         ApplicationContext context = ContextManager.getInstance().getContext();
+//
+//        FactoryService.getEmployeeService(HIBERNATE).saveEntry(context.getBean("employeeAdmin", Employee.class));
+//        FactoryService.getEmployeeService(HIBERNATE).saveEntry(context.getBean("employeeAlan", Employee.class));
+//        FactoryService.getEmployeeService(HIBERNATE).saveEntry(context.getBean("storekeeperJake", Employee.class));
 
 //        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountAdmin", Account.class));
 //        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountManagerAlan", Account.class));
@@ -85,11 +89,6 @@ public class Main extends Application
 //        FactoryService.getGoodService(HIBERNATE).saveEntry(context.getBean("goodLaptopHP", Good.class));
 //        FactoryService.getGoodService(HIBERNATE).saveEntry(context.getBean("goodLaptopAcer", Good.class));
 //        FactoryService.getGoodService(HIBERNATE).saveEntry(context.getBean("goodLaptopAsus", Good.class));
-//
-//        FactoryService.getClientService(HIBERNATE).saveEntry(context.getBean("clientMary", Client.class));
-//        FactoryService.getClientService(HIBERNATE).saveEntry(context.getBean("clientLara", Client.class));
-//
-//        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountCourierJane", Account.class));
 
         launch(args);
     }

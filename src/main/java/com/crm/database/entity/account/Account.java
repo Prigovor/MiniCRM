@@ -47,7 +47,7 @@ public class Account
     private String phone;
 
     @NotNull
-    @OneToOne(targetEntity = Employee.class, cascade = CascadeType.ALL, optional = false)
+    @OneToOne(targetEntity = Employee.class, optional = false)
     @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "ID", nullable = false)
     private Employee employee;
 

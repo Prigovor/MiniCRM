@@ -13,6 +13,8 @@
         <property name="phone" value="+380962896702"/>
 
         <property name="courierStatus" value="FREE"/>
+
+        <property name="account" ref="accountCourierJane"/>
     </bean>
 
 </beans>
