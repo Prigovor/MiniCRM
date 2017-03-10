@@ -79,16 +79,6 @@ public class Main extends Application
         ApplicationContext context = ContextManager.getInstance().getContext();
 //
 //        FactoryService.getEmployeeService(HIBERNATE).saveEntry(context.getBean("employeeAdmin", Employee.class));
-//        FactoryService.getEmployeeService(HIBERNATE).saveEntry(context.getBean("employeeAlan", Employee.class));
-//        FactoryService.getEmployeeService(HIBERNATE).saveEntry(context.getBean("storekeeperJake", Employee.class));
-
-//        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountAdmin", Account.class));
-//        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountManagerAlan", Account.class));
-//        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountStorekeeperJake", Account.class));
-//
-//        FactoryService.getGoodService(HIBERNATE).saveEntry(context.getBean("goodLaptopHP", Good.class));
-//        FactoryService.getGoodService(HIBERNATE).saveEntry(context.getBean("goodLaptopAcer", Good.class));
-//        FactoryService.getGoodService(HIBERNATE).saveEntry(context.getBean("goodLaptopAsus", Good.class));
 
         launch(args);
     }

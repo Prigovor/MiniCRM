@@ -180,6 +180,7 @@ public class AccountManagementController
         employeeInfo.setOpacity(0.0);
         accountInfo.setOpacity(0.0);
         tableView.setOpacity(1.0);
+        tableView.setDisable(false);
 
         tableView.setItems(FXCollections.observableList(model.getListEmployers()));
 
@@ -197,15 +198,19 @@ public class AccountManagementController
         employeeInfo.setOpacity(0.0);
         accountInfo.setOpacity(0.0);
         tableView.setOpacity(1.0);
+        tableView.setDisable(false);
 
         tableView.setItems(FXCollections.observableList(model.getListAccounts()));
 
         tableView.getColumns().clear();
         for (Field field : Account.class.getDeclaredFields())
         {
-            TableColumn tableColumn = new TableColumn(field.getName());
-            tableColumn.setCellValueFactory(new PropertyValueFactory<>(field.getName()));
-            tableView.getColumns().add(tableColumn);
+            if (!field.getName().equals("password"))
+            {
+                TableColumn tableColumn = new TableColumn(field.getName());
+                tableColumn.setCellValueFactory(new PropertyValueFactory<>(field.getName()));
+                tableView.getColumns().add(tableColumn);
+            }
         }
     }
 
@@ -218,6 +223,7 @@ public class AccountManagementController
                 tableView.setOpacity(0.0);
                 accountInfo.setOpacity(0.0);
                 employeeInfo.setOpacity(1.0);
+                tableView.setDisable(true);
 
                 employeeInfo.setEmployee(model.getSelectedAccount().getEmployee());
             }
@@ -237,6 +243,7 @@ public class AccountManagementController
         tableView.setOpacity(0.0);
         employeeInfo.setOpacity(0.0);
         accountInfo.setOpacity(1.0);
+        tableView.setDisable(true);
 
         if (model.getSelectedAccount() != null)
         {

@@ -24,10 +24,10 @@ public class EmployeeManagementModel
         Main.getInstance().replaceSceneContent("/com/crm/menu/admin/employee/create/set-main-employee-data-menu.fxml");
     }
 
-    public void changeEmloyee()
+    public void changeEmployee()
     {
         EmployeeCreationModel.getInstance().setEmployeeToCreate(selectedEmployee);
-        Main.getInstance().replaceSceneContent("/com/crm/menu/admin/employee/create/set-secondary-employee-data-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/admin/employee/create/set-main-employee-data-menu.fxml");
     }
 
     public void deleteEmployee()

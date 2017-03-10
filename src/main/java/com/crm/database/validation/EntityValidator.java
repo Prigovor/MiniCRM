@@ -32,72 +32,87 @@ public class EntityValidator
 
     private ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
 
-    public <T> void validateEntry(T tObj)
+    public <T> void validateEntry(T objToValidate)
     {
         Validator validator = validatorFactory.getValidator();
 
-        for (ConstraintViolation<T> tConstraintViolation : validator.validate(tObj))
+        for (ConstraintViolation<T> tConstraintViolation : validator.validate(objToValidate))
         {
             throw new ValidationException(tConstraintViolation.getMessage());
         }
 
-        T tObjInDb = getEntry(tObj);
+        T databaseObject = getEntry(objToValidate);
 
-        for (Field field : tObj.getClass().getDeclaredFields())
+        Class clazz = objToValidate.getClass();
+
+        while (clazz != null)
         {
-            if (field.isAnnotationPresent(Unique.class))
+            for (Field field : clazz.getDeclaredFields())
             {
-                Unique uniqueAnnotation = field.getAnnotation(Unique.class);
-                field.setAccessible(true);
-
-                GenericService service = FactoryService.getService(uniqueAnnotation.serviceType(), tObj.getClass());
-
-                try
+                if (field.isAnnotationPresent(Unique.class))
                 {
-                    if (tObjInDb != null)
+                    try
                     {
-                        if (!field.get(tObj).equals(field.get(tObjInDb)) && service.getEntryByField(field.getName(), field.get(tObj)) != null)
+                        field.setAccessible(true);
+
+                        GenericService service = FactoryService.getService(DatabaseManagerType.HIBERNATE, clazz);
+
+                        Object obj = service.getEntryByField(field.getName(), field.get(objToValidate));
+
+                        if (databaseObject != null)
                         {
-                            throw new ValidationException(String.format("%s with such %s already exists", tObj.getClass().getSimpleName(), field.getName()));
+                            if (!field.get(databaseObject).equals(objToValidate) && (obj != null && !obj.equals(databaseObject)))
+                            {
+                                throw new ValidationException(String.format("%s with such %s already exists", clazz.getSimpleName(), field.getName()));
+                            }
+                        }
+                        else
+                        {
+                            if (obj != null)
+                            {
+                                throw new ValidationException(String.format("%s with such %s already exists", clazz.getSimpleName(), field.getName()));
+                            }
                         }
                     }
-                    else
+                    catch (IllegalAccessException e)
                     {
-                        if (service.getEntryByField(field.getName(), field.get(tObj)) != null)
-                        {
-                            throw new ValidationException(String.format("%s with such %s already exists", tObj.getClass().getSimpleName(), field.getName()));
-                        }
-                    }
-                }
-                catch (IllegalAccessException e)
-                {
 
+                    }
                 }
             }
+
+            clazz = clazz.getSuperclass();
         }
     }
 
     private <T> T getEntry(T tObj)
     {
-        for (Field field : tObj.getClass().getDeclaredFields())
-        {
-            if (field.isAnnotationPresent(Id.class))
-            {
-                GenericService service = FactoryService.getService(DatabaseManagerType.HIBERNATE, tObj.getClass());
+        Class clazz = tObj.getClass();
 
-                field.setAccessible(true);
-                try
+        while (clazz != null)
+        {
+            for (Field field : clazz.getDeclaredFields())
+            {
+                if (field.isAnnotationPresent(Id.class))
                 {
-                    if (field.get(tObj) != null)
+                    GenericService service = FactoryService.getService(DatabaseManagerType.HIBERNATE, clazz);
+
+                    field.setAccessible(true);
+                    try
                     {
-                        return (T) service.getEntry((Serializable) field.get(tObj));
+                        if (field.get(tObj) != null)
+                        {
+                            return (T) service.getEntry((Serializable) field.get(tObj));
+                        }
+                    }
+                    catch (IllegalAccessException e)
+                    {
+
                     }
                 }
-                catch (IllegalAccessException e)
-                {
-
-                }
             }
+
+            clazz = clazz.getSuperclass();
         }
 
         return null;

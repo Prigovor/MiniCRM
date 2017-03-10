@@ -37,7 +37,10 @@ public class ChooseEmployeeController
 
         if (accountEmployee != null)
         {
-            listViewFreeEmployers.getItems().add(accountEmployee);
+            if (!listViewFreeEmployers.getItems().contains(accountEmployee))
+            {
+                listViewFreeEmployers.getItems().add(accountEmployee);
+            }
             listViewFreeEmployers.getSelectionModel().select(accountEmployee);
         }
 

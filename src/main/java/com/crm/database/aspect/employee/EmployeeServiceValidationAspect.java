@@ -1,6 +1,7 @@
 package com.crm.database.aspect.employee;
 
 import com.crm.database.entity.employee.Employee;
+import com.crm.database.validation.EntityValidator;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -34,10 +35,11 @@ public class EmployeeServiceValidationAspect
     @Before(value = "pointcutSaveEntry(employee) || pointcutSaveOrUpdate(employee) || pointcutUpdateEntry(employee)", argNames = "employee")
     private void beforeSave(Employee employee)
     {
-        checkEmployeeExistence(employee);
+        validateEmployee(employee);
     }
 
-    private void checkEmployeeExistence(Employee employee)
+    private void validateEmployee(Employee employee)
     {
+        EntityValidator.getInstance().validateEntry(employee);
     }
 }

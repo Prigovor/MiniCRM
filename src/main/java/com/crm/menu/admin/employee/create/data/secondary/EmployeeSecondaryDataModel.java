@@ -3,7 +3,6 @@ package com.crm.menu.admin.employee.create.data.secondary;
 import com.crm.database.entity.employee.Employee;
 import com.crm.database.entity.employee.Gender;
 import com.crm.database.entity.employee.PositionType;
-import com.crm.database.validation.EntityValidator;
 import com.crm.main.Main;
 import com.crm.menu.admin.employee.create.EmployeeCreationModel;
 
@@ -19,8 +18,6 @@ public class EmployeeSecondaryDataModel
         employee.setAge(age);
         employee.setGender(gender);
         employee.setPosition(positionType);
-
-        EntityValidator.getInstance().validateEntry(employee);
     }
 
     public void confirm()

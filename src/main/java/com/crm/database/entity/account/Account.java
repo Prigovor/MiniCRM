@@ -1,13 +1,10 @@
 package com.crm.database.entity.account;
 
 import com.crm.database.entity.employee.Employee;
-import com.crm.database.service.account.AccountService;
-import com.crm.database.validation.email.EmailCustom;
+import com.crm.database.manager.PasswordManager;
 import com.crm.database.validation.login.LoginCustom;
 import com.crm.database.validation.password.PasswordCustom;
-import com.crm.database.validation.phone.PhoneCustom;
 import com.crm.database.validation.unique.Unique;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -35,16 +32,6 @@ public class Account
     @PasswordCustom
     @Column(name = "PASSWORD")
     private String password;
-
-    @Unique
-    @EmailCustom
-    @Column(name = "EMAIL")
-    private String email;
-
-    @Unique
-    @PhoneCustom
-    @Column(name = "PHONE")
-    private String phone;
 
     @NotNull
     @OneToOne(targetEntity = Employee.class, optional = false)
@@ -103,19 +90,19 @@ public class Account
         return password;
     }
 
-    public void setPassword(String password)
+    public void setPassword(String inputPassword)
     {
-        this.password = password;
+        this.password = PasswordManager.getInstance().getEncryptedPassword(inputPassword);
     }
 
     public String getEmail()
     {
-        return email;
+        return employee.getEmail();
     }
 
     public String getPhone()
     {
-        return phone;
+        return employee.getPhone();
     }
 
     public Employee getEmployee()
@@ -126,9 +113,6 @@ public class Account
     public void setEmployee(Employee employee)
     {
         this.employee = employee;
-
-        this.email = employee.getEmail();
-        this.phone = employee.getPhone();
     }
 
     public RightType getRightType()
@@ -193,10 +177,6 @@ public class Account
         {
             return false;
         }
-        if (email != null ? !email.equals(account.email) : account.email != null)
-        {
-            return false;
-        }
         if (employee != null ? !employee.equals(account.employee) : account.employee != null)
         {
             return false;
@@ -218,7 +198,6 @@ public class Account
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (employee != null ? employee.hashCode() : 0);
         result = 31 * result + (rightType != null ? rightType.hashCode() : 0);
         result = 31 * result + (lockType != null ? lockType.hashCode() : 0);

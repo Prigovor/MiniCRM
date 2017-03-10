@@ -34,6 +34,6 @@ public class AccountCreationModel
     public void close()
     {
         accountToCreate = new Account();
-        Main.getInstance().replaceSceneContent("/com/crm/menu/admin/admin-main-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/admin/account/account-management-menu.fxml");
     }
 }

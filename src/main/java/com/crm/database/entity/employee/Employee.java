@@ -36,6 +36,7 @@ public class Employee
     private Integer age;
 
     @NotNull(message = "Employee gender should be set")
+    @Enumerated(EnumType.STRING)
     @Column(name = "GENDER")
     private Gender gender;
 
@@ -54,7 +55,7 @@ public class Employee
     @Column(name = "EMAIL")
     private String email;
 
-    @OneToOne(mappedBy = "employee", targetEntity = Account.class)
+    @OneToOne(mappedBy = "employee", targetEntity = Account.class, orphanRemoval = true)
     @JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID")
     private Account account;
 

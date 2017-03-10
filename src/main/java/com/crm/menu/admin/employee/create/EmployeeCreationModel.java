@@ -58,6 +58,6 @@ public class EmployeeCreationModel
     public void close()
     {
         employeeToCreate = new Employee();
-        Main.getInstance().replaceSceneContent("/com/crm/menu/admin/admin-main-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/admin/employee/employee-management-menu.fxml");
     }
 }

@@ -148,7 +148,7 @@ public class EmployeeManagementController
     {
         if (model.getSelectedEmployee() != null)
         {
-            model.changeEmloyee();
+            model.changeEmployee();
         }
         else
         {
@@ -166,6 +166,7 @@ public class EmployeeManagementController
         employeeInfo.setOpacity(0.0);
         accountInfo.setOpacity(0.0);
         tableView.setOpacity(1.0);
+        tableView.setDisable(false);
 
         tableView.setItems(FXCollections.observableList(model.getListEmployers()));
 
@@ -183,15 +184,19 @@ public class EmployeeManagementController
         employeeInfo.setOpacity(0.0);
         accountInfo.setOpacity(0.0);
         tableView.setOpacity(1.0);
+        tableView.setDisable(false);
 
         tableView.setItems(FXCollections.observableList(model.getListAccounts()));
 
         tableView.getColumns().clear();
         for (Field field : Account.class.getDeclaredFields())
         {
-            TableColumn tableColumn = new TableColumn(field.getName());
-            tableColumn.setCellValueFactory(new PropertyValueFactory<>(field.getName()));
-            tableView.getColumns().add(tableColumn);
+            if (!field.getName().equals("password"))
+            {
+                TableColumn tableColumn = new TableColumn(field.getName());
+                tableColumn.setCellValueFactory(new PropertyValueFactory<>(field.getName()));
+                tableView.getColumns().add(tableColumn);
+            }
         }
     }
 
@@ -199,6 +204,7 @@ public class EmployeeManagementController
     {
         if (model.getSelectedEmployee() != null)
         {
+            tableView.setDisable(true);
             tableView.setOpacity(0.0);
             accountInfo.setOpacity(0.0);
             employeeInfo.setOpacity(1.0);
@@ -215,12 +221,13 @@ public class EmployeeManagementController
     {
         if (model.getSelectedEmployee() != null)
         {
-            tableView.setOpacity(0.0);
-            employeeInfo.setOpacity(0.0);
-            accountInfo.setOpacity(1.0);
-
             if (model.getSelectedEmployee().getAccount() != null)
             {
+                tableView.setDisable(true);
+                tableView.setOpacity(0.0);
+                employeeInfo.setOpacity(0.0);
+                accountInfo.setOpacity(1.0);
+
                 accountInfo.setAccount(model.getSelectedEmployee().getAccount());
             }
             else
