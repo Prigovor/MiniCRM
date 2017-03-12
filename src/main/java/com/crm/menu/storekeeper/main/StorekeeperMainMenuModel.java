@@ -1,7 +1,6 @@
 package com.crm.menu.storekeeper.main;
 
 import com.crm.database.entity.good.Good;
-import com.crm.database.manager.DatabaseManagerType;
 import com.crm.database.service.FactoryService;
 import com.crm.database.service.good.GoodService;
 import com.crm.main.Main;
@@ -14,7 +13,7 @@ import java.util.stream.Collectors;
  */
 public class StorekeeperMainMenuModel
 {
-    private GoodService goodService = FactoryService.getGoodService(DatabaseManagerType.HIBERNATE);
+    private GoodService goodService = FactoryService.getGoodService();
 
     public List<Good> getListGoods()
     {

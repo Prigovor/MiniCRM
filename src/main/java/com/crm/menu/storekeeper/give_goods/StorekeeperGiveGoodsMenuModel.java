@@ -4,7 +4,6 @@ import com.crm.database.entity.good.Good;
 import com.crm.database.entity.good.selected_good.SelectedGood;
 import com.crm.database.entity.order.Order;
 import com.crm.database.entity.order.OrderStatus;
-import com.crm.database.manager.DatabaseManagerType;
 import com.crm.database.service.FactoryService;
 import com.crm.managers.CourierManager;
 import com.crm.database.service.good.GoodService;
@@ -18,8 +17,8 @@ import java.util.stream.Collectors;
  */
 public class StorekeeperGiveGoodsMenuModel
 {
-    private OrderService orderService = FactoryService.getOrderService(DatabaseManagerType.HIBERNATE);
-    private GoodService goodService = FactoryService.getGoodService(DatabaseManagerType.HIBERNATE);
+    private OrderService orderService = FactoryService.getOrderService();
+    private GoodService goodService = FactoryService.getGoodService();
 
     private Order selectedOrder;
 

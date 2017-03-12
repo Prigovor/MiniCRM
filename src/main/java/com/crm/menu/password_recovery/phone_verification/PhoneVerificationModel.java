@@ -1,7 +1,6 @@
 package com.crm.menu.password_recovery.phone_verification;
 
 import com.crm.database.entity.account.Account;
-import com.crm.database.manager.DatabaseManagerType;
 import com.crm.database.manager.PasswordManager;
 import com.crm.database.service.FactoryService;
 import com.crm.main.Main;
@@ -17,7 +16,7 @@ public class PhoneVerificationModel
 
     public void verifyPhone(String phone)
     {
-        Account account = FactoryService.getAccountService(DatabaseManagerType.HIBERNATE).getEntryByField("phone", phone);
+        Account account = FactoryService.getAccountService().getEntryByField("phone", phone);
         if (account != null)
         {
             String smsCode = PasswordManager.getInstance().generatePassword(8);

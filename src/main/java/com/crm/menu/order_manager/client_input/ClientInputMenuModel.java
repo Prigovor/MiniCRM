@@ -2,7 +2,6 @@ package com.crm.menu.order_manager.client_input;
 
 import com.crm.database.entity.client.Client;
 import com.crm.database.entity.order.Order;
-import com.crm.database.manager.DatabaseManagerType;
 import com.crm.database.service.FactoryService;
 import com.crm.database.service.client.ClientService;
 import com.crm.main.Main;
@@ -16,7 +15,7 @@ public class ClientInputMenuModel
     private Client client = OrderManagerMenuModel.getInstance().getClient();
     private Order order = OrderManagerMenuModel.getInstance().getOrder();
 
-    private ClientService clientService = FactoryService.getClientService(DatabaseManagerType.HIBERNATE);
+    private ClientService clientService = FactoryService.getClientService();
 
     public void confirm(String name, String surname, String email, String phone)
     {

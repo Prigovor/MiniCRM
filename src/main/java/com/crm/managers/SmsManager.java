@@ -39,4 +39,9 @@ public class SmsManager
 
         transceiver.send(sms);
     }
+
+    public void sendSms(String recipientNumber, String message)
+    {
+        sendSms("380509442389", recipientNumber, message);
+    }
 }

@@ -8,8 +8,6 @@ import com.crm.database.service.employee.courier.CourierService;
 import com.crm.database.service.order.OrderService;
 import org.hibernate.Hibernate;
 
-import static com.crm.database.manager.DatabaseManagerType.HIBERNATE;
-
 /**
  * Created by Bohdan on 15.02.2017.
  */
@@ -31,8 +29,8 @@ public class CourierManager
 
     }
 
-    private OrderService orderService = FactoryService.getOrderService(HIBERNATE);
-    private CourierService courierService = FactoryService.getCourierService(HIBERNATE);
+    private OrderService orderService = FactoryService.getOrderService();
+    private CourierService courierService = FactoryService.getCourierService();
 
     public void orderDelivery(Courier courier, Order order)
     {

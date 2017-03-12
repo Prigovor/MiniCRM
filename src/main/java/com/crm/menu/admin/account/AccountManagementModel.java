@@ -2,7 +2,6 @@ package com.crm.menu.admin.account;
 
 import com.crm.database.entity.account.Account;
 import com.crm.database.entity.employee.Employee;
-import com.crm.database.manager.DatabaseManagerType;
 import com.crm.database.service.FactoryService;
 import com.crm.main.Main;
 import com.crm.menu.admin.account.create.AccountCreationModel;
@@ -32,7 +31,7 @@ public class AccountManagementModel
 
     public void deleteAccount()
     {
-        FactoryService.getAccountService(DatabaseManagerType.HIBERNATE).deleteEntry(selectedAccount.getId());
+        FactoryService.getAccountService().deleteEntry(selectedAccount.getId());
     }
 
     public void generateAccount()
@@ -42,12 +41,12 @@ public class AccountManagementModel
 
     public List<Account> getListAccounts()
     {
-        return FactoryService.getAccountService(DatabaseManagerType.HIBERNATE).getEntries();
+        return FactoryService.getAccountService().getEntries();
     }
 
     public List<Employee> getListEmployers()
     {
-        return FactoryService.getEmployeeService(DatabaseManagerType.HIBERNATE).getEntries();
+        return FactoryService.getEmployeeService().getEntries();
     }
 
     public void back()

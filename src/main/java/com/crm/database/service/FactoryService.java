@@ -28,57 +28,59 @@ public class FactoryService
 {
     private static ApplicationContext context = ContextManager.getInstance().getContext();
 
-    public static GenericService getService(DatabaseManagerType databaseManagerType, Class entityClass)
+    private static DatabaseManagerType databaseManagerType = DatabaseManagerType.HIBERNATE;
+
+    public static GenericService getService(Class entityClass)
     {
         if (entityClass.equals(Account.class))
         {
-            return getAccountService(databaseManagerType);
+            return getAccountService();
         }
 
         if (entityClass.equals(Client.class))
         {
-            return getClientService(databaseManagerType);
+            return getClientService();
         }
 
         if (entityClass.equals(Employee.class))
         {
-            return getEmployeeService(databaseManagerType);
+            return getEmployeeService();
         }
 
         if (entityClass.equals(Courier.class))
         {
-            return getClientService(databaseManagerType);
+            return getClientService();
         }
 
         if (entityClass.equals(Storekeeper.class))
         {
-            return getStorekeeperService(databaseManagerType);
+            return getStorekeeperService();
         }
 
         if (entityClass.equals(OrderManager.class))
         {
-            return getOrderManagerService(databaseManagerType);
+            return getOrderManagerService();
         }
 
         if (entityClass.equals(Good.class))
         {
-            return getGoodService(databaseManagerType);
+            return getGoodService();
         }
 
         if (entityClass.equals(SelectedGood.class))
         {
-            return getSelectedGoodService(databaseManagerType);
+            return getSelectedGoodService();
         }
 
         if (entityClass.equals(Order.class))
         {
-            return getOrderService(databaseManagerType);
+            return getOrderService();
         }
 
         return null;
     }
 
-    public static AccountService getAccountService(DatabaseManagerType databaseManagerType)
+    public static AccountService getAccountService()
     {
         switch (databaseManagerType)
         {
@@ -91,7 +93,7 @@ public class FactoryService
         return null;
     }
 
-    public static ClientService getClientService(DatabaseManagerType databaseManagerType)
+    public static ClientService getClientService()
     {
         switch (databaseManagerType)
         {
@@ -104,7 +106,7 @@ public class FactoryService
         return null;
     }
 
-    public static EmployeeService getEmployeeService(DatabaseManagerType databaseManagerType)
+    public static EmployeeService getEmployeeService()
     {
         switch (databaseManagerType)
         {
@@ -117,7 +119,7 @@ public class FactoryService
         return null;
     }
 
-    public static CourierService getCourierService(DatabaseManagerType databaseManagerType)
+    public static CourierService getCourierService()
     {
         switch (databaseManagerType)
         {
@@ -130,7 +132,7 @@ public class FactoryService
         return null;
     }
 
-    public static OrderManagerService getOrderManagerService(DatabaseManagerType databaseManagerType)
+    public static OrderManagerService getOrderManagerService()
     {
         switch (databaseManagerType)
         {
@@ -143,7 +145,7 @@ public class FactoryService
         return null;
     }
 
-    public static StorekeeperService getStorekeeperService(DatabaseManagerType databaseManagerType)
+    public static StorekeeperService getStorekeeperService()
     {
         switch (databaseManagerType)
         {
@@ -156,7 +158,7 @@ public class FactoryService
         return null;
     }
 
-    public static GoodService getGoodService(DatabaseManagerType databaseManagerType)
+    public static GoodService getGoodService()
     {
         switch (databaseManagerType)
         {
@@ -169,7 +171,7 @@ public class FactoryService
         return null;
     }
 
-    public static GoodService getSelectedGoodService(DatabaseManagerType databaseManagerType)
+    public static GoodService getSelectedGoodService()
     {
         switch (databaseManagerType)
         {
@@ -182,7 +184,7 @@ public class FactoryService
         return null;
     }
 
-    public static OrderService getOrderService(DatabaseManagerType databaseManagerType)
+    public static OrderService getOrderService()
     {
         switch (databaseManagerType)
         {

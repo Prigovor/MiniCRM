@@ -2,7 +2,6 @@ package com.crm.menu.order_manager.main;
 
 import com.crm.database.entity.client.Client;
 import com.crm.database.entity.order.Order;
-import com.crm.database.manager.DatabaseManagerType;
 import com.crm.database.service.FactoryService;
 import com.crm.database.service.client.ClientService;
 import com.crm.database.service.order.OrderService;
@@ -15,8 +14,8 @@ import java.util.List;
  */
 public class ManagerMainMenuModel
 {
-    private OrderService orderService = FactoryService.getOrderService(DatabaseManagerType.HIBERNATE);
-    private ClientService clientService = FactoryService.getClientService(DatabaseManagerType.HIBERNATE);
+    private OrderService orderService = FactoryService.getOrderService();
+    private ClientService clientService = FactoryService.getClientService();
 
     private Order selectedOrder;
 

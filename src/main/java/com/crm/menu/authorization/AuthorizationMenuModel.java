@@ -8,8 +8,6 @@ import com.crm.database.service.account.AccountService;
 import com.crm.main.Main;
 import com.crm.main.MainModel;
 
-import static com.crm.database.manager.DatabaseManagerType.HIBERNATE;
-
 /**
  * Created by Bohdan on 05.02.2017.
  */
@@ -17,7 +15,7 @@ public class AuthorizationMenuModel
 {
     private static final int MAX_LOG_IN_ATTEMPTS = 3;
 
-    private AccountService accountService = FactoryService.getAccountService(HIBERNATE);
+    private AccountService accountService = FactoryService.getAccountService();
 
     private Integer logInAttempts = 0;
 

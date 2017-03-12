@@ -1,7 +1,6 @@
 package com.crm.menu.admin.account.create.employee;
 
 import com.crm.database.entity.employee.Employee;
-import com.crm.database.manager.DatabaseManagerType;
 import com.crm.database.service.FactoryService;
 import com.crm.main.Main;
 import com.crm.menu.admin.account.create.AccountCreationModel;
@@ -16,7 +15,7 @@ public class ChooseEmployeeModel
 {
     public List<Employee> getListFreeEmployers()
     {
-        return FactoryService.getEmployeeService(DatabaseManagerType.HIBERNATE).getEntries()
+        return FactoryService.getEmployeeService().getEntries()
                 .stream().filter(employee ->
                 {
                     return employee.getAccount() == null;

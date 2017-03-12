@@ -2,7 +2,6 @@ package com.crm.menu.order_manager.order.input;
 
 import com.crm.database.entity.employee.courier.Courier;
 import com.crm.database.entity.employee.courier.CourierStatus;
-import com.crm.database.manager.DatabaseManagerType;
 import com.crm.database.service.FactoryService;
 import com.crm.database.service.employee.courier.CourierService;
 import com.crm.menu.order_manager.OrderManagerMenuModel;
@@ -26,7 +25,7 @@ public class OrderInputMenuController
 
     private OrderInputMenuModel model = new OrderInputMenuModel();
 
-    private CourierService courierService = FactoryService.getCourierService(DatabaseManagerType.HIBERNATE);
+    private CourierService courierService = FactoryService.getCourierService();
 
     @FXML
     public void initialize()

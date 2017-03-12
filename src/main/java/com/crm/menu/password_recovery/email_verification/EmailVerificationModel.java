@@ -1,7 +1,6 @@
 package com.crm.menu.password_recovery.email_verification;
 
 import com.crm.database.entity.account.Account;
-import com.crm.database.manager.DatabaseManagerType;
 import com.crm.database.service.FactoryService;
 import com.crm.main.Main;
 import com.crm.menu.password_recovery.PasswordRecoveryModel;
@@ -17,7 +16,7 @@ public class EmailVerificationModel
 
     public void verifyEmail(String email)
     {
-        Account account = FactoryService.getAccountService(DatabaseManagerType.HIBERNATE).getEntryByField("email", email);
+        Account account = FactoryService.getAccountService().getEntryByField("email", email);
 
         if (account.equals(PasswordRecoveryModel.getInstance().getAccountToRecover()))
         {
@@ -34,7 +33,7 @@ public class EmailVerificationModel
 
             if (attempts >= PasswordRecoveryModel.MAX_ATTEMPTS)
             {
-                FactoryService.getAccountService(DatabaseManagerType.HIBERNATE).lockAccount(
+                FactoryService.getAccountService().lockAccount(
                         PasswordRecoveryModel.getInstance().getAccountToRecover()
                 );
                 Main.getInstance().replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");

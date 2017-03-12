@@ -1,6 +1,7 @@
 package com.crm.database.aspect.client;
 
 import com.crm.database.entity.client.Client;
+import com.crm.database.validation.EntityValidator;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -39,5 +40,6 @@ public class ClientServiceValidationAspect
 
     private void validateClient(Client client)
     {
+        EntityValidator.getInstance().validateEntry(client);
     }
 }

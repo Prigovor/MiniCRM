@@ -1,6 +1,11 @@
 package com.crm.database.entity.client;
 
 import com.crm.database.entity.order.Order;
+import com.crm.database.manager.PasswordManager;
+import com.crm.database.validation.email.EmailCustom;
+import com.crm.database.validation.login.LoginCustom;
+import com.crm.database.validation.password.PasswordCustom;
+import com.crm.database.validation.unique.Unique;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,9 +23,13 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Unique
+    @LoginCustom
     @Column(name = "LOGIN")
     private String login;
 
+    @Unique
+    @PasswordCustom
     @Column(name = "PASSWORD")
     private String password;
 
@@ -33,6 +42,8 @@ public class Client {
     @Column(name = "PHONE")
     private String phone;
 
+    @Unique
+    @EmailCustom
     @Column(name = "EMAIL")
     private String email;
 
@@ -72,9 +83,9 @@ public class Client {
         return password;
     }
 
-    public void setPassword(String password)
+    public void setPassword(String inputPassword)
     {
-        this.password = password;
+        this.password = PasswordManager.getInstance().getEncryptedPassword(inputPassword);
     }
 
     public String getName() {

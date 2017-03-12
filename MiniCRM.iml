@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="CompassSettings">
+    <option name="compassSupportEnabled" value="true" />
+  </component>
   <component name="FacetManager">
     <facet type="hibernate" name="Hibernate">
       <configuration>
@@ -14,13 +17,33 @@
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/resources/spring-config/spring-config.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/spring-config/aspects.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/spring-config/bean/manager/database.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/spring-config/bean/dao/account-dao.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/spring-config/bean/entity/orders.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/spring-config/bean/entity/employers.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/spring-config/bean/entity/accounts.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring-config/bean/entity/clients.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring-config/bean/entity/couriers.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring-config/data-config.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring-config/bean/entity/goods.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring-config/bean/dao/hibernate-dao.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring-config/bean/service/hibernate-service.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring-config/bean/entity/selected-goods.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring-config/bean/entity/storekeepers.xml</file>
         </fileset>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
+        </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/resources" />
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
+        </sourceRoots>
       </configuration>
     </facet>
   </component>
@@ -30,8 +53,8 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/test" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -85,5 +108,7 @@
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-validator:5.4.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish:javax.el:3.0.1-b08" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-validator-cdi:5.4.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-web:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:4.3.6.RELEASE" level="project" />
   </component>
 </module>

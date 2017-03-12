@@ -6,7 +6,6 @@ import com.crm.database.entity.employee.courier.Courier;
 import com.crm.database.entity.good.Good;
 import com.crm.database.entity.good.selected_good.SelectedGood;
 import com.crm.database.entity.order.Order;
-import com.crm.database.manager.DatabaseManagerType;
 import com.crm.database.service.FactoryService;
 
 import java.util.ArrayList;
@@ -67,7 +66,7 @@ public class OrderManagerMenuModel
         this.listChosenGoods = listChosenGoods;
     }
 
-    private List<Good> listStoreGoods = FactoryService.getGoodService(DatabaseManagerType.HIBERNATE).getEntries();
+    private List<Good> listStoreGoods = FactoryService.getGoodService().getEntries();
 
     public List<Good> getListStoreGoods()
     {

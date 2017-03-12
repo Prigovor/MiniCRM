@@ -1,7 +1,6 @@
 package com.crm.menu.admin.account.create;
 
 import com.crm.database.entity.account.Account;
-import com.crm.database.manager.DatabaseManagerType;
 import com.crm.database.service.FactoryService;
 import com.crm.main.Main;
 import lombok.Getter;
@@ -28,7 +27,7 @@ public class AccountCreationModel
 
     public void saveAccount()
     {
-        FactoryService.getAccountService(DatabaseManagerType.HIBERNATE).saveOrUpdate(accountToCreate);
+        FactoryService.getAccountService().saveOrUpdate(accountToCreate);
     }
 
     public void close()

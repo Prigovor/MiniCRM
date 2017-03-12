@@ -5,7 +5,6 @@ import com.crm.database.entity.employee.Employee;
 import com.crm.database.entity.employee.courier.Courier;
 import com.crm.database.entity.employee.order_manager.OrderManager;
 import com.crm.database.entity.employee.storekeeper.Storekeeper;
-import com.crm.database.manager.DatabaseManagerType;
 import com.crm.database.service.FactoryService;
 import com.crm.main.Main;
 import lombok.Getter;
@@ -52,7 +51,7 @@ public class EmployeeCreationModel
             }
         }
 
-        FactoryService.getEmployeeService(DatabaseManagerType.HIBERNATE).saveOrUpdate(employeeToCreate);
+        FactoryService.getEmployeeService().saveOrUpdate(employeeToCreate);
     }
 
     public void close()

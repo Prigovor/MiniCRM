@@ -1,6 +1,5 @@
 package com.crm.database.validation;
 
-import com.crm.database.manager.DatabaseManagerType;
 import com.crm.database.service.FactoryService;
 import com.crm.database.service.GenericService;
 import com.crm.database.validation.unique.Unique;
@@ -55,7 +54,7 @@ public class EntityValidator
                     {
                         field.setAccessible(true);
 
-                        GenericService service = FactoryService.getService(DatabaseManagerType.HIBERNATE, clazz);
+                        GenericService service = FactoryService.getService(clazz);
 
                         Object obj = service.getEntryByField(field.getName(), field.get(objToValidate));
 
@@ -95,7 +94,7 @@ public class EntityValidator
             {
                 if (field.isAnnotationPresent(Id.class))
                 {
-                    GenericService service = FactoryService.getService(DatabaseManagerType.HIBERNATE, clazz);
+                    GenericService service = FactoryService.getService(clazz);
 
                     field.setAccessible(true);
                     try

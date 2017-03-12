@@ -1,6 +1,5 @@
 package com.crm.menu.password_recovery.email_code_verification;
 
-import com.crm.database.manager.DatabaseManagerType;
 import com.crm.database.service.FactoryService;
 import com.crm.main.Main;
 import com.crm.menu.password_recovery.PasswordRecoveryModel;
@@ -30,7 +29,7 @@ public class EmailCodeVerificationModel
 
             if (attempts >= PasswordRecoveryModel.MAX_ATTEMPTS)
             {
-                FactoryService.getAccountService(DatabaseManagerType.HIBERNATE).lockAccount(
+                FactoryService.getAccountService().lockAccount(
                         PasswordRecoveryModel.getInstance().getAccountToRecover()
                 );
                 Main.getInstance().replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");
