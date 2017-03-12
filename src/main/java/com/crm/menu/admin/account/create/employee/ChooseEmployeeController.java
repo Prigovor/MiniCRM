@@ -4,6 +4,7 @@ import com.crm.database.entity.account.Account;
 import com.crm.database.entity.account.LockType;
 import com.crm.database.entity.account.RightType;
 import com.crm.database.entity.employee.Employee;
+import com.crm.database.entity.employee.PositionType;
 import com.crm.database.validation.ValidationException;
 import com.crm.menu.admin.account.create.AccountCreationModel;
 import javafx.collections.FXCollections;
@@ -90,7 +91,14 @@ public class ChooseEmployeeController
         {
             Account account = AccountCreationModel.getInstance().getAccountToCreate();
 
-            account.setRightType(RightType.USER);
+            if (employee.getPosition() != PositionType.ADMIN)
+            {
+                account.setRightType(RightType.USER);
+            }
+            else
+            {
+                account.setRightType(RightType.ADMIN);
+            }
             account.setLockType(LockType.UNLOCKED);
 
             account.setLogin(employee.getName().toLowerCase()

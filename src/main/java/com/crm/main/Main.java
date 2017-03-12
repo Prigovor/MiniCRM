@@ -1,6 +1,9 @@
 package com.crm.main;
 
+import com.crm.database.entity.account.Account;
+import com.crm.database.entity.employee.Employee;
 import com.crm.database.manager.ContextManager;
+import com.crm.database.service.FactoryService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -77,8 +80,12 @@ public class Main extends Application
     public static void main(String[] args)
     {
         ApplicationContext context = ContextManager.getInstance().getContext();
-//
-//        FactoryService.getEmployeeService(HIBERNATE).saveEntry(context.getBean("employeeAdmin", Employee.class));
+
+        Account account = context.getBean("accountAdmin", Account.class);
+        Employee employee = context.getBean("employeeAdmin", Employee.class);
+
+        FactoryService.getEmployeeService().saveOrUpdate(employee);
+        FactoryService.getAccountService().saveOrUpdate(account);
 
         launch(args);
     }

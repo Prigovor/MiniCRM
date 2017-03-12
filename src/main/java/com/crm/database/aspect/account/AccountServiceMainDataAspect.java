@@ -1,9 +1,6 @@
 package com.crm.database.aspect.account;
 
 import com.crm.database.entity.account.Account;
-import com.crm.database.manager.PasswordManager;
-import com.crm.database.service.FactoryService;
-import com.crm.managers.EmailManager;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -34,21 +31,14 @@ public class AccountServiceMainDataAspect
 
     }
 
-    @Before(value = "pointcutSaveEntry(account) || pointcutSaveOrUpdate(account) || pointcutUpdateEntry(account)", argNames = "account")
+    @Before(value = "pointcutSaveEntry(account) || pointcutSaveOrUpdate(account)", argNames = "account")
     private void beforeSave(Account account)
     {
-        if (FactoryService.getAccountService().getEntryByField("login", account.getLogin()) == null)
-        {
-            EmailManager.getInstance().sendMessage(account.getEmail(), "Your login from mini.crm account", account.getLogin());
-        }
 
-        if (FactoryService.getAccountService().getEntryByField("password", account.getPassword()) == null)
-        {
-            String generatedPassword = PasswordManager.getInstance().generatePassword(8);
+    }
 
-            account.setPassword(generatedPassword);
-
-            EmailManager.getInstance().sendMessage(account.getEmail(), "Your password from mini.crm account", generatedPassword);
-        }
+    @Before(value = "pointcutUpdateEntry(account)", argNames = "account")
+    private void beforeUpdate(Account account)
+    {
     }
 }

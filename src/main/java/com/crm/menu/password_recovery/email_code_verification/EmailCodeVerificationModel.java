@@ -1,7 +1,10 @@
 package com.crm.menu.password_recovery.email_code_verification;
 
+import com.crm.database.entity.account.Account;
+import com.crm.database.manager.PasswordManager;
 import com.crm.database.service.FactoryService;
 import com.crm.main.Main;
+import com.crm.managers.EmailManager;
 import com.crm.menu.password_recovery.PasswordRecoveryModel;
 import javafx.scene.control.Alert;
 
@@ -16,7 +19,16 @@ public class EmailCodeVerificationModel
     {
         if (emailCode.equals(PasswordRecoveryModel.getInstance().getEmailCode()))
         {
-            Main.getInstance().replaceSceneContent("/com/crm/menu/password_recovery/email_verification/email-verification-menu.fxml");
+            Account account = PasswordRecoveryModel.getInstance().getAccountToRecover();
+
+            String generatedPassword = PasswordManager.getInstance().generatePassword(8);
+            account.setPassword(generatedPassword);
+
+            FactoryService.getAccountService().updateEntry(account);
+
+            EmailManager.getInstance().sendAccountData(account, generatedPassword);
+
+            Main.getInstance().replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");
         }
         else
         {

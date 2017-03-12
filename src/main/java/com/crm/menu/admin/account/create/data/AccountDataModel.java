@@ -22,7 +22,9 @@ public class AccountDataModel
         account.setRightType(rightType);
         account.setLockType(lockType);
 
-        account.setPassword(PasswordManager.getInstance().generatePassword(8));
+        AccountCreationModel.getInstance().setGeneratedPassword(PasswordManager.getInstance().generatePassword(8));
+
+        account.setPassword(AccountCreationModel.getInstance().getGeneratedPassword());
         account.setRegistrationDate(new Date());
     }
 

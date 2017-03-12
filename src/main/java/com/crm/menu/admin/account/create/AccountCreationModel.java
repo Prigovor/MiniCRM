@@ -3,6 +3,7 @@ package com.crm.menu.admin.account.create;
 import com.crm.database.entity.account.Account;
 import com.crm.database.service.FactoryService;
 import com.crm.main.Main;
+import com.crm.managers.EmailManager;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,9 +26,13 @@ public class AccountCreationModel
 
     private Account accountToCreate = new Account();
 
+    private String generatedPassword;
+
     public void saveAccount()
     {
         FactoryService.getAccountService().saveOrUpdate(accountToCreate);
+
+        EmailManager.getInstance().sendAccountData(accountToCreate, generatedPassword);
     }
 
     public void close()

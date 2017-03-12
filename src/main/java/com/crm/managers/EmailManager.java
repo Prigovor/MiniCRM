@@ -1,5 +1,8 @@
 package com.crm.managers;
 
+import com.crm.database.entity.account.Account;
+import com.crm.database.service.FactoryService;
+
 import javax.mail.*;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -62,12 +65,21 @@ public class EmailManager
             }
             catch (AddressException e)
             {
-
+                e.printStackTrace();
             }
             catch (MessagingException e)
             {
-
+                e.printStackTrace();
             }
         }).start();
+    }
+
+    public void sendAccountData(Account account, String generatedPassword)
+    {
+        if (FactoryService.getAccountService().getEntryByField("login", account.getLogin()) != null)
+        {
+            sendMessage(account.getEmail(), "Your login and password from mini.crm account",
+                    String.format("Login: %s, Password: %s", account.getLogin(), generatedPassword));
+        }
     }
 }
