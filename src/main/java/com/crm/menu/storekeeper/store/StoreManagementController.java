@@ -1,7 +1,6 @@
 package com.crm.menu.storekeeper.store;
 
 import com.crm.database.entity.good.Good;
-import com.crm.database.entity.good.selected_good.SelectedGood;
 import com.crm.node.good.GoodInfo;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -40,9 +39,6 @@ public class StoreManagementController
     private Button buttonShowAllGoods;
 
     @FXML
-    private Button buttonShowAllSelectedGoods;
-
-    @FXML
     private Button buttonBack;
 
     @FXML
@@ -71,11 +67,6 @@ public class StoreManagementController
         buttonShowAllGoods.setOnAction(event ->
         {
             showAllGoods();
-        });
-
-        buttonShowAllSelectedGoods.setOnAction(event ->
-        {
-            showAllSelectedGoods();
         });
 
         buttonAddGood.setOnAction(event ->
@@ -124,23 +115,6 @@ public class StoreManagementController
             {
                 continue;
             }
-            TableColumn tableColumn = new TableColumn(field.getName());
-            tableColumn.setCellValueFactory(new PropertyValueFactory<>(field.getName()));
-            tableView.getColumns().add(tableColumn);
-        }
-    }
-
-    private void showAllSelectedGoods()
-    {
-        goodInfo.setOpacity(0.0);
-        tableView.setOpacity(1.0);
-        tableView.setDisable(false);
-
-        tableView.setItems(FXCollections.observableList(model.getListSelectedGoods()));
-
-        tableView.getColumns().clear();
-        for (Field field : SelectedGood.class.getDeclaredFields())
-        {
             TableColumn tableColumn = new TableColumn(field.getName());
             tableColumn.setCellValueFactory(new PropertyValueFactory<>(field.getName()));
             tableView.getColumns().add(tableColumn);

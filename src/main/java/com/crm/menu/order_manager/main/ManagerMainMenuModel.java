@@ -39,9 +39,14 @@ public class ManagerMainMenuModel
         return clientService.getEntries();
     }
 
-    public void addOrder()
+    public void goToOrderManagement()
     {
-        Main.getInstance().replaceSceneContent("/com/crm/menu/order_manager/client_input/client-input-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/order_manager/order/management/order-management-menu.fxml");
+    }
+
+    public void goToOrderCreation()
+    {
+        Main.getInstance().replaceSceneContent("/com/crm/menu/order_manager/order/creation/input/client/client-input-menu.fxml");
     }
 
     public void logOut()

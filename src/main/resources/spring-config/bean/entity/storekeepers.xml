@@ -3,16 +3,16 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean class="com.crm.database.entity.employee.storekeeper.Storekeeper" id="storekeeperJake">
-        <property name="name" value="Jake"/>
-        <property name="surname" value="Valentine"/>
-        <property name="age" value="23"/>
+    <bean class="com.crm.database.entity.employee.storekeeper.Storekeeper" id="storekeeperDane">
+        <property name="name" value="Dane"/>
+        <property name="surname" value="Thorson"/>
+        <property name="age" value="21"/>
         <property name="gender" value="MALE"/>
         <property name="position" value="STOREKEEPER"/>
-        <property name="email" value="jake.valentine@gmail.com"/>
-        <property name="phone" value="+380962896703"/>
+        <property name="email" value="thorson.dane@yandex.ru"/>
+        <property name="phone" value="+380962896772"/>
 
-        <property name="account" ref="accountStorekeeperJake"/>
+        <property name="account" ref="accountStorekeeperDane"/>
     </bean>
 
 </beans>

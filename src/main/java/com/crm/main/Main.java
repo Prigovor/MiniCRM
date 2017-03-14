@@ -77,12 +77,30 @@ public class Main extends Application
     public static void main(String[] args)
     {
         ApplicationContext context = ContextManager.getInstance().getContext();
+
+//        Account accountAdmin = context.getBean("accountAdmin", Account.class);
+//        Employee employeeAdmin = context.getBean("employeeAdmin", Employee.class);
 //
-//        Account account = context.getBean("accountAdmin", Account.class);
-//        Employee employee = context.getBean("employeeAdmin", Employee.class);
+//        FactoryService.getEmployeeService().saveOrUpdate(employeeAdmin);
+//        FactoryService.getAccountService().saveOrUpdate(accountAdmin);
 //
-//        FactoryService.getEmployeeService().saveOrUpdate(employee);
-//        FactoryService.getAccountService().saveOrUpdate(account);
+//        Account accountOrderManager = context.getBean("accountManagerPeter", Account.class);
+//        OrderManager orderManager = context.getBean("orderManagerPeter", OrderManager.class);
+//
+//        FactoryService.getOrderManagerService().saveOrUpdate(orderManager);
+//        FactoryService.getAccountService().saveOrUpdate(accountOrderManager);
+//
+//        Account accountStorekeeper = context.getBean("accountStorekeeperDane", Account.class);
+//        Storekeeper storekeeper = context.getBean("storekeeperDane", Storekeeper.class);
+//
+//        FactoryService.getStorekeeperService().saveOrUpdate(storekeeper);
+//        FactoryService.getAccountService().saveOrUpdate(accountStorekeeper);
+//
+//        Account accountCourier = context.getBean("accountCourierGaverel", Account.class);
+//        Courier courier = context.getBean("courierGaverel", Courier.class);
+//
+//        FactoryService.getCourierService().saveOrUpdate(courier);
+//        FactoryService.getAccountService().saveOrUpdate(accountCourier);
 
         launch(args);
     }

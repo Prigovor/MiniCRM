@@ -21,12 +21,12 @@
         </property>
     </bean>
 
-    <bean class="com.crm.database.entity.account.Account" id="accountManagerAlan">
-        <property name="login" value="alan"/>
-        <property name="password" value="alanalan"/>
+    <bean class="com.crm.database.entity.account.Account" id="accountManagerPeter">
+        <property name="login" value="peter.glebsky"/>
+        <property name="password" value="peter"/>
         <property name="rightType" value="USER"/>
         <property name="lockType" value="UNLOCKED"/>
-        <property name="employee" ref="employeeAlan"/>
+        <property name="employee" ref="orderManagerPeter"/>
 
         <property name="registrationDate">
             <bean factory-bean="dateFormat" factory-method="parse">
@@ -35,12 +35,12 @@
         </property>
     </bean>
 
-    <bean class="com.crm.database.entity.account.Account" id="accountStorekeeperJake">
-        <property name="login" value="jake"/>
-        <property name="password" value="jakejake"/>
+    <bean class="com.crm.database.entity.account.Account" id="accountStorekeeperDane">
+        <property name="login" value="dane.thorson"/>
+        <property name="password" value="dane"/>
         <property name="lockType" value="UNLOCKED"/>
         <property name="rightType" value="USER"/>
-        <property name="employee" ref="storekeeperJake"/>
+        <property name="employee" ref="storekeeperDane"/>
 
         <property name="registrationDate">
             <bean factory-bean="dateFormat" factory-method="parse">
@@ -49,12 +49,12 @@
         </property>
     </bean>
 
-    <bean class="com.crm.database.entity.account.Account" id="accountCourierJane">
-        <property name="login" value="jane"/>
-        <property name="password" value="janejane"/>
+    <bean class="com.crm.database.entity.account.Account" id="accountCourierGaverel">
+        <property name="login" value="gaverel.rocannon"/>
+        <property name="password" value="gaverel"/>
         <property name="lockType" value="UNLOCKED"/>
         <property name="rightType" value="USER"/>
-        <property name="employee" ref="courierJane"/>
+        <property name="employee" ref="courierGaverel"/>
 
         <property name="registrationDate">
             <bean factory-bean="dateFormat" factory-method="parse">

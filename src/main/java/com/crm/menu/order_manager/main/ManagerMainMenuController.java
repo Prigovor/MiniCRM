@@ -10,15 +10,21 @@ public class ManagerMainMenuController
 {
     public Button buttonLogOut;
     public Button buttonCreateOrder;
+    public Button buttonOrderManagement;
 
     private ManagerMainMenuModel model = new ManagerMainMenuModel();
 
     @FXML
     public void initialize()
     {
+        buttonOrderManagement.setOnAction(event ->
+        {
+            model.goToOrderManagement();
+        });
+
         buttonCreateOrder.setOnAction(event ->
         {
-            model.addOrder();
+            model.goToOrderCreation();
         });
 
         buttonLogOut.setOnAction(event ->

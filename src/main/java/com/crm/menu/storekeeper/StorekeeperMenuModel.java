@@ -14,7 +14,7 @@ public class StorekeeperMenuModel
 
     public void goToGoodsDelivery()
     {
-        Main.getInstance().replaceSceneContent("/com/crm/menu/storekeeper/give_goods/storekeeper-give-goods-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/storekeeper/store/good/delivery/goods-delivery-menu.fxml");
     }
 
     public void logOut()
