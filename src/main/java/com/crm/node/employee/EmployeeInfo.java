@@ -1,4 +1,4 @@
-package com.crm.node_custom.employee_info;
+package com.crm.node.employee;
 
 import com.crm.database.entity.employee.Employee;
 import com.crm.database.entity.employee.Gender;

@@ -64,7 +64,7 @@ public class AuthorizationMenuModel
                                     }
                                     case STOREKEEPER:
                                     {
-                                        Main.getInstance().replaceSceneContent("/com/crm/menu/storekeeper/main/storekeeper-main-menu.fxml");
+                                        Main.getInstance().replaceSceneContent("/com/crm/menu/storekeeper/storekeeper-menu.fxml");
                                         break;
                                     }
                                     case CASHIER:

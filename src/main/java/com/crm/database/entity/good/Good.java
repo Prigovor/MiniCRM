@@ -106,10 +106,8 @@ public class Good {
     @Override
     public String toString()
     {
-        return "Good{" +
-                "nomination='" + nomination + '\'' +
+        return nomination +
                 ", amount=" + amount +
-                ", price=" + price +
-                '}';
+                ", price=" + price;
     }
 }

@@ -5,7 +5,9 @@ import com.crm.database.manager.PasswordManager;
 import com.crm.database.validation.email.EmailCustom;
 import com.crm.database.validation.login.LoginCustom;
 import com.crm.database.validation.password.PasswordCustom;
+import com.crm.database.validation.phone.PhoneCustom;
 import com.crm.database.validation.unique.Unique;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.util.List;
@@ -24,21 +26,20 @@ public class Client {
     private Long id;
 
     @Unique
-    @LoginCustom
-    @Column(name = "LOGIN")
-    private String login;
-
-    @Unique
     @PasswordCustom
     @Column(name = "PASSWORD")
     private String password;
 
+    @NotBlank(message = "Client name should be filled")
     @Column(name = "NAME")
     private String name;
 
+    @NotBlank(message = "Client surname should be filled")
     @Column(name = "SURNAME")
     private String surname;
 
+    @Unique
+    @PhoneCustom
     @Column(name = "PHONE")
     private String phone;
 
@@ -66,16 +67,6 @@ public class Client {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getLogin()
-    {
-        return login;
-    }
-
-    public void setLogin(String login)
-    {
-        this.login = login;
     }
 
     public String getPassword()
@@ -130,6 +121,6 @@ public class Client {
 
     @Override
     public String toString() {
-        return login;
+        return email;
     }
 }

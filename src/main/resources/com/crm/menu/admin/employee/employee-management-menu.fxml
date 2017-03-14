@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.crm.node_custom.account_info.AccountInfo?>
-<?import com.crm.node_custom.employee_info.EmployeeInfo?>
+<?import com.crm.node.account.AccountInfo?>
+<?import com.crm.node.employee.EmployeeInfo?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>

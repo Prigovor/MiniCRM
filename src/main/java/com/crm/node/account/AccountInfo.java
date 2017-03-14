@@ -1,4 +1,4 @@
-package com.crm.node_custom.account_info;
+package com.crm.node.account;
 
 import com.crm.database.entity.account.Account;
 import com.crm.database.entity.account.LockType;

@@ -1,6 +1,7 @@
 package com.crm.managers;
 
 import com.crm.database.entity.account.Account;
+import com.crm.database.entity.client.Client;
 import com.crm.database.service.FactoryService;
 
 import javax.mail.*;
@@ -80,6 +81,15 @@ public class EmailManager
         {
             sendMessage(account.getEmail(), "Your login and password from mini.crm account",
                     String.format("Login: %s, Password: %s", account.getLogin(), generatedPassword));
+        }
+    }
+
+    public void sendClientData(Client client, String generatedPassword)
+    {
+        if (FactoryService.getClientService().getEntryByField("email", client.getEmail()) != null)
+        {
+            sendMessage(client.getEmail(), "Your password from mini.crm account",
+                    String.format("Password: %s", generatedPassword));
         }
     }
 }

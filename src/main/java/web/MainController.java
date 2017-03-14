@@ -37,8 +37,6 @@ public class MainController
             client.setPassword(password);
             client.setEmail(email);
 
-            client.setLogin(name.toLowerCase().concat(".").concat(surname.toLowerCase()));
-
             FactoryService.getClientService().saveEntry(client);
 
             message.setText("Client successfully registered");

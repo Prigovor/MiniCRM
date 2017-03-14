@@ -18,6 +18,7 @@ import com.crm.database.service.employee.courier.CourierService;
 import com.crm.database.service.employee.order_manager.OrderManagerService;
 import com.crm.database.service.employee.storekeeper.StorekeeperService;
 import com.crm.database.service.good.GoodService;
+import com.crm.database.service.good.selected_good.SelectedGoodService;
 import com.crm.database.service.order.OrderService;
 import org.springframework.context.ApplicationContext;
 
@@ -171,13 +172,13 @@ public class FactoryService
         return null;
     }
 
-    public static GoodService getSelectedGoodService()
+    public static SelectedGoodService getSelectedGoodService()
     {
         switch (databaseManagerType)
         {
             case HIBERNATE:
             {
-                return context.getBean("selectedGoodHibernateService", GoodService.class);
+                return context.getBean("selectedGoodHibernateService", SelectedGoodService.class);
             }
         }
 

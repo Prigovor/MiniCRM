@@ -2,9 +2,11 @@ package com.crm.menu.order_manager.client_input;
 
 import com.crm.database.entity.client.Client;
 import com.crm.database.entity.order.Order;
+import com.crm.database.manager.PasswordManager;
 import com.crm.database.service.FactoryService;
 import com.crm.database.service.client.ClientService;
 import com.crm.main.Main;
+import com.crm.managers.EmailManager;
 import com.crm.menu.order_manager.OrderManagerMenuModel;
 
 /**
@@ -24,11 +26,14 @@ public class ClientInputMenuModel
         client.setEmail(email);
         client.setPhone(phone);
 
-        client.setLogin(name.toLowerCase().concat(".").concat(surname.toLowerCase()));
-
-        Client clientEntry = clientService.getEntryByField("login", client.getLogin());
+        Client clientEntry = clientService.getEntryByField("email", client.getEmail());
         if (clientEntry == null)
         {
+            String generatedPassword = PasswordManager.getInstance().generatePassword(8);
+            client.setPassword(generatedPassword);
+
+            EmailManager.getInstance().sendClientData(client, generatedPassword);
+
             clientService.saveEntry(client);
         }
         else

@@ -2,8 +2,8 @@ package com.crm.menu.admin.employee;
 
 import com.crm.database.entity.account.Account;
 import com.crm.database.entity.employee.Employee;
-import com.crm.node_custom.account_info.AccountInfo;
-import com.crm.node_custom.employee_info.EmployeeInfo;
+import com.crm.node.account.AccountInfo;
+import com.crm.node.employee.EmployeeInfo;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

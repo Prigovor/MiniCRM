@@ -1,7 +1,9 @@
 package com.crm.menu.order_manager.client_input;
 
+import com.crm.database.validation.ValidationException;
 import com.crm.menu.order_manager.OrderManagerMenuModel;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
@@ -35,11 +37,23 @@ public class ClientInputMenuController
 
     public void confirm()
     {
-        model.confirm(textFieldName.getText(), textFieldSurname.getText(), textFieldEmail.getText(), textFieldPhone.getText());
+        try
+        {
+            model.confirm(textFieldName.getText(), textFieldSurname.getText(), textFieldEmail.getText(), textFieldPhone.getText());
+        }
+        catch (ValidationException e)
+        {
+            showInformationMessage(e.getMessage());
+        }
     }
 
     public void back()
     {
         model.back();
+    }
+
+    private void showInformationMessage(String text)
+    {
+        new Alert(Alert.AlertType.INFORMATION, text).showAndWait();
     }
 }
