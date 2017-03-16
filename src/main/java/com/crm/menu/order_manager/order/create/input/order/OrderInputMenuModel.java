@@ -2,6 +2,7 @@ package com.crm.menu.order_manager.order.create.input.order;
 
 import com.crm.database.entity.employee.courier.Courier;
 import com.crm.database.entity.order.Order;
+import com.crm.database.entity.order.OrderStatus;
 import com.crm.main.Main;
 import com.crm.menu.order_manager.order.create.OrderCreationModel;
 
@@ -14,17 +15,20 @@ public class OrderInputMenuModel
 {
     private Order order = OrderCreationModel.getInstance().getOrder();
 
-    public void confirm(Courier courier)
+    public void setOrderData(Courier courier, Date receiveDate, String address)
     {
         order.setRegistrationDate(new Date());
-
+        order.setOrderStatus(OrderStatus.READY);
         order.setCourier(courier);
+        order.setReceiveDate(receiveDate);
+        order.setAddress(address);
+    }
 
+    public void confirm()
+    {
         OrderCreationModel.getInstance().saveOrder();
 
-        OrderCreationModel.getInstance().clearData();
-
-        Main.getInstance().replaceSceneContent("/com/crm/menu/order_manager/order/order-management-menu.fxml");
+        OrderCreationModel.getInstance().close();
     }
 
     public void back()
@@ -34,7 +38,6 @@ public class OrderInputMenuModel
 
     public void cancel()
     {
-        OrderCreationModel.getInstance().clearData();
-        Main.getInstance().replaceSceneContent("/com/crm/menu/order_manager/order-manager-main-menu.fxml");
+        OrderCreationModel.getInstance().close();
     }
 }

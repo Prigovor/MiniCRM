@@ -13,6 +13,7 @@ import org.hibernate.Hibernate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Bohdan on 15.02.2017.
@@ -35,7 +36,20 @@ public class OrderCreationModel
     private Order order = new Order();
 
     private List<SelectedGood> listChosenGoods = new ArrayList<>();
-    private List<Good> listStoreGoods = FactoryService.getGoodService().getEntries();
+    private List<Good> listStoreGoods = FactoryService.getGoodService().getEntries().stream().filter(good ->
+    {
+        return !good.getClass().equals(SelectedGood.class);
+    }).collect(Collectors.toList());
+
+    public void setOrder(Order order)
+    {
+        this.order = order;
+
+        if (order.getGoods() != null)
+        {
+            this.listChosenGoods = order.getGoods();
+        }
+    }
 
     public void saveOrder()
     {
@@ -57,7 +71,12 @@ public class OrderCreationModel
 
     public void clearData()
     {
-        instance = new OrderCreationModel();
+        order = new Order();
+        listChosenGoods = new ArrayList<>();
+        listStoreGoods = FactoryService.getGoodService().getEntries().stream().filter(good ->
+        {
+            return !good.getClass().equals(SelectedGood.class);
+        }).collect(Collectors.toList());
     }
 
     public void close()

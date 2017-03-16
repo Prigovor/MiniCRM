@@ -112,8 +112,7 @@ public class ChooseGoodsModel
 
     public void cancel()
     {
-        OrderCreationModel.getInstance().clearData();
-        Main.getInstance().replaceSceneContent("/com/crm/menu/order_manager/order/order-management-menu.fxml");
+        OrderCreationModel.getInstance().close();
     }
 
     public void back()

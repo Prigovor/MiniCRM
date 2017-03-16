@@ -31,13 +31,15 @@ public class OrderManagementModel
 
     public void changeOrder()
     {
-        FactoryService.getOrderService().getEntry(selectedOrder.getId(), order ->
+        Order order = FactoryService.getOrderService().getEntry(selectedOrder.getId(), orderEntry ->
         {
-            Hibernate.initialize(order.getGoods());
-
-            OrderCreationModel.getInstance().setOrder(order);
-            OrderCreationModel.getInstance().setListChosenGoods(order.getGoods());
+            Hibernate.initialize(orderEntry.getGoods());
         });
+
+        OrderCreationModel.getInstance().setOrder(order);
+        OrderCreationModel.getInstance().setListChosenGoods(order.getGoods());
+        
+        Main.getInstance().replaceSceneContent("/com/crm/menu/order_manager/order/create/input/client/client-choose-menu.fxml");
     }
 
     public void deleteOrder()

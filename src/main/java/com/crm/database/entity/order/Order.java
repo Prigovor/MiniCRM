@@ -22,7 +22,7 @@ public class Order {
     @Column(name = "ID")
     private Long id;
 
-    @NotNull
+    @NotNull(message = "Client should be set")
     @ManyToOne(targetEntity = Client.class)
     private Client client;
 
@@ -34,7 +34,7 @@ public class Order {
     @Column(name = "RECEIVE_DATE")
     private Date receiveDate;
 
-    @NotBlank
+    @NotBlank(message = "Address should be set")
     @Column(name = "ADDRESS")
     private String address;
 
@@ -42,7 +42,7 @@ public class Order {
     @Column(name = "ORDER_STATUS")
     private OrderStatus orderStatus;
 
-    @NotNull
+    @NotNull(message = "Courier should be set")
     @ManyToOne(targetEntity = Courier.class)
     private Courier courier;
 

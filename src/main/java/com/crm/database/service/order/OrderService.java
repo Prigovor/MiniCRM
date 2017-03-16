@@ -10,4 +10,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderService extends GenericServiceImpl<Order, Long>
 {
+    @Override
+    public Long saveEntry(Order entry)
+    {
+        return super.saveEntry(entry);
+    }
+
+    @Override
+    public void saveOrUpdate(Order entry)
+    {
+        super.saveOrUpdate(entry);
+    }
+
+    @Override
+    public void updateEntry(Order entry)
+    {
+        super.updateEntry(entry);
+    }
 }

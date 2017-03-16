@@ -51,15 +51,21 @@ public class OrderInputMenuController
 
         buttonConfirm.setOnAction(event ->
         {
+            if (datePickerReceiveDate.getValue() == null)
+            {
+                showInformationMessage("Set receive date, please");
+                return;
+            }
+
             try
             {
-                OrderCreationModel.getInstance().getOrder().setAddress(
-                        textFieldAddress.getText());
-                order.setReceiveDate(Date.from(datePickerReceiveDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-
                 Courier courier = (Courier) choiceBoxCouriers.getSelectionModel().getSelectedItem();
+                Date receiveDate = Date.from(datePickerReceiveDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+                String address = textFieldAddress.getText();
 
-                model.confirm(courier);
+                model.setOrderData(courier, receiveDate, address);
+
+                model.confirm();
             }
             catch (ValidationException e)
             {

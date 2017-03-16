@@ -160,6 +160,7 @@ public class OrderManagementController
         if (model.getSelectedOrder() != null)
         {
             model.deleteOrder();
+            refresh();
         }
         else
         {
