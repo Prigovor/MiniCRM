@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Table(name = "SELECTED_GOODS")
 public class SelectedGood extends Good
 {
-    @ManyToOne(targetEntity = Order.class, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Order.class)
     private transient Order order;
 
     public SelectedGood()

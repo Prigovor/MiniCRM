@@ -1,15 +1,21 @@
 package com.crm.database.entity.employee;
 
 import com.crm.database.entity.account.Account;
+import com.crm.database.service.employee.EmployeeService;
+import com.crm.database.validation.email.EmailCustom;
+import com.crm.database.validation.phone.PhoneCustom;
+import com.crm.database.validation.unique.Unique;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Prigovor on 05.02.2017.
  */
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "EMPLOYEES")
 public class Employee
 {
@@ -18,29 +24,38 @@ public class Employee
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "Employee name should be set")
     @Column(name = "NAME")
     private String name;
 
+    @NotBlank(message = "Employee surname should be set")
     @Column(name = "SURNAME")
     private String surname;
 
     @Column(name = "AGE")
     private Integer age;
 
+    @NotNull(message = "Employee gender should be set")
+    @Enumerated(EnumType.STRING)
     @Column(name = "GENDER")
     private Gender gender;
 
+    @NotNull(message = "Employee position should be set")
     @Enumerated(EnumType.STRING)
     @Column(name = "POSITION")
     private PositionType position;
 
+    @Unique
+    @PhoneCustom
     @Column(name = "PHONE")
     private String phone;
 
+    @Unique
+    @EmailCustom
     @Column(name = "EMAIL")
     private String email;
 
-    @OneToOne(mappedBy = "employee", targetEntity = Account.class)
+    @OneToOne(mappedBy = "employee", targetEntity = Account.class, orphanRemoval = true)
     @JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID")
     private Account account;
 
@@ -209,6 +224,6 @@ public class Employee
     @Override
     public String toString()
     {
-        return id.toString();
+        return name + " " + surname + " (" + email + ")";
     }
 }

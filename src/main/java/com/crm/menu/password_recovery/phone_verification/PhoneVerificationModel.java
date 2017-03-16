@@ -1,7 +1,7 @@
 package com.crm.menu.password_recovery.phone_verification;
 
-import com.crm.database.entity.account.Account;
-import com.crm.database.manager.DatabaseManagerType;
+import com.crm.database.entity.account.LockType;
+import com.crm.database.entity.employee.Employee;
 import com.crm.database.manager.PasswordManager;
 import com.crm.database.service.FactoryService;
 import com.crm.main.Main;
@@ -17,18 +17,28 @@ public class PhoneVerificationModel
 
     public void verifyPhone(String phone)
     {
-        Account account = FactoryService.getAccountService(DatabaseManagerType.HIBERNATE).getEntryByField("phone", phone);
-        if (account != null)
+        Employee employee = FactoryService.getEmployeeService().getEntryByField("phone", phone);
+
+        if (employee != null && employee.getAccount() != null)
         {
-            String smsCode = PasswordManager.getInstance().generatePassword(8);
-            //SmsManager.getInstance().sendSms("380509442389", phone, smsCode);
+            if (employee.getAccount().getLockType() == LockType.LOCKED)
+            {
+                new Alert(Alert.AlertType.INFORMATION, "Account is locked").showAndWait();
 
-            System.out.println(smsCode);
+                Main.getInstance().replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");
+            }
+            else
+            {
+                String smsCode = PasswordManager.getInstance().generatePassword(8);
+                //SmsManager.getInstance().sendSms("380509442389", phone, smsCode);
 
-            PasswordRecoveryModel.getInstance().setAccountToRecover(account);
-            PasswordRecoveryModel.getInstance().setSmsCode(smsCode);
+                System.out.println(smsCode);
 
-            Main.getInstance().replaceSceneContent("/fxml-files/password-recovery/sms-code-verification-menu.fxml");
+                PasswordRecoveryModel.getInstance().setAccountToRecover(employee.getAccount());
+                PasswordRecoveryModel.getInstance().setSmsCode(smsCode);
+
+                Main.getInstance().replaceSceneContent("/com/crm/menu/password_recovery/sms_code_verification/sms-code-verification-menu.fxml");
+            }
         }
         else
         {
@@ -42,13 +52,13 @@ public class PhoneVerificationModel
 
             if (attempts >= PasswordRecoveryModel.MAX_ATTEMPTS)
             {
-                Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
+                Main.getInstance().replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");
             }
         }
     }
 
     public void cancel()
     {
-        Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");
     }
 }

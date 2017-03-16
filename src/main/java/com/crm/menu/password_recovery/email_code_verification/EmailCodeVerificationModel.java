@@ -1,8 +1,10 @@
 package com.crm.menu.password_recovery.email_code_verification;
 
-import com.crm.database.manager.DatabaseManagerType;
+import com.crm.database.entity.account.Account;
+import com.crm.database.manager.PasswordManager;
 import com.crm.database.service.FactoryService;
 import com.crm.main.Main;
+import com.crm.managers.EmailManager;
 import com.crm.menu.password_recovery.PasswordRecoveryModel;
 import javafx.scene.control.Alert;
 
@@ -17,7 +19,16 @@ public class EmailCodeVerificationModel
     {
         if (emailCode.equals(PasswordRecoveryModel.getInstance().getEmailCode()))
         {
-            Main.getInstance().replaceSceneContent("/fxml-files/password-recovery/email-verification-menu.fxml");
+            Account account = PasswordRecoveryModel.getInstance().getAccountToRecover();
+
+            String generatedPassword = PasswordManager.getInstance().generatePassword(8);
+            account.setPassword(generatedPassword);
+
+            FactoryService.getAccountService().updateEntry(account);
+
+            EmailManager.getInstance().sendAccountData(account, generatedPassword);
+
+            Main.getInstance().replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");
         }
         else
         {
@@ -30,16 +41,16 @@ public class EmailCodeVerificationModel
 
             if (attempts >= PasswordRecoveryModel.MAX_ATTEMPTS)
             {
-                FactoryService.getAccountService(DatabaseManagerType.HIBERNATE).lockAccount(
+                FactoryService.getAccountService().lockAccount(
                         PasswordRecoveryModel.getInstance().getAccountToRecover()
                 );
-                Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
+                Main.getInstance().replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");
             }
         }
     }
 
     public void cancel()
     {
-        Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");
     }
 }

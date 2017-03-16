@@ -3,16 +3,18 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean class="com.crm.database.entity.employee.courier.Courier" id="courierJane">
-        <property name="name" value="Jane"/>
-        <property name="surname" value="Lawsy"/>
-        <property name="age" value="19"/>
-        <property name="gender" value="FEMALE"/>
+    <bean class="com.crm.database.entity.employee.courier.Courier" id="courierGaverel">
+        <property name="name" value="Gaverel"/>
+        <property name="surname" value="Rocannon"/>
+        <property name="age" value="109"/>
+        <property name="gender" value="MALE"/>
         <property name="position" value="COURIER"/>
-        <property name="email" value="jane.lawsy@gmail.com"/>
-        <property name="phone" value="+380962896702"/>
+        <property name="email" value="gaverel.rocannon@yandex.ru"/>
+        <property name="phone" value="+380962896771"/>
 
         <property name="courierStatus" value="FREE"/>
+
+        <property name="account" ref="accountCourierGaverel"/>
     </bean>
 
 </beans>

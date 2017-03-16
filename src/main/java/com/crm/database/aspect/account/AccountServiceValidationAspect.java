@@ -1,11 +1,7 @@
 package com.crm.database.aspect.account;
 
-import com.crm.database.aspect.account.exception.AccountExistenceException;
-import com.crm.database.aspect.account.exception.AccountValidationException;
-import com.crm.database.data.MessageDataContainer;
 import com.crm.database.entity.account.Account;
-import com.crm.database.manager.DataValidator;
-import com.crm.database.manager.EntityChecker;
+import com.crm.database.validation.EntityValidator;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -40,52 +36,10 @@ public class AccountServiceValidationAspect
     private void beforeSave(Account account)
     {
         validateAccount(account);
-        checkAccountExistence(account);
     }
 
     private void validateAccount(Account account)
     {
-        if (!DataValidator.isLoginValid(account.getLogin()))
-        {
-            throw new AccountValidationException(MessageDataContainer.LOGIN_INVALID);
-        }
-
-        if (!DataValidator.isPasswordValid(account.getPassword()))
-        {
-            throw new AccountValidationException(MessageDataContainer.PASSWORD_INVALID);
-        }
-
-        if (!DataValidator.isEmailValid(account.getEmail()))
-        {
-            throw new AccountValidationException(MessageDataContainer.EMAIL_INVALID);
-        }
-
-        if (!DataValidator.isPhoneValid(account.getPhone()))
-        {
-            throw new AccountValidationException(MessageDataContainer.PHONE_INVALID);
-        }
-    }
-
-    private void checkAccountExistence(Account account)
-    {
-        if (EntityChecker.isAccountWithLoginExists(account.getLogin()))
-        {
-            throw new AccountExistenceException(MessageDataContainer.LOGIN_EXISTS);
-        }
-
-        if (EntityChecker.isAccountWithPasswordExists(account.getPassword()))
-        {
-            throw new AccountExistenceException(MessageDataContainer.PASSWORD_EXISTS);
-        }
-
-        if (EntityChecker.isAccountWithEmailExists(account.getEmail()))
-        {
-            throw new AccountExistenceException(MessageDataContainer.EMAIL_EXISTS);
-        }
-
-        if (EntityChecker.isAccountWithPhoneExists(account.getPhone()))
-        {
-            throw new AccountExistenceException(MessageDataContainer.PHONE_EXISTS);
-        }
+        EntityValidator.getInstance().validateEntry(account);
     }
 }

@@ -9,14 +9,12 @@ import org.hibernate.Hibernate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.crm.database.manager.DatabaseManagerType.HIBERNATE;
-
 /**
  * Created by Bohdan on 26.02.2017.
  */
 public class CourierMenuModel
 {
-    private OrderService orderService = FactoryService.getOrderService(HIBERNATE);
+    private OrderService orderService = FactoryService.getOrderService();
 
     private Order selectedOrder;
 

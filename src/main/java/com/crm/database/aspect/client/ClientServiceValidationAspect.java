@@ -1,11 +1,7 @@
 package com.crm.database.aspect.client;
 
-import com.crm.database.aspect.client.exception.ClientExistenceException;
-import com.crm.database.aspect.client.exception.ClientValidationException;
-import com.crm.database.data.MessageDataContainer;
 import com.crm.database.entity.client.Client;
-import com.crm.database.manager.DataValidator;
-import com.crm.database.manager.EntityChecker;
+import com.crm.database.validation.EntityValidator;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -40,52 +36,10 @@ public class ClientServiceValidationAspect
     private void beforeSave(Client client)
     {
         validateClient(client);
-        checkClientExistence(client);
     }
 
     private void validateClient(Client client)
     {
-        if (!DataValidator.isLoginValid(client.getLogin()))
-        {
-            throw new ClientValidationException(MessageDataContainer.LOGIN_INVALID);
-        }
-
-        if (!DataValidator.isPasswordValid(client.getPassword()))
-        {
-            throw new ClientValidationException(MessageDataContainer.PASSWORD_INVALID);
-        }
-
-        if (!DataValidator.isEmailValid(client.getEmail()))
-        {
-            throw new ClientValidationException(MessageDataContainer.EMAIL_INVALID);
-        }
-
-        if (!DataValidator.isPhoneValid(client.getPhone()))
-        {
-            throw new ClientValidationException(MessageDataContainer.PHONE_INVALID);
-        }
-    }
-    
-    private void checkClientExistence(Client client)
-    {
-        if (EntityChecker.isClientWithLoginExists(client.getLogin()))
-        {
-            throw new ClientExistenceException(MessageDataContainer.LOGIN_EXISTS);
-        }
-
-        if (EntityChecker.isClientWithPasswordExists(client.getPassword()))
-        {
-            throw new ClientExistenceException(MessageDataContainer.PASSWORD_EXISTS);
-        }
-
-        if (EntityChecker.isClientWithEmailExists(client.getEmail()))
-        {
-            throw new ClientExistenceException(MessageDataContainer.EMAIL_EXISTS);
-        }
-
-        if (EntityChecker.isClientWithPhoneExists(client.getPhone()))
-        {
-            throw new ClientExistenceException(MessageDataContainer.PHONE_EXISTS);
-        }
+        EntityValidator.getInstance().validateEntry(client);
     }
 }

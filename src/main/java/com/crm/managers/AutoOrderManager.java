@@ -9,14 +9,12 @@ import com.crm.database.service.employee.courier.CourierService;
 import javax.mail.MessagingException;
 import java.io.IOException;
 
-import static com.crm.database.manager.DatabaseManagerType.HIBERNATE;
-
 /**
  * Created by Bohdan on 15.02.2017.
  */
 public class AutoOrderManager
 {
-    private CourierService courierService = FactoryService.getCourierService(HIBERNATE);
+    private CourierService courierService = FactoryService.getCourierService();
 
     public void formOrder(String jsonFilePath) throws IOException, MessagingException
     {

@@ -8,8 +8,6 @@ import com.crm.database.service.account.AccountService;
 import com.crm.main.Main;
 import com.crm.main.MainModel;
 
-import static com.crm.database.manager.DatabaseManagerType.HIBERNATE;
-
 /**
  * Created by Bohdan on 05.02.2017.
  */
@@ -17,7 +15,7 @@ public class AuthorizationMenuModel
 {
     private static final int MAX_LOG_IN_ATTEMPTS = 3;
 
-    private AccountService accountService = FactoryService.getAccountService(HIBERNATE);
+    private AccountService accountService = FactoryService.getAccountService();
 
     private Integer logInAttempts = 0;
 
@@ -43,7 +41,7 @@ public class AuthorizationMenuModel
                         {
                             case ADMIN:
                             {
-                                Main.getInstance().replaceSceneContent("/fxml-files/admin-main-menu.fxml");
+                                Main.getInstance().replaceSceneContent("/com/crm/menu/admin/admin-main-menu.fxml");
                                 break;
                             }
                             case SUPER:
@@ -56,17 +54,17 @@ public class AuthorizationMenuModel
                                 {
                                     case COURIER:
                                     {
-                                        Main.getInstance().replaceSceneContent("/fxml-files/courier-menu.fxml");
+                                        Main.getInstance().replaceSceneContent("/com/crm/menu/courier/courier-menu.fxml");
                                         break;
                                     }
                                     case ORDER_MANAGER:
                                     {
-                                        Main.getInstance().replaceSceneContent("/fxml-files/order-manager-main-menu.fxml");
+                                        Main.getInstance().replaceSceneContent("/com/crm/menu/order_manager/main/order-manager-main-menu.fxml");
                                         break;
                                     }
                                     case STOREKEEPER:
                                     {
-                                        Main.getInstance().replaceSceneContent("/fxml-files/storekeeper-main-menu.fxml");
+                                        Main.getInstance().replaceSceneContent("/com/crm/menu/storekeeper/storekeeper-menu.fxml");
                                         break;
                                     }
                                     case CASHIER:
@@ -101,7 +99,7 @@ public class AuthorizationMenuModel
 
     public void remindPassword()
     {
-        Main.getInstance().replaceSceneContent("/fxml-files/password-recovery/phone-verification-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/password_recovery/phone_verification/phone-verification-menu.fxml");
     }
 
     public void exit()

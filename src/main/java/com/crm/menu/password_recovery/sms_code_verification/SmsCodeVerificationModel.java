@@ -1,6 +1,5 @@
 package com.crm.menu.password_recovery.sms_code_verification;
 
-import com.crm.database.manager.DatabaseManagerType;
 import com.crm.database.service.FactoryService;
 import com.crm.main.Main;
 import com.crm.menu.password_recovery.PasswordRecoveryModel;
@@ -17,7 +16,7 @@ public class SmsCodeVerificationModel
     {
         if (smsCode.equals(PasswordRecoveryModel.getInstance().getSmsCode()))
         {
-            Main.getInstance().replaceSceneContent("/fxml-files/password-recovery/email-verification-menu.fxml");
+            Main.getInstance().replaceSceneContent("/com/crm/menu/password_recovery/email_verification/email-verification-menu.fxml");
         }
         else
         {
@@ -30,16 +29,16 @@ public class SmsCodeVerificationModel
 
             if (attempts >= PasswordRecoveryModel.MAX_ATTEMPTS)
             {
-                FactoryService.getAccountService(DatabaseManagerType.HIBERNATE).lockAccount(
+                FactoryService.getAccountService().lockAccount(
                         PasswordRecoveryModel.getInstance().getAccountToRecover()
                 );
-                Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
+                Main.getInstance().replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");
             }
         }
     }
 
     public void cancel()
     {
-        Main.getInstance().replaceSceneContent("/fxml-files/authorization-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");
     }
 }

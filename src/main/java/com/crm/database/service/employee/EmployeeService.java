@@ -10,4 +10,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmployeeService extends GenericServiceImpl<Employee, Long>
 {
+    @Override
+    public Long saveEntry(Employee entry)
+    {
+        return super.saveEntry(entry);
+    }
+
+    @Override
+    public void saveOrUpdate(Employee entry)
+    {
+        super.saveOrUpdate(entry);
+    }
+
+    @Override
+    public void updateEntry(Employee entry)
+    {
+        super.updateEntry(entry);
+    }
 }

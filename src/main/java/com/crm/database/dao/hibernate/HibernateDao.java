@@ -89,6 +89,10 @@ public class HibernateDao<T, PK extends Serializable> implements GenericDao<T, P
     @Transactional
     public List<T> getEntriesByField(String fieldName, Object fieldValue)
     {
+        if (fieldValue == null)
+        {
+            return sessionFactory.getCurrentSession().createCriteria(tClass).add(Restrictions.isNull(fieldName)).list();
+        }
         return sessionFactory.getCurrentSession().createCriteria(tClass).add(Restrictions.eq(fieldName, fieldValue)).list();
     }
 }

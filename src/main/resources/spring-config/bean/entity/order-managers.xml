@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.crm.database.entity.employee.order_manager.OrderManager" id="orderManagerPeter">
+        <property name="name" value="Peter"/>
+        <property name="surname" value="Glebsky"/>
+        <property name="age" value="35"/>
+        <property name="gender" value="MALE"/>
+        <property name="position" value="ORDER_MANAGER"/>
+        <property name="email" value="peter.glebsky@yandex.ru"/>
+        <property name="phone" value="+380962896770"/>
+
+        <property name="account" ref="accountManagerPeter"/>
+    </bean>
+
+</beans>

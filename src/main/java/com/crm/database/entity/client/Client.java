@@ -1,6 +1,13 @@
 package com.crm.database.entity.client;
 
 import com.crm.database.entity.order.Order;
+import com.crm.database.manager.PasswordManager;
+import com.crm.database.validation.email.EmailCustom;
+import com.crm.database.validation.login.LoginCustom;
+import com.crm.database.validation.password.PasswordCustom;
+import com.crm.database.validation.phone.PhoneCustom;
+import com.crm.database.validation.unique.Unique;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,21 +25,26 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "LOGIN")
-    private String login;
-
+    @Unique
+    @PasswordCustom
     @Column(name = "PASSWORD")
     private String password;
 
+    @NotBlank(message = "Client name should be filled")
     @Column(name = "NAME")
     private String name;
 
+    @NotBlank(message = "Client surname should be filled")
     @Column(name = "SURNAME")
     private String surname;
 
+    @Unique
+    @PhoneCustom
     @Column(name = "PHONE")
     private String phone;
 
+    @Unique
+    @EmailCustom
     @Column(name = "EMAIL")
     private String email;
 
@@ -57,24 +69,14 @@ public class Client {
         this.id = id;
     }
 
-    public String getLogin()
-    {
-        return login;
-    }
-
-    public void setLogin(String login)
-    {
-        this.login = login;
-    }
-
     public String getPassword()
     {
         return password;
     }
 
-    public void setPassword(String password)
+    public void setPassword(String inputPassword)
     {
-        this.password = password;
+        this.password = PasswordManager.getInstance().getEncryptedPassword(inputPassword);
     }
 
     public String getName() {
@@ -119,6 +121,6 @@ public class Client {
 
     @Override
     public String toString() {
-        return login;
+        return email;
     }
 }

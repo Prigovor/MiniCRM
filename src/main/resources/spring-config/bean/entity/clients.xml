@@ -3,34 +3,4 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean class="com.crm.database.entity.client.Client" id="clientMary">
-        <property name="name" value="Marry"/>
-        <property name="surname" value="McDonnell"/>
-        <property name="login" value="marry.mcdonnell"/>
-        <property name="password" value="marymary"/>
-        <property name="email" value="mary.mcdonnell@gmail.com"/>
-        <property name="phone" value="+380962896704"/>
-
-        <property name="orders">
-            <list>
-                <ref bean="orderMary"/>
-            </list>
-        </property>
-    </bean>
-
-    <bean class="com.crm.database.entity.client.Client" id="clientLara">
-        <property name="name" value="Lara"/>
-        <property name="surname" value="Wolfkeep"/>
-        <property name="login" value="lara.wolfkeep"/>
-        <property name="password" value="laralara"/>
-        <property name="email" value="lara.wolfkeep@gmail.com"/>
-        <property name="phone" value="+380962896705"/>
-
-        <property name="orders">
-            <list>
-                <ref bean="orderLara"/>
-            </list>
-        </property>
-    </bean>
-
 </beans>

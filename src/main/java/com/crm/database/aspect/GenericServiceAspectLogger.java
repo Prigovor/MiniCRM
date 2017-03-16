@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Created by Bohdan on 01.03.2017.
@@ -27,14 +29,16 @@ public class GenericServiceAspectLogger
     private void beforeExecution(JoinPoint joinPoint)
     {
         logger.info("Entering: {} with arguments {}",
-                joinPoint.getSignature(), Arrays.toString(joinPoint.getArgs()));
+                joinPoint.getSignature(), Arrays.stream(joinPoint.getArgs())
+                        .filter(Objects::nonNull).collect(Collectors.toList()));
     }
 
     @After("pointcutMethodExecution()")
     private void afterExecution(JoinPoint joinPoint)
     {
         logger.info("Leaving: {} with arguments {}",
-            joinPoint.getSignature(), Arrays.toString(joinPoint.getArgs()));
+                joinPoint.getSignature(), Arrays.stream(joinPoint.getArgs())
+                        .filter(Objects::nonNull).collect(Collectors.toList()));
     }
 
     @AfterThrowing(value = "pointcutMethodExecution()", throwing = "exc")
@@ -42,6 +46,8 @@ public class GenericServiceAspectLogger
     {
         logger.error("Exception was thrown in: {} stack trace is: {}",
                 joinPoint.getSignature(), exc.getStackTrace());
+
+        exc.printStackTrace();
     }
 
     @AfterReturning(value = "pointcutMethodExecution()", returning = "obj")

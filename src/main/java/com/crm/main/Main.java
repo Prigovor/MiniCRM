@@ -1,10 +1,6 @@
 package com.crm.main;
 
-import com.crm.database.entity.account.Account;
-import com.crm.database.entity.client.Client;
-import com.crm.database.entity.good.Good;
 import com.crm.database.manager.ContextManager;
-import com.crm.database.service.FactoryService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,8 +8,6 @@ import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
 
 import java.io.IOException;
-
-import static com.crm.database.manager.DatabaseManagerType.HIBERNATE;
 
 /**
  * Created by Prigovor on 04.02.2017.
@@ -39,7 +33,7 @@ public class Main extends Application
     {
         this.primaryStage = primaryStage;
 
-        replaceSceneContent("/fxml-files/authorization-menu.fxml");
+        replaceSceneContent("/com/crm/menu/authorization/authorization-menu.fxml");
 
         primaryStage.setTitle("MiniCRM");
         primaryStage.setMaximized(true);
@@ -84,18 +78,29 @@ public class Main extends Application
     {
         ApplicationContext context = ContextManager.getInstance().getContext();
 
-        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountAdmin", Account.class));
-        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountManagerAlan", Account.class));
-        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountStorekeeperJake", Account.class));
-
-        FactoryService.getGoodService(HIBERNATE).saveEntry(context.getBean("goodLaptopHP", Good.class));
-        FactoryService.getGoodService(HIBERNATE).saveEntry(context.getBean("goodLaptopAcer", Good.class));
-        FactoryService.getGoodService(HIBERNATE).saveEntry(context.getBean("goodLaptopAsus", Good.class));
-
-        FactoryService.getClientService(HIBERNATE).saveEntry(context.getBean("clientMary", Client.class));
-        FactoryService.getClientService(HIBERNATE).saveEntry(context.getBean("clientLara", Client.class));
-
-        FactoryService.getAccountService(HIBERNATE).saveEntry(context.getBean("accountCourierJane", Account.class));
+//        Account accountAdmin = context.getBean("accountAdmin", Account.class);
+//        Employee employeeAdmin = context.getBean("employeeAdmin", Employee.class);
+//
+//        FactoryService.getEmployeeService().saveOrUpdate(employeeAdmin);
+//        FactoryService.getAccountService().saveOrUpdate(accountAdmin);
+//
+//        Account accountOrderManager = context.getBean("accountManagerPeter", Account.class);
+//        OrderManager orderManager = context.getBean("orderManagerPeter", OrderManager.class);
+//
+//        FactoryService.getOrderManagerService().saveOrUpdate(orderManager);
+//        FactoryService.getAccountService().saveOrUpdate(accountOrderManager);
+//
+//        Account accountStorekeeper = context.getBean("accountStorekeeperDane", Account.class);
+//        Storekeeper storekeeper = context.getBean("storekeeperDane", Storekeeper.class);
+//
+//        FactoryService.getStorekeeperService().saveOrUpdate(storekeeper);
+//        FactoryService.getAccountService().saveOrUpdate(accountStorekeeper);
+//
+//        Account accountCourier = context.getBean("accountCourierGaverel", Account.class);
+//        Courier courier = context.getBean("courierGaverel", Courier.class);
+//
+//        FactoryService.getCourierService().saveOrUpdate(courier);
+//        FactoryService.getAccountService().saveOrUpdate(accountCourier);
 
         launch(args);
     }
