@@ -27,6 +27,6 @@ public class OrderInfoModel
 
     public void back()
     {
-        Main.getInstance().replaceSceneContent("/com/crm/menu/order_manager/order/management/order-management-menu.fxml");
+        Main.getInstance().replaceSceneContent("/com/crm/menu/order_manager/order/order-management-menu.fxml");
     }
 }
