@@ -1,6 +1,8 @@
 package com.crm.database.entity.good;
 
 import com.crm.database.entity.good.selected_good.SelectedGood;
+import com.crm.database.validation.unique.Unique;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 
@@ -17,6 +19,8 @@ public class Good {
     @Column(name = "ID")
     private Long id;
 
+    @Unique
+    @NotBlank
     @Column(name = "NOMINATION")
     private String nomination;
 
