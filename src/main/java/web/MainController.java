@@ -73,7 +73,7 @@ public class MainController
         return "message";
     }
 
-    @RequestMapping(value = "/confirm")
+    @RequestMapping(value = "/setClientData")
     private String confirm(SessionStatus sessionStatus)
     {
         sessionStatus.setComplete();

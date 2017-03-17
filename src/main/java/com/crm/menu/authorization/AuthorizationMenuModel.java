@@ -59,7 +59,7 @@ public class AuthorizationMenuModel
                                     }
                                     case ORDER_MANAGER:
                                     {
-                                        Main.getInstance().replaceSceneContent("/com/crm/menu/order_manager/main/order-manager-main-menu.fxml");
+                                        Main.getInstance().replaceSceneContent("/com/crm/menu/order_manager/order-manager-main-menu.fxml");
                                         break;
                                     }
                                     case STOREKEEPER:

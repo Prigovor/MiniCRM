@@ -3,4 +3,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean class="com.crm.database.entity.client.Client" id="clientConan">
+        <property name="name" value="Conan"/>
+        <property name="surname" value="Barbarian"/>
+        <property name="email" value="conan.barbarian@gmail.com"/>
+        <property name="phone" value="+380962896790"/>
+        <property name="password" value="conan"/>
+    </bean>
+
 </beans>

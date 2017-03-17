@@ -10,4 +10,27 @@ import org.springframework.stereotype.Service;
 @Service
 public class SelectedGoodService extends GenericServiceImpl<SelectedGood, Long>
 {
+    @Override
+    public Long saveEntry(SelectedGood entry)
+    {
+        return super.saveEntry(entry);
+    }
+
+    @Override
+    public void saveOrUpdate(SelectedGood entry)
+    {
+        super.saveOrUpdate(entry);
+    }
+
+    @Override
+    public void updateEntry(SelectedGood entry)
+    {
+        super.updateEntry(entry);
+    }
+
+    @Override
+    public void deleteEntry(Long id)
+    {
+        super.deleteEntry(id);
+    }
 }

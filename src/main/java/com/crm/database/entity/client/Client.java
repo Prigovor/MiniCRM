@@ -48,7 +48,7 @@ public class Client {
     @Column(name = "EMAIL")
     private String email;
 
-    @OneToMany(targetEntity = Order.class, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Order.class, orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "client")
     private List<Order> orders;
 
     public Client() {
@@ -120,7 +120,56 @@ public class Client {
     }
 
     @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+        {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass())
+        {
+            return false;
+        }
+
+        Client client = (Client) o;
+
+        if (id != null ? !id.equals(client.id) : client.id != null)
+        {
+            return false;
+        }
+        if (password != null ? !password.equals(client.password) : client.password != null)
+        {
+            return false;
+        }
+        if (name != null ? !name.equals(client.name) : client.name != null)
+        {
+            return false;
+        }
+        if (surname != null ? !surname.equals(client.surname) : client.surname != null)
+        {
+            return false;
+        }
+        if (phone != null ? !phone.equals(client.phone) : client.phone != null)
+        {
+            return false;
+        }
+        return email != null ? email.equals(client.email) : client.email == null;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
-        return email;
+        return name + " " + surname + " (" + email + ")";
     }
 }

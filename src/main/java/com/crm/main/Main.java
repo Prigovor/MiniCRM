@@ -1,6 +1,14 @@
 package com.crm.main;
 
+import com.crm.database.entity.account.Account;
+import com.crm.database.entity.client.Client;
+import com.crm.database.entity.employee.Employee;
+import com.crm.database.entity.employee.courier.Courier;
+import com.crm.database.entity.employee.order_manager.OrderManager;
+import com.crm.database.entity.employee.storekeeper.Storekeeper;
+import com.crm.database.entity.good.Good;
 import com.crm.database.manager.ContextManager;
+import com.crm.database.service.FactoryService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -78,29 +86,35 @@ public class Main extends Application
     {
         ApplicationContext context = ContextManager.getInstance().getContext();
 
-//        Account accountAdmin = context.getBean("accountAdmin", Account.class);
-//        Employee employeeAdmin = context.getBean("employeeAdmin", Employee.class);
-//
-//        FactoryService.getEmployeeService().saveOrUpdate(employeeAdmin);
-//        FactoryService.getAccountService().saveOrUpdate(accountAdmin);
-//
-//        Account accountOrderManager = context.getBean("accountManagerPeter", Account.class);
-//        OrderManager orderManager = context.getBean("orderManagerPeter", OrderManager.class);
-//
-//        FactoryService.getOrderManagerService().saveOrUpdate(orderManager);
-//        FactoryService.getAccountService().saveOrUpdate(accountOrderManager);
-//
-//        Account accountStorekeeper = context.getBean("accountStorekeeperDane", Account.class);
-//        Storekeeper storekeeper = context.getBean("storekeeperDane", Storekeeper.class);
-//
-//        FactoryService.getStorekeeperService().saveOrUpdate(storekeeper);
-//        FactoryService.getAccountService().saveOrUpdate(accountStorekeeper);
-//
-//        Account accountCourier = context.getBean("accountCourierGaverel", Account.class);
-//        Courier courier = context.getBean("courierGaverel", Courier.class);
-//
-//        FactoryService.getCourierService().saveOrUpdate(courier);
-//        FactoryService.getAccountService().saveOrUpdate(accountCourier);
+        Account accountAdmin = context.getBean("accountAdmin", Account.class);
+        Employee employeeAdmin = context.getBean("employeeAdmin", Employee.class);
+
+        FactoryService.getEmployeeService().saveOrUpdate(employeeAdmin);
+        FactoryService.getAccountService().saveOrUpdate(accountAdmin);
+
+        Account accountOrderManager = context.getBean("accountManagerPeter", Account.class);
+        OrderManager orderManager = context.getBean("orderManagerPeter", OrderManager.class);
+
+        FactoryService.getOrderManagerService().saveOrUpdate(orderManager);
+        FactoryService.getAccountService().saveOrUpdate(accountOrderManager);
+
+        Account accountStorekeeper = context.getBean("accountStorekeeperDane", Account.class);
+        Storekeeper storekeeper = context.getBean("storekeeperDane", Storekeeper.class);
+
+        FactoryService.getStorekeeperService().saveOrUpdate(storekeeper);
+        FactoryService.getAccountService().saveOrUpdate(accountStorekeeper);
+
+        Account accountCourier = context.getBean("accountCourierGaverel", Account.class);
+        Courier courier = context.getBean("courierGaverel", Courier.class);
+
+        FactoryService.getCourierService().saveOrUpdate(courier);
+        FactoryService.getAccountService().saveOrUpdate(accountCourier);
+
+        Good good = context.getBean("goodLaptopAcer", Good.class);
+        FactoryService.getGoodService().saveOrUpdate(good);
+
+        Client client = context.getBean("clientConan", Client.class);
+        FactoryService.getClientService().saveOrUpdate(client);
 
         launch(args);
     }

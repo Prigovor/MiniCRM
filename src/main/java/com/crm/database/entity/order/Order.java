@@ -3,8 +3,10 @@ package com.crm.database.entity.order;
 import com.crm.database.entity.client.Client;
 import com.crm.database.entity.employee.courier.Courier;
 import com.crm.database.entity.good.selected_good.SelectedGood;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +22,8 @@ public class Order {
     @Column(name = "ID")
     private Long id;
 
-    @ManyToOne(targetEntity = Client.class, cascade = CascadeType.MERGE)
+    @NotNull(message = "Client should be set")
+    @ManyToOne(targetEntity = Client.class)
     private Client client;
 
     @Temporal(TemporalType.DATE)
@@ -31,6 +34,7 @@ public class Order {
     @Column(name = "RECEIVE_DATE")
     private Date receiveDate;
 
+    @NotBlank(message = "Address should be set")
     @Column(name = "ADDRESS")
     private String address;
 
@@ -38,11 +42,11 @@ public class Order {
     @Column(name = "ORDER_STATUS")
     private OrderStatus orderStatus;
 
-    @ManyToOne(targetEntity = Courier.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "COURIER_ID", referencedColumnName = "ID")
+    @NotNull(message = "Courier should be set")
+    @ManyToOne(targetEntity = Courier.class)
     private Courier courier;
 
-    @OneToMany(targetEntity = SelectedGood.class, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = SelectedGood.class, orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "order")
     private List<SelectedGood> goods;
 
     @Column(name = "ORDER_PRICE")

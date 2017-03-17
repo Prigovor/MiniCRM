@@ -19,7 +19,7 @@ public class Courier extends Employee
     @Column(name = "STATUS")
     private CourierStatus courierStatus;
 
-    @OneToMany(targetEntity = Order.class, cascade = CascadeType.MERGE)
+    @OneToMany(targetEntity = Order.class, mappedBy = "courier")
     private List<Order> listOrders;
 
     public Courier()

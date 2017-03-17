@@ -13,7 +13,7 @@ public class ConfirmationManager
     {
         String confirmationCode = PasswordManager.getInstance().generatePassword(4);
 
-        EmailManager.getInstance().sendMessage(email, "Confirmation", "Use this code to confirm action: " + confirmationCode);
+        EmailManager.getInstance().sendMessage(email, "Confirmation", "Use this code to setClientData action: " + confirmationCode);
 
         if (inputConfirmationCode.equals(confirmationCode))
         {
@@ -29,7 +29,7 @@ public class ConfirmationManager
     {
         String confirmationCode = PasswordManager.getInstance().generatePassword(4);
 
-        SmsManager.getInstance().sendSms(phone, "Use this code to confirm action");
+        SmsManager.getInstance().sendSms(phone, "Use this code to setClientData action");
 
         if (inputConfirmationCode.equals(confirmationCode))
         {
