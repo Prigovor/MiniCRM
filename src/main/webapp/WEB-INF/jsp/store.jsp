@@ -18,18 +18,12 @@
 <body>
 
 <header>
+
     <div id="logo">
         <a href="${pageContext.request.contextPath}/" title="Перейти на главную"><span>N</span>otebook store</a>
     </div>
-    <div id="menuHead">
-        <a href="${pageContext.request.contextPath}/">
-            <div style="margin-right: 5%">Text</div>
-        </a>
-        <a href="${pageContext.request.contextPath}/">
-            <div>Text</div>
-        </a>
-    </div>
-    <div >
+
+    <div>
         <label>
             <select id="regAuth">
                 <option href="${pageContext.request.contextPath}/"><a>Registry </a></option>
@@ -39,23 +33,23 @@
     </div>
 </header>
 
-<div id="wrapper">
-
-    <div id="top">
-        <a href="/">
-            <img id="image1" src="${pageContext.request.contextPath}/resources/images/apple_macbook_pro_retina_13_-mf839uaa.jpg"
-            width="575" height="300" class="image">
-        </a>
-        <a href="/">
-            <img id="image2" class="image" src="${pageContext.request.contextPath}/resources/images/images.jpg"
-                 width="575" height="300">
-        </a>
-    </div>
-    <div id="bottom">
-        <a href="${pageContext.request.contextPath}/resources/images/images%20(1).jpg"></a>
-        <a href="${pageContext.request.contextPath}/resources/images/images%20(2).jpg"></a>
-    </div>
-
+<div id="wrapper" class="images">
+    <a href="/">
+        <img id="notebook1" src="${pageContext.request.contextPath}/resources/images/apple_macbook_pro_retina_13_-mf839uaa.jpg"
+             width="400" height="230" class="image"/>
+    </a>
+    <a href="/">
+        <img id="notebook2" src="${pageContext.request.contextPath}/resources/images/images.jpg"
+             width="400" height="230" class="image"/>
+    </a>
+    <a href="/">
+        <img id="notebook3" src="${pageContext.request.contextPath}/resources/images/images%20(1).jpg"
+             width="400" height="230" class="image"/>
+    </a>
+    <a href="/">
+        <img id="notebook4" src="${pageContext.request.contextPath}/resources/images/images%20(2).jpg"
+             width="400" height="230" class="image"/>
+    </a>
 </div>
 
 <footer>
@@ -67,7 +61,6 @@
     </div>
 
 </footer>
-
 </body>
 
 </html>
