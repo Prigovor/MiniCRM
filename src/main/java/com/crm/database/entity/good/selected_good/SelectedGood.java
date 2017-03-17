@@ -12,18 +12,21 @@ import javax.persistence.*;
 @Table(name = "SELECTED_GOODS")
 public class SelectedGood extends Good
 {
-    @ManyToOne(targetEntity = Order.class, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Order.class)
     private Order order;
+
+    @OneToOne
+    @JoinColumn(name = "STORE_GOOD_ID")
+    private Good goodInStore;
 
     public SelectedGood()
     {
     }
 
-    public SelectedGood(String nomination, int amount, Double price, Order order)
+    public SelectedGood(Good goodInStore, Order order)
     {
-        setNomination(nomination);
-        setAmount(amount);
-        setPrice(price);
+        setGoodInStore(goodInStore);
+        setAmount(0);
 
         this.order = order;
     }
@@ -36,5 +39,37 @@ public class SelectedGood extends Good
     public void setOrder(Order order)
     {
         this.order = order;
+    }
+
+    public Good getGoodInStore()
+    {
+        return goodInStore;
+    }
+
+    public void setGoodInStore(Good goodInStore)
+    {
+        this.goodInStore = goodInStore;
+
+        setNomination(goodInStore.getNomination());
+        setDescription(goodInStore.getDescription());
+        setPrice(goodInStore.getPrice());
+    }
+
+    public void incAmount()
+    {
+        if (goodInStore.getAmount() > 0)
+        {
+            setAmount(getAmount() + 1);
+            goodInStore.setAmount(goodInStore.getAmount() - 1);
+        }
+    }
+
+    public void decAmount()
+    {
+        if (getAmount() > 0)
+        {
+            setAmount(getAmount() - 1);
+            goodInStore.setAmount(goodInStore.getAmount() + 1);
+        }
     }
 }

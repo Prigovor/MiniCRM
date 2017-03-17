@@ -26,6 +26,7 @@ public class OrderManagementModel
 
     public void addOrder()
     {
+        OrderCreationModel.getInstance().clearData();
         Main.getInstance().replaceSceneContent("/com/crm/menu/order_manager/order/create/input/client/client-choose-menu.fxml");
     }
 
@@ -36,6 +37,7 @@ public class OrderManagementModel
             Hibernate.initialize(orderEntry.getGoods());
         });
 
+        OrderCreationModel.getInstance().clearData();
         OrderCreationModel.getInstance().setOrder(order);
         OrderCreationModel.getInstance().setListChosenGoods(order.getGoods());
         

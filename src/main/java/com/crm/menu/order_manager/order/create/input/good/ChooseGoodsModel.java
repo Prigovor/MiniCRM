@@ -56,19 +56,15 @@ public class ChooseGoodsModel
         Integer amountOfGoodInStore = goodInStore.getAmount();
         if (amountOfGoodInStore > 0)
         {
-            goodInStore.setAmount(amountOfGoodInStore - 1);
-
             int indexChosenGood = listChosenGoods.indexOf(good);
             if (indexChosenGood > -1)
             {
-                Good goodInChosen = listChosenGoods.get(indexChosenGood);
-                Integer amountOfGoodInChosen = goodInChosen.getAmount();
-                goodInChosen.setAmount(amountOfGoodInChosen + 1);
+                listChosenGoods.get(indexChosenGood).incAmount();
             }
             else
             {
-                SelectedGood goodToAdd = new SelectedGood(good.getNomination(), 1, good.getPrice(), order);
-                goodToAdd.setDescription(good.getDescription());
+                SelectedGood goodToAdd = new SelectedGood(good, order);
+                goodToAdd.incAmount();
 
                 listChosenGoods.add(goodToAdd);
             }
@@ -80,25 +76,14 @@ public class ChooseGoodsModel
     public void removeGood(Good good)
     {
         int indexChosenGood = listChosenGoods.indexOf(good);
-        Good goodInChosen = listChosenGoods.get(indexChosenGood);
+        SelectedGood goodInChosen = listChosenGoods.get(indexChosenGood);
 
         Integer amountOfGoodInChosen = goodInChosen.getAmount();
         if (amountOfGoodInChosen > 0)
         {
-            goodInChosen.setAmount(amountOfGoodInChosen - 1);
-
-            int indexStoreGood = listStoreGoods.indexOf(good);
-            Good goodInStore = listStoreGoods.get(indexStoreGood);
-
-            Integer amountOfGoodInStore = goodInStore.getAmount();
-            goodInStore.setAmount(amountOfGoodInStore + 1);
+            goodInChosen.decAmount();
 
             orderSum -= goodInChosen.getPrice();
-        }
-
-        if (goodInChosen.getAmount() == 0)
-        {
-            listChosenGoods.remove(goodInChosen);
         }
     }
 

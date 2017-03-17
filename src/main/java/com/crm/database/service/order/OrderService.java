@@ -27,4 +27,10 @@ public class OrderService extends GenericServiceImpl<Order, Long>
     {
         super.updateEntry(entry);
     }
+
+    @Override
+    public void deleteEntry(Long id)
+    {
+        super.deleteEntry(id);
+    }
 }
