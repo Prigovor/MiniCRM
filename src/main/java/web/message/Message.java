@@ -10,4 +10,8 @@ import lombok.Setter;
 public class Message
 {
     private String text;
+
+    public void setText(String text) {
+        this.text = text;
+    }
 }

@@ -22,7 +22,7 @@ public class MainController
     @RequestMapping(method = RequestMethod.GET)
     private String start()
     {
-        return "index";
+        return "store";
     }
 
     @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
