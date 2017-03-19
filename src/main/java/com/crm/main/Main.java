@@ -84,6 +84,11 @@ public class Main extends Application
 
     public static void main(String[] args)
     {
+        launch(args);
+    }
+
+    private static void addTestEntries()
+    {
         ApplicationContext context = ContextManager.getInstance().getContext();
 
         Account accountAdmin = context.getBean("accountAdmin", Account.class);
@@ -115,7 +120,5 @@ public class Main extends Application
 
         Client client = context.getBean("clientConan", Client.class);
         FactoryService.getClientService().saveOrUpdate(client);
-
-        launch(args);
     }
 }

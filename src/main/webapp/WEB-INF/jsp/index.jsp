@@ -85,6 +85,13 @@
 
                 <div class="field-wrap">
                     <label>
+                        Your Phone<span class="req">*</span>
+                    </label>
+                    <input type="tel" name="phone" required autocomplete="off"/>
+                </div>
+
+                <div class="field-wrap">
+                    <label>
                         Your Password<span class="req">*</span>
                     </label>
                     <input type="password" name="password" required autocomplete="off"/>

@@ -29,7 +29,7 @@ public class GoodInfo extends AnchorPane
     {
         this.good = good;
 
-        textFieldNomination.setText(good.getNomination());
+        textFieldNomination.setText(good.getName());
         textAreaDescription.setText(good.getDescription());
         textFieldAmount.setText(String.valueOf(good.getAmount()));
         textFieldPrice.setText(String.valueOf(good.getPrice()));

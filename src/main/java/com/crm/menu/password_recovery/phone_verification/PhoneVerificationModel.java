@@ -5,6 +5,7 @@ import com.crm.database.entity.employee.Employee;
 import com.crm.database.manager.PasswordManager;
 import com.crm.database.service.FactoryService;
 import com.crm.main.Main;
+import com.crm.managers.SmsManager;
 import com.crm.menu.password_recovery.PasswordRecoveryModel;
 import javafx.scene.control.Alert;
 
@@ -29,8 +30,8 @@ public class PhoneVerificationModel
             }
             else
             {
-                String smsCode = PasswordManager.getInstance().generatePassword(8);
-                //SmsManager.getInstance().sendSms("380509442389", phone, smsCode);
+                String smsCode = PasswordManager.getInstance().generateNumericPassword(4);
+                SmsManager.getInstance().sendSms(phone, smsCode);
 
                 System.out.println(smsCode);
 

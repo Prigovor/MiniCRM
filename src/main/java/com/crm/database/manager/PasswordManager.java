@@ -6,6 +6,7 @@ import org.passay.EnglishCharacterData;
 import org.passay.PasswordGenerator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -41,6 +42,11 @@ public class PasswordManager
     public String generatePassword(int length)
     {
         return passwordGenerator.generatePassword(length, characterRules);
+    }
+
+    public String generateNumericPassword(int length)
+    {
+        return passwordGenerator.generatePassword(length, Arrays.asList(new CharacterRule(EnglishCharacterData.Digit)));
     }
 
     public String getEncryptedPassword(String inputPassword)

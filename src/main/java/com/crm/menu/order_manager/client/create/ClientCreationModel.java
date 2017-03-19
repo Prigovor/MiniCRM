@@ -1,6 +1,7 @@
 package com.crm.menu.order_manager.client.create;
 
 import com.crm.database.entity.client.Client;
+import com.crm.database.manager.PasswordManager;
 import com.crm.database.service.FactoryService;
 import com.crm.main.Main;
 import com.crm.managers.EmailManager;
@@ -31,6 +32,9 @@ public class ClientCreationModel
 
     public void saveClient()
     {
+        generatedPassword = PasswordManager.getInstance().generatePassword(4);
+        client.setPassword(generatedPassword);
+
         FactoryService.getClientService().saveOrUpdate(client);
 
         EmailManager.getInstance().sendClientData(client, generatedPassword);

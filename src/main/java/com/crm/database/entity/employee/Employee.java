@@ -1,11 +1,11 @@
 package com.crm.database.entity.employee;
 
 import com.crm.database.entity.account.Account;
-import com.crm.database.service.employee.EmployeeService;
 import com.crm.database.validation.email.EmailCustom;
 import com.crm.database.validation.phone.PhoneCustom;
 import com.crm.database.validation.unique.Unique;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -32,6 +32,7 @@ public class Employee
     @Column(name = "SURNAME")
     private String surname;
 
+    @Range(message = "Employee should be adult", min = 18)
     @Column(name = "AGE")
     private Integer age;
 

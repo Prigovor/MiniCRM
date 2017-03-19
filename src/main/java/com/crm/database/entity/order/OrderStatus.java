@@ -5,5 +5,5 @@ package com.crm.database.entity.order;
  */
 public enum OrderStatus
 {
-    NOT_READY, READY, PAID_UP, DELIVERY_PROCESS, CLOSED
+    NOT_READY, READY, PAID_UP, DELIVERY_PROCESS, CALL_CLIENT, CLOSED
 }

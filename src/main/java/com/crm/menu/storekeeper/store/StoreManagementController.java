@@ -159,6 +159,7 @@ public class StoreManagementController
         if (model.getSelectedGood() != null)
         {
             model.deleteGood();
+            refresh();
         }
         else
         {

@@ -34,7 +34,7 @@ public class Order {
     @Column(name = "RECEIVE_DATE")
     private Date receiveDate;
 
-    @NotBlank(message = "Address should be set")
+//    @NotBlank(message = "Address should be set")
     @Column(name = "ADDRESS")
     private String address;
 
@@ -42,7 +42,7 @@ public class Order {
     @Column(name = "ORDER_STATUS")
     private OrderStatus orderStatus;
 
-    @NotNull(message = "Courier should be set")
+//    @NotNull(message = "Courier should be set")
     @ManyToOne(targetEntity = Courier.class)
     private Courier courier;
 
@@ -142,11 +142,10 @@ public class Order {
     @Override
     public String toString()
     {
-        return "Order{" +
-                "id=" + id +
-                ", client=" + client +
-                ", orderStatus=" + orderStatus +
-                ", orderPrice=" + orderPrice +
+        return  "ID=" + id +
+                ", Client=" + client +
+                ", Status=" + orderStatus +
+                ", Price=" + orderPrice +
                 '}';
     }
 }

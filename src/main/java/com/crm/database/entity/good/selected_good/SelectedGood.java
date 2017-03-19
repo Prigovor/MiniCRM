@@ -50,7 +50,7 @@ public class SelectedGood extends Good
     {
         this.goodInStore = goodInStore;
 
-        setNomination(goodInStore.getNomination());
+        setName(goodInStore.getName());
         setDescription(goodInStore.getDescription());
         setPrice(goodInStore.getPrice());
     }

@@ -25,7 +25,7 @@ public class GoodDataController
     {
         Good good = GoodCreationModel.getInstance().getGoodToCreate();
 
-        textFieldNomination.setText(good.getNomination());
+        textFieldNomination.setText(good.getName());
         textAreaDescription.setText(good.getDescription());
 
         if (good.getAmount() != null)

@@ -42,6 +42,8 @@ public class SmsManager
 
     public void sendSms(String recipientNumber, String message)
     {
-        sendSms("380509442389", recipientNumber, message);
+        String number = recipientNumber.replaceAll("\\+", "");
+
+        sendSms("380509442389", number, message);
     }
 }

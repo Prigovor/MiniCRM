@@ -12,7 +12,7 @@ public class GoodDataModel
     {
         Good good = GoodCreationModel.getInstance().getGoodToCreate();
 
-        good.setNomination(nomination);
+        good.setName(nomination);
         good.setDescription(description);
         good.setAmount(amount);
         good.setPrice(price);

@@ -3,6 +3,7 @@ package com.crm.database.entity.good;
 import com.crm.database.entity.good.selected_good.SelectedGood;
 import com.crm.database.validation.unique.Unique;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 
@@ -12,7 +13,8 @@ import javax.persistence.*;
 
 @Entity(name = "GOODS")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Good {
+public class Good
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,56 +23,72 @@ public class Good {
 
     @Unique
     @NotBlank
-    @Column(name = "NOMINATION")
-    private String nomination;
+    @Column(name = "NAME")
+    private String name;
 
     @Column(name = "DESCRIPTION")
     private String description;
 
+    @Range(message = "Amount should be bigger than 0", min = 0)
     @Column(name = "AMOUNT")
     private Integer amount;
 
+    @Range(message = "Price should be bigger than 0", min = 0)
     @Column(name = "PRICE")
     private Double price;
 
-    public Good() {
+    public Good()
+    {
     }
 
-    public Good(String nomination, Integer amount, Double price) {
-        this.nomination = nomination;
+    public Good(String name, Integer amount, Double price)
+    {
+        this.name = name;
         this.amount = amount;
         this.price = price;
     }
 
-    public Long getId() {
+    public Long getId()
+    {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Long id)
+    {
         this.id = id;
     }
 
-    public String getNomination() {
-        return nomination;
+    public String getName()
+    {
+        return name;
     }
 
-    public void setNomination(String nomination) {
-        this.nomination = nomination;
+    public void setName(String nomination)
+    {
+        this.name = nomination;
     }
 
-    public Integer getAmount() {
+    public Integer getAmount()
+    {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(Integer amount)
+    {
         this.amount = amount;
     }
 
-    public Double getPrice() {
+    public Double getPrice()
+    {
+        price = (double) Math.round(price * 100);
+
+        price = price / 100;
+
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Double price)
+    {
         this.price = price;
     }
 
@@ -98,19 +116,19 @@ public class Good {
 
         Good good = (Good) o;
 
-        return nomination != null ? nomination.equals(good.nomination) : good.nomination == null;
+        return name != null ? name.equals(good.name) : good.name == null;
     }
 
     @Override
     public int hashCode()
     {
-        return nomination != null ? nomination.hashCode() : 0;
+        return name != null ? name.hashCode() : 0;
     }
 
     @Override
     public String toString()
     {
-        return nomination +
+        return name +
                 ", amount=" + amount +
                 ", price=" + price;
     }

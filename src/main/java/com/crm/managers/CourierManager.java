@@ -55,7 +55,6 @@ public class CourierManager
 
             }).start();
 
-
             new Thread(() ->
             {
                 EmailManager.getInstance().sendMessage(order.getCourier().getEmail(),

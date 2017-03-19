@@ -1,9 +1,12 @@
 package web;
 
 import com.crm.database.entity.client.Client;
+import com.crm.database.entity.order.Order;
+import com.crm.database.entity.order.OrderStatus;
 import com.crm.database.manager.PasswordManager;
 import com.crm.database.service.FactoryService;
 import com.crm.database.validation.ValidationException;
+import com.crm.managers.EmailManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,17 +19,21 @@ import web.message.Message;
  */
 @Controller
 @RequestMapping(value = "/")
-@SessionAttributes(types = {Message.class})
+@SessionAttributes(types = {Message.class, Client.class})
 public class MainController
 {
+    private Client client;
+
     @RequestMapping(method = RequestMethod.GET)
     private String start()
     {
+        client = new Client();
+
         return "index";
     }
 
     @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
-    private String signUp(String name, String surname, String password, String email, Message message)
+    private String signUp(String name, String surname, String password, String email, String phone, Message message)
     {
         try
         {
@@ -36,10 +43,15 @@ public class MainController
             client.setSurname(surname);
             client.setPassword(password);
             client.setEmail(email);
+            client.setPhone(phone);
 
             FactoryService.getClientService().saveEntry(client);
 
-            message.setText("Client successfully registered");
+            EmailManager.getInstance().sendClientData(client, password);
+
+            this.client = client;
+
+            return "client-page";
         }
         catch (ValidationException e)
         {
@@ -58,7 +70,9 @@ public class MainController
         {
             if (PasswordManager.getInstance().isPasswordCorrect(password, clientEntry.getPassword()))
             {
-                message.setText("Client successfully logged in");
+                this.client = clientEntry;
+
+                return "client-page";
             }
             else
             {
@@ -73,7 +87,26 @@ public class MainController
         return "message";
     }
 
-    @RequestMapping(value = "/setClientData")
+    @RequestMapping(value = "/call-me", method = RequestMethod.GET)
+    private String callMe()
+    {
+        Order order = new Order();
+
+        order.setOrderStatus(OrderStatus.CALL_CLIENT);
+        order.setClient(client);
+
+        FactoryService.getOrderService().saveEntry(order);
+
+        return "client-page";
+    }
+
+    @RequestMapping(value = "/exit", method = RequestMethod.GET)
+    private String exit()
+    {
+        return "index";
+    }
+
+    @RequestMapping(value = "/confirm")
     private String confirm(SessionStatus sessionStatus)
     {
         sessionStatus.setComplete();

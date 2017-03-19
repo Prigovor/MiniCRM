@@ -40,10 +40,29 @@ public class OrderServiceAspect
     @Before(value = "pointcutSaveOrUpdate(order) || pointcutSaveEntry(order) || pointcutUpdate(order)", argNames = "order")
     private void beforeSave(Order order)
     {
-        for (SelectedGood selectedGood : order.getGoods())
+        if (order.getGoods() != null)
         {
-            Good goodInStore = selectedGood.getGoodInStore();
-            FactoryService.getGoodService().updateEntry(goodInStore);
+            if (order.getId() != null)
+            {
+                Order orderEntry = FactoryService.getOrderService().getEntry(order.getId(), order1 ->
+                {
+                    Hibernate.initialize(order1.getGoods());
+                });
+
+                for (SelectedGood selectedGood : orderEntry.getGoods())
+                {
+                    Good goodInStore = selectedGood.getGoodInStore();
+                    FactoryService.getGoodService().updateEntry(goodInStore);
+                }
+            }
+            else
+            {
+                for (SelectedGood selectedGood : order.getGoods())
+                {
+                    Good goodInStore = selectedGood.getGoodInStore();
+                    FactoryService.getGoodService().updateEntry(goodInStore);
+                }
+            }
         }
     }
 
@@ -71,7 +90,7 @@ public class OrderServiceAspect
         {
             for (SelectedGood selectedGood : order.getGoods())
             {
-                Good goodInStore = FactoryService.getGoodService().getEntryByField("nomination", selectedGood.getNomination());
+                Good goodInStore = FactoryService.getGoodService().getEntryByField("nomination", selectedGood.getName());
                 goodInStore.setAmount(goodInStore.getAmount() + selectedGood.getAmount());
 
                 FactoryService.getGoodService().updateEntry(goodInStore);

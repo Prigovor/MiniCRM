@@ -1,14 +1,13 @@
 package com.crm.menu.storekeeper.store.good.delivery;
 
-import com.crm.database.entity.good.Good;
 import com.crm.database.entity.good.selected_good.SelectedGood;
 import com.crm.database.entity.order.Order;
 import com.crm.database.entity.order.OrderStatus;
 import com.crm.database.service.FactoryService;
-import com.crm.main.Main;
-import com.crm.managers.CourierManager;
 import com.crm.database.service.good.GoodService;
 import com.crm.database.service.order.OrderService;
+import com.crm.main.Main;
+import com.crm.managers.CourierManager;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,23 +43,6 @@ public class GoodsDeliveryModel
 
     public void giveGoodsToCourier(List<SelectedGood> listSelectedGoods)
     {
-        listSelectedGoods.forEach(selectedGood ->
-        {
-            List<Good> entries = goodService.getEntriesByField("nomination", selectedGood.getNomination())
-                    .stream().filter(good ->
-                    {
-                        return good.getClass().equals(Good.class);
-                    }).collect(Collectors.toList());
-
-            Good goodInStore = entries.get(0);
-
-            if (goodInStore != null)
-            {
-                goodInStore.setAmount(goodInStore.getAmount() - selectedGood.getAmount());
-                goodService.updateEntry(goodInStore);
-            }
-        });
-
         CourierManager.getInstance().orderDelivery(selectedOrder.getCourier(), selectedOrder);
     }
 
