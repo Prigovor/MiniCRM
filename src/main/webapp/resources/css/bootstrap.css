@@ -1,0 +1,51 @@
+body {
+    background-image: url("/resources/images/poverhnost_svet.jpg");
+}
+
+#navBar {
+
+    /*Градиент*/
+    background: rgba(212, 212, 212, 1);
+    background: -moz-linear-gradient(left, rgba(212, 212, 212, 1) 0%, rgba(212, 212, 212, 1) 0%, rgba(55, 190, 152, 1) 63%, rgba(163, 163, 163, 1) 100%);
+    background: -webkit-linear-gradient(left, rgba(212, 212, 212, 1) 0%, rgba(212, 212, 212, 1) 0%, rgba(55, 190, 152, 1) 63%, rgba(163, 163, 163, 1) 100%);
+    background: -o-linear-gradient(left, rgba(212, 212, 212, 1) 0%, rgba(212, 212, 212, 1) 0%, rgba(55, 190, 152, 1) 63%, rgba(163, 163, 163, 1) 100%);
+    background: -ms-linear-gradient(left, rgba(212, 212, 212, 1) 0%, rgba(212, 212, 212, 1) 0%, rgba(55, 190, 152, 1) 63%, rgba(163, 163, 163, 1) 100%);
+    background: linear-gradient(to right, rgba(212, 212, 212, 1) 0%, rgba(212, 212, 212, 1) 0%, rgba(55, 190, 152, 1) 63%, rgba(163, 163, 163, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d4d4d4', endColorstr='#a3a3a3', GradientType=1);
+    -webkit-box-shadow: inset 0px 0px 108px -15px rgba(153, 153, 153, 1);
+    -moz-box-shadow: inset 0px 0px 108px -15px rgba(153, 153, 153, 1);
+    box-shadow: inset 0px 0px 108px -15px rgba(153, 153, 153, 1);
+    /*Градиент*/
+
+    border: 1px solid rgba(121, 126, 118, 0.85);
+
+    z-index: 1000;
+}
+
+#main {
+    height: 73.1%;
+}
+
+#footer {
+    background: rgba(212, 212, 212, 1);
+    background: -moz-linear-gradient(left, rgba(212, 212, 212, 1) 0%, rgba(212, 212, 212, 1) 0%, rgba(55, 190, 152, 1) 63%, rgba(163, 163, 163, 1) 100%);
+    background: -webkit-linear-gradient(left, rgba(212, 212, 212, 1) 0%, rgba(212, 212, 212, 1) 0%, rgba(55, 190, 152, 1) 63%, rgba(163, 163, 163, 1) 100%);
+    background: -o-linear-gradient(left, rgba(212, 212, 212, 1) 0%, rgba(212, 212, 212, 1) 0%, rgba(55, 190, 152, 1) 63%, rgba(163, 163, 163, 1) 100%);
+    background: -ms-linear-gradient(left, rgba(212, 212, 212, 1) 0%, rgba(212, 212, 212, 1) 0%, rgba(55, 190, 152, 1) 63%, rgba(163, 163, 163, 1) 100%);
+    background: linear-gradient(to right, rgba(212, 212, 212, 1) 0%, rgba(212, 212, 212, 1) 0%, rgba(55, 190, 152, 1) 63%, rgba(163, 163, 163, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d4d4d4', endColorstr='#a3a3a3', GradientType=1);
+    -webkit-box-shadow: inset 0px 0px 108px -15px rgba(153, 153, 153, 1);
+    -moz-box-shadow: inset 0px 0px 108px -15px rgba(153, 153, 153, 1);
+    box-shadow: inset 0px 0px 108px -15px rgba(153, 153, 153, 1);
+
+    border: 1px solid rgba(0, 0, 0, 0.85);
+    border-radius: 3px;
+}
+
+#image1,
+#image2,
+#image3 {
+    width: 60%;
+    background-color: #91e0a9;
+    opacity: 0.95;
+}

@@ -11,7 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import org.controlsfx.glyphfont.Glyph;
+//import org.controlsfx.glyphfont.Glyph;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,8 +42,8 @@ public class ClientRegistrationContr implements Initializable {
     private Stage clientMenuStage;
     private FXMLLoader fxmlLoader = new FXMLLoader();
 
-    @FXML
-    private Glyph glyphLogin;
+//    @FXML
+//    private Glyph glyphLogin;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

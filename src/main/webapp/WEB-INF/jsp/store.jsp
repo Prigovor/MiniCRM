@@ -23,30 +23,36 @@
         <a href="${pageContext.request.contextPath}/" title="Перейти на главную"><span>N</span>otebook store</a>
     </div>
 
-    <div>
-        <label>
-            <select id="regAuth">
-                <option href="${pageContext.request.contextPath}/"><a>Registry </a></option>
-                <option href="${pageContext.request.contextPath}/"><a> Authorisation</a></option>
-            </select>
-        </label>
+    <div id="menu">
+        <a href="${pageContext.request.contextPath}/">
+            <img src="${pageContext.request.contextPath}/resources/images/1489777436_cart.png"
+                 height="50">
+        </a>
+    </div>
+
+    <div id="regAuth">
+        <select>
+            <option href="${pageContext.request.contextPath}/">Registry </option>
+            <option href="${pageContext.request.contextPath}/">Authorisation</option>
+        </select>
     </div>
 </header>
 
 <div id="wrapper" class="images">
-    <a href="/">
-        <img id="notebook1" src="${pageContext.request.contextPath}/resources/images/apple_macbook_pro_retina_13_-mf839uaa.jpg"
+    <a href="${pageContext.request.contextPath}/">
+        <img id="notebook1"
+             src="${pageContext.request.contextPath}/resources/images/apple.jpg"
              width="400" height="230" class="image"/>
     </a>
-    <a href="/">
+    <a href="${pageContext.request.contextPath}/">
         <img id="notebook2" src="${pageContext.request.contextPath}/resources/images/images.jpg"
              width="400" height="230" class="image"/>
     </a>
-    <a href="/">
+    <a href="${pageContext.request.contextPath}/">
         <img id="notebook3" src="${pageContext.request.contextPath}/resources/images/images%20(1).jpg"
              width="400" height="230" class="image"/>
     </a>
-    <a href="/">
+    <a href="${pageContext.request.contextPath}/">
         <img id="notebook4" src="${pageContext.request.contextPath}/resources/images/images%20(2).jpg"
              width="400" height="230" class="image"/>
     </a>
