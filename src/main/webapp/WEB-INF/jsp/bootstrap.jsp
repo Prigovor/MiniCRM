@@ -54,8 +54,9 @@
                             <div style="margin-top: 4%">
                                 <a href="/">
                                     <span style="text-decoration: none" class="fa fa-shopping-cart fa-3x"
-                                          aria-grabbed="true"> 0</span>
+                                          aria-grabbed="true"></span>
                                 </a>
+                                <span id="countCart"> 0</span>
                             </div>
                         </li>
                         <li class="dropdown">
@@ -190,6 +191,7 @@
 <%--<script src="/resources/js/pagination_boot.js"></script>--%>
 <script src="${pageContext.request.contextPath}/resources/jQuery/jquery-3.1.1.js"></script>
 <script src="${pageContext.request.contextPath}/resources/bootstrapLast/js/bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
 <%--<script src="/resources/pagination/pagination.js"></script>--%>
 
 </body>
